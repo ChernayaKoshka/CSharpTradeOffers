@@ -1,0 +1,7 @@
+C:\Users\Christopher\OneDrive\Visual Studio Projects\CSharpTradeOffers\CSharpTradeOffers\bin\Release\CSharpTradeOffers.dll
+C:\Users\Christopher\OneDrive\Visual Studio Projects\CSharpTradeOffers\CSharpTradeOffers\bin\Release\CSharpTradeOffers.pdb
+C:\Users\Christopher\OneDrive\Visual Studio Projects\CSharpTradeOffers\CSharpTradeOffers\bin\Release\Newtonsoft.Json.dll
+C:\Users\Christopher\OneDrive\Visual Studio Projects\CSharpTradeOffers\CSharpTradeOffers\bin\Release\Newtonsoft.Json.xml
+C:\Users\Christopher\OneDrive\Visual Studio Projects\CSharpTradeOffers\CSharpTradeOffers\obj\Release\CSharpTradeOffers.csprojResolveAssemblyReference.cache
+C:\Users\Christopher\OneDrive\Visual Studio Projects\CSharpTradeOffers\CSharpTradeOffers\obj\Release\CSharpTradeOffers.dll
+C:\Users\Christopher\OneDrive\Visual Studio Projects\CSharpTradeOffers\CSharpTradeOffers\obj\Release\CSharpTradeOffers.pdb
