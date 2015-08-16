@@ -6,17 +6,28 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Trading
 {
+    /// <summary>
+    /// Handles Inventory-Related tasks for a specific account. TODO: Allow other accounts
+    /// </summary>
     public class InventoryHandler
     {
         private readonly Config _config;
         private Account _account;
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <param name="account"></param>
         public InventoryHandler(Config cfg, Account account)
         {
             _config = cfg;
             _account = account;
         }
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public Dictionary<uint, Inventory> Inventories = new Dictionary<uint, Inventory>();
 
         //predicate
@@ -80,6 +91,19 @@ namespace CSharpTradeOffers.Trading
                     throw new Exception("Unknown TypeId!");
             }
             return null;
+        }
+
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="marketHashName"></param>
+        /// <param name="appid"></param>
+        /// <returns></returns>
+        public List<Item> FindUnusedItems(string marketHashName, uint appid)
+        {
+            Inventory inv = Inventories[appid];
+            List<Item> items = inv.Items.Values.Where(item => item.market_hash_name.Contains(marketHashName) && !item.items.TrueForAll(BeingUsed)).ToList();
+            return items;
         }
 
         /// <summary>
@@ -204,10 +228,111 @@ namespace CSharpTradeOffers.Trading
             foreach (uint appid in _config.Cfg.Inventories)
                 Inventories.Add(appid, new Inventory(steamId, appid));
         }
+
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="steamId"></param>
+        /// <param name="appids"></param>
+        public void RefreshInventories(ulong steamId, uint[] appids)
+        {
+            Inventories.Clear();
+            foreach (uint appid in appids)
+                Inventories.Add(appid, new Inventory(steamId,appid));
+        }
+
+        /// <summary>
+        /// Requests decimal worth of an Item.
+        /// </summary>
+        /// <param name="item">An Item object to get the value of.</param>
+        /// <returns>A decimal worth in USD.</returns>
+        public decimal ItemWorth(Item item)
+        {
+            if (item.tradable != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
+            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+        }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="tradable"></param>
+        /// <param name="appid"></param>
+        /// <param name="marketHashName"></param>
+        /// <returns></returns>
+        public decimal ItemWorth(bool tradable, uint appid, string marketHashName)
+        {
+            if (tradable.IntValue() != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
+            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+        }
+
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="tradable"></param>
+        /// <param name="appid"></param>
+        /// <param name="marketHashName"></param>
+        /// <returns></returns>
+        public decimal ItemWorth(int tradable, uint appid, string marketHashName)
+        {
+            if (tradable != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
+            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+        }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class Inventory
     {
+
+        #region old, remove later + fix
+        /// <summary>
+        /// Requests decimal worth of an Item.
+        /// </summary>
+        /// <param name="item">An Item object to get the value of.</param>
+        /// <returns>A decimal worth in USD.</returns>
+        public decimal ItemWorth(Item item)
+        {
+            if (item.tradable != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
+            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+        }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="tradable"></param>
+        /// <param name="appid"></param>
+        /// <param name="marketHashName"></param>
+        /// <returns></returns>
+        public decimal ItemWorth(bool tradable, uint appid, string marketHashName)
+        {
+            if (tradable.IntValue() != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
+            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+        }
+
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="tradable"></param>
+        /// <param name="appid"></param>
+        /// <param name="marketHashName"></param>
+        /// <returns></returns>
+        public decimal ItemWorth(int tradable, uint appid, string marketHashName)
+        {
+            if (tradable != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
+            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+        }
+        #endregion
         /// <summary>
         /// Class constructor, automatically initializes inventory.
         /// </summary>
@@ -367,61 +492,57 @@ Console.WriteLine("Name | Duplicate Val | Val");
         {
             foreach (rgInventory_Item item in Items[asset.classid].items)
             {
-                if (item.instanceid.ToString() == asset.instanceid)
-                {
-                    item.inUse = inUse;
-                    return true;
-                }
+                if (item.instanceid.ToString() != asset.instanceid) continue;
+                item.inUse = inUse;
+                return true;
             }
             return false;
         }
-
-        /// <summary>
-        /// Requests decimal worth of an Item.
-        /// </summary>
-        /// <param name="item">An Item object to get the value of.</param>
-        /// <returns>A decimal worth in USD.</returns>
-        public decimal ItemWorth(Item item)
-        {
-            if (item.tradable != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
-        }
-
-        public decimal ItemWorth(bool tradable, uint appid, string market_hash_name)
-        {
-            if (tradable.IntValue() != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
-        }
-
-        public decimal ItemWorth(int tradable, uint appid, string market_hash_name)
-        {
-            if (tradable != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
-        }
-
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class InventoryException : Exception
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public InventoryException() { }
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="message"></param>
         public InventoryException(string message) : base(message) { }
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="inner"></param>
         public InventoryException(string message, Exception inner) : base(message, inner){ }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// TODO: REMOVE?
+    /// </summary>
     public class CurrencyObj
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string currency { get; set; } //exact match of currency
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public decimal percentage { get; set; } //percent to markup/markdown
     }
 
+    /// <summary>
+    /// TODO: REMOVE?
+    /// </summary>
     public class ItemSearchParams
     {
         Inventory inv { get; set; }
@@ -495,14 +616,37 @@ Console.WriteLine("Name | Duplicate Val | Val");
     /// </summary>
     public class rgInventory_Item
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ulong amount { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ulong classid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ulong id { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ulong instanceid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ulong pos { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         [JsonIgnore] 
         public bool inUse;
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <returns></returns>
         public CEconAsset ToCEconAsset(string appId)
         {
             var asset = new CEconAsset
@@ -524,47 +668,146 @@ Console.WriteLine("Name | Duplicate Val | Val");
     /// </summary>
     public class rgDescription
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string appid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string classid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string instanceid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string icon_url { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string icon_url_large { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string icon_drag_url { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string name { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string market_hash_name { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string market_name { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string name_color { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string background_color { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string type { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int tradable { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int marketable { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int commodity { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string market_tradable_restriction { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string market_marketable_restriction { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<Description> descriptions = new List<Description>();
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<Action> actions = new List<Action>();
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<Tag> tags = new List<Tag>();
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public AppData app_data { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class Action
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string name { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string link { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class Tag
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string internal_name { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string name { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string category { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string color { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string category_name { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class AppData
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string def_index { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string quality { get; set; }
     }
 }

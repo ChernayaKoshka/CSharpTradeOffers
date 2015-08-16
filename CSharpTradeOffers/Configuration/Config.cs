@@ -7,13 +7,30 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Configuration
 {
+    /// <summary>
+    /// Generic config file
+    /// </summary>
     public class Config
     {
+        /// <summary>
+        /// The meat of the config
+        /// </summary>
         public RootConfig Cfg = new RootConfig();
+        /// <summary>
+        /// Dictionary forms of the lists contained in for easy access/use
+        /// </summary>
         public Dictionaries ConfigDictionaries = new Dictionaries();
+        /// <summary>
+        /// I forgot why I put this here but it's probably important.
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string MarketEligibilityJson { get; set; }
         private readonly string _path;
 
+        /// <summary>
+        /// Initializes the Config and the path to use
+        /// </summary>
+        /// <param name="path"></param>
         public Config(string path)
         {
             _path = path;
@@ -75,6 +92,10 @@ namespace CSharpTradeOffers.Configuration
             Cfg = JsonConvert.DeserializeObject<RootConfig>(File.ReadAllText(_path)); // js.Deserialize<RootConfig>(File.ReadAllText(_path));
         }
 
+        /// <summary>
+        /// Writes the changes made to the config.
+        /// </summary>
+        /// <param name="towrite"></param>
         public void WriteChanges(RootConfig towrite)
         {
             File.WriteAllText(_path, JsonConvert.SerializeObject(towrite));
@@ -94,9 +115,9 @@ namespace CSharpTradeOffers.Configuration
             /// </summary>
             public int permission_level { get; set; }
             /// <summary>
-            /// Turns the Officer into a KeyValuePair<ulong,int>
+            /// Turns the Officer into a KeyValuePair
             /// </summary>
-            /// <returns>KeyValuePair<steamid,permission_level></returns>
+            /// <returns>KeyValuePair of steamid,permissionlevel</returns>
             public KeyValuePair<ulong, int> ToKeyValuePair()
             {
                 return new KeyValuePair<ulong, int>(steamid, permission_level);
@@ -117,9 +138,9 @@ namespace CSharpTradeOffers.Configuration
             /// </summary>
             public int permission_level { get; set; }
             /// <summary>
-            /// Turns the Command_Permission into a KeyValuePair<string,int>
+            /// Turns the Command_Permission into a KeyValuePair
             /// </summary>
-            /// <returns>KeyValuePair<string,permission_level></returns>
+            /// <returns>KeyValuePair</returns>
             public KeyValuePair<string, int> ToKeyValuePair()
             {
                 return new KeyValuePair<string, int>(command_name, permission_level);
@@ -188,11 +209,17 @@ namespace CSharpTradeOffers.Configuration
         }
 
         /// <summary>
-        /// Class containing Dictionary versions of List<Officer> and List<Command_Permission>
+        /// Class containing Dictionary versions of Offer/CommandPermission
         /// </summary>
         public class Dictionaries
         {
-            public Dictionary<UInt64, int> Officers_Dict = new Dictionary<UInt64, int>();
+            /// <summary>
+            /// 
+            /// </summary>
+            public Dictionary<ulong, int> Officers_Dict = new Dictionary<UInt64, int>();
+            /// <summary>
+            /// 
+            /// </summary>
             public Dictionary<string, int> Command_Permissions_Dict = new Dictionary<string, int>();
             /// <summary>
             /// Clear officers dictionary. This should not be called directly.

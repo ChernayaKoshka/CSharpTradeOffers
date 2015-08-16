@@ -5,6 +5,9 @@ using Newtonsoft.Json.Linq;
 namespace CSharpTradeOffers.Trading
 {
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// Handles Steam Economy related tasks, like retrieving class info
+    /// </summary>
     public class ISteamEconomyHandler
     {
         private const string BaseUrl = "https://api.steampowered.com/ISteamEconomy/";
@@ -14,7 +17,7 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="apiKey">Your Steam API key</param>
         /// <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
-        /// <param name="IDs">Dictionary<string,string> that MUST contain ClassID/InstanceID of item.</param>
+        /// <param name="IDs">Dictionary MUST contain ClassID/InstanceID of item.</param>
         /// <returns></returns>
         public dynamic GetAssetClassInfo(string apiKey, uint appid, Dictionary<string, string> IDs)
         {

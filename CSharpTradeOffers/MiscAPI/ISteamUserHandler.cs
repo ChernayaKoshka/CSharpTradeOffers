@@ -6,11 +6,18 @@ using Newtonsoft.Json;
 namespace CSharpTradeOffers.MiscAPI
 {
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// Handles steam user related tasks.
+    /// </summary>
     public class ISteamUserHandler
     {
         private const string BaseUrl = "http://api.steampowered.com/ISteamUser/";
         private readonly string _apiKey;
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="apiKey"></param>
         public ISteamUserHandler(string apiKey)
         {
             _apiKey = apiKey;
@@ -143,128 +150,293 @@ namespace CSharpTradeOffers.MiscAPI
     }
 
     #region ResolveVanityURLResult
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class ResolveVanityUrlResult
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string steamid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int success { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class ResolveVanityUrlBaseResult
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ResolveVanityUrlResult response { get; set; }
     }
     #endregion
 
     #region GetUserGroupListResult
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class Group
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ulong gid { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Response")]
     public class GetUserGroupListResult
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public bool success { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<Group> groups { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class GetUserGroupListBaseResult
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public GetUserGroupListResult Result { get; set; }
     }
     #endregion
 
     #region GetPlayerSummariesResult
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Player")]
     public class PlayerSummary
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string steamid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int communityvisibilitystate { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int profilestate { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string personaname { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int lastlogoff { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string profileurl { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string avatar { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string avatarmedium { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string avatarfull { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int personastate { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string primaryclanid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int timecreated { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int personastateflags { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string loccountrycode { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Players")]
     public class PlayersSummaries
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<PlayerSummary> PlayerSummaries { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Response")]
     public class ResponseV1
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public PlayersSummaries PlayersSummaries { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class GetPlayerSummariesV1Result
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ResponseV1 Response { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Response")]
     public class ResponseV2
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<PlayerSummary> PlayersSummaries { get; set; } 
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class GetPlayerSummariesV2Result
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ResponseV2 Response { get; set; }
     }
 
     #endregion
 
     #region GetPlayerBansResult
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Player")]
     public class PlayerBans
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string SteamId { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public bool CommunityBanned { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public bool VACBanned { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int NumberOfVACBans { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int DaysSinceLastBan { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int NumberOfGameBans { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string EconomyBan { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class GetPlayerBansResult
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<PlayerBans> playersbans { get; set; } //better name?
     }
     #endregion
 
     #region GetFriendListResult
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class Friend
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string steamid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string relationship { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int friend_since { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class Friendslist
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public List<Friend> friends { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class GetFriendListResult
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public Friendslist friendslist { get; set; }
     }
     #endregion

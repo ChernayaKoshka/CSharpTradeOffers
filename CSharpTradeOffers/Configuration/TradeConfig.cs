@@ -5,27 +5,63 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Configuration
 {
+    /// <summary>
+    /// Generic trade config, in progress suggested to not use
+    /// </summary>
     public static class TradeConfig
     {
+        /// <summary>
+        /// The meat of the config
+        /// </summary>
         public static Trades TradesConfig = new Trades();
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public class ConfigAsset
         {
+            /// <summary>
+            /// I forgot or it's obvious. TODO: Add better documentation
+            /// </summary>
             public uint AppId { get; set; }
+            /// <summary>
+            /// I forgot or it's obvious. TODO: Add better documentation
+            /// </summary>
             public int TypeId { get; set; }
+            /// <summary>
+            /// I forgot or it's obvious. TODO: Add better documentation
+            /// </summary>
             public string TypeObj { get; set; }
+            /// <summary>
+            /// I forgot or it's obvious. TODO: Add better documentation
+            /// </summary>
             public int Amount { get; set; }
         }
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public class AcceptableTrade
         {
+            /// <summary>
+            /// I forgot or it's obvious. TODO: Add better documentation
+            /// </summary>
             public List<ConfigAsset> Me { get; set; }
+            /// <summary>
+            /// I forgot or it's obvious. TODO: Add better documentation
+            /// </summary>
             public List<ConfigAsset> Them { get; set; }
         }
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         [JsonObject(Title = "RootObject")]
         public class Trades
         {
+            /// <summary>
+            /// I forgot or it's obvious. TODO: Add better documentation
+            /// </summary>
             public List<AcceptableTrade> AcceptableTrades { get; set; }
         }
 
@@ -73,6 +109,10 @@ namespace CSharpTradeOffers.Configuration
             TradesConfig = JsonConvert.DeserializeObject<Trades>(File.ReadAllText("trades.cfg"));
         }
 
+        /// <summary>
+        /// Writes the changes made to the trade config.
+        /// </summary>
+        /// <param name="towrite"></param>
         public static void WriteChanges(Trades towrite)
         {
             File.WriteAllText("trades.cfg", JsonConvert.SerializeObject(towrite));

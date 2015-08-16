@@ -2,6 +2,9 @@
 
 namespace CSharpTradeOffers
 {
+    /// <summary>
+    /// Generic account
+    /// </summary>
     public class Account
     {
         /// <summary>

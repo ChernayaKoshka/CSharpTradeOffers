@@ -7,6 +7,9 @@ using System.Xml.Serialization;
 
 namespace CSharpTradeOffers
 {
+    /// <summary>
+    /// Handles commmunity related tasks
+    /// </summary>
     public class CommunityHandler
     {
         /// <summary>
@@ -215,7 +218,7 @@ namespace CSharpTradeOffers
         /// <summary>
         /// Requests group information as well as the all pages of users.
         /// </summary>
-        /// <param name="groupId">The name of the group to request information about.</param>
+        /// <param name="groupName">The name of the group to request information about.</param>
         /// <returns>A List of the memberList object.</returns>
         public List<memberList> RequestAllMemberLists(string groupName)
         {
@@ -241,33 +244,84 @@ namespace CSharpTradeOffers
         }
     }
 
+    /// <summary>
+    /// MultiInviteResponse
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class MultiInviteResponse
     {
+        /// <summary>
+        /// Results, I forgot. TODO: Add better documentation
+        /// </summary>
         public string results { get; set; }
+        /// <summary>
+        /// I forgot. TODO: Add better documentation
+        /// </summary>
         public string groupId { get; set; }
     }
 
+    /// <summary>
+    /// InviteResponse
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class InviteResponse
     {
+        /// <summary>
+        /// I forgot. TODO: Add better documentation
+        /// </summary>
         public string results { get; set; }
+        /// <summary>
+        /// I forgot. TODO: Add better documentation
+        /// </summary>
         public string groupId { get; set; }
+        /// <summary>
+        /// I forgot. TODO: Add better documentation
+        /// </summary>
         public bool duplicate { get; set; }
     }
 
 
+    /// <summary>
+    /// I forgot. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class CommentResponse
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public bool success { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string name { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int start { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string pagesize { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int total_count { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int upvotes { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int has_upvoted { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string comments_html { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int timelastpost { get; set; }
     }
 

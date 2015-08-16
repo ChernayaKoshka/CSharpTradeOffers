@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers
 {
+    /// <summary>
+    /// Handles market related tasks.
+    /// </summary>
     public class MarketHandler
     {
         const string BaseUrl = "https://steamcommunity.com/market/";

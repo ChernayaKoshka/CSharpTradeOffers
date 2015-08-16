@@ -1,0 +1,2669 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSharpTradeOffers</name>
+    </assembly>
+    <members>
+        <member name="T:CSharpTradeOffers.Trading.AssetClassInfo">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.icon_url">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.icon_url_large">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.icon_drag_url">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.market_hash_name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.market_name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.name_color">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.background_color">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.type">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.tradable">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.marketable">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.commodity">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.market_tradable_restriction">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.market_marketable_restriction">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.fraudwarnings">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.AssetClassInfo.descriptions">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.AssetClassInfo.actions">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.AssetClassInfo.tags">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.AssetClassInfo.appdata2">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AssetClassInfo.classid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Element_IDs">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Element_IDs.ids">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Description">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Description.type">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Description.value">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Description.color">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Description.app_data">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Description.is_itemset_name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Description.def_index">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.AppData2">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AppData2.def_index">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AppData2.quality">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AppData2.slot">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AppData2.set_bundle_def_index">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.AppData2.containing_bundles">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.AppData2.filter_data">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.AppData2.player_class_ids">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Filter_Data">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Filter_Data.element_ids">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.EconServiceHandler">
+            <summary>
+            Handles EconService related tasks such as trade offers.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.#ctor(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="apiKey"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffers(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Requests all trade offers.
+            </summary>
+            <param name="data">A dictionary containing the URL params found here: https://developer.valvesoftware.com/wiki/Steam_Web_API/IEconService at GetTradeOffers (v1).
+            ex: [leftarrow]"get_sent_offers","1"[rightarrow]. Please note, [leftarrow] and [rightarrow] correspond to the keys on the keyboard.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffer(System.String,System.String)">
+            <summary>
+            Requests a single trade offer based on the tradeofferid.
+            </summary>
+            <param name="tradeofferid">The tradeofferid to request information on.</param>
+            <param name="language">The language to use. Default: english</param>
+            <returns>A CEConTradeOffer object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.DeclineTradeOffer(System.String)">
+            <summary>
+            Declines a trade offer that was sent to you.
+            </summary>
+            <param name="tradeofferid">The ID of the offer to decline.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CancelTradeOffer(System.String)">
+            <summary>
+            Cancels a trade offer based on the specified tradeofferid.
+            </summary>
+            <param name="tradeofferid">The ID of the offer to cancel.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.AcceptTradeOffer(CSharpTradeOffers.Trading.TradeId,System.Net.CookieContainer,System.UInt32,System.String)">
+            <summary>
+            Accepts a specified trade offer.
+            </summary>
+            <param name="tradeId">A TradeId object containing the id of the trade to accept.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="partnerId">The AccountId of the person to trade with.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <returns>The TradeId of the offer that was accepted.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.SendTradeOffer(System.UInt64,System.Net.CookieContainer,System.String,System.String,CSharpTradeOffers.Trading.TradeOffer)">
+            <summary>
+            Sends a trade offer to the specified recipient. 
+            </summary>
+            <param name="partnerSid">The SteamId64 (ulong) of the person to send the offer to.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="tradeoffermessage">An optional message to be sent with the offer. Can be null.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <param name="offer">A TradeOffer object containing the trade parameters.</param>
+            <returns>A SendOfferResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.ModifyTradeOffer(System.UInt64,System.Net.CookieContainer,System.String,System.String,System.UInt32,CSharpTradeOffers.Trading.TradeOffer)">
+            <summary>
+            Modifies an existing trade offer.
+            </summary>
+            <param name="partnerSid">The SteamId64 (ulong) of the person whose offer will be modified.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="tradeoffermessage">An otpional message to be sent with the trade offer. Can be null.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <param name="tradeofferidCountered">The TradeId of the offer to counter or modify.</param>
+            <param name="offer">A TradeOffer object containing the trade parameters. </param>
+            <returns>A SendOfferResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CreateCompatibleTrade(CSharpTradeOffers.Trading.CEconTradeOffer,CSharpTradeOffers.Trading.InventoryHandler)">
+            <summary>
+            Attempts to locate a valid trade in the TradeConfig.
+            </summary>
+            <param name="offer">A TradeOffer object containing the trade to create a compatible form with.</param>
+            <param name="inventoryHandler">An InventoryHandler object, the InventoryHandler must be that off the bot otherwise it will return erroneous data.</param>
+            <returns>A compatible trade offer, null if none was found.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.FindAcceptableTrade(CSharpTradeOffers.Trading.CEconTradeOffer)">
+            <summary>
+            Searches TradeConfig for a valid trade.
+            </summary>
+            <param name="offer">a CEconTradeOffer to check.</param>
+            <returns>A TradeConfig.AcceptableTrade object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetNames(System.Collections.Generic.List{CSharpTradeOffers.Trading.CEconAsset}@)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            IGNORE THIS METHOD FOR NOW, IT IS BAD!
+            </summary>
+            <param name="assets"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffersSummary(System.UInt32)">
+            <summary>
+            Requestss TradeOffer statistics. ie: historical_received_count
+            </summary>
+            <param name="time_last_visit">Unix time for historical cutoff.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.TypeIds">
+            <summary>
+            TypeIds for use in trade config, mostly for reference and not actually used anywhere
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TypeIds.Exact">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TypeIds.Contains">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TypeIds.StartsWith">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TypeIds.ClassId">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TypeIds.DollarWorth">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TypeIds.Tag">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TypeIds.CurrencyTrade">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.ETradeOfferState">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateInvalid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateActive">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateAccepted">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateCountered">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateExpired">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateCanceled">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateDeclined">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateInvalidItems">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateEmailPending">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.ETradeOfferState.ETradeOfferStateEmailCanceled">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.GetTradeOffersSummaryBaseResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryBaseResponse.response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.pending_received_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.new_received_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.updated_received_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.historical_received_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.pending_sent_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.newly_accepted_sent_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.updated_sent_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.GetTradeOffersSummaryResponse.historical_sent_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.MarketValue">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.MarketValue.success">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.MarketValue.lowest_price">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.MarketValue.volume">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.MarketValue.median_price">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.TradeId">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.TradeId.tradeid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.CEconAsset">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconAsset.appid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconAsset.contextid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconAsset.assetid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconAsset.classid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconAsset.instanceid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconAsset.amount">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconAsset.missing">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.CEconAsset.name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="apiKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.CEconTradeOffer">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.tradeofferid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.accountid_other">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.message">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.expiration_time">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.trade_offer_state">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.items_to_give">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.items_to_receive">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.is_our_offer">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.time_created">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.time_updated">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.tradeid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CEconTradeOffer.from_real_time_trade">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.TradeOffersList">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.TradeOffersList.trade_offers_received">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.TradeOffers">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.TradeOffers.response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.SendOfferResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.SendOfferResponse.tradeofferid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.SendOfferResponse.needs_email_confirmation">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.SendOfferResponse.email_domain">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Me">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Me.assets">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Me.currency">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Me.ready">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Them">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Them.assets">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Them.currency">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Them.ready">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.TradeOffer">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TradeOffer.newversion">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TradeOffer.version">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TradeOffer.me">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.TradeOffer.them">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.InventoryHandler">
+            <summary>
+            Handles Inventory-Related tasks for a specific account. TODO: Allow other accounts
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.#ctor(CSharpTradeOffers.Configuration.Config,CSharpTradeOffers.Account)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="cfg"></param>
+            <param name="account"></param>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.InventoryHandler.Inventories">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItem(CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset)">
+            <summary>
+            Locates an Item in the inventory.
+            </summary>
+            <param name="assetToFind">Specifies search params.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItems(System.String,System.UInt32)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="marketHashName"></param>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItem(CSharpTradeOffers.Trading.CEconAsset,CSharpTradeOffers.Trading.Inventory)">
+            <summary>
+            Locates an Item in the inventory.
+            </summary>
+            <param name="assetToFind">Specifies search params.</param>
+            <param name="inv">Inventory to search.providing the </param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindFirstItem(CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset)">
+            <summary>
+            Locates an Item in the inventory.
+            </summary>
+            <param name="assetToFind">Specifies search params.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindFirstItem(CSharpTradeOffers.Trading.CEconAsset)">
+            <summary>
+            Locates an Item in the inventory.
+            </summary>
+            <param name="assetToFind">Specifies search params.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.Me,System.Boolean)">
+            <summary>
+            Marks the inUse bool of the specified asset.
+            </summary>
+            <param name="me"></param>
+            <param name="inUse"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.CEconTradeOffer,System.Boolean)">
+            <summary>
+            Marks the inUse bool of the assets specified in the trade offer.
+            </summary>
+            <param name="offer">TradeOffer to mark.</param>
+            <param name="inUse">Bool to set.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.TradeOffer,System.Boolean)">
+            <summary>
+            Marks the inUse bool of the assets specified in the trade offer.
+            </summary>
+            <param name="offer">TradeOffer to mark.</param>
+            <param name="inUse">Bool to set.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt64)">
+            <summary>
+            Reloads all of the inventories belonging to a specified steamid64. The inventories to refresh are specified in the config file.
+            </summary>
+            <param name="steamId"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt64,System.UInt32[])">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="steamId"></param>
+            <param name="appids"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.ItemWorth(CSharpTradeOffers.Trading.Item)">
+            <summary>
+            Requests decimal worth of an Item.
+            </summary>
+            <param name="item">An Item object to get the value of.</param>
+            <returns>A decimal worth in USD.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.ItemWorth(System.Boolean,System.UInt32,System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="tradable"></param>
+            <param name="appid"></param>
+            <param name="marketHashName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.ItemWorth(System.Int32,System.UInt32,System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="tradable"></param>
+            <param name="appid"></param>
+            <param name="marketHashName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Inventory">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(CSharpTradeOffers.Trading.Item)">
+            <summary>
+            Requests decimal worth of an Item.
+            </summary>
+            <param name="item">An Item object to get the value of.</param>
+            <returns>A decimal worth in USD.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Boolean,System.UInt32,System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="tradable"></param>
+            <param name="appid"></param>
+            <param name="marketHashName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Int32,System.UInt32,System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="tradable"></param>
+            <param name="appid"></param>
+            <param name="marketHashName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.#ctor(System.UInt64,System.UInt32)">
+            <summary>
+            Class constructor, automatically initializes inventory.
+            </summary>
+            <param name="steamId">steamId64 of the inventory.</param>
+            <param name="appId">App ID of the inventory.</param>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Inventory.Items">
+            <summary>
+            String is the ClassId linking to an Item object.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.RequestInventory(System.UInt64,System.UInt32)">
+            <summary>
+            Requests the inventory for the specified steamId and appId.
+            </summary>
+            <param name="steamId">steamId64 of the inventory to request.</param>
+            <param name="appId">App ID of the inventory to request.</param>
+            <returns>Returns a dynamic JSON object of the inventory to request.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.InitializeInventory(System.UInt64,System.UInt32)">
+            <summary>
+            Initializes the inventory for the specified steamId and appId.
+            </summary>
+            <param name="steamId">steamId64 of the inventory to request.</param>
+            <param name="appId">App ID of the inventory to request.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.FindAvailableAsset(System.String)">
+            <summary>
+            Finds the first rgInventory_Item that is not in use.
+            </summary>
+            <param name="classid">ClassId of items to search.</param>
+            <returns>An rgInventory_Item that is not marked in use.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.MarkAsset(CSharpTradeOffers.Trading.CEconAsset,System.Boolean)">
+            <summary>
+            Locates asset in Items[classid].items and marks it's inUse bool according to the inUse argument.
+            </summary>
+            <param name="asset">Asset to mark</param>
+            <param name="inUse">Value to set</param>
+            <returns>True if successful, false if not.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.InventoryException">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryException.#ctor">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryException.#ctor(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryException.#ctor(System.String,System.Exception)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.CurrencyObj">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            TODO: REMOVE?
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CurrencyObj.currency">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.CurrencyObj.percentage">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.ItemSearchParams">
+            <summary>
+            TODO: REMOVE?
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Item">
+            <summary>
+            An inventory item type class.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.appid">
+            <summary>
+            AppId of item
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.classid">
+            <summary>
+            ClassId of item
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.market_hash_name">
+            <summary>
+            Market hash name of item, used for searching price as well as general matching.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.tradable">
+            <summary>
+            0 = not tradable, 1 = tradable.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.marketable">
+            <summary>
+            0 = not marketable, 1 = marketable
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.commodity">
+            <summary>
+            0 = not commodity, 1 = commodity
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Item.items">
+            <summary>
+            List of rgInventory_Item, this should be used for whenever you need to interact with a specific item rather than all of them.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.worth">
+            <summary>
+            Market worth of the item.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.rgInventory_Item">
+            <summary>
+            An item within an inventory list.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgInventory_Item.amount">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgInventory_Item.classid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgInventory_Item.id">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgInventory_Item.instanceid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgInventory_Item.pos">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.rgInventory_Item.inUse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.rgInventory_Item.ToCEconAsset(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="appId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.rgDescription">
+            <summary>
+            Description object contained in the dynamic JSON returned by RequestInventory.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.appid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.classid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.instanceid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.icon_url">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.icon_url_large">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.icon_drag_url">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.market_hash_name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.market_name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.name_color">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.background_color">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.type">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.tradable">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.marketable">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.commodity">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.market_tradable_restriction">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.market_marketable_restriction">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.rgDescription.descriptions">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.rgDescription.actions">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.rgDescription.tags">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.rgDescription.app_data">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Action">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Action.name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Action.link">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Tag">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Tag.internal_name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Tag.name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Tag.category">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Tag.color">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Tag.category_name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.AppData">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AppData.def_index">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.AppData.quality">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.ISteamEconomyHandler">
+            <summary>
+            Handles Steam Economy related tasks, like retrieving class info
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.ISteamEconomyHandler.GetAssetClassInfo(System.String,System.UInt32,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Gets the asset class info of an item, must provide ClassID/InstanceID in IDs
+            </summary>
+            <param name="apiKey">Your Steam API key</param>
+            <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
+            <param name="IDs">Dictionary MUST contain ClassID/InstanceID of item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.ISteamEconomyHandler.ToAssetClassInfo(System.Object)">
+            <summary>
+            Partially converts the dynamic GetAssetClassInfo into an AssetClassInfo object.
+            Does not convert filter_data because its complicated and I'm lazy.
+            Very poorly done, possibly optimize/fix?
+            </summary>
+            <param name="dynamicinfo">The return variable from GetAssetClassInfo</param>
+            <returns>An AssetClassInfo object.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Account">
+            <summary>
+            Generic account
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Account.SteamId">
+            <summary>
+            The bot's Sid64.
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Account.AuthContainer">
+            <summary>
+            The Auth Cookies for the bot.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Account.AddMachineAuthCookies(System.String)">
+            <summary>
+            Sets the bot's auth cookie from a string of the format steamMachineAuthSID64=AuthData
+            </summary>
+            <param name="authstring">The auth string.</param>
+        </member>
+        <member name="T:CSharpTradeOffers.CommunityHandler">
+            <summary>
+            Handles commmunity related tasks
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.PostComment(System.UInt64,System.String,System.Net.CookieContainer)">
+            <summary>
+            Posts a comment to the specified profile.
+            </summary>
+            <param name="steamId">The SteamId64 of the profile to post to.</param>
+            <param name="comment">The comment text.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A CommentResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Invites the specified user to a group.
+            </summary>
+            <param name="steamId">The SteamId64 of the person to invite.</param>
+            <param name="json">I forgot... oops.</param>
+            <param name="group">The SteamId64 of the group to invite to.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>An InviteResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.InviteUsersToGroup(System.UInt64[],System.Boolean,System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Invites the specified users to a group.
+            </summary>
+            <param name="steamIds">The SteamId64s of the users to invite.</param>
+            <param name="json">I forgot... oops.</param>
+            <param name="group">The SteamId64 of the group to invite the users to.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A MultiInviteResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.String,System.Net.CookieContainer)">
+            <summary>
+            Invites the specified user to a group.
+            </summary>
+            <param name="steamId">The SteamId64 of the person to invite.</param>
+            <param name="json">I forgot... oops.</param>
+            <param name="group">The name of the group to invite to.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>An InviteResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.InviteUsersToGroup(System.UInt64[],System.Boolean,System.String,System.Net.CookieContainer)">
+            <summary>
+            Invites the specified users to a group.
+            </summary>
+            <param name="steamIds">The SteamId64s of the users to invite.</param>
+            <param name="json">I forgot... oops.</param>
+            <param name="group">The name of the group to invite the users to.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A MultiInviteResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.ToJArray(System.UInt64[])">
+            <summary>
+            Converts an array of SteamId64s to an array of the format ["0","1"]
+            </summary>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.RequestMemberList(System.UInt64)">
+            <summary>
+            Requests group information as well as the first page of users.
+            </summary>
+            <param name="groupId">The SteamId64 of the group to request information about.</param>
+            <returns>A memberList object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.RequestMemberList(System.String)">
+            <summary>
+            Requests group information as well as the first page of users.
+            </summary>
+            <param name="groupName">The name of the group to request information about.</param>
+            <returns>A memberList object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.RequestAllMemberLists(System.UInt64)">
+            <summary>
+            Requests group information as well as all pages of users.
+            </summary>
+            <param name="groupId">The SteamId64 of the group to request information about.</param>
+            <returns>A List of the memberList object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.CommunityHandler.RequestAllMemberLists(System.String)">
+            <summary>
+            Requests group information as well as the all pages of users.
+            </summary>
+            <param name="groupName">The name of the group to request information about.</param>
+            <returns>A List of the memberList object.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.MultiInviteResponse">
+            <summary>
+            MultiInviteResponse
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MultiInviteResponse.results">
+            <summary>
+            Results, I forgot. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MultiInviteResponse.groupId">
+            <summary>
+            I forgot. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.InviteResponse">
+            <summary>
+            InviteResponse
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.InviteResponse.results">
+            <summary>
+            I forgot. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.InviteResponse.groupId">
+            <summary>
+            I forgot. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.InviteResponse.duplicate">
+            <summary>
+            I forgot. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.CommentResponse">
+            <summary>
+            I forgot. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.success">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.start">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.pagesize">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.total_count">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.upvotes">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.has_upvoted">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.comments_html">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.CommentResponse.timelastpost">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.memberList">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberList.groupID64">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberList.groupDetails">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberList.memberCount">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberList.totalPages">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberList.currentPage">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberList.startingMember">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberList.members">
+            <remarks/>
+        </member>
+        <member name="T:CSharpTradeOffers.memberListGroupDetails">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.groupName">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.groupURL">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.headline">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.summary">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.avatarIcon">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.avatarMedium">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.avatarFull">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.memberCount">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.membersInChat">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.membersInGame">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.memberListGroupDetails.membersOnline">
+            <remarks/>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.Config">
+            <summary>
+            Generic config file
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Configuration.Config.Cfg">
+            <summary>
+            The meat of the config
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Configuration.Config.ConfigDictionaries">
+            <summary>
+            Dictionary forms of the lists contained in for easy access/use
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.MarketEligibilityJson">
+            <summary>
+            I forgot why I put this here but it's probably important.
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Config.#ctor(System.String)">
+            <summary>
+            Initializes the Config and the path to use
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Config.Reload">
+            <summary>
+            Reloads the configuration file (path). If file is not present, it will generate a new one.
+            </summary>
+            <returns>A RootConfig object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Config.WriteChanges(CSharpTradeOffers.Configuration.Config.RootConfig)">
+            <summary>
+            Writes the changes made to the config.
+            </summary>
+            <param name="towrite"></param>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.Config.Officer">
+            <summary>
+            Generic officer class.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.Officer.steamid">
+            <summary>
+            The UInt64 version of a SteamID
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.Officer.permission_level">
+            <summary>
+            The permission level the SteamID has.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Config.Officer.ToKeyValuePair">
+            <summary>
+            Turns the Officer into a KeyValuePair
+            </summary>
+            <returns>KeyValuePair of steamid,permissionlevel</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.Config.Command_Permission">
+            <summary>
+            Generic command permission class.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.Command_Permission.command_name">
+            <summary>
+            The exact name of the command.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.Command_Permission.permission_level">
+            <summary>
+            An integer representing a permission level.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Config.Command_Permission.ToKeyValuePair">
+            <summary>
+            Turns the Command_Permission into a KeyValuePair
+            </summary>
+            <returns>KeyValuePair</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.Config.RootConfig">
+            <summary>
+            A generic RootConfig object containing configuration information.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.Username">
+            <summary>
+            Username to automatically log in to.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.Password">
+            <summary>
+            Password to use to automatically log in.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.SteamMachineAuth">
+            <summary>
+            Special bytes sent to Steam to prove the user is the account holder.
+            </summary>"
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.ApiKey">
+            <summary>
+            A special key retrieved from https://steamcommunity.com/dev/apikey
+            The key MUST be from the bot's account.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.GreetMessage">
+            <summary>
+            Will be said upon a successful friend add.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.AddOfficers">
+            <summary>
+            Determines whether or not the bot should attempt to friend all Officers.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.Verbose">
+            <summary>
+            Changes whether or not the Debug.Log should output verbose information.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.LogChat">
+            <summary>
+            Log all chat into .txt files with the date and time. A new file is generated every five minutes.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.Log">
+            <summary>
+            I can't remember.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.Officers">
+            <summary>
+            List of Officer objects.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.CommandPermissions">
+            <summary>
+            List of Command_Permission objects.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.Inventories">
+            <summary>
+            Inventories to create on load, refreshInventories method from Inventory handler also uses these.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.RootConfig.BannedUsers">
+            <summary>
+            Define users that are not allowed to use this bot.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.Config.Dictionaries">
+            <summary>
+            Class containing Dictionary versions of Offer/CommandPermission
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Configuration.Config.Dictionaries.Officers_Dict">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Configuration.Config.Dictionaries.Command_Permissions_Dict">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Config.Dictionaries.ClearOfficer">
+            <summary>
+            Clear officers dictionary. This should not be called directly.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Config.Dictionaries.ClearPerms">
+            <summary>
+            Clear permissions dictionary. This shold not be called directly.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.TradeConfig">
+            <summary>
+            Generic trade config, in progress suggested to not use
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Configuration.TradeConfig.TradesConfig">
+            <summary>
+            The meat of the config
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset.AppId">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset.TypeId">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset.TypeObj">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset.Amount">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.TradeConfig.AcceptableTrade">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.TradeConfig.AcceptableTrade.Me">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.TradeConfig.AcceptableTrade.Them">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.TradeConfig.Trades">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.TradeConfig.Trades.AcceptableTrades">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.TradeConfig.Reload">
+            <summary>
+            Reloads the configuration file (trades.cfg). If file is not present, it will generate a new one.
+            </summary>
+            <returns>A Trades object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.TradeConfig.WriteChanges(CSharpTradeOffers.Configuration.TradeConfig.Trades)">
+            <summary>
+            Writes the changes made to the trade config.
+            </summary>
+            <param name="towrite"></param>
+        </member>
+        <member name="T:CSharpTradeOffers.ExtensionMethods">
+            <summary>
+            Various extension methods used in the library.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.ExtensionMethods.IntValue(System.Boolean)">
+            <summary>
+            Converts the bool variable to its integer representation of 0 for false and 1 for true.
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler">
+            <summary>
+            Hadles Account Recovery tasks
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler.#ctor(System.String)">
+            <summary>
+            Initializes the object with the api key
+            </summary>
+            <param name="apiKey"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler.ReportAccountRecoveryData(System.String,System.String,System.String,System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="loginUserList">I forgot or it's obvious. TODO: Add better documentation</param>
+            <param name="installConfig">I forgot or it's obvious. TODO: Add better documentation</param>
+            <param name="shaSentryFile">I forgot or it's obvious. TODO: Add better documentation</param>
+            <param name="machineId">I forgot or it's obvious. TODO: Add better documentation</param>
+            <returns>I forgot or it's obvious. TODO: Add better documentation</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler.RetrieveAccountRecoveryData(System.String,System.Net.CookieContainer)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="requesthandle">I forgot or it's obvious. TODO: Add better documentation</param>
+            <param name="authContainer">I forgot or it's obvious. TODO: Add better documentation</param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ICSGOServers_730Handler">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ICSGOServers_730Handler.#ctor(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="apiKey"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ICSGOServers_730Handler.GetGameServersStatus">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler.#ctor(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="apiKey"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler.GetFantasyPlayerStats(System.UInt32,System.UInt32,System.UInt32,System.UInt64,System.UInt32,System.UInt32)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="fantasyLeagueId"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <param name="matchId"></param>
+            <param name="seriesId"></param>
+            <param name="playerAccountId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler.GetPlayerOfficialInfo(System.UInt32)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="accountid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetPlayerOfficalInfoBaseResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficalInfoBaseResult.result">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.Name">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.TeamName">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.TeamTag">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.Sponsor">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.FantasyRole">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.StatsList">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.PlayerAccountID">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.PlayerName">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.Role">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.Score">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.Matches">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageLevel">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageKills">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageDeaths">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageAssists">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageLastHits">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageDenies">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageGPM">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageXPPM">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageStuns">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageHealing">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageTowerKills">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageRoshanKills">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsResult.StatsList">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsResult.success">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsBaseResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsBaseResult.result">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.#ctor(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="apiKey"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetAccountList">
+            <summary>
+            Gets a list of servers owned by the account
+            </summary>
+            <returns>Unknown, was unable to succeed since my account owns no servers. Returns dynamic.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.CreateAccount(System.UInt32,System.String)">
+            <summary>
+            Creates a persistent game server account
+            </summary>
+            <param name="appId">App to use account for</param>
+            <param name="memo">Memo to set on new account</param>
+            <returns>A CreateAccountResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.SetMemo(System.UInt64,System.String)">
+            <summary>
+            This method changes the memo associated with the game server account. 
+            Memos do not affect the account in any way. 
+            The memo shows up in the GetAccountList response and serves only as a reminder of what the account is used for.
+            </summary>
+            <param name="steamId">The SteamId64 of the game server.</param>
+            <param name="memo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.ResetLoginToken(System.UInt64)">
+            <summary>
+            Resets the login token for the specified game server
+            </summary>
+            <param name="steamId">Server SteamId64 to reset the token of.</param>
+            <returns>A ResetLoginTokenResponse containing the new token.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetAccountPublicInfo(System.UInt64)">
+            <summary>
+            Gets the public information about the specified game server account.
+            </summary>
+            <param name="steamId">Game server SteamId64 to get info from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetServerSteamIdsByIp(System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets a list of server SteamIDs from a list of server IPs
+            </summary>
+            <param name="serverIps">A list of IPs to get the SteamIDs for.</param>
+            <returns>Unknown</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetServerIPsBySteamId(System.Collections.Generic.List{System.UInt64})">
+            <summary>
+            Gets a list of server SteamIDs from a list of server IPs
+            </summary>
+            <param name="serverSteamIds">A list of server Sid64s to get the IPs of.</param>
+            <returns>Unknown</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoBaseResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoBaseResponse.response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoResponse.steamid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoResponse.appid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ResetLoginTokenBaseResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.ResetLoginTokenBaseResponse.response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ResetLoginTokenResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.ResetLoginTokenResponse.login_token">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.CreateAccountBaseResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.CreateAccountBaseResponse.response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.CreateAccountResponse">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.CreateAccountResponse.steamid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.CreateAccountResponse.login_token">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ISteamUserHandler">
+            <summary>
+            Handles steam user related tasks.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.#ctor(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="apiKey"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetFriendList(System.UInt64,System.String)">
+            <summary>
+            Retrieves the friends list of the specified steamid64. 
+            The profile must be set to public or the owner of the api key must be friends with them.
+            The profile cannot be private or the method will fail and it will return null.
+            </summary>
+            <param name="steamId">SteamId64 to retrieve the friends list from.</param>
+            <param name="relationship">All/Friend, there are others but I do not know what.</param>
+            <returns>Null upon failure, otherwise a list of Friend objects.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetPlayerBans(System.Collections.Generic.List{System.UInt64})">
+            <summary>
+            Gets the bans of the specified SteamId64s
+            </summary>
+            <param name="playersBansToRequest">A List of steamid64s to retrieve ban information about.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetPlayerSummariesV1(System.Collections.Generic.List{System.UInt64})">
+            <summary>
+            DEPRECATED, DO NOT USE.
+            I only included this for completeness.
+            </summary>
+            <param name="playerSummariesToRequest">List of SteamIds to request a player summary of.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetPlayerSummariesV2(System.Collections.Generic.List{System.UInt64})">
+            <summary>
+            Requests a list of player summaries of the players in the list.
+            </summary>
+            <param name="playerSummariesToRequest">A list of SteamIds to request their summaries.</param>
+            <returns>A list of PlayerSummary objects.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetUserGroupList(System.UInt64)">
+            <summary>
+            Requests the GroupIds of the groups of the specified player.
+            </summary>
+            <param name="steamId">SteamId64 of the player.</param>
+            <returns>A GetUserGroupListResult object that contains a list of group ids.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.ResolveVanityUrl(System.String,System.Int32)">
+            <summary>
+            Resolves a vanity url into a SteamId64.
+            </summary>
+            <param name="vanityUrl">The vanity url part of the url (not whole url). ex: fatherfoxxy NOT https://steamcommunity.com/id/FatherFoxxy </param>
+            <param name="urlType">
+            1 - (default) Individual profile
+            2 - Group Profile
+            3 - Offical Game Group Profile
+            </param>
+            <returns>A ResolveVanityUrlResult object.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ResolveVanityUrlResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.ResolveVanityUrlResult.steamid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.ResolveVanityUrlResult.success">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ResolveVanityUrlBaseResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.ResolveVanityUrlBaseResult.response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.Group">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.Group.gid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetUserGroupListResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetUserGroupListResult.success">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetUserGroupListResult.groups">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetUserGroupListBaseResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetUserGroupListBaseResult.Result">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.PlayerSummary">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.steamid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.communityvisibilitystate">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.profilestate">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.personaname">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.lastlogoff">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.profileurl">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.avatar">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.avatarmedium">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.avatarfull">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.personastate">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.primaryclanid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.timecreated">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.personastateflags">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerSummary.loccountrycode">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.PlayersSummaries">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayersSummaries.PlayerSummaries">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ResponseV1">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.ResponseV1.PlayersSummaries">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetPlayerSummariesV1Result">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerSummariesV1Result.Response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.ResponseV2">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.ResponseV2.PlayersSummaries">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetPlayerSummariesV2Result">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerSummariesV2Result.Response">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.PlayerBans">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerBans.SteamId">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerBans.CommunityBanned">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerBans.VACBanned">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerBans.NumberOfVACBans">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerBans.DaysSinceLastBan">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerBans.NumberOfGameBans">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.PlayerBans.EconomyBan">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetPlayerBansResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerBansResult.playersbans">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.Friend">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.Friend.steamid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.Friend.relationship">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.Friend.friend_since">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.Friendslist">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.Friendslist.friends">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MiscAPI.GetFriendListResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.MiscAPI.GetFriendListResult.friendslist">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.MarketHandler">
+            <summary>
+            Handles market related tasks.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.MarketHandler.EligibilityCheck(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Sets the container to contain a MarketEligibility cookie. Required before trading.
+            </summary>
+            <param name="steamId">The SteamId of the bot.</param>
+            <param name="container">The bot CookieContainer</param>
+        </member>
+        <member name="M:CSharpTradeOffers.MarketHandler.GetPriceOverview(System.UInt32,System.String,System.String,System.String)">
+            <summary>
+            Gets the price overview of an item.
+            </summary>
+            <param name="appId">The appId of the item.</param>
+            <param name="marketHashName">The market_hash_name of the item</param>
+            <param name="country">Country to check in. (ISO)</param>
+            <param name="currency">Currency code, I forget what. 1 = US $</param>
+            <returns>A MarketValue object containing the data.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.SteamIdOperations">
+            <summary>
+            Helps with conversion operations
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertAccountIdtoUInt64(System.UInt32)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="accountid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertAccountIdToSteamId(System.UInt32)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="accountid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertSteamIdtoULong(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="sid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertUlongToSteamId(System.UInt64)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="steamid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertSteamIdToAccountId(System.String)">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+            <param name="steamid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web">
+            <summary>
+            Handles Web related tasks like logging in and fetching
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Web.SteamCommunityDomain">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamLogin">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SessionId">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamLoginSecure">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamMachineAuth">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.TimezoneOffset">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Request(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Fetch calls this method.
+            </summary>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>An HttpWebResponse object from the requested URL.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            A web method to return the response string from the URL.
+            </summary>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>A string from the response stream.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.FetchStream(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            A web method to return the response string from the URL.
+            </summary>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>The response stream.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Converts a dictionary to URL parameters. Ex: ?param=arg
+            </summary>
+            <param name="dict">The Dictionary to be converted.</param>
+            <returns>A concatenated string of URL arguments.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,CSharpTradeOffers.Account@,CSharpTradeOffers.Configuration.Config.RootConfig@)">
+            <summary>
+            Executes the login by using the Steam Website.
+            </summary> 
+        </member>
+        <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,CSharpTradeOffers.Account@)">
+            <summary>
+            Executes the login by using the Steam Website.
+            </summary>   
+        </member>
+        <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,CSharpTradeOffers.Account@,System.String)">
+            <summary>
+            Executes the login by using the Steam Website.
+            </summary> 
+        </member>
+        <member name="T:CSharpTradeOffers.Web.GetRsaKey">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.GetRsaKey.success">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.GetRsaKey.publickey_mod">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.GetRsaKey.publickey_exp">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.GetRsaKey.timestamp">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.SteamResult">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.success">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.requires_twofactor">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.message">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.captcha_needed">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.captcha_gid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.emailauth_needed">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.emaildomain">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResult.emailsteamid">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -5,11 +5,18 @@ using Newtonsoft.Json;
 namespace CSharpTradeOffers.MiscAPI
 {
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     public class IGameServersServiceHandler
     {
         private const string BaseUrl = "https://api.steampowered.com/IGameServersService/";
         private readonly string _apiKey;
 
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        /// <param name="apiKey"></param>
         public IGameServersServiceHandler(string apiKey)
         {
             _apiKey = apiKey;
@@ -131,45 +138,87 @@ namespace CSharpTradeOffers.MiscAPI
     }
 
     #region GetAccountPublicInfoResponse
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class GetAccountPublicInfoBaseResponse
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public GetAccountPublicInfoResponse response { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Response")]
     public class GetAccountPublicInfoResponse
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string steamid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public int appid { get; set; }
     }
     #endregion
 
     #region ResetLoginTokenResponse
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class ResetLoginTokenBaseResponse
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public ResetLoginTokenResponse response { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Response")]
     public class ResetLoginTokenResponse
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string login_token { get; set; }
     }
     #endregion
 
     #region CreateAccountResponse
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class CreateAccountBaseResponse
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public CreateAccountResponse response { get; set; }
     }
 
+    /// <summary>
+    /// I forgot or it's obvious. TODO: Add better documentation
+    /// </summary>
     [JsonObject(Title = "Response")]
     public class CreateAccountResponse
     {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string steamid { get; set; }
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
         public string login_token { get; set; }
     }
 
