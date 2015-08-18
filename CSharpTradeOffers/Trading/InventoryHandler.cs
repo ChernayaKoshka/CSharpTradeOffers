@@ -69,23 +69,23 @@ namespace CSharpTradeOffers.Trading
                 case 4: //money
                     throw new Exception("TypeId not available for 'me' trades.");
                 case 5: //tags
-                    var handler = new ISteamEconomyHandler();
-                    foreach (var item in inv.Items.Values)
-                    {
-                        var classid = new Dictionary<string, string>
-                        {
-                            {item.classid, null}
-                        };
-                        AssetClassInfo info = handler.ToAssetClassInfo(handler.GetAssetClassInfo(_config.Cfg.ApiKey, Convert.ToUInt32(item.appid), classid).result);
-                        foreach (var tag in info.tags)
-                        {
-                            if (tag.name == assetToFind.TypeObj)
-                            {
-                                if (!item.items.TrueForAll(BeingUsed)) return item;
-                                break;
-                            }
-                        }
-                    }
+                    //var handler = new ISteamEconomyHandler();
+                    //foreach (var item in inv.Items.Values)
+                    //{
+                    //    var classid = new Dictionary<string, string>
+                    //    {
+                    //        {item.classid, null}
+                    //    };
+                    //    AssetClassInfo info = handler.ToAssetClassInfo(handler.GetAssetClassInfo(_config.Cfg.ApiKey, Convert.ToUInt32(item.appid), classid).result);
+                    //    foreach (var tag in info.tags)
+                    //    {
+                    //        if (tag.name == assetToFind.TypeObj)
+                    //        {
+                    //            if (!item.items.TrueForAll(BeingUsed)) return item;
+                    //            break;
+                    //        }
+                    //    }
+                    //}
                     break;
                 default:
                     throw new Exception("Unknown TypeId!");
@@ -102,7 +102,7 @@ namespace CSharpTradeOffers.Trading
         public List<Item> FindUnusedItems(string marketHashName, uint appid)
         {
             Inventory inv = Inventories[appid];
-            List<Item> items = inv.Items.Values.Where(item => item.market_hash_name.Contains(marketHashName) && !item.items.TrueForAll(BeingUsed)).ToList();
+            List<Item> items = inv.Items.Values.Where(item => item.market_hash_name.ToLower().Contains(marketHashName) && !item.items.TrueForAll(BeingUsed)).ToList();
             return items;
         }
 
@@ -150,23 +150,23 @@ namespace CSharpTradeOffers.Trading
 
                     break;
                 case 5:
-                    ISteamEconomyHandler handler = new ISteamEconomyHandler();
-                    foreach (Item item in inv.Items.Values)
-                    {
-                        var classid = new Dictionary<string, string>
-                        {
-                            {item.classid, null}
-                        };
-
-                        AssetClassInfo info = handler.ToAssetClassInfo(
-                            handler.GetAssetClassInfo(_config.Cfg.ApiKey, Convert.ToUInt32(item.appid),
-                                classid).result);
-
-                        if (info.tags.Any(tag => tag.name == assetToFind.TypeObj))
-                        {
-                            return item;
-                        }
-                    }
+                    //ISteamEconomyHandler handler = new ISteamEconomyHandler();
+                    //foreach (Item item in inv.Items.Values)
+                    //{
+                    //    var classid = new Dictionary<string, string>
+                    //    {
+                    //        {item.classid, null}
+                    //    };
+                    //
+                    //    AssetClassInfo info = handler.ToAssetClassInfo(
+                    //        handler.GetAssetClassInfo(_config.Cfg.ApiKey, Convert.ToUInt32(item.appid),
+                    //            classid).result);
+                    //
+                    //    if (info.tags.Any(tag => tag.name == assetToFind.TypeObj))
+                    //    {
+                    //        return item;
+                    //    }
+                    //}
                     break;
                 default:
                     throw new Exception("Unknown TypeId!");
@@ -251,7 +251,7 @@ namespace CSharpTradeOffers.Trading
             if (item.tradable != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+            return Convert.ToDecimal(mv.median_price.Substring(1));
         }
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
@@ -265,7 +265,7 @@ namespace CSharpTradeOffers.Trading
             if (tradable.IntValue() != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+            return Convert.ToDecimal(mv.median_price.Substring(1));
         }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace CSharpTradeOffers.Trading
             if (tradable != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+            return Convert.ToDecimal(mv.median_price.Substring(1));
         }
     }
 
@@ -289,7 +289,6 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class Inventory
     {
-
         #region old, remove later + fix
         /// <summary>
         /// Requests decimal worth of an Item.
@@ -301,8 +300,9 @@ namespace CSharpTradeOffers.Trading
             if (item.tradable != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+            return Convert.ToDecimal(mv.median_price.Substring(1));
         }
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
@@ -315,7 +315,7 @@ namespace CSharpTradeOffers.Trading
             if (tradable.IntValue() != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+            return Convert.ToDecimal(mv.median_price.Substring(1));
         }
 
         /// <summary>
@@ -330,9 +330,10 @@ namespace CSharpTradeOffers.Trading
             if (tradable != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
+            return Convert.ToDecimal(mv.median_price.Substring(1));
         }
         #endregion
+
         /// <summary>
         /// Class constructor, automatically initializes inventory.
         /// </summary>
@@ -343,12 +344,10 @@ namespace CSharpTradeOffers.Trading
             InitializeInventory(steamId, appId);
         }
 
-        private readonly Dictionary<string, Item> _items = new Dictionary<string, Item>();
-
         /// <summary>
         /// String is the ClassId linking to an Item object.
         /// </summary>
-        public Dictionary<string, Item> Items => _items;
+        public Dictionary<string, Item> Items { get; } = new Dictionary<string, Item>();
 
         /// <summary>
         /// Requests the inventory for the specified steamId and appId.
@@ -390,10 +389,14 @@ namespace CSharpTradeOffers.Trading
                         commodity = descriptionObj.commodity,
                         marketable = descriptionObj.marketable,
                         tradable = descriptionObj.tradable,
-                        worth = ItemWorth(descriptionObj.tradable,descriptionObj.appid,descriptionObj.market_hash_name)
+                        worth =
+                            ItemWorth(Convert.ToInt32(descriptionObj.tradable),
+                                Convert.ToUInt32(descriptionObj.appid),
+                                descriptionObj.market_hash_name.ToString())
                     };
-                    if (!_items.ContainsKey(description.classid))
-                        _items.Add(description.classid, description);
+
+                    if (!Items.ContainsKey(description.classid))
+                        Items.Add(description.classid, description);
                 }
                 catch (NullReferenceException)
                 {
@@ -413,7 +416,7 @@ namespace CSharpTradeOffers.Trading
                     instanceid = item.instanceid,
                     pos = item.pos
                 };
-                _items[inventoryItem.classid.ToString()].items.Add(inventoryItem);
+                Items[inventoryItem.classid.ToString()].items.Add(inventoryItem);
                 //Inventory[inventory_item.classid].items
             }
 
@@ -546,7 +549,6 @@ Console.WriteLine("Name | Duplicate Val | Val");
     public class ItemSearchParams
     {
         Inventory inv { get; set; }
-
     }
 
     /// <summary>
@@ -585,6 +587,7 @@ Console.WriteLine("Name | Duplicate Val | Val");
         /// <summary>
         /// Market worth of the item.
         /// </summary>
+        [JsonIgnore]
         public decimal worth { get; set; }
 
         #region old

@@ -264,15 +264,15 @@ namespace CSharpTradeOffers.Trading
                                     assetsAreAcceptable = true;
                                 break;
                             case 5:
-                                var classid = new Dictionary<string, string>
-                                {
-                                    {cEconAsset.classid, cEconAsset.instanceid}
-                                };
-                                AssetClassInfo info = EconomyHandler.ToAssetClassInfo(
-                                    EconomyHandler.GetAssetClassInfo(_apiKey, Convert.ToUInt32(cEconAsset.appid),
-                                        classid).result);
-                                foreach (Tag tag in info.tags.Where(tag => tag.name == expectedAsset.TypeObj))
-                                    assetsAreAcceptable = true;
+                                //var classid = new Dictionary<string, string>
+                                //{
+                                //    {cEconAsset.classid, cEconAsset.instanceid}
+                                //};
+                                //AssetClassInfo info = EconomyHandler.ToAssetClassInfo(
+                                //    EconomyHandler.GetAssetClassInfo(_apiKey, Convert.ToUInt32(cEconAsset.appid),
+                                //        classid).result);
+                                //foreach (Tag tag in info.tags.Where(tag => tag.name == expectedAsset.TypeObj))
+                                //    assetsAreAcceptable = true;
                                 break;
                             case 6:
                                 throw new Exception("'Them' is not a valid area for this TypeId!");
