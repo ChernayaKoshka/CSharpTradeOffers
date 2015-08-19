@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Trading
 {
-    #region AssetClassInfo
+    #region OldAssetClassInfo
 
     /// <summary>
     /// I forgot or it's obvious. TODO: Add better documentation

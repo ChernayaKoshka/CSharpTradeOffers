@@ -11,18 +11,19 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class InventoryHandler
     {
-        private readonly Config _config;
-        private Account _account;
+        //private readonly Config _config;
+        //private Account _account;
+        private readonly ulong _steamId;
+
 
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         /// <param name="cfg"></param>
         /// <param name="account"></param>
-        public InventoryHandler(Config cfg, Account account)
+        public InventoryHandler(ulong steamId)
         {
-            _config = cfg;
-            _account = account;
+            _steamId = steamId;
         }
 
         /// <summary>
@@ -218,27 +219,27 @@ namespace CSharpTradeOffers.Trading
                 Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
         }
 
-        /// <summary>
+        ///// <summary>
         /// Reloads all of the inventories belonging to a specified steamid64. The inventories to refresh are specified in the config file.
         /// </summary>
         /// <param name="steamId"></param>
-        public void RefreshInventories(ulong steamId)
-        {
-            Inventories.Clear();
-            foreach (uint appid in _config.Cfg.Inventories)
-                Inventories.Add(appid, new Inventory(steamId, appid));
-        }
+        //public void RefreshInventories(ulong steamId)
+        //{
+        //    Inventories.Clear();
+        //    foreach (uint appid in _config.Cfg.Inventories)
+        //        Inventories.Add(appid, new Inventory(steamId, appid));
+        //}
 
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         /// <param name="steamId"></param>
         /// <param name="appids"></param>
-        public void RefreshInventories(ulong steamId, uint[] appids)
+        public void RefreshInventories(uint[] appids)
         {
             Inventories.Clear();
             foreach (uint appid in appids)
-                Inventories.Add(appid, new Inventory(steamId,appid));
+                Inventories.Add(appid, new Inventory(_steamId, appid));
         }
 
         /// <summary>
@@ -253,6 +254,7 @@ namespace CSharpTradeOffers.Trading
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
             return Convert.ToDecimal(mv.median_price.Substring(1));
         }
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
@@ -289,6 +291,7 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class Inventory
     {
+        private readonly ulong _steamId;
         #region old, remove later + fix
         /// <summary>
         /// Requests decimal worth of an Item.
@@ -341,7 +344,8 @@ namespace CSharpTradeOffers.Trading
         /// <param name="appId">App ID of the inventory.</param>
         public Inventory(ulong steamId, uint appId)
         {
-            InitializeInventory(steamId, appId);
+            _steamId = steamId;
+            InitializeInventory(appId);
         }
 
         /// <summary>
@@ -355,9 +359,9 @@ namespace CSharpTradeOffers.Trading
         /// <param name="steamId">steamId64 of the inventory to request.</param>
         /// <param name="appId">App ID of the inventory to request.</param>
         /// <returns>Returns a dynamic JSON object of the inventory to request.</returns>
-        private static dynamic RequestInventory(ulong steamId, uint appId)
+        private dynamic RequestInventory(uint appId)
         {
-            string url = "https://steamcommunity.com/profiles/" + steamId + "/inventory/json/" + appId + "/2/";
+            string url = "https://steamcommunity.com/profiles/" + _steamId + "/inventory/json/" + appId + "/2/";
             return JsonConvert.DeserializeObject<dynamic>(Web.Fetch(url, "GET", null, null, false));
         }
 
@@ -366,9 +370,9 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="steamId">steamId64 of the inventory to request.</param>
         /// <param name="appId">App ID of the inventory to request.</param>
-        private void InitializeInventory(ulong steamId, uint appId)
+        private void InitializeInventory(uint appId)
         {
-            dynamic inventoryJson = RequestInventory(steamId, appId);
+            dynamic inventoryJson = RequestInventory(appId);
 
             if(inventoryJson.success == null) throw new InventoryException("Inventory request was not successful. 'success' field was null.");
             if (inventoryJson.success != true) throw new InventoryException("Inventory request was not successful. 'success' field was false.");

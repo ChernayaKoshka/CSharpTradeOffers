@@ -193,18 +193,11 @@
             <param name="offer">a CEconTradeOffer to check.</param>
             <returns>A TradeConfig.AcceptableTrade object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetNames(System.Collections.Generic.List{CSharpTradeOffers.Trading.CEconAsset}@)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            IGNORE THIS METHOD FOR NOW, IT IS BAD!
-            </summary>
-            <param name="assets"></param>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffersSummary(System.UInt32)">
             <summary>
             Requestss TradeOffer statistics. ie: historical_received_count
             </summary>
-            <param name="time_last_visit">Unix time for historical cutoff.</param>
+            <param name="timeLastVisit">Unix time for historical cutoff.</param>
             <returns></returns>
         </member>
         <member name="T:CSharpTradeOffers.Trading.TypeIds">
@@ -432,11 +425,6 @@
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
         </member>
-        <member name="F:CSharpTradeOffers.Trading.CEconAsset.name">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
@@ -619,7 +607,7 @@
             Handles Inventory-Related tasks for a specific account. TODO: Allow other accounts
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.#ctor(CSharpTradeOffers.Configuration.Config,CSharpTradeOffers.Account)">
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.#ctor(System.UInt64)">
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
@@ -689,13 +677,7 @@
             <param name="offer">TradeOffer to mark.</param>
             <param name="inUse">Bool to set.</param>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt64)">
-            <summary>
-            Reloads all of the inventories belonging to a specified steamid64. The inventories to refresh are specified in the config file.
-            </summary>
-            <param name="steamId"></param>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt64,System.UInt32[])">
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt32[])">
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
@@ -769,7 +751,7 @@
             String is the ClassId linking to an Item object.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.RequestInventory(System.UInt64,System.UInt32)">
+        <member name="M:CSharpTradeOffers.Trading.Inventory.RequestInventory(System.UInt32)">
             <summary>
             Requests the inventory for the specified steamId and appId.
             </summary>
@@ -777,7 +759,7 @@
             <param name="appId">App ID of the inventory to request.</param>
             <returns>Returns a dynamic JSON object of the inventory to request.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.InitializeInventory(System.UInt64,System.UInt32)">
+        <member name="M:CSharpTradeOffers.Trading.Inventory.InitializeInventory(System.UInt32)">
             <summary>
             Initializes the inventory for the specified steamId and appId.
             </summary>
@@ -1113,15 +1095,6 @@
             <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
             <param name="IDs">Dictionary MUST contain ClassID/InstanceID of item.</param>
             <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.ISteamEconomyHandler.ToAssetClassInfo(System.Object)">
-            <summary>
-            Partially converts the dynamic GetAssetClassInfo into an AssetClassInfo object.
-            Does not convert filter_data because its complicated and I'm lazy.
-            Very poorly done, possibly optimize/fix?
-            </summary>
-            <param name="dynamicinfo">The return variable from GetAssetClassInfo</param>
-            <returns>An AssetClassInfo object.</returns>
         </member>
         <member name="T:CSharpTradeOffers.Account">
             <summary>

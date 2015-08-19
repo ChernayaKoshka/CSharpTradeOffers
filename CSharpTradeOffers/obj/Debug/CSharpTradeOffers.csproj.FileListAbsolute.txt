@@ -13,3 +13,11 @@ C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers\CSharpTradeOffers\obj\
 C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers\CSharpTradeOffers\obj\Debug\CSharpTradeOffers.dll
 C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers\CSharpTradeOffers\obj\Debug\CSharpTradeOffers.pdb
 C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers\CSharpTradeOffers\bin\Debug\CSharpTradeOffers.XML
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\bin\Debug\CSharpTradeOffers.XML
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\obj\Debug\CSharpTradeOffers.csprojResolveAssemblyReference.cache
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\obj\Debug\CSharpTradeOffers.dll
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\obj\Debug\CSharpTradeOffers.pdb
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\bin\Debug\CSharpTradeOffers.dll
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\bin\Debug\CSharpTradeOffers.pdb
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Christopher\OneDrive\BitBucket\CSharpTradeOffers-Partner\CSharpTradeOffers\bin\Debug\Newtonsoft.Json.xml

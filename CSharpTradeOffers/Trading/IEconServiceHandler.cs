@@ -12,12 +12,8 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class EconServiceHandler
     {
-        //create initliazer to pass inventoryhandler?
-        private static readonly ISteamEconomyHandler EconomyHandler = new ISteamEconomyHandler();
-        private static readonly MarketHandler MarketHandler = new MarketHandler();
         private readonly string _apiKey ;
 
-        private const string ApiUrl = "https://api.steampowered.com/IEconService/{0}/v1/"; //migrate to base url later
         private const string BaseUrl = "https://api.steampowered.com/IEconService/";
 
         /// <summary>
@@ -37,11 +33,12 @@ namespace CSharpTradeOffers.Trading
         /// <returns></returns>
         public TradeOffersList GetTradeOffers(Dictionary<string, string> data)
         {
+            const string url = BaseUrl + "GetTradeOffers/v1/";
             data.Add("key", _apiKey);
             data.Add("format", "json");
             return
                 JsonConvert.DeserializeObject<TradeOffers>(
-                    WebUtility.UrlDecode(Web.Fetch(string.Format(ApiUrl, "GetTradeOffers"), "GET", data))).response;
+                    WebUtility.UrlDecode(Web.Fetch(url, "GET", data))).response;
         }
 
         /// <summary>
@@ -52,8 +49,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>A CEConTradeOffer object.</returns>
         public CEconTradeOffer GetTradeOffer(string tradeofferid, string language = "english")
         {
-
-            if (_apiKey == null) throw new ArgumentNullException(nameof(_apiKey));
+            const string url = BaseUrl + "GetTradeOffer/v1/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
@@ -63,7 +59,7 @@ namespace CSharpTradeOffers.Trading
             };
             return
                 JsonConvert.DeserializeObject<CEconTradeOffer>(
-                    WebUtility.UrlDecode(Web.Fetch(string.Format(ApiUrl, "GetTradeOffer"), "GET", data)));
+                    WebUtility.UrlDecode(Web.Fetch(url, "GET", data)));
         }
 
         /// <summary>
@@ -73,13 +69,14 @@ namespace CSharpTradeOffers.Trading
         /// <returns></returns>
         public string DeclineTradeOffer(string tradeofferid)
         {
+            const string url = BaseUrl + "DeclineTradeOffer/v1/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
                 {"tradeofferid", tradeofferid},
                 {"format", "json"}
             };
-            return Web.Fetch(string.Format(ApiUrl, "DeclineTradeOffer"), "POST", data);
+            return Web.Fetch(url, "POST", data);
         }
 
         /// <summary>
@@ -89,13 +86,14 @@ namespace CSharpTradeOffers.Trading
         /// <returns></returns>
         public string CancelTradeOffer(string tradeofferid)
         {
+            const string url = BaseUrl + "CancelTradeOffer/v1/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
                 {"tradeofferid", tradeofferid},
                 {"format", "json"}
             };
-            return WebUtility.UrlDecode(Web.Fetch(string.Format(ApiUrl, "CancelTradeOffer"), "POST", data));
+            return WebUtility.UrlDecode(Web.Fetch(url, "POST", data));
         }
 
         /// <summary>
@@ -193,7 +191,8 @@ namespace CSharpTradeOffers.Trading
         /// <returns>A compatible trade offer, null if none was found.</returns>
         public TradeOffer CreateCompatibleTrade(CEconTradeOffer offer, InventoryHandler inventoryHandler)
         {
-            TradeOffer compatibleOffer = new TradeOffer { them = { assets = offer.items_to_receive } };
+            return null;
+            /*TradeOffer compatibleOffer = new TradeOffer { them = { assets = offer.items_to_receive } };
             TradeConfig.AcceptableTrade acceptableTrade = FindAcceptableTrade(offer);
             if (acceptableTrade == null) return null;
             
@@ -211,7 +210,7 @@ namespace CSharpTradeOffers.Trading
                 }
             }
             //return compatibleOffer.me.assets.Count == 0 ? null : compatibleOffer;
-            return compatibleOffer;
+            return compatibleOffer;*/
         }
 
         /// <summary>
@@ -221,7 +220,8 @@ namespace CSharpTradeOffers.Trading
         /// <returns>A TradeConfig.AcceptableTrade object.</returns>
         public TradeConfig.AcceptableTrade FindAcceptableTrade(CEconTradeOffer offer)
         {
-            bool assetsAreAcceptable = false;
+            return null;
+            /*bool assetsAreAcceptable = false;
             var items_to_receive = offer.items_to_receive;
             GetNames(ref items_to_receive);
             foreach (TradeConfig.AcceptableTrade acceptableTrade in TradeConfig.TradesConfig.AcceptableTrades)
@@ -286,175 +286,31 @@ namespace CSharpTradeOffers.Trading
                 if (assetsAreAcceptable) return acceptableTrade;
             }
             return null;
+            */
         }
-
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// IGNORE THIS METHOD FOR NOW, IT IS BAD!
-        /// </summary>
-        /// <param name="assets"></param>
-        public void GetNames(ref List<CEconAsset> assets)
-        {
-            foreach (CEconAsset cEconAsset in assets)
-                cEconAsset.name = cEconAsset.GetMarketHashName(_apiKey);
-        } 
-
-        #region old
-        /*public TradeConfig.AcceptableTrade FindAcceptableTrade(CEconTradeOffer offer)
-        {
-            bool assetIsAcceptable = false;
-            foreach (TradeConfig.AcceptableTrade acceptableTrade in TradeConfig.TradesConfig.AcceptableTrades)
-            {
-                foreach (CEconAsset cEconAsset in offer.items_to_receive)
-                {
-                    foreach (TradeConfig.ConfigAsset expectedAsset in acceptableTrade.Them)
-                    {
-                        switch (expectedAsset.TypeId)
-                        {
-                            case 0:
-                                if (cEconAsset.GetMarketHashName(_apiKey) == expectedAsset.TypeObj)
-                                    assetIsAcceptable = true;
-                                break;
-                            case 1:
-                                if (
-                                    cEconAsset.GetMarketHashName(_apiKey)
-                                        .ToLower()
-                                        .Contains(expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-                                break;
-                            case 2:
-                                if (
-                                    cEconAsset.GetMarketHashName(_apiKey)
-                                        .ToLower()
-                                        .StartsWith(expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-                                break;
-                            case 3:
-                                if (cEconAsset.classid == expectedAsset.TypeObj)
-                                    assetIsAcceptable = true;
-                                break;
-                            case 4:
-                                if (
-                                    Convert.ToUInt32(
-                                        MarketHandler.GetPriceOverview(Convert.ToUInt32(cEconAsset.appid),
-                                            cEconAsset.GetMarketHashName(_apiKey)).median_price) >=
-                                    Convert.ToUInt32(expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-                                break;
-                            case 5:
-                                var classid = new Dictionary<string, string>
-                                {
-                                    {cEconAsset.classid, cEconAsset.instanceid}
-                                };
-                                AssetClassInfo info = EconomyHandler.ToAssetClassInfo(
-                                    EconomyHandler.GetAssetClassInfo(_apiKey, Convert.ToUInt32(cEconAsset.appid),
-                                        classid).result);
-                                foreach (Tag tag in info.tags.Where(tag => tag.name == expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-                                break;
-                            case 6:
-                                throw new Exception("'Them' is not a valid area for this TypeId!");
-                            default:
-                                throw new Exception("Unknown TypeId!");
-                        }
-                        break;
-                    }
-                    if (!assetIsAcceptable) break;
-                }
-                if (assetIsAcceptable) return acceptableTrade;
-            }
-            return null;
-        }*/
-        #endregion
 
         /// <summary>
         /// Requestss TradeOffer statistics. ie: historical_received_count
         /// </summary>
-        /// <param name="time_last_visit">Unix time for historical cutoff.</param>
+        /// <param name="timeLastVisit">Unix time for historical cutoff.</param>
         /// <returns></returns>
-        public GetTradeOffersSummaryResponse GetTradeOffersSummary(uint time_last_visit)
+        public GetTradeOffersSummaryResponse GetTradeOffersSummary(uint timeLastVisit)
         {
             const string url = BaseUrl + "GetTradeOffersSummary/v1/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
-                {"time_last_visit", time_last_visit.ToString()}
+                {"time_last_visit", timeLastVisit.ToString()}
             };
             return
                 JsonConvert.DeserializeObject<GetTradeOffersSummaryBaseResponse>(Web.Fetch(url, "GET", data)).response;
         }
-
-        /*Non LINQ
-        public TradeConfig.AcceptableTrade FindAcceptableTrade(string apiKey, CEconTradeOffer offer)
-        {
-            bool assetIsAcceptable = false;
-            foreach (TradeConfig.AcceptableTrade acceptableTrade in TradeConfig.TradesConfig.AcceptableTrades)
-            {
-                foreach (CEconAsset cEconAsset in offer.items_to_receive)
-                {
-                    foreach (TradeConfig.ConfigAsset expectedAsset in acceptableTrade.Them)
-                    {
-                        switch (expectedAsset.TypeId)
-                        {
-                            case 0:
-                                if (cEconAsset.GetMarketHashName(Config.Cfg.ApiKey) == expectedAsset.TypeObj)
-                                    assetIsAcceptable = true;
-                                break;
-                            case 1:
-                                if (
-                                    cEconAsset.GetMarketHashName(Config.Cfg.ApiKey)
-                                        .ToLower()
-                                        .Contains(expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-                                break;
-                            case 2:
-                                if (
-                                    cEconAsset.GetMarketHashName(Config.Cfg.ApiKey)
-                                        .ToLower()
-                                        .StartsWith(expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-                                break;
-                            case 3:
-                                if (cEconAsset.classid == expectedAsset.TypeObj)
-                                    assetIsAcceptable = true;
-                                break;
-                            case 4:
-                                if (
-                                    Convert.ToUInt32(
-                                        marketHandler.GetPriceOverview(Convert.ToUInt32(cEconAsset.appid),
-                                            cEconAsset.GetMarketHashName(apiKey)).median_price) >=
-                                    Convert.ToUInt32(expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-                                break;
-                            case 5:
-                                var classid = new Dictionary<string, string>
-                                {
-                                    {cEconAsset.classid, cEconAsset.instanceid}
-                                };
-                                AssetClassInfo info = economyHandler.ToAssetClassInfo(
-                                    economyHandler.GetAssetClassInfo(apiKey, Convert.ToUInt32(cEconAsset.appid),
-                                        classid).result);
-                                foreach (Tag tag in info.tags.Where(tag => tag.name == expectedAsset.TypeObj))
-                                    assetIsAcceptable = true;
-
-                                break;
-                        }
-                        break;
-                    }
-                    if (!assetIsAcceptable) break;
-                }
-                if (assetIsAcceptable) return acceptableTrade;
-            }
-            return null;
-        }
-        */
     }
 
     //public class Desired_Tags
     //{
     //    public List<Tag> tags { get; set; }
     //}
-
 
     #region enums
     /// <summary>
@@ -773,12 +629,6 @@ namespace CSharpTradeOffers.Trading
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         public bool missing { get; set; }
-
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        [JsonIgnore] public string name;
-
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
@@ -788,7 +638,7 @@ namespace CSharpTradeOffers.Trading
         {
             var _handler = new ISteamEconomyHandler();
             var data = new Dictionary<string, string> { { classid, instanceid } };
-            AssetClassInfo info = _handler.ToAssetClassInfo(_handler.GetAssetClassInfo(apiKey, Convert.ToUInt32(appid), data).result);
+            AssetClassInfo info = _handler.GetAssetClassInfo(apiKey, Convert.ToUInt32(appid), data);
             return info.market_hash_name;
         }
     }

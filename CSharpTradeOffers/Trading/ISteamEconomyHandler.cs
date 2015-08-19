@@ -20,7 +20,7 @@ namespace CSharpTradeOffers.Trading
         /// <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
         /// <param name="IDs">Dictionary MUST contain ClassID/InstanceID of item.</param>
         /// <returns></returns>
-        public dynamic GetAssetClassInfo(string apiKey, uint appid, Dictionary<string, string> IDs)
+        public AssetClassInfo GetAssetClassInfo(string apiKey, uint appid, Dictionary<string, string> IDs)
         {
             const string url = BaseUrl + "GetAssetClassInfo/v0001/";
             var data = new Dictionary<string, string>
@@ -37,9 +37,16 @@ namespace CSharpTradeOffers.Trading
                 currentClass++;
             }
 
-            return JsonConvert.DeserializeObject<dynamic>(Web.Fetch(url, "GET", data, null, false));
+            var desrDictionary =
+                JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(Web.Fetch(url, "GET", data, null, false));
+
+            desrDictionary.Remove("success");
+
+            return JsonConvert.DeserializeObject<AssetClassInfo>(desrDictionary.Values.First().ToString());
         }
 
+        #region old
+        /*
         /// <summary>
         /// Partially converts the dynamic GetAssetClassInfo into an AssetClassInfo object.
         /// Does not convert filter_data because its complicated and I'm lazy.
@@ -137,5 +144,7 @@ namespace CSharpTradeOffers.Trading
             //}
             //return info;
         }
+        */
+        #endregion
     }
 }

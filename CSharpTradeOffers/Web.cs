@@ -20,26 +20,32 @@ namespace CSharpTradeOffers
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         public const string SteamCommunityDomain = "steamcommunity.com";
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         public static string SteamLogin { get; set; }
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         public static string SessionId { get; set; }
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         public static string SteamLoginSecure { get; set; }
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         public static string SteamMachineAuth { get; set; }
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         public static string TimezoneOffset { get; set; }
+
         private static CookieContainer _cookies = new CookieContainer();
 
         /// <summary>
@@ -156,11 +162,11 @@ namespace CSharpTradeOffers
         /// <summary>
         /// Executes the login by using the Steam Website.
         /// </summary> 
-        public static bool DoLogin(string username, string password, ref Account bot, ref Config.RootConfig cfg)
+        public static bool DoLogin(string username, string password, ref Account account, ref Config.RootConfig cfg)
         {
             Thread.Sleep(2000);
             var data = new Dictionary<string, string> {{"username", username}};
-            string response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", data, null);
+            string response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", data);
             GetRsaKey rsaJson = JsonConvert.DeserializeObject<GetRsaKey>(response);
 
             // Validate
@@ -190,8 +196,8 @@ namespace CSharpTradeOffers
             string steamGuardId = "";
             do
             {
-                bool captcha = loginJson != null && loginJson.captcha_needed == true;
-                bool steamGuard = loginJson != null && loginJson.emailauth_needed == true;
+                bool captcha = loginJson != null && loginJson.captcha_needed;
+                bool steamGuard = loginJson != null && loginJson.emailauth_needed;
 
                 var time = Uri.EscapeDataString(rsaJson.timestamp);
                 var capGid = "-1";
@@ -265,27 +271,24 @@ namespace CSharpTradeOffers
                     switch(cookie.Name)
                     {
                         case "steamLogin":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             SteamLogin = cookie.Value;
                             break;
                         case "steamLoginSecure":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             SteamLoginSecure = cookie.Value;
                             break;
                         case "timezoneOffset":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             TimezoneOffset = cookie.Value;
                             break;
                     }
-                    if (cookie.Name.StartsWith("steamMachineAuth"))
-                    {
-                        bot.AuthContainer.Add(cookie);
-                        SteamMachineAuth = cookie.Name + "=" + cookie.Value;
-                    }
-
+                    if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
+                    account.AuthContainer.Add(cookie);
+                    SteamMachineAuth = cookie.Name + "=" + cookie.Value;
                 }
                 SubmitCookies(_cookies);
-                bot.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
+                account.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
                 SessionId = _cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"].Value;
                 return true;
             }
@@ -296,7 +299,7 @@ namespace CSharpTradeOffers
         /// <summary>
         /// Executes the login by using the Steam Website.
         /// </summary>   
-        public static bool DoLogin(string username, string password, ref Account bot)
+        public static bool DoLogin(string username, string password, ref Account account)
         {
             Thread.Sleep(2000);
             var data = new Dictionary<string, string> { { "username", username } };
@@ -375,14 +378,6 @@ namespace CSharpTradeOffers
                 data.Add("rsatimestamp", time);
 
                 CookieContainer cc = null;
-                //if (cfg.SteamMachineAuth != null)
-                //{
-                //    cc = new CookieContainer();
-                //    var split = cfg.SteamMachineAuth.Split('=');
-                //    var machineCookie = new Cookie(split[0], split[1]);
-                //    cc.Add(new Uri("https://steamcommunity.com/login/dologin/"), machineCookie);
-                //}
-
 
                 using (var webResponse = Request("https://steamcommunity.com/login/dologin/", "POST", data, cc))
                 {
@@ -405,28 +400,30 @@ namespace CSharpTradeOffers
                     switch (cookie.Name)
                     {
                         case "steamLogin":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             SteamLogin = cookie.Value;
                             break;
                         case "steamLoginSecure":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             SteamLoginSecure = cookie.Value;
                             break;
                         case "timezoneOffset":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             TimezoneOffset = cookie.Value;
                             break;
                     }
-                    if (cookie.Name.StartsWith("steamMachineAuth"))
-                    {
-                        bot.AuthContainer.Add(cookie);
-                        SteamMachineAuth = cookie.Name + "=" + cookie.Value;
-                    }
 
+                    if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
+
+                    account.AuthContainer.Add(cookie);
+                    SteamMachineAuth = cookie.Name + "=" + cookie.Value;
                 }
                 SubmitCookies(_cookies);
-                bot.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
+
+                account.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
+
                 SessionId = _cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"].Value;
+
                 return true;
             }
             Console.WriteLine("SteamWeb Error: " + loginJson.message);
@@ -436,18 +433,15 @@ namespace CSharpTradeOffers
         /// <summary>
         /// Executes the login by using the Steam Website.
         /// </summary> 
-        public static bool DoLogin(string username, string password, ref Account bot, string machineAuth)
+        public static bool DoLogin(string username, string password, ref Account account, string machineAuth)
         {
             Thread.Sleep(2000);
             var data = new Dictionary<string, string> { { "username", username } };
-            string response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", data, null);
+            string response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", data);
             GetRsaKey rsaJson = JsonConvert.DeserializeObject<GetRsaKey>(response);
 
             // Validate
-            if (!rsaJson.success)
-            {
-                return false;
-            }
+            if (!rsaJson.success) return false;
 
             //RSA Encryption
             var rsa = new RSACryptoServiceProvider();
@@ -470,8 +464,8 @@ namespace CSharpTradeOffers
             string steamGuardId = "";
             do
             {
-                bool captcha = loginJson != null && loginJson.captcha_needed == true;
-                bool steamGuard = loginJson != null && loginJson.emailauth_needed == true;
+                bool captcha = loginJson != null && loginJson.captcha_needed;
+                bool steamGuard = loginJson != null && loginJson.emailauth_needed;
 
                 var time = Uri.EscapeDataString(rsaJson.timestamp);
                 var capGid = "-1";
@@ -545,28 +539,29 @@ namespace CSharpTradeOffers
                     switch (cookie.Name)
                     {
                         case "steamLogin":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             SteamLogin = cookie.Value;
                             break;
                         case "steamLoginSecure":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             SteamLoginSecure = cookie.Value;
                             break;
                         case "timezoneOffset":
-                            bot.AuthContainer.Add(cookie);
+                            account.AuthContainer.Add(cookie);
                             TimezoneOffset = cookie.Value;
                             break;
                     }
-                    if (cookie.Name.StartsWith("steamMachineAuth"))
-                    {
-                        bot.AuthContainer.Add(cookie);
-                        SteamMachineAuth = cookie.Name + "=" + cookie.Value;
-                    }
-
+                    if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
+                    account.AuthContainer.Add(cookie);
+                    SteamMachineAuth = cookie.Name + "=" + cookie.Value;
                 }
+
                 SubmitCookies(_cookies);
-                bot.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
+
+                account.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
+
                 SessionId = _cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"].Value;
+
                 return true;
             }
             Console.WriteLine("SteamWeb Error: " + loginJson.message);
@@ -575,7 +570,7 @@ namespace CSharpTradeOffers
 
         static void SubmitCookies(CookieContainer cookies)
         {
-            HttpWebRequest w = WebRequest.Create("https://steamcommunity.com/") as HttpWebRequest;
+            var w = WebRequest.Create("https://steamcommunity.com/") as HttpWebRequest;
 
             w.Method = "POST";
             w.ContentType = "application/x-www-form-urlencoded";
@@ -603,7 +598,7 @@ namespace CSharpTradeOffers
 
         static int GetHexVal(char hex)
         {
-            int val = (int)hex;
+            int val = hex;
             return val - (val < 58 ? 48 : 55);
         }
         #endregion
