@@ -4,6 +4,10 @@ This project is to create a decent class library for interacting with Steam Trad
 # CHANGELOG OF PREVIOUS COMMIT #
 Made changes to:
 
+
+```
+#!c#
+
 IEconServiceHandler.cs:
 -Migrated ApiUrl to BaseUrl and made the corresponding changes to the code.
 ISteamEconomyHandler.cs:
@@ -13,3 +17,5 @@ InventoryHandler.cs:
 -Removed old RefreshInventories method that required Config object.
 Web.cs:
 -General readability improvements.
+
+```
