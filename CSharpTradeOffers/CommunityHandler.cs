@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
+using CSharpTradeOffers.MiscAPI;
 
 namespace CSharpTradeOffers
 {
@@ -12,6 +13,7 @@ namespace CSharpTradeOffers
     /// </summary>
     public class CommunityHandler
     {
+
         /// <summary>
         /// Posts a comment to the specified profile.
         /// </summary>
@@ -59,7 +61,7 @@ namespace CSharpTradeOffers
                 {"json", json.IntValue().ToString()},
                 {"type", "groupInvite"},
                 {"group", group.ToString()},
-                {"sessionid", sessionid},
+                {"sessionID", sessionid},
                 {"invitee_list", ToJArray(new[] {steamId})}
             };
             return JsonConvert.DeserializeObject<InviteResponse>(Web.Fetch(url, "POST", data, authContainer));
@@ -85,13 +87,14 @@ namespace CSharpTradeOffers
                 {"json", json.IntValue().ToString()},
                 {"type", "groupInvite"},
                 {"group", group.ToString()},
-                {"sessionid", sessionid},
+                {"sessionID", sessionid},
                 {"invitee_list", ToJArray(steamIds)}
             };
             return JsonConvert.DeserializeObject<MultiInviteResponse>(Web.Fetch(url, "POST", data, authContainer));
         }
 
-        /// <summary>
+        #region old
+        /*/// <summary>
         /// Invites the specified user to a group.
         /// </summary>
         /// <param name="steamId">The SteamId64 of the person to invite.</param>
@@ -143,7 +146,8 @@ namespace CSharpTradeOffers
                 {"invitee_list", ToJArray(steamIds)}
             };
             return JsonConvert.DeserializeObject<MultiInviteResponse>(Web.Fetch(url, "POST", data, authContainer));
-        }
+        }*/
+        #endregion
 
         /// <summary>
         /// Converts an array of SteamId64s to an array of the format ["0","1"]

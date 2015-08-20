@@ -87,7 +87,6 @@ namespace CSharpTradeOffers
                 request.Headers.Add("X-Requested-With", "XMLHttpRequest");
                 request.Headers.Add("X-Prototype-Version", "1.7");
             }
-
             request.CookieContainer = cookies ?? new CookieContainer();
 
             if(data != null && !isGetMethod)

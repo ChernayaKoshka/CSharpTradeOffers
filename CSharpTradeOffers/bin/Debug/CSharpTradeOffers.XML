@@ -1151,26 +1151,6 @@
             <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A MultiInviteResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.String,System.Net.CookieContainer)">
-            <summary>
-            Invites the specified user to a group.
-            </summary>
-            <param name="steamId">The SteamId64 of the person to invite.</param>
-            <param name="json">I forgot... oops.</param>
-            <param name="group">The name of the group to invite to.</param>
-            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
-            <returns>An InviteResponse object.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.CommunityHandler.InviteUsersToGroup(System.UInt64[],System.Boolean,System.String,System.Net.CookieContainer)">
-            <summary>
-            Invites the specified users to a group.
-            </summary>
-            <param name="steamIds">The SteamId64s of the users to invite.</param>
-            <param name="json">I forgot... oops.</param>
-            <param name="group">The name of the group to invite the users to.</param>
-            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
-            <returns>A MultiInviteResponse object.</returns>
-        </member>
         <member name="M:CSharpTradeOffers.CommunityHandler.ToJArray(System.UInt64[])">
             <summary>
             Converts an array of SteamId64s to an array of the format ["0","1"]
