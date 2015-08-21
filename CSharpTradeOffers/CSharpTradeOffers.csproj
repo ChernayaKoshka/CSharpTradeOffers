@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SteamID.cs" />
     <Compile Include="Configuration\TradeConfig.cs" />
+    <Compile Include="Trading\ItemValueHandler.cs" />
     <Compile Include="Web.cs" />
   </ItemGroup>
   <ItemGroup>

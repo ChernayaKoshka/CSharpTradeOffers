@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ namespace CSharpTradeOffers.Configuration
     /// <summary>
     /// Generic trade config, in progress suggested to not use
     /// </summary>
+    [Obsolete("Replaced by ItemValueHandler")]
     public static class TradeConfig
     {
         /// <summary>
