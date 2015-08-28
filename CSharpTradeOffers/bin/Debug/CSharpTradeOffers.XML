@@ -178,67 +178,12 @@
             <param name="offer">A TradeOffer object containing the trade parameters. </param>
             <returns>A SendOfferResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CreateCompatibleTrade(CSharpTradeOffers.Trading.CEconTradeOffer,CSharpTradeOffers.Trading.InventoryHandler)">
-            <summary>
-            Attempts to locate a valid trade in the TradeConfig.
-            </summary>
-            <param name="offer">A TradeOffer object containing the trade to create a compatible form with.</param>
-            <param name="inventoryHandler">An InventoryHandler object, the InventoryHandler must be that off the bot otherwise it will return erroneous data.</param>
-            <returns>A compatible trade offer, null if none was found.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.FindAcceptableTrade(CSharpTradeOffers.Trading.CEconTradeOffer)">
-            <summary>
-            Searches TradeConfig for a valid trade.
-            </summary>
-            <param name="offer">a CEconTradeOffer to check.</param>
-            <returns>A TradeConfig.AcceptableTrade object.</returns>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffersSummary(System.UInt32)">
             <summary>
             Requestss TradeOffer statistics. ie: historical_received_count
             </summary>
             <param name="timeLastVisit">Unix time for historical cutoff.</param>
             <returns></returns>
-        </member>
-        <member name="T:CSharpTradeOffers.Trading.TypeIds">
-            <summary>
-            TypeIds for use in trade config, mostly for reference and not actually used anywhere
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Trading.TypeIds.Exact">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Trading.TypeIds.Contains">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Trading.TypeIds.StartsWith">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Trading.TypeIds.ClassId">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Trading.TypeIds.DollarWorth">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Trading.TypeIds.Tag">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Trading.TypeIds.CurrencyTrade">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
         </member>
         <member name="T:CSharpTradeOffers.Trading.ETradeOfferState">
             <summary>
@@ -577,6 +522,21 @@
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
         </member>
+        <member name="F:CSharpTradeOffers.Trading.Offer.assets">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Offer.currency">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Trading.Offer.ready">
+            <summary>
+            I forgot or it's obvious. TODO: Add better documentation
+            </summary>
+        </member>
         <member name="T:CSharpTradeOffers.Trading.TradeOffer">
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
@@ -604,10 +564,10 @@
         </member>
         <member name="T:CSharpTradeOffers.Trading.InventoryHandler">
             <summary>
-            Handles Inventory-Related tasks for a specific account. TODO: Allow other accounts
+            Handles Inventory-Related tasks for a specific account.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.#ctor(System.UInt64)">
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.#ctor(System.UInt64,System.String)">
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
@@ -619,7 +579,7 @@
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItem(CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset)">
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItem(CSharpTradeOffers.Trading.ItemValueHandler.ValuedWorth)">
             <summary>
             Locates an Item in the inventory.
             </summary>
@@ -656,13 +616,6 @@
             <param name="assetToFind">Specifies search params.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.Me,System.Boolean)">
-            <summary>
-            Marks the inUse bool of the specified asset.
-            </summary>
-            <param name="me"></param>
-            <param name="inUse"></param>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.CEconTradeOffer,System.Boolean)">
             <summary>
             Marks the inUse bool of the assets specified in the trade offer.
@@ -695,7 +648,7 @@
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
-            <param name="tradable"></param>
+            <param name="marketable"></param>
             <param name="appid"></param>
             <param name="marketHashName"></param>
             <returns></returns>
@@ -704,7 +657,7 @@
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
-            <param name="tradable"></param>
+            <param name="marketable"></param>
             <param name="appid"></param>
             <param name="marketHashName"></param>
             <returns></returns>
@@ -746,7 +699,7 @@
             <param name="steamId">steamId64 of the inventory.</param>
             <param name="appId">App ID of the inventory.</param>
         </member>
-        <member name="P:CSharpTradeOffers.Trading.Inventory.Items">
+        <member name="F:CSharpTradeOffers.Trading.Inventory.Items">
             <summary>
             String is the ClassId linking to an Item object.
             </summary>
@@ -803,27 +756,6 @@
             </summary>
             <param name="message"></param>
             <param name="inner"></param>
-        </member>
-        <member name="T:CSharpTradeOffers.Trading.CurrencyObj">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            TODO: REMOVE?
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.CurrencyObj.currency">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.CurrencyObj.percentage">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.Trading.ItemSearchParams">
-            <summary>
-            TODO: REMOVE?
-            </summary>
         </member>
         <member name="T:CSharpTradeOffers.Trading.Item">
             <summary>
@@ -1095,6 +1027,16 @@
             <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
             <param name="IDs">Dictionary MUST contain ClassID/InstanceID of item.</param>
             <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.ItemValueHandler">
+            <summary>
+            DO. NOT. USE. Under heavy construction.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.ItemValueHandler.TypeIds">
+            <summary>
+            TypeIds for use in trade config, mostly for reference and not actually used anywhere
+            </summary>
         </member>
         <member name="T:CSharpTradeOffers.Account">
             <summary>

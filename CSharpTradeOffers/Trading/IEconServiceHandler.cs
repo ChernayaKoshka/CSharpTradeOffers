@@ -184,112 +184,6 @@ namespace CSharpTradeOffers.Trading
         }
 
         /// <summary>
-        /// Attempts to locate a valid trade in the TradeConfig.
-        /// </summary>
-        /// <param name="offer">A TradeOffer object containing the trade to create a compatible form with.</param>
-        /// <param name="inventoryHandler">An InventoryHandler object, the InventoryHandler must be that off the bot otherwise it will return erroneous data.</param>
-        /// <returns>A compatible trade offer, null if none was found.</returns>
-        public TradeOffer CreateCompatibleTrade(CEconTradeOffer offer, InventoryHandler inventoryHandler)
-        {
-            return null;
-            /*TradeOffer compatibleOffer = new TradeOffer { them = { assets = offer.items_to_receive } };
-            TradeConfig.AcceptableTrade acceptableTrade = FindAcceptableTrade(offer);
-            if (acceptableTrade == null) return null;
-            
-            foreach (TradeConfig.ConfigAsset me in acceptableTrade.Me)
-            {
-                for (int i = 0; i < me.Amount; i++)
-                {
-                    Item item = inventoryHandler.FindUnusedItem(me);
-                    rgInventory_Item rgIItem =
-                        inventoryHandler.Inventories[Convert.ToUInt32(item.appid)].FindAvailableAsset(item.classid);
-                    rgIItem.inUse = true;
-                    CEconAsset assetToAdd = rgIItem.ToCEconAsset(item.appid);
-
-                    compatibleOffer.me.assets.Add(assetToAdd);
-                }
-            }
-            //return compatibleOffer.me.assets.Count == 0 ? null : compatibleOffer;
-            return compatibleOffer;*/
-        }
-
-        /// <summary>
-        /// Searches TradeConfig for a valid trade.
-        /// </summary>
-        /// <param name="offer">a CEconTradeOffer to check.</param>
-        /// <returns>A TradeConfig.AcceptableTrade object.</returns>
-        public TradeConfig.AcceptableTrade FindAcceptableTrade(CEconTradeOffer offer)
-        {
-            return null;
-            /*bool assetsAreAcceptable = false;
-            var items_to_receive = offer.items_to_receive;
-            GetNames(ref items_to_receive);
-            foreach (TradeConfig.AcceptableTrade acceptableTrade in TradeConfig.TradesConfig.AcceptableTrades)
-            {
-                foreach (TradeConfig.ConfigAsset expectedAsset in acceptableTrade.Them)
-                {
-                    foreach (CEconAsset cEconAsset in items_to_receive)
-                    {
-                        
-                        switch (expectedAsset.TypeId)
-                        {
-                            //TODO: CONTINUE HERE.
-                            case 0:
-                                if (cEconAsset.name == expectedAsset.TypeObj)
-                                    if (expectedAsset.Amount == items_to_receive.Count(x => string.Equals(x.name, expectedAsset.TypeObj, StringComparison.CurrentCultureIgnoreCase)))
-                                        assetsAreAcceptable = true;
-                                break;
-                            case 1:
-                                if (expectedAsset.Amount ==
-                                    items_to_receive.Count(
-                                        x => x.name.Contains(expectedAsset.TypeObj.ToLower())))
-                                    assetsAreAcceptable = true;
-                                break;
-                            case 2:
-                                if (expectedAsset.Amount ==
-                                    items_to_receive.Count(
-                                        x => x.name.StartsWith(expectedAsset.TypeObj.ToLower())))
-                                    assetsAreAcceptable = true;
-                                break;
-                            case 3:
-                                if (expectedAsset.Amount == items_to_receive.Count(x => x.classid == expectedAsset.TypeObj))
-                                    assetsAreAcceptable = true;
-                                break;
-                            case 4: //TODO: LEFT HERE v Need to work on this fucking shit
-                                if (
-                                    Convert.ToDecimal(
-                                        MarketHandler.GetPriceOverview(Convert.ToUInt32(cEconAsset.appid),
-                                            cEconAsset.GetMarketHashName(_apiKey)).median_price) >=
-                                    Convert.ToDecimal(expectedAsset.TypeObj))
-                                    assetsAreAcceptable = true;
-                                break;
-                            case 5:
-                                //var classid = new Dictionary<string, string>
-                                //{
-                                //    {cEconAsset.classid, cEconAsset.instanceid}
-                                //};
-                                //AssetClassInfo info = EconomyHandler.ToAssetClassInfo(
-                                //    EconomyHandler.GetAssetClassInfo(_apiKey, Convert.ToUInt32(cEconAsset.appid),
-                                //        classid).result);
-                                //foreach (Tag tag in info.tags.Where(tag => tag.name == expectedAsset.TypeObj))
-                                //    assetsAreAcceptable = true;
-                                break;
-                            case 6:
-                                throw new Exception("'Them' is not a valid area for this TypeId!");
-                            default:
-                                throw new Exception("Unknown TypeId!");
-                        }
-                        break;
-                    }
-                    if (!assetsAreAcceptable) break;
-                }
-                if (assetsAreAcceptable) return acceptableTrade;
-            }
-            return null;
-            */
-        }
-
-        /// <summary>
         /// Requestss TradeOffer statistics. ie: historical_received_count
         /// </summary>
         /// <param name="timeLastVisit">Unix time for historical cutoff.</param>
@@ -313,40 +207,6 @@ namespace CSharpTradeOffers.Trading
     //}
 
     #region enums
-    /// <summary>
-    /// TypeIds for use in trade config, mostly for reference and not actually used anywhere
-    /// </summary>
-    public enum TypeIds
-    {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        Exact = 0,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        Contains = 1,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        StartsWith = 2,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        ClassId = 3,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        DollarWorth = 4,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        Tag = 5,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        CurrencyTrade = 6
-    }
 
     internal enum EResult
     {
@@ -729,6 +589,7 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "RootObject")]
     public class SendOfferResponse
     {
+
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
@@ -746,6 +607,7 @@ namespace CSharpTradeOffers.Trading
     /// <summary>
     /// I forgot or it's obvious. TODO: Add better documentation
     /// </summary>
+    [Obsolete("Replaced with Offer")]
     public class Me
     {
         /// <summary>
@@ -765,7 +627,24 @@ namespace CSharpTradeOffers.Trading
     /// <summary>
     /// I forgot or it's obvious. TODO: Add better documentation
     /// </summary>
+    [Obsolete("Replaced with Offer")]
     public class Them
+    {
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        public List<CEconAsset> assets = new List<CEconAsset>();
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        public List<object> currency = new List<object>();
+        /// <summary>
+        /// I forgot or it's obvious. TODO: Add better documentation
+        /// </summary>
+        public bool ready = false;
+    }
+
+    public class Offer //NEEDS a better name
     {
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
@@ -798,10 +677,10 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
-        public Me me = new Me();
+        public Offer me = new Offer();
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
-        public Them them = new Them();
+        public Offer them = new Offer();
     }
 }

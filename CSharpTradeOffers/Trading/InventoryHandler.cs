@@ -7,23 +7,24 @@ using Newtonsoft.Json;
 namespace CSharpTradeOffers.Trading
 {
     /// <summary>
-    /// Handles Inventory-Related tasks for a specific account. TODO: Allow other accounts
+    /// Handles Inventory-Related tasks for a specific account.
     /// </summary>
     public class InventoryHandler
     {
         //private readonly Config _config;
         //private Account _account;
         private readonly ulong _steamId;
-
+        private readonly string _apiKey;
 
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         /// <param name="cfg"></param>
         /// <param name="account"></param>
-        public InventoryHandler(ulong steamId)
+        public InventoryHandler(ulong steamId, string apiKey)
         {
             _steamId = steamId;
+            _apiKey = apiKey;
         }
 
         /// <summary>
@@ -42,51 +43,48 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="assetToFind">Specifies search params.</param>
         /// <returns></returns>
-        public Item FindUnusedItem(TradeConfig.ConfigAsset assetToFind)
+        public Item FindUnusedItem(ItemValueHandler.ValuedWorth assetToFind)
         {
-            Inventory inv = Inventories[assetToFind.AppId];
-            switch (assetToFind.TypeId)
+            Inventory inv = Inventories[assetToFind.appid];
+            switch (assetToFind.typeid)
             {
                 case 0: //exact
-                    foreach (Item item in inv.Items.Values)
-                        if (item.market_hash_name == assetToFind.TypeObj)
-                            if(!item.items.TrueForAll(BeingUsed))
-                                return item;
+                    foreach (Item item in inv.Items.Values.Where(item => item.market_hash_name == assetToFind.typeobj).Where(item => !item.items.TrueForAll(BeingUsed)))
+                        return item;
                     break;
                 case 1: //contains
-                    foreach (Item item in inv.Items.Values)
-                        if (item.market_hash_name.ToLower().Contains(assetToFind.TypeObj))
-                            if (!item.items.TrueForAll(BeingUsed))
-                                return item;
+                    foreach (Item item in inv.Items.Values.Where(item => item.market_hash_name.ToLower().Contains(assetToFind.typeobj)).Where(item => !item.items.TrueForAll(BeingUsed)))
+                        return item;
                     break;
                 case 2: //startswirth
-                    foreach (Item item in inv.Items.Values)
-                        if (item.market_hash_name.ToLower().StartsWith(assetToFind.TypeObj))
-                            if (!item.items.TrueForAll(BeingUsed))
-                                return item;
+                    foreach (Item item in inv.Items.Values.Where(item => item.market_hash_name.ToLower().StartsWith(assetToFind.typeobj)).Where(item => !item.items.TrueForAll(BeingUsed)))
+                        return item;
                     break;
                 case 3: //classid
-                    throw new Exception("TypeId is not implemented and will probably never be.");
-                case 4: //money
-                    throw new Exception("TypeId not available for 'me' trades.");
-                case 5: //tags
-                    //var handler = new ISteamEconomyHandler();
-                    //foreach (var item in inv.Items.Values)
-                    //{
-                    //    var classid = new Dictionary<string, string>
-                    //    {
-                    //        {item.classid, null}
-                    //    };
-                    //    AssetClassInfo info = handler.ToAssetClassInfo(handler.GetAssetClassInfo(_config.Cfg.ApiKey, Convert.ToUInt32(item.appid), classid).result);
-                    //    foreach (var tag in info.tags)
-                    //    {
-                    //        if (tag.name == assetToFind.TypeObj)
-                    //        {
-                    //            if (!item.items.TrueForAll(BeingUsed)) return item;
-                    //            break;
-                    //        }
-                    //    }
-                    //}
+                    foreach (
+                        Item item in
+                            inv.Items.Values.Where(
+                                item => item.classid == assetToFind.typeobj && item.items.TrueForAll(BeingUsed)))
+                        return item;
+                    return null;
+                case 4: //tags
+                    var handler = new ISteamEconomyHandler();
+                    foreach (var item in inv.Items.Values)
+                    {
+                        Dictionary<string, string> classid = new Dictionary<string, string>
+                        {
+                            {item.classid, null}
+                        };
+                        AssetClassInfo info = handler.GetAssetClassInfo(_apiKey, Convert.ToUInt32(item.appid), classid);
+                        foreach (var tag in info.tags.Values)
+                        {
+                            if (tag.name == assetToFind.typeobj)
+                            {
+                                if (!item.items.TrueForAll(BeingUsed)) return item;
+                                break;
+                            }
+                        }
+                    }
                     break;
                 default:
                     throw new Exception("Unknown TypeId!");
@@ -186,16 +184,16 @@ namespace CSharpTradeOffers.Trading
             return inv.Items[assetToFind.classid];
         }
 
-        /// <summary>
+        ///// <summary>
         /// Marks the inUse bool of the specified asset.
         /// </summary>
         /// <param name="me"></param>
         /// <param name="inUse"></param>
-        public void MarkMyAssets(Me me, bool inUse)
-        {
-            foreach (var asset in me.assets)
-                Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
-        }
+        //public void MarkMyAssets(Me me, bool inUse)
+        //{
+        //    foreach (var asset in me.assets)
+        //        Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
+        //}
 
         /// <summary>
         /// Marks the inUse bool of the assets specified in the trade offer.
@@ -219,7 +217,7 @@ namespace CSharpTradeOffers.Trading
                 Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
         }
 
-        ///// <summary>
+        /// <summary>
         /// Reloads all of the inventories belonging to a specified steamid64. The inventories to refresh are specified in the config file.
         /// </summary>
         /// <param name="steamId"></param>
@@ -239,6 +237,7 @@ namespace CSharpTradeOffers.Trading
         {
             Inventories.Clear();
             foreach (uint appid in appids)
+                if(!Inventories.ContainsKey(appid))
                 Inventories.Add(appid, new Inventory(_steamId, appid));
         }
 
@@ -258,13 +257,13 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
-        /// <param name="tradable"></param>
+        /// <param name="marketable"></param>
         /// <param name="appid"></param>
         /// <param name="marketHashName"></param>
         /// <returns></returns>
-        public decimal ItemWorth(bool tradable, uint appid, string marketHashName)
+        public decimal ItemWorth(bool marketable, uint appid, string marketHashName)
         {
-            if (tradable.IntValue() != 1) return 0.0m;
+            if (marketable.IntValue() != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
             return Convert.ToDecimal(mv.median_price.Substring(1));
@@ -273,13 +272,13 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
-        /// <param name="tradable"></param>
+        /// <param name="marketable"></param>
         /// <param name="appid"></param>
         /// <param name="marketHashName"></param>
         /// <returns></returns>
-        public decimal ItemWorth(int tradable, uint appid, string marketHashName)
+        public decimal ItemWorth(int marketable, uint appid, string marketHashName)
         {
-            if (tradable != 1) return 0.0m;
+            if (marketable != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
             return Convert.ToDecimal(mv.median_price.Substring(1));
@@ -351,7 +350,7 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// String is the ClassId linking to an Item object.
         /// </summary>
-        public Dictionary<string, Item> Items { get; } = new Dictionary<string, Item>();
+        public Dictionary<string, Item> Items = new Dictionary<string, Item>();
 
         /// <summary>
         /// Requests the inventory for the specified steamId and appId.
@@ -375,7 +374,8 @@ namespace CSharpTradeOffers.Trading
             dynamic inventoryJson = RequestInventory(appId);
 
             if(inventoryJson.success == null) throw new InventoryException("Inventory request was not successful. 'success' field was null.");
-            if (inventoryJson.success != true) throw new InventoryException("Inventory request was not successful. 'success' field was false.");
+            if (inventoryJson.success != true && inventoryJson.Error != null) throw new InventoryException("Inventory request was not successful. 'success' field was false. Error Message: " + inventoryJson.Error.ToString());
+            if(inventoryJson.success != true) throw new InventoryException("Inventory request was not successsful. 'success' field was false. Likely cause: No items in inventory.");
 
             dynamic rgInventory = inventoryJson.rgInventory;
             dynamic rgDescriptions = inventoryJson.rgDescriptions;
@@ -499,7 +499,7 @@ Console.WriteLine("Name | Duplicate Val | Val");
         {
             foreach (rgInventory_Item item in Items[asset.classid].items)
             {
-                if (item.instanceid.ToString() != asset.instanceid) continue;
+                if (item.id.ToString() != asset.assetid) continue;
                 item.inUse = inUse;
                 return true;
             }
@@ -529,30 +529,6 @@ Console.WriteLine("Name | Duplicate Val | Val");
         /// <param name="message"></param>
         /// <param name="inner"></param>
         public InventoryException(string message, Exception inner) : base(message, inner){ }
-    }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// TODO: REMOVE?
-    /// </summary>
-    public class CurrencyObj
-    {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        public string currency { get; set; } //exact match of currency
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        public decimal percentage { get; set; } //percent to markup/markdown
-    }
-
-    /// <summary>
-    /// TODO: REMOVE?
-    /// </summary>
-    public class ItemSearchParams
-    {
-        Inventory inv { get; set; }
     }
 
     /// <summary>

@@ -58,7 +58,8 @@ namespace CSharpTradeOffers
         /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>An HttpWebResponse object from the requested URL.</returns>
-        public static HttpWebResponse Request(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        public static HttpWebResponse Request(string url, string method, Dictionary<string, string> data = null,
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             bool isGetMethod = (method.ToLower() == "get");
             string dataString = null;
@@ -66,7 +67,7 @@ namespace CSharpTradeOffers
             if (data != null)
                 dataString = "?" + DictionaryToUrlString(data);
 
-            if (isGetMethod && !String.IsNullOrEmpty(dataString))
+            if (isGetMethod && !string.IsNullOrEmpty(dataString))
             {
                 url += dataString;
             }
@@ -76,33 +77,34 @@ namespace CSharpTradeOffers
             request.Accept = "application/json, text/javascript;q=0.9, */*;q=0.5";
             request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
 
-            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
+            request.UserAgent =
+                "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
             request.Referer = string.IsNullOrEmpty(referer) ? "http://steamcommunity.com/" : referer;
             request.Timeout = 50000;
             request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Revalidate);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
 
-            if(xHeaders)
+            if (xHeaders)
             {
                 request.Headers.Add("X-Requested-With", "XMLHttpRequest");
                 request.Headers.Add("X-Prototype-Version", "1.7");
             }
             request.CookieContainer = cookies ?? new CookieContainer();
 
-            if(data != null && !isGetMethod)
+            if (data != null && !isGetMethod)
             {
                 //string dataString = DictionaryToURLString(data);
                 byte[] dataBytes = Encoding.UTF8.GetBytes(DictionaryToUrlString(data));
                 request.ContentLength = dataBytes.Length;
 
-                using(var reqStream = request.GetRequestStream())
+                using (var reqStream = request.GetRequestStream())
                 {
                     reqStream.Write(dataBytes, 0, dataBytes.Length);
                 }
             }
             return request.GetResponse() as HttpWebResponse;
         }
-               
+
         /// <summary>
         /// A web method to return the response string from the URL.
         /// </summary>
@@ -122,6 +124,40 @@ namespace CSharpTradeOffers
                 return sr.ReadToEnd();
             }
         }
+
+        /*/// <summary>
+        /// A web method to return the response string from the URL.
+        /// </summary>
+        /// <param name="url">The URL to request.</param>
+        /// <param name="method">The method to be used. Ex: POST</param>
+        /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+        /// <param name="cookies">A cookiecontainer with cookies to send.</param>
+        /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+        /// <param name="referer">Sets the referrer for the request.</param>
+        /// <returns>A string from the response stream.</returns>
+        public static string RetryFetch(string url, string method, Dictionary<string, string> data = null,
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        {
+            while (true)
+            {
+                bool success = true;
+                try
+                {
+                    HttpWebResponse response = Request(url, method, data, cookies, xHeaders, referer);
+
+                    using (var sr = new StreamReader(response.GetResponseStream()))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
+                if(success)
+
+            }
+        } */
 
         /// <summary>
         /// A web method to return the response string from the URL.
@@ -240,7 +276,7 @@ namespace CSharpTradeOffers
                 data.Add("rsatimestamp", time);
 
                 CookieContainer cc = null;
-                if(cfg.SteamMachineAuth != null)
+                if(cfg.SteamMachineAuth != null && cfg.SteamMachineAuth != "null" && cfg.SteamMachineAuth != "")
                 {
                     cc = new CookieContainer();
                     var split = cfg.SteamMachineAuth.Split('=');
