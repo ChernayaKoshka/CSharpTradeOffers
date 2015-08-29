@@ -16,34 +16,22 @@ namespace CSharpTradeOffers
     /// </summary>
     public class Web
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public const string SteamCommunityDomain = "steamcommunity.com";
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public static string SteamLogin { get; set; }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public static string SessionId { get; set; }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public static string SteamLoginSecure { get; set; }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public static string SteamMachineAuth { get; set; }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public static string TimezoneOffset { get; set; }
 
         private static CookieContainer _cookies = new CookieContainer();
@@ -639,75 +627,25 @@ namespace CSharpTradeOffers
         #endregion
 
         // JSON Classes
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public class GetRsaKey
         {
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public bool success { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string publickey_mod { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string publickey_exp { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string timestamp { get; set; }
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public class SteamResult
         {
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public bool success { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public bool requires_twofactor { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string message { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public bool captcha_needed { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string captcha_gid { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public bool emailauth_needed { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string emaildomain { get; set; }
-
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string emailsteamid { get; set; }
         }
     }

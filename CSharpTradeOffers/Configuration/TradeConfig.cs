@@ -17,53 +17,23 @@ namespace CSharpTradeOffers.Configuration
         /// </summary>
         public static Trades TradesConfig = new Trades();
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
         public class ConfigAsset
         {
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public uint AppId { get; set; }
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public int TypeId { get; set; }
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public string TypeObj { get; set; }
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public int Amount { get; set; }
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
         public class AcceptableTrade
         {
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public List<ConfigAsset> Me { get; set; }
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public List<ConfigAsset> Them { get; set; }
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
         [JsonObject(Title = "RootObject")]
         public class Trades
         {
-            /// <summary>
-            /// I forgot or it's obvious. TODO: Add better documentation
-            /// </summary>
             public List<AcceptableTrade> AcceptableTrades { get; set; }
         }
 

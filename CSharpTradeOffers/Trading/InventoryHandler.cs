@@ -16,20 +16,13 @@ namespace CSharpTradeOffers.Trading
         private readonly ulong _steamId;
         private readonly string _apiKey;
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        /// <param name="cfg"></param>
-        /// <param name="account"></param>
         public InventoryHandler(ulong steamId, string apiKey)
         {
             _steamId = steamId;
             _apiKey = apiKey;
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public Dictionary<uint, Inventory> Inventories = new Dictionary<uint, Inventory>();
 
         //predicate
@@ -92,9 +85,7 @@ namespace CSharpTradeOffers.Trading
             return null;
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="marketHashName"></param>
         /// <param name="appid"></param>
         /// <returns></returns>
@@ -228,11 +219,6 @@ namespace CSharpTradeOffers.Trading
         //        Inventories.Add(appid, new Inventory(steamId, appid));
         //}
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        /// <param name="steamId"></param>
-        /// <param name="appids"></param>
         public void RefreshInventories(uint[] appids)
         {
             Inventories.Clear();
@@ -254,9 +240,7 @@ namespace CSharpTradeOffers.Trading
             return Convert.ToDecimal(mv.median_price.Substring(1));
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="marketable"></param>
         /// <param name="appid"></param>
         /// <param name="marketHashName"></param>
@@ -269,9 +253,7 @@ namespace CSharpTradeOffers.Trading
             return Convert.ToDecimal(mv.median_price.Substring(1));
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="marketable"></param>
         /// <param name="appid"></param>
         /// <param name="marketHashName"></param>
@@ -285,9 +267,6 @@ namespace CSharpTradeOffers.Trading
         }
     }
 
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     public class Inventory
     {
         private readonly ulong _steamId;
@@ -305,9 +284,7 @@ namespace CSharpTradeOffers.Trading
             return Convert.ToDecimal(mv.median_price.Substring(1));
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="tradable"></param>
         /// <param name="appid"></param>
         /// <param name="marketHashName"></param>
@@ -320,9 +297,7 @@ namespace CSharpTradeOffers.Trading
             return Convert.ToDecimal(mv.median_price.Substring(1));
         }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="tradable"></param>
         /// <param name="appid"></param>
         /// <param name="marketHashName"></param>
@@ -421,62 +396,7 @@ namespace CSharpTradeOffers.Trading
                     pos = item.pos
                 };
                 Items[inventoryItem.classid.ToString()].items.Add(inventoryItem);
-                //Inventory[inventory_item.classid].items
             }
-
-            #region old
-            /*
-                foreach (rgDescription desc in description_list)
-                    Console.WriteLine(desc.market_hash_name);
-                ISteamEconomyHandler handler = new ISteamEconomyHandler();
-                Dictionary<string,rgInventory_Item> data = new Dictionary<string,rgInventory_Item>();
-                foreach (rgInventory_Item item in item_list)
-                {
-                    if (data.ContainsKey(item.classid.ToString()))
-                    {
-Console.WriteLine("Name | Duplicate Val | Val");
-                        if (item.amount != data[item.classid.ToString()].amount)
-                            Console.ForegroundColor = ConsoleColor.Red;
-
-                        Console.Write("Amount: " + item.amount + " | ");
-                        Console.WriteLine(data[item.classid.ToString()].amount);
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        if (item.classid != data[item.classid.ToString()].classid)
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("ClassID: " + item.classid + " | ");
-                        Console.WriteLine(data[item.classid.ToString()].classid);
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        //may not be the same across all class id
-                        if (item.id != data[item.classid.ToString()].id)
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("ID: " + item.id + " | ");
-                        Console.WriteLine(data[item.classid.ToString()].id);
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        if (item.instanceid != data[item.classid.ToString()].instanceid)
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("InstanceID: " + item.instanceid + " | ");
-                        Console.WriteLine(data[item.classid.ToString()].instanceid);
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        if (item.pos != data[item.classid.ToString()].pos)
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("Pos: " + item.pos + " | ");
-                        Console.WriteLine(data[item.classid.ToString()].pos);
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        Console.WriteLine();
-                    }
-                    else
-                        data.Add(item.classid.ToString(), item);
-                 
-                }
-                */
-            #endregion
-
-            //throw new ItemNotFoundException(item_name + " could not be located in " + SteamID + "'s " + app_id + " inventory.");
         }
 
         /// <summary>
@@ -507,25 +427,16 @@ Console.WriteLine("Name | Duplicate Val | Val");
         }
     }
 
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     public class InventoryException : Exception
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public InventoryException() { }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="message"></param>
         public InventoryException(string message) : base(message) { }
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="message"></param>
         /// <param name="inner"></param>
         public InventoryException(string message, Exception inner) : base(message, inner){ }
@@ -599,35 +510,21 @@ Console.WriteLine("Name | Duplicate Val | Val");
     /// </summary>
     public class rgInventory_Item
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong amount { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong classid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong id { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong instanceid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong pos { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         [JsonIgnore] 
         public bool inUse;
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="appId"></param>
         /// <returns></returns>
         public CEconAsset ToCEconAsset(string appId)
@@ -651,146 +548,76 @@ Console.WriteLine("Name | Duplicate Val | Val");
     /// </summary>
     public class rgDescription
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string appid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string classid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string instanceid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string icon_url { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string icon_url_large { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string icon_drag_url { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string name { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string market_hash_name { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string market_name { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string name_color { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string background_color { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string type { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int tradable { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int marketable { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int commodity { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string market_tradable_restriction { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string market_marketable_restriction { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<Description> descriptions = new List<Description>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<Action> actions = new List<Action>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<Tag> tags = new List<Tag>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public AppData app_data { get; set; }
     }
 
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     public class Action
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
         public string name { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string link { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
+    
     public class Tag
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string internal_name { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string name { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string category { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string color { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string category_name { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
+    
     public class AppData
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string def_index { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string quality { get; set; }
     }
 }

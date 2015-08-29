@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Net;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Xml.Serialization;
-using CSharpTradeOffers.MiscAPI;
+using Newtonsoft.Json;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Community
 {
     /// <summary>
     /// Handles commmunity related tasks
     /// </summary>
     public class CommunityHandler
     {
-
         /// <summary>
         /// Posts a comment to the specified profile.
         /// </summary>
@@ -92,63 +90,7 @@ namespace CSharpTradeOffers
             };
             return JsonConvert.DeserializeObject<MultiInviteResponse>(Web.Fetch(url, "POST", data, authContainer));
         }
-
-        #region old
-        /*/// <summary>
-        /// Invites the specified user to a group.
-        /// </summary>
-        /// <param name="steamId">The SteamId64 of the person to invite.</param>
-        /// <param name="json">I forgot... oops.</param>
-        /// <param name="group">The name of the group to invite to.</param>
-        /// <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
-        /// <returns>An InviteResponse object.</returns>
-        public InviteResponse InviteUserToGroup(ulong steamId, bool json, string group,
-            CookieContainer authContainer)
-        {
-            const string url = "https://steamcommunity.com/actions/GroupInvite/";
-            string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                where cookie.Name == "sessionid"
-                select cookie.Value).FirstOrDefault();
-            ulong groupId = RequestMemberList(group).groupID64;
-            var data = new Dictionary<string, string>
-            {
-                {"json", json.IntValue().ToString()},
-                {"type", "groupInvite"},
-                {"group", groupId.ToString()},
-                {"sessionid", sessionid},
-                {"invitee_list", ToJArray(new[] {steamId})}
-            };
-            return JsonConvert.DeserializeObject<InviteResponse>(Web.Fetch(url, "POST", data, authContainer));
-        }
-
-        /// <summary>
-        /// Invites the specified users to a group.
-        /// </summary>
-        /// <param name="steamIds">The SteamId64s of the users to invite.</param>
-        /// <param name="json">I forgot... oops.</param>
-        /// <param name="group">The name of the group to invite the users to.</param>
-        /// <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
-        /// <returns>A MultiInviteResponse object.</returns>
-        public MultiInviteResponse InviteUsersToGroup(ulong[] steamIds, bool json, string group,
-            CookieContainer authContainer)
-        {
-            const string url = "https://steamcommunity.com/actions/GroupInvite/";
-            string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                where cookie.Name == "sessionid"
-                select cookie.Value).FirstOrDefault();
-            ulong groupId = RequestMemberList(group).groupID64;
-            var data = new Dictionary<string, string>
-            {
-                {"json", json.IntValue().ToString()},
-                {"type", "groupInvite"},
-                {"group", groupId.ToString()},
-                {"sessionid", sessionid},
-                {"invitee_list", ToJArray(steamIds)}
-            };
-            return JsonConvert.DeserializeObject<MultiInviteResponse>(Web.Fetch(url, "POST", data, authContainer));
-        }*/
-        #endregion
-
+        
         /// <summary>
         /// Converts an array of SteamId64s to an array of the format ["0","1"]
         /// </summary>
@@ -259,9 +201,6 @@ namespace CSharpTradeOffers
         /// Results, I forgot. TODO: Add better documentation
         /// </summary>
         public string results { get; set; }
-        /// <summary>
-        /// I forgot. TODO: Add better documentation
-        /// </summary>
         public string groupId { get; set; }
     }
 
@@ -271,62 +210,30 @@ namespace CSharpTradeOffers
     [JsonObject(Title = "RootObject")]
     public class InviteResponse
     {
-        /// <summary>
-        /// I forgot. TODO: Add better documentation
-        /// </summary>
         public string results { get; set; }
-        /// <summary>
-        /// I forgot. TODO: Add better documentation
-        /// </summary>
         public string groupId { get; set; }
-        /// <summary>
-        /// I forgot. TODO: Add better documentation
-        /// </summary>
         public bool duplicate { get; set; }
     }
-
-
-    /// <summary>
-    /// I forgot. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class CommentResponse
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool success { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string name { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int start { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string pagesize { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int total_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int upvotes { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int has_upvoted { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string comments_html { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int timelastpost { get; set; }
     }
 

@@ -16,10 +16,6 @@ namespace CSharpTradeOffers.Trading
 
         private const string BaseUrl = "https://api.steampowered.com/IEconService/";
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
-        /// <param name="apiKey"></param>
         public EconServiceHandler(string apiKey)
         {
             _apiKey = apiKey;
@@ -315,183 +311,95 @@ namespace CSharpTradeOffers.Trading
         AccountActivityLimitExceeded = 96,
         PhoneActivityLimitExceeded = 97
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     public enum ETradeOfferState
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
         ETradeOfferStateInvalid = 1,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateActive = 2,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateAccepted = 3,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateCountered = 4,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateExpired = 5,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateCanceled = 6,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateDeclined = 7,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateInvalidItems = 8,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateEmailPending = 9,
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         ETradeOfferStateEmailCanceled = 10
     }
 
     #endregion
 
     #region GetTradeOffersSummaryResponse
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class GetTradeOffersSummaryBaseResponse
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
         public GetTradeOffersSummaryResponse response { get; set; }
     }
 
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "Response")]
     public class GetTradeOffersSummaryResponse
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int pending_received_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int new_received_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int updated_received_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int historical_received_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int pending_sent_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int newly_accepted_sent_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int updated_sent_count { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int historical_sent_count { get; set; }
     }
     #endregion
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class MarketValue
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool success { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string lowest_price { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string volume { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string median_price { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class TradeId
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong tradeid { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "ItemsToReceive")]
     public class CEconAsset
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string appid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string contextid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string assetid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string classid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string instanceid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string amount { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool missing { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         /// <param name="apiKey"></param>
         /// <returns></returns>
         public string GetMarketHashName(string apiKey)
@@ -502,185 +410,96 @@ namespace CSharpTradeOffers.Trading
             return info.market_hash_name;
         }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "TradeOffersReceieved")]
     public class CEconTradeOffer
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string tradeofferid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public uint accountid_other { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string message { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int expiration_time { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int trade_offer_state { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<CEconAsset> items_to_give { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<CEconAsset> items_to_receive { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool is_our_offer { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong time_created { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public ulong time_updated { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string tradeid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool from_real_time_trade { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "Response")]
     public class TradeOffersList
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<CEconTradeOffer> trade_offers_received { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class TradeOffers
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public TradeOffersList response { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class SendOfferResponse
     {
 
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string tradeofferid { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool needs_email_confirmation { get; set; }
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public string email_domain { get; set; }
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [Obsolete("Replaced with Offer")]
     public class Me
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<CEconAsset> assets = new List<CEconAsset>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<object> currency = new List<object>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool ready = false;
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [Obsolete("Replaced with Offer")]
     public class Them
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<CEconAsset> assets = new List<CEconAsset>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<object> currency = new List<object>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool ready = false;
     }
 
     public class Offer //NEEDS a better name
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
         public List<CEconAsset> assets = new List<CEconAsset>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public List<object> currency = new List<object>();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool ready = false;
     }
-
-    /// <summary>
-    /// I forgot or it's obvious. TODO: Add better documentation
-    /// </summary>
     [JsonObject(Title = "RootObject")]
     public class TradeOffer
     {
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public bool newversion = true;
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public int version = 2;
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public Offer me = new Offer();
-        /// <summary>
-        /// I forgot or it's obvious. TODO: Add better documentation
-        /// </summary>
+
         public Offer them = new Offer();
     }
 }
