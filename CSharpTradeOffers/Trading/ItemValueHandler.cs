@@ -166,7 +166,7 @@ namespace CSharpTradeOffers.Trading
                             }
                         break;
                     case 4: //tag category match TODO: REDO
-                        var handler = new ISteamEconomyHandler();
+                        var handler = new SteamEconomyHandler();
                         var IDs = new Dictionary<string, string>
                         {
                             {asset.classid, asset.instanceid}

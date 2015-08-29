@@ -68,7 +68,7 @@ namespace CSharpTradeOffers.Trading
                         return item;
                     return null;
                 case 4: //tags
-                    var handler = new ISteamEconomyHandler();
+                    var handler = new SteamEconomyHandler();
                     foreach (var item in inv.Items.Values)
                     {
                         Dictionary<string, string> classid = new Dictionary<string, string>

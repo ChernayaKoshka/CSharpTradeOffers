@@ -496,7 +496,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns></returns>
         public string GetMarketHashName(string apiKey)
         {
-            var _handler = new ISteamEconomyHandler();
+            var _handler = new SteamEconomyHandler();
             var data = new Dictionary<string, string> { { classid, instanceid } };
             AssetClassInfo info = _handler.GetAssetClassInfo(apiKey, Convert.ToUInt32(appid), data);
             return info.market_hash_name;

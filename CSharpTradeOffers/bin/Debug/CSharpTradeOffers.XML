@@ -1014,12 +1014,12 @@
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
         </member>
-        <member name="T:CSharpTradeOffers.Trading.ISteamEconomyHandler">
+        <member name="T:CSharpTradeOffers.Trading.SteamEconomyHandler">
             <summary>
             Handles Steam Economy related tasks, like retrieving class info
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.ISteamEconomyHandler.GetAssetClassInfo(System.String,System.UInt32,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.GetAssetClassInfo(System.String,System.UInt32,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Gets the asset class info of an item, must provide ClassID/InstanceID in IDs
             </summary>
@@ -1534,382 +1534,18 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler">
-            <summary>
-            Hadles Account Recovery tasks
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler.#ctor(System.String)">
-            <summary>
-            Initializes the object with the api key
-            </summary>
-            <param name="apiKey"></param>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler.ReportAccountRecoveryData(System.String,System.String,System.String,System.String)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <param name="loginUserList">I forgot or it's obvious. TODO: Add better documentation</param>
-            <param name="installConfig">I forgot or it's obvious. TODO: Add better documentation</param>
-            <param name="shaSentryFile">I forgot or it's obvious. TODO: Add better documentation</param>
-            <param name="machineId">I forgot or it's obvious. TODO: Add better documentation</param>
-            <returns>I forgot or it's obvious. TODO: Add better documentation</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IAccountRecoverServiceHandler.RetrieveAccountRecoveryData(System.String,System.Net.CookieContainer)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <param name="requesthandle">I forgot or it's obvious. TODO: Add better documentation</param>
-            <param name="authContainer">I forgot or it's obvious. TODO: Add better documentation</param>
-            <returns></returns>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.ICSGOServers_730Handler">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ICSGOServers_730Handler.#ctor(System.String)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <param name="apiKey"></param>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ICSGOServers_730Handler.GetGameServersStatus">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler.#ctor(System.String)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <param name="apiKey"></param>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler.GetFantasyPlayerStats(System.UInt32,System.UInt32,System.UInt32,System.UInt64,System.UInt32,System.UInt32)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <param name="fantasyLeagueId"></param>
-            <param name="startTime"></param>
-            <param name="endTime"></param>
-            <param name="matchId"></param>
-            <param name="seriesId"></param>
-            <param name="playerAccountId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IDOTA2Fantasy_570Handler.GetPlayerOfficialInfo(System.UInt32)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <param name="accountid"></param>
-            <returns></returns>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.GetPlayerOfficalInfoBaseResult">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficalInfoBaseResult.result">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.Name">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.TeamName">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.TeamTag">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.Sponsor">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetPlayerOfficialInfoResult.FantasyRole">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.StatsList">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.PlayerAccountID">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.PlayerName">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.Role">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.Score">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.Matches">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageLevel">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageKills">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageDeaths">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageAssists">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageLastHits">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageDenies">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageGPM">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageXPPM">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageStuns">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageHealing">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageTowerKills">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.StatsList.AverageRoshanKills">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsResult">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsResult.StatsList">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsResult.success">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsBaseResult">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetFantasyPlayerStatsBaseResult.result">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.#ctor(System.String)">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-            <param name="apiKey"></param>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetAccountList">
-            <summary>
-            Gets a list of servers owned by the account
-            </summary>
-            <returns>Unknown, was unable to succeed since my account owns no servers. Returns dynamic.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.CreateAccount(System.UInt32,System.String)">
-            <summary>
-            Creates a persistent game server account
-            </summary>
-            <param name="appId">App to use account for</param>
-            <param name="memo">Memo to set on new account</param>
-            <returns>A CreateAccountResponse object.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.SetMemo(System.UInt64,System.String)">
-            <summary>
-            This method changes the memo associated with the game server account. 
-            Memos do not affect the account in any way. 
-            The memo shows up in the GetAccountList response and serves only as a reminder of what the account is used for.
-            </summary>
-            <param name="steamId">The SteamId64 of the game server.</param>
-            <param name="memo"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.ResetLoginToken(System.UInt64)">
-            <summary>
-            Resets the login token for the specified game server
-            </summary>
-            <param name="steamId">Server SteamId64 to reset the token of.</param>
-            <returns>A ResetLoginTokenResponse containing the new token.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetAccountPublicInfo(System.UInt64)">
-            <summary>
-            Gets the public information about the specified game server account.
-            </summary>
-            <param name="steamId">Game server SteamId64 to get info from.</param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetServerSteamIdsByIp(System.Collections.Generic.List{System.String})">
-            <summary>
-            Gets a list of server SteamIDs from a list of server IPs
-            </summary>
-            <param name="serverIps">A list of IPs to get the SteamIDs for.</param>
-            <returns>Unknown</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.IGameServersServiceHandler.GetServerIPsBySteamId(System.Collections.Generic.List{System.UInt64})">
-            <summary>
-            Gets a list of server SteamIDs from a list of server IPs
-            </summary>
-            <param name="serverSteamIds">A list of server Sid64s to get the IPs of.</param>
-            <returns>Unknown</returns>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoBaseResponse">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoBaseResponse.response">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoResponse">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoResponse.steamid">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.GetAccountPublicInfoResponse.appid">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.ResetLoginTokenBaseResponse">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.ResetLoginTokenBaseResponse.response">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.ResetLoginTokenResponse">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.ResetLoginTokenResponse.login_token">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.CreateAccountBaseResponse">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.CreateAccountBaseResponse.response">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.CreateAccountResponse">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.CreateAccountResponse.steamid">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.MiscAPI.CreateAccountResponse.login_token">
-            <summary>
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.MiscAPI.ISteamUserHandler">
+        <member name="T:CSharpTradeOffers.MiscAPI.SteamUserHandler">
             <summary>
             Handles steam user related tasks.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.#ctor(System.String)">
+        <member name="M:CSharpTradeOffers.MiscAPI.SteamUserHandler.#ctor(System.String)">
             <summary>
             I forgot or it's obvious. TODO: Add better documentation
             </summary>
             <param name="apiKey"></param>
         </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetFriendList(System.UInt64,System.String)">
+        <member name="M:CSharpTradeOffers.MiscAPI.SteamUserHandler.GetFriendList(System.UInt64,System.String)">
             <summary>
             Retrieves the friends list of the specified steamid64. 
             The profile must be set to public or the owner of the api key must be friends with them.
@@ -1919,14 +1555,14 @@
             <param name="relationship">All/Friend, there are others but I do not know what.</param>
             <returns>Null upon failure, otherwise a list of Friend objects.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetPlayerBans(System.Collections.Generic.List{System.UInt64})">
+        <member name="M:CSharpTradeOffers.MiscAPI.SteamUserHandler.GetPlayerBans(System.Collections.Generic.List{System.UInt64})">
             <summary>
             Gets the bans of the specified SteamId64s
             </summary>
             <param name="playersBansToRequest">A List of steamid64s to retrieve ban information about.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetPlayerSummariesV1(System.Collections.Generic.List{System.UInt64})">
+        <member name="M:CSharpTradeOffers.MiscAPI.SteamUserHandler.GetPlayerSummariesV1(System.Collections.Generic.List{System.UInt64})">
             <summary>
             DEPRECATED, DO NOT USE.
             I only included this for completeness.
@@ -1934,21 +1570,21 @@
             <param name="playerSummariesToRequest">List of SteamIds to request a player summary of.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetPlayerSummariesV2(System.Collections.Generic.List{System.UInt64})">
+        <member name="M:CSharpTradeOffers.MiscAPI.SteamUserHandler.GetPlayerSummariesV2(System.Collections.Generic.List{System.UInt64})">
             <summary>
             Requests a list of player summaries of the players in the list.
             </summary>
             <param name="playerSummariesToRequest">A list of SteamIds to request their summaries.</param>
             <returns>A list of PlayerSummary objects.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.GetUserGroupList(System.UInt64)">
+        <member name="M:CSharpTradeOffers.MiscAPI.SteamUserHandler.GetUserGroupList(System.UInt64)">
             <summary>
             Requests the GroupIds of the groups of the specified player.
             </summary>
             <param name="steamId">SteamId64 of the player.</param>
             <returns>A GetUserGroupListResult object that contains a list of group ids.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.MiscAPI.ISteamUserHandler.ResolveVanityUrl(System.String,System.Int32)">
+        <member name="M:CSharpTradeOffers.MiscAPI.SteamUserHandler.ResolveVanityUrl(System.String,System.Int32)">
             <summary>
             Resolves a vanity url into a SteamId64.
             </summary>

@@ -33,8 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,16 +50,10 @@
     <Compile Include="CommunityHandler.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="MiscAPI\IAccountRecoverServiceHandler.cs" />
-    <Compile Include="MiscAPI\ICheatReportingServiceHandler.cs" />
-    <Compile Include="MiscAPI\ICSGOServers_730Handler.cs" />
-    <Compile Include="MiscAPI\IDOTA2Fantasy_570Handler.cs" />
-    <Compile Include="MiscAPI\IDOTA2MatchStats_570Handler.cs" />
-    <Compile Include="Trading\IEconServiceHandler.cs" />
-    <Compile Include="MiscAPI\IGameServersServiceHandler.cs" />
+    <Compile Include="Trading\EconServiceHandler.cs" />
     <Compile Include="Trading\InventoryHandler.cs" />
-    <Compile Include="Trading\ISteamEconomyHandler.cs" />
-    <Compile Include="MiscAPI\ISteamUserHandler.cs" />
+    <Compile Include="Trading\SteamEconomyHandler.cs" />
+    <Compile Include="MiscAPI\SteamUserHandler.cs" />
     <Compile Include="MarketHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SteamID.cs" />

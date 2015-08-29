@@ -9,7 +9,7 @@ namespace CSharpTradeOffers.MiscAPI
     /// <summary>
     /// Handles steam user related tasks.
     /// </summary>
-    public class ISteamUserHandler
+    public class SteamUserHandler
     {
         private const string BaseUrl = "http://api.steampowered.com/ISteamUser/";
         private readonly string _apiKey;
@@ -18,7 +18,7 @@ namespace CSharpTradeOffers.MiscAPI
         /// I forgot or it's obvious. TODO: Add better documentation
         /// </summary>
         /// <param name="apiKey"></param>
-        public ISteamUserHandler(string apiKey)
+        public SteamUserHandler(string apiKey)
         {
             _apiKey = apiKey;
         }

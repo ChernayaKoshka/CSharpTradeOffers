@@ -9,7 +9,7 @@ namespace CSharpTradeOffers.Trading
     /// <summary>
     /// Handles Steam Economy related tasks, like retrieving class info
     /// </summary>
-    public class ISteamEconomyHandler
+    public class SteamEconomyHandler
     {
         private const string BaseUrl = "https://api.steampowered.com/ISteamEconomy/";
 
