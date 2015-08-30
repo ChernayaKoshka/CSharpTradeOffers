@@ -112,62 +112,6 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="assetToFind">Specifies search params.</param>
         /// <returns></returns>
-        public Item FindFirstItem(TradeConfig.ConfigAsset assetToFind)
-        {
-            Inventory inv = Inventories[assetToFind.AppId];
-            switch (assetToFind.TypeId)
-            {
-                case 0:
-                    foreach (Item item in inv.Items.Values)
-                        if (item.market_hash_name == assetToFind.TypeObj)
-                            return item;
-                    break;
-                case 1:
-                    foreach (Item item in inv.Items.Values)
-                        if (item.market_hash_name.ToLower().Contains(assetToFind.TypeObj))
-                            return item;
-                    break;
-                case 2:
-                    foreach (Item item in inv.Items.Values)
-                        if (item.market_hash_name.ToLower().StartsWith(assetToFind.TypeObj))
-                            return item;
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-                    //ISteamEconomyHandler handler = new ISteamEconomyHandler();
-                    //foreach (Item item in inv.Items.Values)
-                    //{
-                    //    var classid = new Dictionary<string, string>
-                    //    {
-                    //        {item.classid, null}
-                    //    };
-                    //
-                    //    AssetClassInfo info = handler.ToAssetClassInfo(
-                    //        handler.GetAssetClassInfo(_config.Cfg.ApiKey, Convert.ToUInt32(item.appid),
-                    //            classid).result);
-                    //
-                    //    if (info.tags.Any(tag => tag.name == assetToFind.TypeObj))
-                    //    {
-                    //        return item;
-                    //    }
-                    //}
-                    break;
-                default:
-                    throw new Exception("Unknown TypeId!");
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Locates an Item in the inventory.
-        /// </summary>
-        /// <param name="assetToFind">Specifies search params.</param>
-        /// <returns></returns>
         public Item FindFirstItem(CEconAsset assetToFind)
         {
             Inventory inv = Inventories[Convert.ToUInt32(assetToFind.appid)];
