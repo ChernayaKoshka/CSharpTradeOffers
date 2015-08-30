@@ -368,28 +368,6 @@
             </summary>
             <param name="towrite"></param>
         </member>
-        <member name="T:CSharpTradeOffers.Configuration.TradeConfig">
-            <summary>
-            Generic trade config, in progress suggested to not use
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Configuration.TradeConfig.TradesConfig">
-            <summary>
-            The meat of the config
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Configuration.TradeConfig.Reload">
-            <summary>
-            Reloads the configuration file (trades.cfg). If file is not present, it will generate a new one.
-            </summary>
-            <returns>A Trades object.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Configuration.TradeConfig.WriteChanges(CSharpTradeOffers.Configuration.TradeConfig.Trades)">
-            <summary>
-            Writes the changes made to the trade config.
-            </summary>
-            <param name="towrite"></param>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
             <param name="apiKey"></param>
             <returns></returns>
@@ -560,13 +538,6 @@
             </summary>
             <param name="assetToFind">Specifies search params.</param>
             <param name="inv">Inventory to search.providing the </param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindFirstItem(CSharpTradeOffers.Configuration.TradeConfig.ConfigAsset)">
-            <summary>
-            Locates an Item in the inventory.
-            </summary>
-            <param name="assetToFind">Specifies search params.</param>
             <returns></returns>
         </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindFirstItem(CSharpTradeOffers.Trading.CEconAsset)">
