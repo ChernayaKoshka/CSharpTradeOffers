@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Community
 {
-    // ReSharper disable once InconsistentNaming
     /// <summary>
     /// Handles steam user related tasks.
     /// </summary>
@@ -56,26 +55,6 @@ namespace CSharpTradeOffers.Community
             };
             return
                 JsonConvert.DeserializeObject<GetPlayerBansResult>(Web.Fetch(url, "GET", data, null, false)).playersbans;
-        }
-
-        /// <summary>
-        /// DEPRECATED, DO NOT USE.
-        /// I only included this for completeness.
-        /// </summary>
-        /// <param name="playerSummariesToRequest">List of SteamIds to request a player summary of.</param>
-        /// <returns></returns>
-        [Obsolete("GetPlayerSummariesV1 is deprecated. Please use GetPlayerSummariesV2 instead.")]
-        public List<PlayerSummary> GetPlayerSummariesV1(List<ulong> playerSummariesToRequest)
-        {
-            const string url = BaseUrl + "GetPlayerSummaries/v1/";
-            var data = new Dictionary<string, string>
-            {
-                {"key", _apiKey},
-                {"steamids", CommaDelimit(playerSummariesToRequest)}
-            };
-            return
-                JsonConvert.DeserializeObject<GetPlayerSummariesV1Result>(Web.Fetch(url, "GET", data, null, false))
-                    .Response.PlayersSummaries.PlayerSummaries;
         }
 
         /// <summary>
@@ -144,150 +123,4 @@ namespace CSharpTradeOffers.Community
             return returned.Substring(0, returned.Length - 1);
         }
     }
-
-    #region ResolveVanityURLResult
-    public class ResolveVanityUrlResult
-    {
-        public string steamid { get; set; }
-
-        public int success { get; set; }
-    }
-    [JsonObject(Title = "RootObject")]
-    public class ResolveVanityUrlBaseResult
-    {
-
-        public ResolveVanityUrlResult response { get; set; }
-    }
-    #endregion
-
-    #region GetUserGroupListResult
-    public class Group
-    {
-        public ulong gid { get; set; }
-    }
-    [JsonObject(Title = "Response")]
-    public class GetUserGroupListResult
-    {
-        public bool success { get; set; }
-
-        public List<Group> groups { get; set; }
-    }
-    [JsonObject(Title = "RootObject")]
-    public class GetUserGroupListBaseResult
-    {
-        public GetUserGroupListResult Result { get; set; }
-    }
-    #endregion
-
-    #region GetPlayerSummariesResult
-    [JsonObject(Title = "Player")]
-    public class PlayerSummary
-    {
-        public string steamid { get; set; }
-
-        public int communityvisibilitystate { get; set; }
-
-        public int profilestate { get; set; }
-
-        public string personaname { get; set; }
-
-        public int lastlogoff { get; set; }
-
-        public string profileurl { get; set; }
-
-        public string avatar { get; set; }
-
-        public string avatarmedium { get; set; }
-
-        public string avatarfull { get; set; }
-
-        public int personastate { get; set; }
-
-        public string primaryclanid { get; set; }
-
-        public int timecreated { get; set; }
-
-        public int personastateflags { get; set; }
-
-        public string loccountrycode { get; set; }
-    }
-
-    [JsonObject(Title = "Players")]
-    public class PlayersSummaries
-    {
-        public List<PlayerSummary> PlayerSummaries { get; set; }
-    }
-
-    [JsonObject(Title = "Response")]
-    public class ResponseV1
-    {
-
-        public PlayersSummaries PlayersSummaries { get; set; }
-    }
-
-    [JsonObject(Title = "RootObject")]
-    public class GetPlayerSummariesV1Result
-    {
-
-        public ResponseV1 Response { get; set; }
-    }
-
-    [JsonObject(Title = "Response")]
-    public class ResponseV2
-    {
-        public List<PlayerSummary> PlayersSummaries { get; set; } 
-    }
-
-    [JsonObject(Title = "RootObject")]
-    public class GetPlayerSummariesV2Result
-    {
-        public ResponseV2 Response { get; set; }
-    }
-
-    #endregion
-
-    #region GetPlayerBansResult
-    [JsonObject(Title = "Player")]
-    public class PlayerBans
-    {
-        public string SteamId { get; set; }
-
-        public bool CommunityBanned { get; set; }
-
-        public bool VACBanned { get; set; }
-
-        public int NumberOfVACBans { get; set; }
-
-        public int DaysSinceLastBan { get; set; }
-
-        public int NumberOfGameBans { get; set; }
-
-        public string EconomyBan { get; set; }
-    }
-    [JsonObject(Title = "RootObject")]
-    public class GetPlayerBansResult
-    {
-        public List<PlayerBans> playersbans { get; set; } //better name?
-    }
-    #endregion
-
-    #region GetFriendListResult
-    public class Friend
-    {
-        public string steamid { get; set; }
-
-        public string relationship { get; set; }
-
-        public int friend_since { get; set; }
-    }
-    public class Friendslist
-    {
-        public List<Friend> friends { get; set; }
-    }
-    [JsonObject(Title = "RootObject")]
-    public class GetFriendListResult
-    {
-        public Friendslist friendslist { get; set; }
-    }
-    #endregion
 }

@@ -45,13 +45,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Community\CommentResponse.cs" />
+    <Compile Include="Community\Friend.cs" />
+    <Compile Include="Community\Friendslist.cs" />
+    <Compile Include="Community\GetFriendListResult.cs" />
+    <Compile Include="Community\GetPlayerBansResult.cs" />
+    <Compile Include="Community\GetPlayerSummariesV1Result.cs" />
+    <Compile Include="Community\GetPlayerSummariesV2Result.cs" />
+    <Compile Include="Community\GetUserGroupListBaseResult.cs" />
+    <Compile Include="Community\GetUserGroupListResult.cs" />
+    <Compile Include="Community\Group.cs" />
+    <Compile Include="Community\InviteResponse.cs" />
+    <Compile Include="Community\MemberList.cs" />
+    <Compile Include="Community\memberListGroupDetails.cs" />
+    <Compile Include="Community\MultiInviteResponse.cs" />
+    <Compile Include="Community\PlayerBans.cs" />
+    <Compile Include="Community\PlayersSummaries.cs" />
+    <Compile Include="Community\PlayerSummary.cs" />
+    <Compile Include="Community\ResolveVanityUrlBaseResult.cs" />
+    <Compile Include="Community\ResolveVanityUrlResult.cs" />
+    <Compile Include="Community\ResponseV2.cs" />
+    <Compile Include="Trading\Action.cs" />
+    <Compile Include="Trading\AppData.cs" />
     <Compile Include="Trading\AssetClassInfo.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Community\CommunityHandler.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Trading\CEconAsset.cs" />
+    <Compile Include="Trading\CEconTradeOffer.cs" />
     <Compile Include="Trading\EconServiceHandler.cs" />
+    <Compile Include="Trading\EResult.cs" />
+    <Compile Include="Trading\ETradeOfferState.cs" />
+    <Compile Include="Trading\GetTradeOffersSummaryBaseResponse.cs" />
+    <Compile Include="Trading\GetTradeOffersSummaryResponse.cs" />
+    <Compile Include="Trading\Inventory.cs" />
+    <Compile Include="Trading\InventoryException.cs" />
     <Compile Include="Trading\InventoryHandler.cs" />
+    <Compile Include="Trading\Item.cs" />
+    <Compile Include="Trading\MarketValue.cs" />
+    <Compile Include="Trading\Me.cs" />
+    <Compile Include="Trading\Offer.cs" />
+    <Compile Include="Trading\rgDescription.cs" />
+    <Compile Include="Trading\rgInventory_Item.cs" />
+    <Compile Include="Trading\SendOfferResponse.cs" />
     <Compile Include="Trading\SteamEconomyHandler.cs" />
     <Compile Include="Community\SteamUserHandler.cs" />
     <Compile Include="MarketHandler.cs" />
@@ -59,6 +96,12 @@
     <Compile Include="SteamID.cs" />
     <Compile Include="Configuration\TradeConfig.cs" />
     <Compile Include="Trading\ItemValueHandler.cs" />
+    <Compile Include="Trading\Tag.cs" />
+    <Compile Include="Trading\Them.cs" />
+    <Compile Include="Trading\TradeId.cs" />
+    <Compile Include="Trading\TradeOffer.cs" />
+    <Compile Include="Trading\TradeOffers.cs" />
+    <Compile Include="Trading\TradeOffersList.cs" />
     <Compile Include="Web.cs" />
   </ItemGroup>
   <ItemGroup>

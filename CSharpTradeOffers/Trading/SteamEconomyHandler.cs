@@ -5,7 +5,6 @@ using Newtonsoft.Json.Linq;
 
 namespace CSharpTradeOffers.Trading
 {
-    // ReSharper disable once InconsistentNaming
     /// <summary>
     /// Handles Steam Economy related tasks, like retrieving class info
     /// </summary>
@@ -45,33 +44,6 @@ namespace CSharpTradeOffers.Trading
             desrDictionary.Remove("success");
 
             return JsonConvert.DeserializeObject<AssetClassInfo>(desrDictionary.Values.First().ToString());
-
-            //var desrDictionary =
-            //    JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(dynamicinfo.ToString());
-            //
-            //desrDictionary.Remove("success");
-            //
-            //return JsonConvert.DeserializeObject<AssetClassInfo>(desrDictionary.Values.ToString());
         }
-
-        #region old
-        
-        ///// <summary>
-        ///// Partially converts the dynamic GetAssetClassInfo into an AssetClassInfo object.
-        ///// Does not convert filter_data because its complicated and I'm lazy.
-        ///// Very poorly done, possibly optimize/fix?
-        ///// </summary>
-        ///// <param name="dynamicinfo">The return variable from GetAssetClassInfo</param>
-        ///// <returns>An AssetClassInfo object.</returns>
-        //// ReSharper disable once FunctionComplexityOverflow
-        //public AssetClassInfo ToAssetClassInfo(dynamic dynamicinfo)
-        //{
-        //    Dictionary<string, dynamic> desrDictionary =
-        //        JsonConvert.DeserializeObject <Dictionary<string, dynamic>>(dynamicinfo.ToString());
-        //    desrDictionary.Remove("success");
-        //    return JsonConvert.DeserializeObject<AssetClassInfo>(desrDictionary.Values.First().ToString());
-        //}
-        
-        #endregion
     }
 }

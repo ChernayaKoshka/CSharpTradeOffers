@@ -110,13 +110,13 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="groupId">The SteamId64 of the group to request information about.</param>
         /// <returns>A memberList object.</returns>
-        public memberList RequestMemberList(ulong groupId)
+        public MemberList RequestMemberList(ulong groupId)
         {
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1";
 
             return
-                (memberList)
-                    new XmlSerializer(typeof (memberList)).Deserialize(Web.FetchStream(string.Format(url, groupId),
+                (MemberList)
+                    new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(string.Format(url, groupId),
                         "GET"));
         }
 
@@ -125,13 +125,13 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="groupName">The name of the group to request information about.</param>
         /// <returns>A memberList object.</returns>
-        public memberList RequestMemberList(string groupName)
+        public MemberList RequestMemberList(string groupName)
         {
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1";
 
             return
-                (memberList)
-                    new XmlSerializer(typeof (memberList)).Deserialize(Web.FetchStream(string.Format(url, groupName),
+                (MemberList)
+                    new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(string.Format(url, groupName),
                         "GET"));
         }
 
@@ -140,12 +140,12 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="groupId">The SteamId64 of the group to request information about.</param>
         /// <returns>A List of the memberList object.</returns>
-        public List<memberList> RequestAllMemberLists(ulong groupId)
+        public List<MemberList> RequestAllMemberLists(ulong groupId)
         {
-            var membersList = new List<memberList>();
+            var membersList = new List<MemberList>();
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1&p={1}";
 
-            memberList populatedList;
+            MemberList populatedList;
             ulong count = 1;
 
             do
@@ -153,7 +153,7 @@ namespace CSharpTradeOffers.Community
                 string temp = string.Format(url, groupId, count);
 
                 populatedList =
-                    (memberList) (new XmlSerializer(typeof (memberList)).Deserialize(Web.FetchStream(temp, "GET")));
+                    (MemberList) (new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(temp, "GET")));
                 membersList.Add(populatedList);
 
                 count++;
@@ -167,13 +167,13 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="groupName">The name of the group to request information about.</param>
         /// <returns>A List of the memberList object.</returns>
-        public List<memberList> RequestAllMemberLists(string groupName)
+        public List<MemberList> RequestAllMemberLists(string groupName)
         {
-            var membersList = new List<memberList>();
+            var membersList = new List<MemberList>();
             groupName = groupName.Replace(" ", "");
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1&p={1}";
 
-            memberList populatedList;
+            MemberList populatedList;
             ulong count = 1;
 
             do
@@ -181,7 +181,7 @@ namespace CSharpTradeOffers.Community
                 string temp = string.Format(url, groupName, count);
 
                 populatedList =
-                    (memberList) (new XmlSerializer(typeof (memberList)).Deserialize(Web.FetchStream(temp, "GET")));
+                    (MemberList) (new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(temp, "GET")));
                 membersList.Add(populatedList);
 
                 count++;
@@ -190,120 +190,4 @@ namespace CSharpTradeOffers.Community
             return membersList;
         }
     }
-
-    /// <summary>
-    /// MultiInviteResponse
-    /// </summary>
-    [JsonObject(Title = "RootObject")]
-    public class MultiInviteResponse
-    {
-        /// <summary>
-        /// Results, I forgot. TODO: Add better documentation
-        /// </summary>
-        public string results { get; set; }
-        public string groupId { get; set; }
-    }
-
-    /// <summary>
-    /// InviteResponse
-    /// </summary>
-    [JsonObject(Title = "RootObject")]
-    public class InviteResponse
-    {
-        public string results { get; set; }
-        public string groupId { get; set; }
-        public bool duplicate { get; set; }
-    }
-    [JsonObject(Title = "RootObject")]
-    public class CommentResponse
-    {
-
-        public bool success { get; set; }
-
-        public string name { get; set; }
-
-        public int start { get; set; }
-
-        public string pagesize { get; set; }
-
-        public int total_count { get; set; }
-
-        public int upvotes { get; set; }
-
-        public int has_upvoted { get; set; }
-
-        public string comments_html { get; set; }
-
-        public int timelastpost { get; set; }
-    }
-
-    #region memberslistxml
-    /// <remarks/>
-    [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
-    // ReSharper disable once InconsistentNaming
-    public class memberList
-    {
-        /// <remarks/>
-        public ulong groupID64 { get; set; }
-
-        /// <remarks/>
-        public memberListGroupDetails groupDetails { get; set; }
-
-        /// <remarks/>
-        public ulong memberCount { get; set; }
-
-        /// <remarks/>
-        public ulong totalPages { get; set; }
-
-        /// <remarks/>
-        public ulong currentPage { get; set; }
-
-        /// <remarks/>
-        public ulong startingMember { get; set; }
-
-        /// <remarks/>
-        [XmlArrayItem("steamID64", IsNullable = false)]
-        public ulong[] members { get; set; }
-    }
-
-    /// <remarks/>
-    [XmlType(AnonymousType = true)]
-    // ReSharper disable once InconsistentNaming
-    public class memberListGroupDetails
-    {
-        /// <remarks/>
-        public string groupName { get; set; }
-
-        /// <remarks/>
-        public string groupURL { get; set; }
-
-        /// <remarks/>
-        public string headline { get; set; }
-
-        /// <remarks/>
-        public string summary { get; set; }
-
-        /// <remarks/>
-        public string avatarIcon { get; set; }
-
-        /// <remarks/>
-        public string avatarMedium { get; set; }
-
-        /// <remarks/>
-        public string avatarFull { get; set; }
-
-        /// <remarks/>
-        public ulong memberCount { get; set; }
-
-        /// <remarks/>
-        public ulong membersInChat { get; set; }
-
-        /// <remarks/>
-        public ulong membersInGame { get; set; }
-
-        /// <remarks/>
-        public ulong membersOnline { get; set; }
-    }
-    #endregion
 }
