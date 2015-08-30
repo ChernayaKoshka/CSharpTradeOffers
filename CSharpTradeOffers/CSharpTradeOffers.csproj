@@ -64,6 +64,11 @@
     <Compile Include="Community\ResolveVanityUrlBaseResult.cs" />
     <Compile Include="Community\ResolveVanityUrlResult.cs" />
     <Compile Include="Community\ResponseV2.cs" />
+    <Compile Include="Configuration\Command_Permission.cs" />
+    <Compile Include="Configuration\Dictionaries.cs" />
+    <Compile Include="Configuration\IConfig.cs" />
+    <Compile Include="Configuration\Officer.cs" />
+    <Compile Include="Configuration\RootConfig.cs" />
     <Compile Include="Trading\Action.cs" />
     <Compile Include="Trading\AppData.cs" />
     <Compile Include="Trading\AssetClassInfo.cs" />

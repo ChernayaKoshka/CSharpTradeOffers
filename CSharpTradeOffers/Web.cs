@@ -185,7 +185,7 @@ namespace CSharpTradeOffers
         /// <summary>
         /// Executes the login by using the Steam Website.
         /// </summary> 
-        public static bool DoLogin(string username, string password, ref Account account, ref Config.RootConfig cfg)
+        public static bool DoLogin(string username, string password, ref Account account, ref RootConfig cfg)
         {
             Thread.Sleep(2000);
             var data = new Dictionary<string, string> {{"username", username}};
