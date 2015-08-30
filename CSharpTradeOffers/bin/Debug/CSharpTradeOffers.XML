@@ -417,6 +417,16 @@
             <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
             <returns>The TradeId of the offer that was accepted.</returns>
         </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.AcceptTradeOffer(System.UInt64,System.Net.CookieContainer,System.UInt32,System.String)">
+            <summary>
+            Accepts a specified trade offer.
+            </summary>
+            <param name="tradeId">A ulong representing the trade to accept.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="partnerId">The AccountId of the person to trade with.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <returns>The TradeId of the offer that was accepted.</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.SendTradeOffer(System.UInt64,System.Net.CookieContainer,System.String,System.String,CSharpTradeOffers.Trading.TradeOffer)">
             <summary>
             Sends a trade offer to the specified recipient. 
