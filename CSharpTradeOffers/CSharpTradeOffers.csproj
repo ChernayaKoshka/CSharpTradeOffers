@@ -50,14 +50,13 @@
     <Compile Include="Community\Friendslist.cs" />
     <Compile Include="Community\GetFriendListResult.cs" />
     <Compile Include="Community\GetPlayerBansResult.cs" />
-    <Compile Include="Community\GetPlayerSummariesV1Result.cs" />
     <Compile Include="Community\GetPlayerSummariesV2Result.cs" />
     <Compile Include="Community\GetUserGroupListBaseResult.cs" />
     <Compile Include="Community\GetUserGroupListResult.cs" />
     <Compile Include="Community\Group.cs" />
     <Compile Include="Community\InviteResponse.cs" />
     <Compile Include="Community\MemberList.cs" />
-    <Compile Include="Community\memberListGroupDetails.cs" />
+    <Compile Include="Community\MemberListGroupDetails.cs" />
     <Compile Include="Community\MultiInviteResponse.cs" />
     <Compile Include="Community\PlayerBans.cs" />
     <Compile Include="Community\PlayersSummaries.cs" />

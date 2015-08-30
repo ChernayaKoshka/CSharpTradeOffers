@@ -113,7 +113,7 @@ namespace CSharpTradeOffers
             }
         }
 
-        /*/// <summary>
+        /// <summary>
         /// A web method to return the response string from the URL.
         /// </summary>
         /// <param name="url">The URL to request.</param>
@@ -126,26 +126,26 @@ namespace CSharpTradeOffers
         public static string RetryFetch(string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
+            int attempts = 0;
             while (true)
             {
-                bool success = true;
                 try
                 {
-                    HttpWebResponse response = Request(url, method, data, cookies, xHeaders, referer);
+                    var response = Request(url, method, data, cookies, xHeaders, referer);
 
                     using (var sr = new StreamReader(response.GetResponseStream()))
                     {
                         return sr.ReadToEnd();
                     }
                 }
-                catch (Exception)
+                catch (WebException)
                 {
-                    success = false;
+                    if (attempts >= 5)
+                        return null;
+                    attempts++;
                 }
-                if(success)
-
             }
-        } */
+        }
 
         /// <summary>
         /// A web method to return the response string from the URL.
