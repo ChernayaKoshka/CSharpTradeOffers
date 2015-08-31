@@ -161,7 +161,6 @@ namespace CSharpTradeOffers
         {
             return Request(url, method, data, cookies, xHeaders, referer).GetResponseStream();
         }
-
                
         /// <summary>
         /// Converts a dictionary to URL parameters. Ex: ?param=arg
@@ -535,7 +534,7 @@ namespace CSharpTradeOffers
                 if (SteamMachineAuth != null)
                 {
                     cc = new CookieContainer();
-                    var split = SteamMachineAuth.Split('=');
+                    var split = machineAuth.Split('=');
                     var machineCookie = new Cookie(split[0], split[1]);
                     cc.Add(new Uri("https://steamcommunity.com/login/dologin/"), machineCookie);
                 }
