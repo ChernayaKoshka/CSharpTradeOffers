@@ -15,7 +15,7 @@ namespace DonationBot
 
         private static void Main(string[] args)
         {
-            if(File.Exists("key.txt"))
+            if (File.Exists("key.txt"))
                 _apiKey = File.ReadAllText("key.txt");
 
             if (string.IsNullOrEmpty(_apiKey))
@@ -36,7 +36,6 @@ namespace DonationBot
                 _machineAuth = File.ReadAllText("auth.txt");
             else
                 File.Create("auth.txt").Close();
-            
 
             if (string.IsNullOrEmpty(_machineAuth))
             {
@@ -60,27 +59,29 @@ namespace DonationBot
 
             var offerHandler = new EconServiceHandler(_apiKey);
             var marketHandler = new MarketHandler();
-            marketHandler.EligibilityCheck(_account.SteamId, _account.AuthContainer); //required to perform trades (?). Checks to see whether or not we're allowed to trade.
+            marketHandler.EligibilityCheck(_account.SteamId, _account.AuthContainer);
+                //required to perform trades (?). Checks to see whether or not we're allowed to trade.
 
             while (isPolling) //permanent loop, can be changed 
             {
                 var recData = new Dictionary<string, string>
-            {
-                {"get_received_offers", "1"},
-                {"active_only", "1"},
-                {"time_historical_cutoff", "999999999999"}
-                 //arbitrarily high number to prevent old offers from appearing
+                {
+                    {"get_received_offers", "1"},
+                    {"active_only", "1"},
+                    {"time_historical_cutoff", "999999999999"}
+                    //arbitrarily high number to prevent old offers from appearing
                 };
 
                 var offers = offerHandler.GetTradeOffers(recData).trade_offers_received;
 
-                if(offers == null) continue;
+                if (offers == null) continue;
 
                 foreach (CEconTradeOffer cEconTradeOffer in offers)
                 {
                     if (cEconTradeOffer.items_to_give == null)
                     {
-                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.tradeofferid), _account.AuthContainer,
+                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.tradeofferid),
+                            _account.AuthContainer,
                             cEconTradeOffer.accountid_other, "1");
                         Console.WriteLine("Accepted a donation!");
                     }
