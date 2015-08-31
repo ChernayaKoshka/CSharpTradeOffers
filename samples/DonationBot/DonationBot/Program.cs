@@ -45,6 +45,8 @@ namespace DonationBot
                 Web.DoLogin(_user, _pass, ref _account, _machineAuth);
             }
 
+            _account.AddMachineAuthCookies(_machineAuth);
+
             PollOffers();
         }
 
@@ -56,22 +58,25 @@ namespace DonationBot
             var marketHandler = new MarketHandler();
             marketHandler.EligibilityCheck(_account.SteamId, _account.AuthContainer); //required to perform trades (?). Checks to see whether or not we're allowed to trade.
 
-            var recData = new Dictionary<string, string>
+            while (isPolling) //permanent loop, can be changed 
+            {
+                var recData = new Dictionary<string, string>
             {
                 {"get_received_offers", "1"},
                 {"active_only", "1"},
                 {"time_historical_cutoff", "999999999999"}
-                //arbitrarily high number to prevent old offers from appearing
-            };
-            
-            while (isPolling) //permanent loop, can be changed 
-            {
+                 //arbitrarily high number to prevent old offers from appearing
+                };
+
                 var offers = offerHandler.GetTradeOffers(recData).trade_offers_received;
+
+                if(offers == null) continue;
+
                 foreach (CEconTradeOffer cEconTradeOffer in offers)
                 {
-                    if (cEconTradeOffer.items_to_give.Count == 0)
+                    if (cEconTradeOffer.items_to_give == null)
                     {
-                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.tradeid), _account.AuthContainer,
+                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.tradeofferid), _account.AuthContainer,
                             cEconTradeOffer.accountid_other, "1");
                         Console.WriteLine("Accepted a donation!");
                     }
