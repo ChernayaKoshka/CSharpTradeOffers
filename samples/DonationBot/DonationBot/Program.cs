@@ -39,13 +39,23 @@ namespace DonationBot
 
             if (string.IsNullOrEmpty(_machineAuth))
             {
-                Web.DoLogin(_user, _pass, ref _account);
+                if(!Web.DoLogin(_user, _pass, ref _account))
+                {
+                    Console.WriteLine("Web login failed, please try again with a correct username/password pair!");
+                    Console.ReadLine();
+                    Environment.Exit(-1);
+                }
                 _machineAuth = Web.SteamMachineAuth;
                 File.WriteAllText("auth.txt", _machineAuth);
             }
             else
             {
-                Web.DoLogin(_user, _pass, ref _account, _machineAuth);
+                if (!Web.DoLogin(_user, _pass, ref _account, _machineAuth))
+                {
+                    Console.WriteLine("Web login failed, please try again with a correct username/password pair!");
+                    Console.ReadLine();
+                    Environment.Exit(-1);
+                }
             }
 
             _account.AddMachineAuthCookies(_machineAuth);
