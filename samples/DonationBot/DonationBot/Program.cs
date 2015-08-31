@@ -35,7 +35,7 @@ namespace DonationBot
             if (File.Exists("auth.txt"))
                 _machineAuth = File.ReadAllText("auth.txt");
             else
-                File.Create("auth.txt");
+                File.Create("auth.txt").Close();
             
 
             if (string.IsNullOrEmpty(_machineAuth))
