@@ -32,7 +32,11 @@ namespace DonationBot
             Console.Write("Password: ");
             _pass = Console.ReadLine();
 
-            _machineAuth = File.ReadAllText("auth.txt");
+            if (File.Exists("auth.txt"))
+                _machineAuth = File.ReadAllText("auth.txt");
+            else
+                File.Create("auth.txt");
+            
 
             if (string.IsNullOrEmpty(_machineAuth))
             {
