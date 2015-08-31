@@ -175,7 +175,9 @@ namespace CSharpTradeOffers
                 if (joined != "")
                     joined += "&";
 
-                joined += $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}";
+                //joined += $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}";
+                joined += string.Format("{0}={1}", WebUtility.UrlEncode(kvp.Key),
+                    WebUtility.UrlEncode(kvp.Value));
             }
             return joined;
         }
