@@ -531,7 +531,7 @@ namespace CSharpTradeOffers
                 data.Add("rsatimestamp", time);
 
                 CookieContainer cc = null;
-                if (SteamMachineAuth != null)
+                if (machineAuth != null)
                 {
                     cc = new CookieContainer();
                     var split = machineAuth.Split('=');
