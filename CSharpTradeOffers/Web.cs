@@ -242,6 +242,7 @@ namespace CSharpTradeOffers
                 CookieContainer cc = null;
                 if (!string.IsNullOrEmpty(machineAuth))
                 {
+                    SteamMachineAuth = machineAuth;
                     cc = new CookieContainer();
                     var split = machineAuth.Split('=');
                     var machineCookie = new Cookie(split[0], split[1]);
@@ -290,7 +291,7 @@ namespace CSharpTradeOffers
                             break;
                     }
                     if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
-                        SteamMachineAuth = cookie.Name + "=" + cookie.Value;
+                    SteamMachineAuth = cookie.Name + "=" + cookie.Value;
                     //account.AuthContainer.Add(cookie);
                 }
 
