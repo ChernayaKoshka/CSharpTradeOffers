@@ -21,6 +21,17 @@ namespace CSharpTradeOffers
         /// <summary>
         /// The Auth Cookies for the bot.
         /// </summary>
-        public CookieContainer AuthContainer = new CookieContainer();
+        public readonly CookieContainer AuthContainer = new CookieContainer();
+
+        /// <summary>
+        /// Adds the steamMachineAuth cookie to the AuthContainer.
+        /// This can also be used for any string separated by [name]=[value]
+        /// </summary>
+        /// <param name="authstring">String to turn into a cookie and add.</param>
+        public void AddMachineAuthCookies(string authstring)
+        {
+            string[] split = authstring.Split('=');
+            AuthContainer.Add(new Cookie(split[0], split[1]) { Domain = "steamcommunity.com" });
+        }
     }
 }

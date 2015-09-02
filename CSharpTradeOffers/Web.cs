@@ -292,14 +292,10 @@ namespace CSharpTradeOffers
                     }
                     if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
                     SteamMachineAuth = cookie.Name + "=" + cookie.Value;
-                    //account.AuthContainer.Add(cookie);
                 }
 
                 if (!string.IsNullOrEmpty(SteamMachineAuth))
-                {
-                    string[] split = SteamMachineAuth.Split('=');
-                    account.AuthContainer.Add(new Cookie(split[0], split[1]) {Domain = "steamcommunity.com"});
-                }
+                    account.AddMachineAuthCookies(SteamMachineAuth);
 
                 SubmitCookies(_cookies);
 

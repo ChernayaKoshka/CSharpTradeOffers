@@ -694,6 +694,13 @@
             The Auth Cookies for the bot.
             </summary>
         </member>
+        <member name="M:CSharpTradeOffers.Account.AddMachineAuthCookies(System.String)">
+            <summary>
+            Adds the steamMachineAuth cookie to the AuthContainer.
+            This can also be used for any string separated by [name]=[value]
+            </summary>
+            <param name="authstring">String to turn into a cookie and add.</param>
+        </member>
         <member name="T:CSharpTradeOffers.ExtensionMethods">
             <summary>
             Various extension methods used in the library.
