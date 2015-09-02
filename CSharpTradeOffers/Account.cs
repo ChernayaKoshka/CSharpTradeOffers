@@ -7,10 +7,16 @@ namespace CSharpTradeOffers
     /// </summary>
     public class Account
     {
+        public Account(ulong steamId)
+        {
+            //add validation later
+            SteamId = steamId;
+        }
+
         /// <summary>
         /// The bot's Sid64.
         /// </summary>
-        public ulong SteamId { get; set; }
+        public ulong SteamId { get; }
 
         /// <summary>
         /// The Auth Cookies for the bot.
