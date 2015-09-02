@@ -3,6 +3,8 @@ using System.Xml.Serialization;
 namespace CSharpTradeOffers.Community
 {
     /// <remarks/>
+    [System.Serializable]
+    [System.ComponentModel.DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     public class MemberListGroupDetails
     {

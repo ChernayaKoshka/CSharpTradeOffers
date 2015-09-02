@@ -3,8 +3,10 @@ using System.Xml.Serialization;
 namespace CSharpTradeOffers.Community
 {
     /// <remarks/>
+    [System.Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
+    [XmlRoot(Namespace = "", IsNullable = false,ElementName = "memberList")]
     public class MemberList
     {
         /// <remarks/>
