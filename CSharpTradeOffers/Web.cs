@@ -290,8 +290,14 @@ namespace CSharpTradeOffers
                             break;
                     }
                     if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
-                    account.AuthContainer.Add(cookie);
-                    SteamMachineAuth = cookie.Name + "=" + cookie.Value;
+                        SteamMachineAuth = cookie.Name + "=" + cookie.Value;
+                    //account.AuthContainer.Add(cookie);
+                }
+
+                if (!string.IsNullOrEmpty(SteamMachineAuth))
+                {
+                    string[] split = SteamMachineAuth.Split('=');
+                    account.AuthContainer.Add(new Cookie(split[0], split[1]) {Domain = "steamcommunity.com"});
                 }
 
                 SubmitCookies(_cookies);
