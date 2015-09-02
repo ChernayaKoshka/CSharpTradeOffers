@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Threading;
 using CSharpTradeOffers;
 using CSharpTradeOffers.Trading;
 
@@ -11,64 +11,62 @@ namespace DonationBot
         private static string _user, _pass;
         private static string _machineAuth;
         private static string _apiKey;
-        private static Account _account = new Account();
+        private static Account _account;
+        private static readonly Config Cfg = new Config();
 
         private static void Main(string[] args)
         {
-            if (File.Exists("key.txt"))
-                _apiKey = File.ReadAllText("key.txt");
+            Console.Title = "Donation Bot by sne4kyFox";
+            Console.WriteLine("Welcome to the donation bot!");
+            Console.WriteLine(
+                "By using this software you agree to the terms in \"license.txt\".");
 
-            if (string.IsNullOrEmpty(_apiKey))
+            Cfg.Reload();
+
+            if (string.IsNullOrEmpty(Cfg.config.apikey))
             {
-                Console.WriteLine("Fatal error: Api key was missing. Please put your API key in \"key.txt\".");
-                File.Create("key.txt").Close();
+                Console.WriteLine("Fatal error: API key is missing. Please fill in the API key field in \"config.cfg\"");
                 Console.ReadLine();
                 Environment.Exit(-1);
             }
 
-            Console.Write("Username: ");
-            _user = Console.ReadLine();
+            _apiKey = Cfg.config.apikey;
+            _machineAuth = Cfg.config.steamMachineAuth;
 
-            Console.Write("Password: ");
-            _pass = Console.ReadLine();
-
-            if (File.Exists("auth.txt"))
-                _machineAuth = File.ReadAllText("auth.txt");
-            else
-                File.Create("auth.txt").Close();
-
-            if (string.IsNullOrEmpty(_machineAuth))
+            if (string.IsNullOrEmpty(Cfg.config.username) || string.IsNullOrEmpty(Cfg.config.password))
             {
-                if(!Web.DoLogin(_user, _pass, ref _account))
-                {
-                    Console.WriteLine("Web login failed, please try again with a correct username/password pair!");
-                    Console.ReadLine();
-                    Environment.Exit(-1);
-                }
-                _machineAuth = Web.SteamMachineAuth;
-                File.WriteAllText("auth.txt", _machineAuth);
+                Console.WriteLine("Please input your username and password.");
+
+                Console.Write("Username: ");
+                _user = Console.ReadLine();
+
+                Console.Write("Password: ");
+                _pass = Console.ReadLine();
             }
             else
             {
-                if (!Web.DoLogin(_user, _pass, ref _account, _machineAuth))
-                {
-                    Console.WriteLine("Web login failed, please try again with a correct username/password pair!");
-                    Console.ReadLine();
-                    Environment.Exit(-1);
-                }
+                _user = Cfg.config.username;
+                _pass = Cfg.config.password;
             }
 
-            _account.AddMachineAuthCookies(_machineAuth);
+            Console.WriteLine("Attempting web login...");
+
+            _account = Web.DoLogin(_user, _pass, Cfg.config.steamMachineAuth);
+
+            Console.WriteLine("Login was successful!");
 
             PollOffers();
         }
 
         private static void PollOffers()
         {
+            Console.WriteLine("Polling offers every ten seconds.");
+
             bool isPolling = true;
 
             var offerHandler = new EconServiceHandler(_apiKey);
             var marketHandler = new MarketHandler();
+
             marketHandler.EligibilityCheck(_account.SteamId, _account.AuthContainer);
                 //required to perform trades (?). Checks to see whether or not we're allowed to trade.
 
@@ -79,7 +77,7 @@ namespace DonationBot
                     {"get_received_offers", "1"},
                     {"active_only", "1"},
                     {"time_historical_cutoff", "999999999999"}
-                    //arbitrarily high number to prevent old offers from appearing
+                    //arbitrarily high number to retrieve latest offers
                 };
 
                 var offers = offerHandler.GetTradeOffers(recData).trade_offers_received;
@@ -101,6 +99,7 @@ namespace DonationBot
                         Console.WriteLine("Refused a \"donation\" that would have taken items from us.");
                     }
                 }
+                Thread.Sleep(10000);
             }
         }
     }
