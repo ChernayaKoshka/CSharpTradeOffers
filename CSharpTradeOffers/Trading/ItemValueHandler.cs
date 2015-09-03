@@ -15,9 +15,9 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class ItemValueHandler
     {
-        private static string _path;
-        private static string _apiKey;
-        //private static InventoryHandler _inventoryHandler;
+        private readonly string _path;
+
+        private readonly string _apiKey;
 
         public static ValuedItemsRoot ValuedItems;
 
@@ -25,7 +25,6 @@ namespace CSharpTradeOffers.Trading
         {
             _path = path;
             _apiKey = apiKey;
-            //_inventoryHandler = InventoryHandler;
 
             if (File.Exists(_path)) throw new Exception("Path not found.");
 
@@ -41,6 +40,7 @@ namespace CSharpTradeOffers.Trading
             sb.Append("  \"Items\": [\r\n");
             sb.Append("    {\r\n");
             sb.Append("      \"name\": \"scrap\",\r\n");
+            sb.Append("      \"appid\": 440,\r\n");
             sb.Append("      \"typeid\": 4,\r\n");
             sb.Append("      \"typeobj\": \"weapon\",\r\n");
             sb.Append("      \"side\":0,\r\n");
@@ -48,6 +48,7 @@ namespace CSharpTradeOffers.Trading
             sb.Append("      \"worth\": [\r\n");
             sb.Append("        {\r\n");
             sb.Append("          \"name\": \"scrap\",\r\n");
+            sb.Append("          \"appid\": 440,\r\n");
             sb.Append("          \"typeid\": 1,\r\n");
             sb.Append("          \"typeobj\": \"scrap metal\",\r\n");
             sb.Append("          \"amount\": 1\r\n");
@@ -69,11 +70,11 @@ namespace CSharpTradeOffers.Trading
 
         public TradeOffer CreateCompatibleOffer(CEconTradeOffer offer, ref InventoryHandler myInventoryHandler, ref InventoryHandler theirInventoryHandler)
         {
-            TradeOffer compatibleOffer = new TradeOffer();
+            var compatibleOffer = new TradeOffer();
 
             foreach (CEconAsset cEconAsset in offer.items_to_give)
             {
-                List<CEconAsset> assetsToAdd = FindCompatibleAssets(cEconAsset, ref myInventoryHandler, 1);
+                List<CEconAsset> assetsToAdd = FindCompatibleAssets(cEconAsset, ref myInventoryHandler, TradeSide.Me);
 
                 if (assetsToAdd == null) return null;
 
@@ -83,7 +84,7 @@ namespace CSharpTradeOffers.Trading
 
             foreach (CEconAsset cEconAsset in offer.items_to_receive)
             {
-                List<CEconAsset> assetsToAdd = FindCompatibleAssets(cEconAsset, ref theirInventoryHandler, 2);
+                List<CEconAsset> assetsToAdd = FindCompatibleAssets(cEconAsset, ref theirInventoryHandler, TradeSide.Them);
 
                 if (assetsToAdd == null) return null;
 
@@ -95,12 +96,12 @@ namespace CSharpTradeOffers.Trading
         }
 
         //needs to support side
-        public List<CEconAsset> FindCompatibleAssets(CEconAsset asset, ref InventoryHandler inventoryHandler, int side) //side : 0 = anyone, 1 = us, 2 = them
+        public List<CEconAsset> FindCompatibleAssets(CEconAsset asset, ref InventoryHandler inventoryHandler, TradeSide side) //side : 0 = anyone, 1 = us, 2 = them
         {
             List<CEconAsset> compatibleAssets = null;
             foreach (ValuedItem valuedItem in ValuedItems.Items)
             {
-                if (valuedItem.side != side && valuedItem.side != 0) continue; //which side should we be searching?
+                if (valuedItem.side != (int)side && valuedItem.side != (int)TradeSide.None) continue; //which side should we be searching?
                 bool done = false;
 
                 switch (valuedItem.typeid)
@@ -166,12 +167,12 @@ namespace CSharpTradeOffers.Trading
                             }
                         break;
                     case 4: //tag category match TODO: REDO
-                        var handler = new SteamEconomyHandler();
+                        var handler = new SteamEconomyHandler(_apiKey);
                         var IDs = new Dictionary<string, string>
                         {
                             {asset.classid, asset.instanceid}
                         };
-                        AssetClassInfo assetClassInfo = handler.GetAssetClassInfo(_apiKey, Convert.ToUInt32(asset.appid),
+                        AssetClassInfo assetClassInfo = handler.GetAssetClassInfo(Convert.ToUInt32(asset.appid),
                             IDs);
 
                         foreach (Tag tag in assetClassInfo.tags.Values.Where(tag => tag.category == valuedItem.typeobj)) //useless?
