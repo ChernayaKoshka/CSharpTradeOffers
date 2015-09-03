@@ -10,19 +10,25 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class InventoryHandler
     {
-        //private readonly Config _config;
-        //private Account _account;
         private readonly ulong _steamId;
+
         private readonly string _apiKey;
 
         public InventoryHandler(ulong steamId, string apiKey)
         {
             _steamId = steamId;
             _apiKey = apiKey;
+            Inventories = new Dictionary<uint, Inventory>();
         }
 
+        public Dictionary<uint, Inventory> Inventories { get; }
 
-        public Dictionary<uint, Inventory> Inventories = new Dictionary<uint, Inventory>();
+        public void RefreshInventories(uint[] appids)
+        {
+            Inventories.Clear();
+            foreach (uint appid in appids.Where(appid => !Inventories.ContainsKey(appid)))
+                Inventories.Add(appid, new Inventory(_steamId, appid));
+        }
 
         //predicate
         private static bool BeingUsed(rgInventory_Item rgInventoryItem)
@@ -34,7 +40,7 @@ namespace CSharpTradeOffers.Trading
         /// Locates an Item in the inventory.
         /// </summary>
         /// <param name="assetToFind">Specifies search params.</param>
-        /// <returns></returns>
+        /// <returns>An item matching the params</returns>
         public Item FindUnusedItem(ItemValueHandler.ValuedWorth assetToFind)
         {
             Inventory inv = Inventories[assetToFind.appid];
@@ -60,14 +66,14 @@ namespace CSharpTradeOffers.Trading
                         return item;
                     return null;
                 case 4: //tags
-                    var handler = new SteamEconomyHandler();
+                    var handler = new SteamEconomyHandler(_apiKey);
                     foreach (var item in inv.Items.Values)
                     {
                         Dictionary<string, string> classid = new Dictionary<string, string>
                         {
                             {item.classid, null}
                         };
-                        AssetClassInfo info = handler.GetAssetClassInfo(_apiKey, Convert.ToUInt32(item.appid), classid);
+                        AssetClassInfo info = handler.GetAssetClassInfo(Convert.ToUInt32(item.appid), classid);
                         foreach (var tag in info.tags.Values)
                         {
                             if (tag.name == assetToFind.typeobj)
@@ -84,10 +90,9 @@ namespace CSharpTradeOffers.Trading
             return null;
         }
 
-
-        /// <param name="marketHashName"></param>
-        /// <param name="appid"></param>
-        /// <returns></returns>
+        /// <param name="marketHashName">Name to search</param>
+        /// <param name="appid">Appid of the inventory to search</param>
+        /// <returns>A list of items whose market_hash_name contains marketHashName</returns>
         public List<Item> FindUnusedItems(string marketHashName, uint appid)
         {
             Inventory inv = Inventories[appid];
@@ -118,17 +123,6 @@ namespace CSharpTradeOffers.Trading
             return inv.Items[assetToFind.classid];
         }
 
-        ///// <summary>
-        /// Marks the inUse bool of the specified asset.
-        /// </summary>
-        /// <param name="me"></param>
-        /// <param name="inUse"></param>
-        //public void MarkMyAssets(Me me, bool inUse)
-        //{
-        //    foreach (var asset in me.assets)
-        //        Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
-        //}
-
         /// <summary>
         /// Marks the inUse bool of the assets specified in the trade offer.
         /// </summary>
@@ -149,26 +143,7 @@ namespace CSharpTradeOffers.Trading
         {
             foreach (var asset in offer.me.assets)
                 Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
-        }
-
-        /// <summary>
-        /// Reloads all of the inventories belonging to a specified steamid64. The inventories to refresh are specified in the config file.
-        /// </summary>
-        /// <param name="steamId"></param>
-        //public void RefreshInventories(ulong steamId)
-        //{
-        //    Inventories.Clear();
-        //    foreach (uint appid in _config.Cfg.Inventories)
-        //        Inventories.Add(appid, new Inventory(steamId, appid));
-        //}
-
-        public void RefreshInventories(uint[] appids)
-        {
-            Inventories.Clear();
-            foreach (uint appid in appids)
-                if(!Inventories.ContainsKey(appid))
-                Inventories.Add(appid, new Inventory(_steamId, appid));
-        }
+        } 
 
         /// <summary>
         /// Requests decimal worth of an Item.
@@ -182,7 +157,6 @@ namespace CSharpTradeOffers.Trading
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
             return Convert.ToDecimal(mv.median_price.Substring(1));
         }
-
 
         /// <param name="marketable"></param>
         /// <param name="appid"></param>
