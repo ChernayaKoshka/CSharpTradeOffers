@@ -11,6 +11,12 @@ namespace CSharpTradeOffers.Trading
     public class SteamEconomyHandler
     {
         private const string BaseUrl = "https://api.steampowered.com/ISteamEconomy/";
+        private readonly string _apiKey;
+
+        public SteamEconomyHandler(string apiKey)
+        {
+            _apiKey = apiKey;
+        }
 
         /// <summary>
         /// Gets the asset class info of an item, must provide ClassID/InstanceID in IDs
@@ -19,12 +25,12 @@ namespace CSharpTradeOffers.Trading
         /// <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
         /// <param name="IDs">Dictionary MUST contain ClassID/InstanceID of item.</param>
         /// <returns></returns>
-        public AssetClassInfo GetAssetClassInfo(string apiKey, uint appid, Dictionary<string, string> IDs)
+        public AssetClassInfo GetAssetClassInfo(uint appid, Dictionary<string, string> IDs)
         {
             const string url = BaseUrl + "GetAssetClassInfo/v0001/";
             var data = new Dictionary<string, string>
             {
-                {"key", apiKey},
+                {"key", _apiKey},
                 {"appid", appid.ToString()},
                 {"class_count", IDs.Count.ToString()}
             };
