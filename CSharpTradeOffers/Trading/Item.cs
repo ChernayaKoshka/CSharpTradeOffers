@@ -41,28 +41,5 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         [JsonIgnore]
         public decimal worth { get; set; }
-
-        #region old
-        /*public decimal Worth()
-        {
-            if (tradable != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(0, 1));
-        }*/
-        /*/// <summary>
-        /// Gets the market_hash_name of the item.
-        /// </summary>
-        /// <param name="apiKey">The bot's API key.</param>
-        /// <returns>The market_hash_name of the item.</returns>
-        public string GetMarketHashName(string apiKey)
-        {
-            var handler = new ISteamEconomyHandler();
-            var data = new Dictionary<string, string> {{classid, "0"}};
-            AssetClassInfo info =
-                handler.ToAssetClassInfo(handler.GetAssetClassInfo(apiKey, Convert.ToUInt32(appid), data).result);
-            return info.market_hash_name;
-        }*/
-        #endregion
     }
 }
