@@ -193,10 +193,13 @@ namespace CSharpTradeOffers
             CookieCollection cookieCollection;
             string steamGuardText = "";
             string steamGuardId = "";
+            string twoFactorText = "";
+
             do
             {
                 bool captcha = loginJson != null && loginJson.captcha_needed;
                 bool steamGuard = loginJson != null && loginJson.emailauth_needed;
+                bool twoFactor = loginJson != null && loginJson.requires_twofactor;
 
                 var time = Uri.EscapeDataString(rsaHelper.RsaJson.timestamp);
                 var capGid = "-1";
@@ -208,7 +211,6 @@ namespace CSharpTradeOffers
                 {
                     {"password", encryptedBase64Password},
                     {"username", username},
-                    {"twofactorcode", ""},
                     {"loginfriendlyname", ""},
                     {"rememberlogin", "false"}
                 };
@@ -237,6 +239,15 @@ namespace CSharpTradeOffers
                 data.Add("emailsteamid", steamGuardId);
                 // SteamGuard end
 
+                //TwoFactor
+                if (twoFactor)
+                {
+                    Console.WriteLine("TwoFactor code required: ");
+                    twoFactorText = Uri.EscapeDataString(Console.ReadLine());
+                }
+
+                data.Add("twofactorcode", twoFactor ? twoFactorText : "");
+
                 data.Add("rsatimestamp", time);
 
                 CookieContainer cc = null;
@@ -258,7 +269,7 @@ namespace CSharpTradeOffers
                         cookieCollection = webResponse.Cookies;
                     }
                 }
-            } while (loginJson.captcha_needed || loginJson.emailauth_needed);
+            } while (loginJson.captcha_needed || loginJson.emailauth_needed || loginJson.requires_twofactor);
 
             Account account;
 
