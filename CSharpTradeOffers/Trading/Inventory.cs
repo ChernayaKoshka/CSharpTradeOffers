@@ -8,46 +8,6 @@ namespace CSharpTradeOffers.Trading
     public class Inventory
     {
         private readonly ulong _steamId;
-        #region old, remove later + fix
-        /// <summary>
-        /// Requests decimal worth of an Item.
-        /// </summary>
-        /// <param name="item">An Item object to get the value of.</param>
-        /// <returns>A decimal worth in USD.</returns>
-        public decimal ItemWorth(Item item)
-        {
-            if (item.tradable != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
-        }
-
-
-        /// <param name="tradable"></param>
-        /// <param name="appid"></param>
-        /// <param name="marketHashName"></param>
-        /// <returns></returns>
-        public decimal ItemWorth(bool tradable, uint appid, string marketHashName)
-        {
-            if (tradable.IntValue() != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
-        }
-
-
-        /// <param name="tradable"></param>
-        /// <param name="appid"></param>
-        /// <param name="marketHashName"></param>
-        /// <returns></returns>
-        public decimal ItemWorth(int tradable, uint appid, string marketHashName)
-        {
-            if (tradable != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
-        }
-        #endregion
 
         /// <summary>
         /// Class constructor, automatically initializes inventory.
@@ -86,9 +46,15 @@ namespace CSharpTradeOffers.Trading
         {
             dynamic inventoryJson = RequestInventory(appId);
 
-            if(inventoryJson.success == null) throw new InventoryException("Inventory request was not successful. 'success' field was null.");
-            if (inventoryJson.success != true && inventoryJson.Error != null) throw new InventoryException("Inventory request was not successful. 'success' field was false. Error Message: " + inventoryJson.Error.ToString());
-            if(inventoryJson.success != true) throw new InventoryException("Inventory request was not successsful. 'success' field was false. Likely cause: No items in inventory.");
+            if (inventoryJson.success == null)
+                throw new InventoryException("Inventory request was not successful. 'success' field was null.");
+            if (inventoryJson.success != true && inventoryJson.Error != null)
+                throw new InventoryException(
+                    "Inventory request was not successful. 'success' field was false. Error Message: " +
+                    inventoryJson.Error.ToString());
+            if (inventoryJson.success != true)
+                throw new InventoryException(
+                    "Inventory request was not successsful. 'success' field was false. Likely cause: No items in inventory.");
 
             dynamic rgInventory = inventoryJson.rgInventory;
             dynamic rgDescriptions = inventoryJson.rgDescriptions;
@@ -138,6 +104,43 @@ namespace CSharpTradeOffers.Trading
         }
 
         /// <summary>
+        /// Requests decimal worth of an Item.
+        /// </summary>
+        /// <param name="item">An Item object to get the value of.</param>
+        /// <returns>A decimal worth in USD.</returns>
+        public decimal ItemWorth(Item item)
+        {
+            if (item.tradable != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
+            return Convert.ToDecimal(mv.median_price.Substring(1)); //skips $ symbol
+        }
+        
+        /// <param name="tradable"></param>
+        /// <param name="appid"></param>
+        /// <param name="marketHashName"></param>
+        /// <returns></returns>
+        public decimal ItemWorth(bool tradable, uint appid, string marketHashName)
+        {
+            if (tradable.IntValue() != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
+            return Convert.ToDecimal(mv.median_price.Substring(1));
+        }
+
+        /// <param name="tradable"></param>
+        /// <param name="appid"></param>
+        /// <param name="marketHashName"></param>
+        /// <returns></returns>
+        public decimal ItemWorth(int tradable, uint appid, string marketHashName)
+        {
+            if (tradable != 1) return 0.0m;
+            var handler = new MarketHandler();
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
+            return Convert.ToDecimal(mv.median_price.Substring(1));
+        }
+
+        /// <summary>
         /// Finds the first rgInventory_Item that is not in use.
         /// </summary>
         /// <param name="classid">ClassId of items to search.</param>
@@ -155,9 +158,8 @@ namespace CSharpTradeOffers.Trading
         /// <returns>True if successful, false if not.</returns>
         public bool MarkAsset(CEconAsset asset, bool inUse)
         {
-            foreach (rgInventory_Item item in Items[asset.classid].items)
+            foreach (rgInventory_Item item in Items[asset.classid].items.Where(item => item.id.ToString() == asset.assetid))
             {
-                if (item.id.ToString() != asset.assetid) continue;
                 item.inUse = inUse;
                 return true;
             }
