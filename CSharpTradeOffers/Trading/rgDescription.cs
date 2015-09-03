@@ -7,7 +7,6 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class rgDescription
     {
-
         public string appid { get; set; }
 
         public string classid { get; set; }

@@ -457,25 +457,6 @@
             <param name="timeLastVisit">Unix time for historical cutoff.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(CSharpTradeOffers.Trading.Item)">
-            <summary>
-            Requests decimal worth of an Item.
-            </summary>
-            <param name="item">An Item object to get the value of.</param>
-            <returns>A decimal worth in USD.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Boolean,System.UInt32,System.String)">
-            <param name="tradable"></param>
-            <param name="appid"></param>
-            <param name="marketHashName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Int32,System.UInt32,System.String)">
-            <param name="tradable"></param>
-            <param name="appid"></param>
-            <param name="marketHashName"></param>
-            <returns></returns>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.Inventory.#ctor(System.UInt64,System.UInt32)">
             <summary>
             Class constructor, automatically initializes inventory.
@@ -503,6 +484,25 @@
             <param name="steamId">steamId64 of the inventory to request.</param>
             <param name="appId">App ID of the inventory to request.</param>
         </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(CSharpTradeOffers.Trading.Item)">
+            <summary>
+            Requests decimal worth of an Item.
+            </summary>
+            <param name="item">An Item object to get the value of.</param>
+            <returns>A decimal worth in USD.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Boolean,System.UInt32,System.String)">
+            <param name="tradable"></param>
+            <param name="appid"></param>
+            <param name="marketHashName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Int32,System.UInt32,System.String)">
+            <param name="tradable"></param>
+            <param name="appid"></param>
+            <param name="marketHashName"></param>
+            <returns></returns>
+        </member>
         <member name="M:CSharpTradeOffers.Trading.Inventory.FindAvailableAsset(System.String)">
             <summary>
             Finds the first rgInventory_Item that is not in use.
@@ -518,13 +518,6 @@
             <param name="inUse">Value to set</param>
             <returns>True if successful, false if not.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryException.#ctor(System.String)">
-            <param name="message"></param>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryException.#ctor(System.String,System.Exception)">
-            <param name="message"></param>
-            <param name="inner"></param>
-        </member>
         <member name="T:CSharpTradeOffers.Trading.InventoryHandler">
             <summary>
             Handles Inventory-Related tasks for a specific account.
@@ -535,12 +528,12 @@
             Locates an Item in the inventory.
             </summary>
             <param name="assetToFind">Specifies search params.</param>
-            <returns></returns>
+            <returns>An item matching the params</returns>
         </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItems(System.String,System.UInt32)">
-            <param name="marketHashName"></param>
-            <param name="appid"></param>
-            <returns></returns>
+            <param name="marketHashName">Name to search</param>
+            <param name="appid">Appid of the inventory to search</param>
+            <returns>A list of items whose market_hash_name contains marketHashName</returns>
         </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItem(CSharpTradeOffers.Trading.CEconAsset,CSharpTradeOffers.Trading.Inventory)">
             <summary>
@@ -570,12 +563,6 @@
             </summary>
             <param name="offer">TradeOffer to mark.</param>
             <param name="inUse">Bool to set.</param>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt32[])">
-            <summary>
-            Reloads all of the inventories belonging to a specified steamid64. The inventories to refresh are specified in the config file.
-            </summary>
-            <param name="steamId"></param>
         </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.ItemWorth(CSharpTradeOffers.Trading.Item)">
             <summary>
@@ -660,7 +647,7 @@
             Handles Steam Economy related tasks, like retrieving class info
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.GetAssetClassInfo(System.String,System.UInt32,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.GetAssetClassInfo(System.UInt32,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Gets the asset class info of an item, must provide ClassID/InstanceID in IDs
             </summary>

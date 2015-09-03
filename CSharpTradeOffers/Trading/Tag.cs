@@ -2,7 +2,6 @@ namespace CSharpTradeOffers.Trading
 {
     public class Tag
     {
-
         public string internal_name { get; set; }
 
         public string name { get; set; }

@@ -81,6 +81,7 @@
     <Compile Include="Trading\EconServiceHandler.cs" />
     <Compile Include="Trading\EResult.cs" />
     <Compile Include="Trading\ETradeOfferState.cs" />
+    <Compile Include="Trading\ETradeSide.cs" />
     <Compile Include="Trading\GetTradeOffersSummaryBaseResponse.cs" />
     <Compile Include="Trading\GetTradeOffersSummaryResponse.cs" />
     <Compile Include="Trading\Inventory.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Trading\InventoryHandler.cs" />
     <Compile Include="Trading\Item.cs" />
     <Compile Include="Trading\MarketValue.cs" />
-    <Compile Include="Trading\Me.cs" />
     <Compile Include="Trading\Offer.cs" />
     <Compile Include="Trading\rgDescription.cs" />
     <Compile Include="Trading\rgInventory_Item.cs" />
@@ -100,7 +100,6 @@
     <Compile Include="SteamID.cs" />
     <Compile Include="Trading\ItemValueHandler.cs" />
     <Compile Include="Trading\Tag.cs" />
-    <Compile Include="Trading\Them.cs" />
     <Compile Include="Trading\TradeId.cs" />
     <Compile Include="Trading\TradeOffer.cs" />
     <Compile Include="Trading\TradeOffers.cs" />

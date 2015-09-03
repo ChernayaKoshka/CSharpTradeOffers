@@ -5,7 +5,6 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "RootObject")]
     public class TradeOffer
     {
-
         public bool newversion = true;
 
         public int version = 2;
