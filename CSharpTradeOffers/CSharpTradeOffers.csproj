@@ -61,6 +61,8 @@
     <Compile Include="Community\PlayerBans.cs" />
     <Compile Include="Community\PlayersSummaries.cs" />
     <Compile Include="Community\PlayerSummary.cs" />
+    <Compile Include="Community\PrivacySettings.cs" />
+    <Compile Include="Community\Profile.cs" />
     <Compile Include="Community\ResolveVanityUrlBaseResult.cs" />
     <Compile Include="Community\ResolveVanityUrlResult.cs" />
     <Compile Include="Community\ResponseV2.cs" />

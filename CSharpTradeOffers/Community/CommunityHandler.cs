@@ -226,5 +226,75 @@ namespace CSharpTradeOffers.Community
 
             return membersList;
         }
+
+        /// <summary>
+        /// Sets the user's public profile settings to the exact settings specified in
+        /// the Profile object.
+        /// </summary>
+        /// <param name="profile">The object to specify the new profile data.</param>
+        /// <param name="account">The account of the profile to modify.</param>
+        /// <returns>Bool depending on the success of the request.</returns>
+        public bool SetProfile(Profile profile, Account account) //implement Settings as an interface!
+        {
+            string url = "https://steamcommunity.com/profiles/" + account.SteamId + "/edit";
+
+            string sessionid =
+                (from Cookie cookie in account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                    where cookie.Name == "sessionid"
+                    select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"type", Profile.type},
+                {"weblink_1_title", profile.weblink_1_title},
+                {"weblink_1_url", profile.weblink_1_url},
+                {"weblink_2_title", profile.weblink_2_title},
+                {"weblink_2_url", profile.weblink_2_url},
+                {"weblink_3_title", profile.weblink_3_title},
+                {"weblink_3_url", profile.weblink_3_url},
+                {"personaName", profile.personaName},
+                {"real_name", profile.real_name},
+                {"country", profile.country},
+                {"state", profile.state},
+                {"city", profile.city},
+                {"customURL", profile.customURL},
+                {"summary", profile.summary},
+                {"favorite_badge_badgeid", profile.favorite_badge_badgeid.ToString()},
+                {"favorite_badge_communityitemid", profile.favorite_badge_communityitemid.ToString()},
+                {"primary_group_steamid", profile.primary_group_steamid.ToString()}
+            };
+
+            string response = Web.Fetch(url, "POST", data, account.AuthContainer);
+            return response.Contains("<div class=\"saved_changes_msg\">");
+        }
+
+        /// <summary>
+        /// Sets the privacy settings of the account.
+        /// </summary>
+        /// <param name="settings">Settings to set.</param>
+        /// <param name="account">Account of settings to change.</param>
+        public void SetPrivacySettings(PrivacySettings settings, Account account) //implement settings as an interface later!
+        {
+            string url = "https://steamcommunity.com/profiles/" + account.SteamId + "/edit/settings";
+
+            string sessionid =
+                (from Cookie cookie in account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                    where cookie.Name == "sessionid"
+                    select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"type", PrivacySettings.type},
+                {"privacySetting", ((int) settings.privacySetting).ToString()},
+                {"commentSetting", PrivacySettings.EPrivacySettingToCommentSetting(settings.commentSetting)},
+                {"inventoryPrivacySetting", ((int) settings.InventoryPrivacySetting).ToString()},
+                {"inventoryGiftPrivacy", settings.inventoryGiftPrivacy.IntValue().ToString()},
+                {"tradeConfirmationSetting", settings.tradeConfirmationSetting.IntValue().ToString()},
+                {"marketConfirmationSetting", settings.marketConfirmationSetting.IntValue().ToString()}
+            };
+            Web.Fetch(url, "POST", data, account.AuthContainer);
+        }
     }
 }

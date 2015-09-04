@@ -143,6 +143,22 @@
             <param name="groupName">The name of the group to request information about.</param>
             <returns>A List of the memberList object.</returns>
         </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.SetProfile(CSharpTradeOffers.Community.Profile,CSharpTradeOffers.Account)">
+            <summary>
+            Sets the user's public profile settings to the exact settings specified in
+            the Profile object.
+            </summary>
+            <param name="profile">The object to specify the new profile data.</param>
+            <param name="account">The account of the profile to modify.</param>
+            <returns>Bool depending on the success of the request.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.SetPrivacySettings(CSharpTradeOffers.Community.PrivacySettings,CSharpTradeOffers.Account)">
+            <summary>
+            Sets the privacy settings of the account.
+            </summary>
+            <param name="settings">Settings to set.</param>
+            <param name="account">Account of settings to change.</param>
+        </member>
         <member name="T:CSharpTradeOffers.Community.SteamUserHandler">
             <summary>
             Handles steam user related tasks.
