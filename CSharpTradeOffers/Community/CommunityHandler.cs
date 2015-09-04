@@ -22,8 +22,7 @@ namespace CSharpTradeOffers.Community
         /// <returns>A CommentResponse object.</returns>
         public CommentResponse PostComment(ulong steamId, string comment, CookieContainer authContainer)
         {
-            string url = "https://steamcommunity.com/comment/Profile/post/{0}/-1/";
-            url = string.Format(url, steamId);
+            string url = "https://steamcommunity.com/comment/Profile/post/" + steamId + "/-1/";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
                 where cookie.Name == "sessionid"
@@ -38,6 +37,34 @@ namespace CSharpTradeOffers.Community
             return
                 JsonConvert.DeserializeObject<CommentResponse>(Web.Fetch(url, "POST", data, authContainer, true,
                     url.Substring(0, url.Length - 3)));
+        }
+
+        /// <summary>
+        /// Posts a comment to the specified clan.
+        /// </summary>
+        /// <param name="clanId">SteamID64 of the clan to post the comment to.</param>
+        /// <param name="comment">The comment to post.</param>
+        /// <param name="authContainer">Authcontainer of the user to post from.</param>
+        /// <param name="count">Almost certainly useless and never needs to be touched.
+        /// I assume that it is the member count but it can be null, non-existant, or any number under the sun.</param>
+        /// <returns>A ClanCommentResponse object.</returns>
+        public ClanCommentResponse PostClanComment(ulong clanId, string comment, CookieContainer authContainer,
+            int count = 0)
+        {
+            string url = "http://steamcommunity.com/comment/Clan/post/" + clanId + "/-1/";
+
+            string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"comment", comment},
+                {"count", count.ToString()},
+                {"sessionid", sessionid}
+            };
+
+            return JsonConvert.DeserializeObject<ClanCommentResponse>(Web.Fetch(url, "POST", data, authContainer));
         }
 
         /// <summary>
@@ -91,7 +118,7 @@ namespace CSharpTradeOffers.Community
             };
             return JsonConvert.DeserializeObject<MultiInviteResponse>(Web.Fetch(url, "POST", data, authContainer));
         }
-        
+
         /// <summary>
         /// Converts an array of SteamId64s to an array of the format ["0","1"]
         /// </summary>
@@ -140,7 +167,9 @@ namespace CSharpTradeOffers.Community
         /// Requests group information as well as all pages of users.
         /// </summary>
         /// <param name="groupId">The SteamId64 of the group to request information about.</param>
-        /// <returns>A List of the memberList object.</returns>
+        /// <param name="retryWait">The number of miliseconds to wait between each retry.</param>
+        /// <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
+        /// <returns>A List of the MemberList object.</returns>
         public List<MemberList> RequestAllMemberLists(ulong groupId, int retryWait = 1000, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
@@ -157,7 +186,8 @@ namespace CSharpTradeOffers.Community
                 try
                 {
                     var populatedList = (MemberList)
-                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait, retryCount, temp, "GET")));
+                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait, retryCount,
+                            temp, "GET")));
                     membersList.Add(populatedList);
                     if (!firstRequest)
                     {
@@ -185,7 +215,9 @@ namespace CSharpTradeOffers.Community
         /// Requests group information as well as the all pages of users.
         /// </summary>
         /// <param name="groupName">The name of the group to request information about.</param>
-        /// <returns>A List of the memberList object.</returns>
+        /// <param name="retryWait">The number of miliseconds to wait between each retry.</param>
+        /// <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
+        /// <returns>A List of the MemberList object.</returns>
         public List<MemberList> RequestAllMemberLists(string groupName, int retryWait = 1000, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
@@ -202,7 +234,8 @@ namespace CSharpTradeOffers.Community
                 try
                 {
                     var populatedList = (MemberList)
-                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait , retryCount, temp, "GET")));
+                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait, retryCount,
+                            temp, "GET")));
                     membersList.Add(populatedList);
 
                     if (!firstRequest)
@@ -274,7 +307,8 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="settings">Settings to set.</param>
         /// <param name="account">Account of settings to change.</param>
-        public void SetPrivacySettings(PrivacySettings settings, Account account) //implement settings as an interface later!
+        public void SetPrivacySettings(PrivacySettings settings, Account account)
+            //implement settings as an interface later!
         {
             string url = "https://steamcommunity.com/profiles/" + account.SteamId + "/edit/settings";
 

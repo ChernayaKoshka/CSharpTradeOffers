@@ -88,6 +88,17 @@
             <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A CommentResponse object.</returns>
         </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostClanComment(System.UInt64,System.String,System.Net.CookieContainer,System.Int32)">
+            <summary>
+            Posts a comment to the specified clan.
+            </summary>
+            <param name="clanId">SteamID64 of the clan to post the comment to.</param>
+            <param name="comment">The comment to post.</param>
+            <param name="authContainer">Authcontainer of the user to post from.</param>
+            <param name="count">Almost certainly useless and never needs to be touched.
+            I assume that it is the member count but it can be null, non-existant, or any number under the sun.</param>
+            <returns>A ClanCommentResponse object.</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.UInt64,System.Net.CookieContainer)">
             <summary>
             Invites the specified user to a group.
@@ -134,14 +145,18 @@
             Requests group information as well as all pages of users.
             </summary>
             <param name="groupId">The SteamId64 of the group to request information about.</param>
-            <returns>A List of the memberList object.</returns>
+            <param name="retryWait">The number of miliseconds to wait between each retry.</param>
+            <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
+            <returns>A List of the MemberList object.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestAllMemberLists(System.String,System.Int32,System.Int32)">
             <summary>
             Requests group information as well as the all pages of users.
             </summary>
             <param name="groupName">The name of the group to request information about.</param>
-            <returns>A List of the memberList object.</returns>
+            <param name="retryWait">The number of miliseconds to wait between each retry.</param>
+            <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
+            <returns>A List of the MemberList object.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.SetProfile(CSharpTradeOffers.Community.Profile,CSharpTradeOffers.Account)">
             <summary>

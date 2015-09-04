@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Community\ClanCommentResponse.cs" />
     <Compile Include="Community\CommentResponse.cs" />
     <Compile Include="Community\Friend.cs" />
     <Compile Include="Community\Friendslist.cs" />
