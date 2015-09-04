@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
@@ -60,7 +61,7 @@ namespace CSharpTradeOffers.Community
                 {"type", "groupInvite"},
                 {"group", group.ToString()},
                 {"sessionID", sessionid},
-                {"invitee_list", ToJArray(new[] {steamId})}
+                {"invitee", steamId.ToString()}
             };
             return JsonConvert.DeserializeObject<InviteResponse>(Web.Fetch(url, "POST", data, authContainer));
         }
@@ -140,24 +141,42 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="groupId">The SteamId64 of the group to request information about.</param>
         /// <returns>A List of the memberList object.</returns>
-        public List<MemberList> RequestAllMemberLists(ulong groupId)
+        public List<MemberList> RequestAllMemberLists(ulong groupId, int retryWait = 1000, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1&p={1}";
 
-            MemberList populatedList;
             ulong count = 1;
+            ulong totalPages = 1;
+            bool firstRequest = false;
 
             do
             {
                 string temp = string.Format(url, groupId, count);
 
-                populatedList =
-                    (MemberList) (new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(temp, "GET")));
-                membersList.Add(populatedList);
+                try
+                {
+                    var populatedList = (MemberList)
+                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait, retryCount, temp, "GET")));
+                    membersList.Add(populatedList);
+                    if (!firstRequest)
+                    {
+                        firstRequest = true;
+                        totalPages = populatedList.totalPages;
+                    }
+                }
+                catch (WebException)
+                {
+                    membersList.Add(null);
+                }
+                catch (NullReferenceException)
+                {
+                    membersList.Add(null);
+                }
+                Thread.Sleep(1000);
 
                 count++;
-            } while (populatedList.totalPages >= count);
+            } while (totalPages >= count);
 
             return membersList;
         }
@@ -167,25 +186,43 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="groupName">The name of the group to request information about.</param>
         /// <returns>A List of the memberList object.</returns>
-        public List<MemberList> RequestAllMemberLists(string groupName)
+        public List<MemberList> RequestAllMemberLists(string groupName, int retryWait = 1000, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
             groupName = groupName.Replace(" ", "");
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1&p={1}";
 
-            MemberList populatedList;
             ulong count = 1;
-
+            ulong totalPages = 1;
+            bool firstRequest = false;
             do
             {
                 string temp = string.Format(url, groupName, count);
 
-                populatedList =
-                    (MemberList) (new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(temp, "GET")));
-                membersList.Add(populatedList);
+                try
+                {
+                    var populatedList = (MemberList)
+                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait , retryCount, temp, "GET")));
+                    membersList.Add(populatedList);
+
+                    if (!firstRequest)
+                    {
+                        firstRequest = true;
+                        totalPages = populatedList.totalPages;
+                    }
+                }
+                catch (WebException)
+                {
+                    membersList.Add(null);
+                }
+                catch (NullReferenceException)
+                {
+                    membersList.Add(null);
+                }
+                Thread.Sleep(1000);
 
                 count++;
-            } while (populatedList.totalPages >= count);
+            } while (totalPages >= count);
 
             return membersList;
         }
