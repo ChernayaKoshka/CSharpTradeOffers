@@ -118,7 +118,7 @@ namespace CSharpTradeOffers
         /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
-        public static string RetryFetch(string url, string method, Dictionary<string, string> data = null,
+        public static string RetryFetch(int retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             int attempts = 0;
@@ -135,10 +135,42 @@ namespace CSharpTradeOffers
                 }
                 catch (WebException)
                 {
-                    if (attempts >= 5)
+                    if (attempts >= retryCount)
                         return null;
                     attempts++;
                 }
+                Thread.Sleep(retryWait);
+            }
+        }
+
+        /// <summary>
+        /// A web method to return the response string from the URL.
+        /// </summary>
+        /// <param name="url">The URL to request.</param>
+        /// <param name="method">The method to be used. Ex: POST</param>
+        /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+        /// <param name="cookies">A cookiecontainer with cookies to send.</param>
+        /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+        /// <param name="referer">Sets the referrer for the request.</param>
+        /// <returns>A string from the response stream.</returns>
+        public static Stream RetryFetchStream(int retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        {
+            int attempts = 0;
+            while (true)
+            {
+                try
+                {
+                    return Request(url, method, data, cookies, xHeaders, referer).GetResponseStream();
+
+                }
+                catch (WebException)
+                {
+                    if (attempts >= retryCount)
+                        return null;
+                    attempts++;
+                }
+                Thread.Sleep(retryWait);
             }
         }
 
@@ -177,7 +209,6 @@ namespace CSharpTradeOffers
             return joined;
         }
 
-        #region from JC96
         /// <summary>
         /// Executes the login by using the Steam Website.
         /// </summary> 
@@ -219,8 +250,9 @@ namespace CSharpTradeOffers
                 if (captcha)
                 {
                     System.Diagnostics.Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.captcha_gid);
+                    Console.WriteLine("Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.");
                     Console.Write("Please enter the numbers/letters from the picture that opened up: ");
-                    capText = Uri.EscapeDataString(Console.ReadLine());
+                    capText = Console.ReadLine();
                 }
 
                 data.Add("captchagid", captcha ? capGid : "");
@@ -231,7 +263,7 @@ namespace CSharpTradeOffers
                 if (steamGuard)
                 {
                     Console.Write("SteamGuard code required: ");
-                    steamGuardText = Uri.EscapeDataString(Console.ReadLine());
+                    steamGuardText = Console.ReadLine();
                     steamGuardId = loginJson.emailsteamid;
                 }
 
@@ -243,7 +275,7 @@ namespace CSharpTradeOffers
                 if (twoFactor)
                 {
                     Console.WriteLine("TwoFactor code required: ");
-                    twoFactorText = Uri.EscapeDataString(Console.ReadLine());
+                    twoFactorText = Console.ReadLine();
                 }
 
                 data.Add("twofactorcode", twoFactor ? twoFactorText : "");
@@ -275,7 +307,7 @@ namespace CSharpTradeOffers
 
             if (loginJson.emailsteamid != null)
                 account = new Account(Convert.ToUInt64(loginJson.emailsteamid));
-            else if (loginJson.transfer_parameters.steamid != null)
+            else if (loginJson.transfer_parameters?.steamid != null)
                 account = new Account(Convert.ToUInt64(loginJson.transfer_parameters.steamid));
             else
                 return null;
@@ -331,7 +363,6 @@ namespace CSharpTradeOffers
 
             w.GetResponse().Close();
         }
-        #endregion
 
         public class RsaHelper
         {
