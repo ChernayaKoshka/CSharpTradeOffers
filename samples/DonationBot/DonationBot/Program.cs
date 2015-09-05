@@ -9,12 +9,11 @@ namespace DonationBot
     internal class Program
     {
         private static string _user, _pass;
-        private static string _machineAuth;
         private static string _apiKey;
         private static Account _account;
         private static readonly Config Cfg = new Config();
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             Console.Title = "Donation Bot by sne4kyFox";
             Console.WriteLine("Welcome to the donation bot!");
@@ -31,7 +30,6 @@ namespace DonationBot
             }
 
             _apiKey = Cfg.config.apikey;
-            _machineAuth = Cfg.config.steamMachineAuth;
 
             if (string.IsNullOrEmpty(Cfg.config.username) || string.IsNullOrEmpty(Cfg.config.password))
             {
