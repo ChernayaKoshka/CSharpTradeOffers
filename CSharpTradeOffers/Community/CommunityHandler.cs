@@ -68,6 +68,77 @@ namespace CSharpTradeOffers.Community
         }
 
         /// <summary>
+        /// Sends a friend request to the specified user.
+        /// </summary>
+        /// <param name="steamId">SteamId64 of the user to add.</param>
+        /// <param name="authContainer">Auth container of the user.</param>
+        /// <returns>An AddFriendResponse object.</returns>
+        public AddFriendResponse AddFriend(ulong steamId, CookieContainer authContainer)
+        {
+            string url = "https://steamcommunity.com/actions/AddFriendAjax";
+
+            string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                                where cookie.Name == "sessionid"
+                                select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"steamid", steamId.ToString()},
+                {"accept_invite", "0"}
+            };
+
+            return JsonConvert.DeserializeObject<AddFriendResponse>(Web.Fetch(url, "POST", data, authContainer));
+        }
+
+        /// <summary>
+        /// Accepts a friend request.
+        /// </summary>
+        /// <param name="steamId">SteamId64 of the person who sent the request.</param>
+        /// <param name="authContainer">Auth container of the user.</param>
+        /// <returns>Boolean representing the success of the function.</returns>
+        public bool AcceptFriendRequest(ulong steamId, CookieContainer authContainer)
+        {
+            string url = "https://steamcommunity.com/actions/AddFriendAjax";
+
+            string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                                where cookie.Name == "sessionid"
+                                select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"steamid", steamId.ToString()},
+                {"accept_invite","1" }
+            };
+
+            return Convert.ToBoolean(Web.Fetch(url, "POST", data, authContainer));
+        }
+
+        /// <summary>
+        /// Removes a friend.
+        /// </summary>
+        /// <param name="steamId">SteamId64 of the friend to remove.</param>
+        /// <param name="authContainer">Auth container of the user.</param>
+        /// <returns>Bollean representing the successs of the function.</returns>
+        public bool RemoveFriend(ulong steamId, CookieContainer authContainer)
+        {
+            string url = "https://steamcommunity.com/actions/RemoveFriendAjax";
+
+            string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                                where cookie.Name == "sessionid"
+                                select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"steamid", steamId.ToString()},
+            };
+
+            return Convert.ToBoolean(Web.Fetch(url, "POST", data, authContainer));
+        }
+
+        /// <summary>
         /// Invites the specified user to a group.
         /// </summary>
         /// <param name="steamId">The SteamId64 of the person to invite.</param>

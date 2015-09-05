@@ -99,6 +99,30 @@
             I assume that it is the member count but it can be null, non-existant, or any number under the sun.</param>
             <returns>A ClanCommentResponse object.</returns>
         </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AddFriend(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Sends a friend request to the specified user.
+            </summary>
+            <param name="steamId">SteamId64 of the user to add.</param>
+            <param name="authContainer">Auth container of the user.</param>
+            <returns>An AddFriendResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AcceptFriendRequest(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Accepts a friend request.
+            </summary>
+            <param name="steamId">SteamId64 of the person who sent the request.</param>
+            <param name="authContainer">Auth container of the user.</param>
+            <returns>Boolean representing the success of the function.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RemoveFriend(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Removes a friend.
+            </summary>
+            <param name="steamId">SteamId64 of the friend to remove.</param>
+            <param name="authContainer">Auth container of the user.</param>
+            <returns>Bollean representing the successs of the function.</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.UInt64,System.Net.CookieContainer)">
             <summary>
             Invites the specified user to a group.
