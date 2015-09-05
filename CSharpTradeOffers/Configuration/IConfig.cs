@@ -1,6 +1,6 @@
 ﻿namespace CSharpTradeOffers.Configuration
 {
-    interface IConfig
+    public interface IConfig
     {
         RootConfig Reload();
         void WriteChanges(RootConfig toWrite);
