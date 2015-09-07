@@ -440,7 +440,7 @@
             ex: [leftarrow]"get_sent_offers","1"[rightarrow]. Please note, [leftarrow] and [rightarrow] correspond to the keys on the keyboard.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffer(System.String,System.String)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffer(System.UInt64,System.String)">
             <summary>
             Requests a single trade offer based on the tradeofferid.
             </summary>
@@ -448,14 +448,14 @@
             <param name="language">The language to use. Default: english</param>
             <returns>A CEConTradeOffer object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.DeclineTradeOffer(System.String)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.DeclineTradeOffer(System.UInt64)">
             <summary>
             Declines a trade offer that was sent to you.
             </summary>
             <param name="tradeofferid">The ID of the offer to decline.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CancelTradeOffer(System.String)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CancelTradeOffer(System.UInt64)">
             <summary>
             Cancels a trade offer based on the specified tradeofferid.
             </summary>
@@ -782,25 +782,40 @@
             Helps with conversion operations
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertAccountIdtoUInt64(System.UInt32)">
-            <param name="accountid"></param>
-            <returns></returns>
+        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertAccountIdToUlong(System.UInt32)">
+            <summary>
+            Converts an AccountId to a SteamId64.
+            </summary>
+            <param name="accountId">AccountId to convert.</param>
+            <returns>SteamId64 derived from AccountId</returns>
         </member>
         <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertAccountIdToSteamId(System.UInt32)">
-            <param name="accountid"></param>
-            <returns></returns>
+            <summary>
+            Covnerts an AccountId to a SteamId
+            </summary>
+            <param name="accountId">AccountId to convert to a SteamId</param>
+            <returns>A string in the format of STEAM_0:0:0000000</returns>
         </member>
-        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertSteamIdtoULong(System.String)">
-            <param name="sid"></param>
-            <returns></returns>
+        <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertSteamIdToUlong(System.String)">
+            <summary>
+            Converts a SteamId to a SteamId64
+            </summary>
+            <param name="steamId">SteamId to convert to a SteamId64</param>
+            <returns>A SteamId64.</returns>
         </member>
         <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertUlongToSteamId(System.UInt64)">
-            <param name="steamid"></param>
-            <returns></returns>
+            <summary>
+            Converts a SteamId64 into a SteamId.
+            </summary>
+            <param name="steamId">SteamId64 to convert.</param>
+            <returns>A string in the format of STEAM_0:0:0000000</returns>
         </member>
         <member name="M:CSharpTradeOffers.SteamIdOperations.ConvertSteamIdToAccountId(System.String)">
-            <param name="steamid"></param>
-            <returns></returns>
+            <summary>
+            Converts a SteamId into an AccountId
+            </summary>
+            <param name="steamId">SteamId to convert.</param>
+            <returns>An AccountId</returns>
         </member>
         <member name="T:CSharpTradeOffers.Web">
             <summary>
