@@ -106,7 +106,7 @@ namespace CSharpTradeOffers.Trading
                 {"sessionid", Web.SessionId},
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.tradeid.ToString()},
-                {"partner", SteamIdOperations.ConvertAccountIdtoUInt64(partnerId).ToString()},
+                {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
                 {"captcha", ""}
             };
             return
@@ -132,7 +132,7 @@ namespace CSharpTradeOffers.Trading
                 {"sessionid", Web.SessionId},
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.ToString()},
-                {"partner", SteamIdOperations.ConvertAccountIdtoUInt64(partnerId).ToString()},
+                {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
                 {"captcha", ""}
             };
             return

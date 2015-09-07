@@ -7,45 +7,57 @@ namespace CSharpTradeOffers
     /// </summary>
     public class SteamIdOperations
     {
-
-        /// <param name="accountid"></param>
-        /// <returns></returns>
-        public static ulong ConvertAccountIdtoUInt64(uint accountid)
+        /// <summary>
+        /// Converts an AccountId to a SteamId64.
+        /// </summary>
+        /// <param name="accountId">AccountId to convert.</param>
+        /// <returns>SteamId64 derived from AccountId</returns>
+        public static ulong ConvertAccountIdToUlong(uint accountId)
         {
-            return ConvertSteamIdtoULong(ConvertAccountIdToSteamId(accountid));
+            return ConvertSteamIdToUlong(ConvertAccountIdToSteamId(accountId));
         }
 
 
-        /// <param name="accountid"></param>
-        /// <returns></returns>
-        public static string ConvertAccountIdToSteamId(uint accountid)
+        /// <summary>
+        /// Covnerts an AccountId to a SteamId
+        /// </summary>
+        /// <param name="accountId">AccountId to convert to a SteamId</param>
+        /// <returns>A string in the format of STEAM_0:0:0000000</returns>
+        public static string ConvertAccountIdToSteamId(uint accountId)
         {
-            return $"STEAM_0:{accountid & 1}:{accountid >> 1}";
+            return $"STEAM_0:{accountId & 1}:{accountId >> 1}";
         }
 
-
-        /// <param name="sid"></param>
-        /// <returns></returns>
-        public static ulong ConvertSteamIdtoULong(string sid)
+        /// <summary>
+        /// Converts a SteamId to a SteamId64
+        /// </summary>
+        /// <param name="steamId">SteamId to convert to a SteamId64</param>
+        /// <returns>A SteamId64.</returns>
+        public static ulong ConvertSteamIdToUlong(string steamId)
         {
-            string[] split = sid.Split(':');
+            string[] split = steamId.Split(':');
             return Convert.ToUInt64((Convert.ToInt32(split[2])*2) + (76561197960265728 + Convert.ToInt32(split[1])));
         }
 
 
-        /// <param name="steamid"></param>
-        /// <returns></returns>
-        public static string ConvertUlongToSteamId(ulong steamid)
+        /// <summary>
+        /// Converts a SteamId64 into a SteamId.
+        /// </summary>
+        /// <param name="steamId">SteamId64 to convert.</param>
+        /// <returns>A string in the format of STEAM_0:0:0000000</returns>
+        public static string ConvertUlongToSteamId(ulong steamId)
         {
-            return $"Steam_0:{(steamid%2)}:{((steamid - (76561197960265728 + (steamid%2)))/2)}";
+            return $"STEAM_0:{(steamId%2)}:{((steamId - (76561197960265728 + (steamId%2)))/2)}";
         }
 
-
-        /// <param name="steamid"></param>
-        /// <returns></returns>
-        public static uint ConvertSteamIdToAccountId(string steamid)
+        /// <summary>
+        /// Converts a SteamId into an AccountId
+        /// </summary>
+        /// <param name="steamId">SteamId to convert.</param>
+        /// <returns>An AccountId</returns>
+        public static uint ConvertSteamIdToAccountId(string steamId)
         {
-            string[] split = steamid.Split(':');
+            string[] split = steamId.Split(':');
             return Convert.ToUInt32(split[2]) << 1;
         }
     }
