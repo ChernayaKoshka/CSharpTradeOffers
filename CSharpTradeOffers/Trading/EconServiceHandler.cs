@@ -105,13 +105,8 @@ namespace CSharpTradeOffers.Trading
             {
                 {"sessionid", Web.SessionId},
                 {"serverid", serverid},
-<<<<<<< HEAD
                 {"tradeofferid", tradeId.TradeId.ToString()},
-                {"partner", SteamIdOperations.ConvertAccountIdtoUInt64(partnerId).ToString()},
-=======
-                {"tradeofferid", tradeId.tradeid.ToString()},
                 {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
->>>>>>> upstream/master
                 {"captcha", ""}
             };
             return
