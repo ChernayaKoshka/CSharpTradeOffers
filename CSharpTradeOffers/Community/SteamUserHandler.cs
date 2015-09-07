@@ -37,7 +37,7 @@ namespace CSharpTradeOffers.Community
             };
             return
                 JsonConvert.DeserializeObject<GetFriendListResult>(Web.Fetch(url, "GET", data, null, false))
-                    .friendslist.friends;
+                    .Friendslist.Friends;
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace CSharpTradeOffers.Community
                 {"steamids", CommaDelimit(playersBansToRequest)}
             };
             return
-                JsonConvert.DeserializeObject<GetPlayerBansResult>(Web.Fetch(url, "GET", data, null, false)).playersbans;
+                JsonConvert.DeserializeObject<GetPlayerBansResult>(Web.Fetch(url, "GET", data, null, false)).PlayerBans;
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace CSharpTradeOffers.Community
             };
             return
                 JsonConvert.DeserializeObject<ResolveVanityUrlBaseResult>(Web.Fetch(url, "GET", data, null, false))
-                    .response;
+                    .Response;
         }
 
         static string CommaDelimit(List<ulong> toDelimit)

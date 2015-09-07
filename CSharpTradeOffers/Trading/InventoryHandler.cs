@@ -31,9 +31,9 @@ namespace CSharpTradeOffers.Trading
         }
 
         //predicate
-        private static bool BeingUsed(rgInventory_Item rgInventoryItem)
+        private static bool BeingUsed(RgInventoryItem rgInventoryItem)
         {
-            return rgInventoryItem.inUse;
+            return rgInventoryItem.InUse;
         }
 
         /// <summary>
@@ -43,26 +43,26 @@ namespace CSharpTradeOffers.Trading
         /// <returns>An item matching the params</returns>
         public Item FindUnusedItem(ItemValueHandler.ValuedWorth assetToFind)
         {
-            Inventory inv = Inventories[assetToFind.appid];
-            switch (assetToFind.typeid)
+            Inventory inv = Inventories[assetToFind.AppId];
+            switch (assetToFind.TypeId)
             {
                 case 0: //exact
-                    foreach (Item item in inv.Items.Values.Where(item => item.market_hash_name == assetToFind.typeobj).Where(item => !item.items.TrueForAll(BeingUsed)))
+                    foreach (Item item in inv.Items.Values.Where(item => item.MarketHashName == assetToFind.TypeObj).Where(item => !item.Items.TrueForAll(BeingUsed)))
                         return item;
                     break;
                 case 1: //contains
-                    foreach (Item item in inv.Items.Values.Where(item => item.market_hash_name.ToLower().Contains(assetToFind.typeobj)).Where(item => !item.items.TrueForAll(BeingUsed)))
+                    foreach (Item item in inv.Items.Values.Where(item => item.MarketHashName.ToLower().Contains(assetToFind.TypeObj)).Where(item => !item.Items.TrueForAll(BeingUsed)))
                         return item;
                     break;
                 case 2: //startswirth
-                    foreach (Item item in inv.Items.Values.Where(item => item.market_hash_name.ToLower().StartsWith(assetToFind.typeobj)).Where(item => !item.items.TrueForAll(BeingUsed)))
+                    foreach (Item item in inv.Items.Values.Where(item => item.MarketHashName.ToLower().StartsWith(assetToFind.TypeObj)).Where(item => !item.Items.TrueForAll(BeingUsed)))
                         return item;
                     break;
                 case 3: //classid
                     foreach (
                         Item item in
                             inv.Items.Values.Where(
-                                item => item.classid == assetToFind.typeobj && item.items.TrueForAll(BeingUsed)))
+                                item => item.ClassId == assetToFind.TypeObj && item.Items.TrueForAll(BeingUsed)))
                         return item;
                     return null;
                 case 4: //tags
@@ -71,14 +71,14 @@ namespace CSharpTradeOffers.Trading
                     {
                         Dictionary<string, string> classid = new Dictionary<string, string>
                         {
-                            {item.classid, null}
+                            {item.ClassId, null}
                         };
-                        AssetClassInfo info = handler.GetAssetClassInfo(Convert.ToUInt32(item.appid), classid);
-                        foreach (var tag in info.tags.Values)
+                        AssetClassInfo info = handler.GetAssetClassInfo(Convert.ToUInt32(item.AppId), classid);
+                        foreach (var tag in info.Tags.Values)
                         {
-                            if (tag.name == assetToFind.typeobj)
+                            if (tag.Name == assetToFind.TypeObj)
                             {
-                                if (!item.items.TrueForAll(BeingUsed)) return item;
+                                if (!item.Items.TrueForAll(BeingUsed)) return item;
                                 break;
                             }
                         }
@@ -96,7 +96,7 @@ namespace CSharpTradeOffers.Trading
         public List<Item> FindUnusedItems(string marketHashName, uint appid)
         {
             Inventory inv = Inventories[appid];
-            List<Item> items = inv.Items.Values.Where(item => item.market_hash_name.ToLower().Contains(marketHashName) && !item.items.TrueForAll(BeingUsed)).ToList();
+            List<Item> items = inv.Items.Values.Where(item => item.MarketHashName.ToLower().Contains(marketHashName) && !item.Items.TrueForAll(BeingUsed)).ToList();
             return items;
         }
 
@@ -109,7 +109,7 @@ namespace CSharpTradeOffers.Trading
         public Item FindUnusedItem(CEconAsset assetToFind, Inventory inv)
         {
             //Inventory inv = Inventories[Convert.ToUInt32(assetToFind.appid)];
-            return inv.Items[assetToFind.classid];
+            return inv.Items[assetToFind.ClassId];
         }
 
         /// <summary>
@@ -119,8 +119,8 @@ namespace CSharpTradeOffers.Trading
         /// <returns></returns>
         public Item FindFirstItem(CEconAsset assetToFind)
         {
-            Inventory inv = Inventories[Convert.ToUInt32(assetToFind.appid)];
-            return inv.Items[assetToFind.classid];
+            Inventory inv = Inventories[Convert.ToUInt32(assetToFind.AppId)];
+            return inv.Items[assetToFind.ClassId];
         }
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace CSharpTradeOffers.Trading
         /// <param name="inUse">Bool to set.</param>
         public void MarkMyAssets(CEconTradeOffer offer, bool inUse)
         {
-            foreach (CEconAsset asset in offer.items_to_give)
-                Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
+            foreach (CEconAsset asset in offer.ItemsToGive)
+                Inventories[Convert.ToUInt32(asset.AppId)].MarkAsset(asset, inUse);
         }
 
         /// <summary>
@@ -141,8 +141,8 @@ namespace CSharpTradeOffers.Trading
         /// <param name="inUse">Bool to set.</param>
         public void MarkMyAssets(TradeOffer offer, bool inUse)
         {
-            foreach (var asset in offer.me.assets)
-                Inventories[Convert.ToUInt32(asset.appid)].MarkAsset(asset, inUse);
+            foreach (var asset in offer.Me.Assets)
+                Inventories[Convert.ToUInt32(asset.AppId)].MarkAsset(asset, inUse);
         } 
 
         /// <summary>
@@ -152,10 +152,10 @@ namespace CSharpTradeOffers.Trading
         /// <returns>A decimal worth in USD.</returns>
         public decimal ItemWorth(Item item)
         {
-            if (item.tradable != 1) return 0.0m;
+            if (item.Tradable != 1) return 0.0m;
             var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.AppId), item.MarketHashName);
+            return Convert.ToDecimal(mv.MedianPrice.Substring(1));
         }
 
         /// <param name="marketable"></param>
@@ -167,7 +167,7 @@ namespace CSharpTradeOffers.Trading
             if (marketable.IntValue() != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
+            return Convert.ToDecimal(mv.MedianPrice.Substring(1));
         }
 
 
@@ -180,7 +180,7 @@ namespace CSharpTradeOffers.Trading
             if (marketable != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
+            return Convert.ToDecimal(mv.MedianPrice.Substring(1));
         }
     }
 }

@@ -2,12 +2,17 @@ using System.Collections.Generic;
 
 namespace CSharpTradeOffers.Trading
 {
-    public class Offer //NEEDS a better name
+    using Newtonsoft.Json;
+
+    public class Offer //ToDo: NEEDS a better name
     {
-        public List<CEconAsset> assets = new List<CEconAsset>();
+        [JsonProperty("assets")]
+        public List<CEconAsset> Assets = new List<CEconAsset>();
 
-        public List<object> currency = new List<object>();
+        [JsonProperty("currency")]
+        public List<object> Currency = new List<object>();
 
-        public bool ready = false;
+        [JsonProperty("ready")]
+        public bool Ready = false;
     }
 }

@@ -7,28 +7,40 @@ namespace CSharpTradeOffers.Trading
     public class CEconTradeOffer
     {
 
-        public string tradeofferid { get; set; }
+        [JsonProperty("tradeofferid")]
+        public string TradeofferId { get; set; }
 
-        public uint accountid_other { get; set; }
+        [JsonProperty("accountid_other")]
+        public uint AccountIdOther { get; set; }
 
-        public string message { get; set; }
+        [JsonProperty("message")]
+        public string Message { get; set; }
 
-        public int expiration_time { get; set; }
+        [JsonProperty("expiration_time")]
+        public int ExpirationTime { get; set; }
 
-        public int trade_offer_state { get; set; }
+        [JsonProperty("trade_offer_state")]
+        public int TradeOfferState { get; set; }
 
-        public List<CEconAsset> items_to_give { get; set; }
+        [JsonProperty("items_to_give")]
+        public List<CEconAsset> ItemsToGive { get; set; }
 
-        public List<CEconAsset> items_to_receive { get; set; }
+        [JsonProperty("items_to_receive")]
+        public List<CEconAsset> ItemsToReceive { get; set; }
 
-        public bool is_our_offer { get; set; }
+        [JsonProperty("is_our_offer")]
+        public bool IsOurOffer { get; set; }
 
-        public ulong time_created { get; set; }
+        [JsonProperty("time_created")]
+        public ulong TimeCreated { get; set; }
 
-        public ulong time_updated { get; set; }
+        [JsonProperty("time_updated")]
+        public ulong TimeUpdated { get; set; }
 
-        public string tradeid { get; set; }
+        [JsonProperty("tradeid")]
+        public string TradeId { get; set; }
 
-        public bool from_real_time_trade { get; set; }
+        [JsonProperty("from_real_time_trade")]
+        public bool FromRealTimeTrade { get; set; }
     }
 }

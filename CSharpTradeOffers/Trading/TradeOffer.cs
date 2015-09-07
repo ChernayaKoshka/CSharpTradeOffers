@@ -5,12 +5,16 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "RootObject")]
     public class TradeOffer
     {
-        public bool newversion = true;
+        [JsonProperty("newversion")]
+        public bool NewVersion = true;
 
-        public int version = 2;
+        [JsonProperty("version")]
+        public int Version = 2;
 
-        public Offer me = new Offer();
+        [JsonProperty("me")]
+        public Offer Me = new Offer();
 
-        public Offer them = new Offer();
+        [JsonProperty("them")]
+        public Offer Them = new Offer();
     }
 }

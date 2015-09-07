@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Trading
 {
-#pragma warning disable 1591
     /// <summary>
     /// DO. NOT. USE. Under heavy construction.
     /// </summary>
@@ -72,120 +71,120 @@ namespace CSharpTradeOffers.Trading
         {
             var compatibleOffer = new TradeOffer();
 
-            foreach (CEconAsset cEconAsset in offer.items_to_give)
+            foreach (CEconAsset cEconAsset in offer.ItemsToGive)
             {
                 List<CEconAsset> assetsToAdd = FindCompatibleAssets(cEconAsset, ref myInventoryHandler, TradeSide.Me);
 
                 if (assetsToAdd == null) return null;
 
                 foreach (CEconAsset econAsset in assetsToAdd)
-                    compatibleOffer.them.assets.Add(econAsset);
+                    compatibleOffer.Them.Assets.Add(econAsset);
             }
 
-            foreach (CEconAsset cEconAsset in offer.items_to_receive)
+            foreach (CEconAsset cEconAsset in offer.ItemsToReceive)
             {
                 List<CEconAsset> assetsToAdd = FindCompatibleAssets(cEconAsset, ref theirInventoryHandler, TradeSide.Them);
 
                 if (assetsToAdd == null) return null;
 
                 foreach (CEconAsset econAsset in assetsToAdd)
-                    compatibleOffer.me.assets.Add(econAsset);
+                    compatibleOffer.Me.Assets.Add(econAsset);
             }
 
             return compatibleOffer;
         }
 
         //needs to support side
-        public List<CEconAsset> FindCompatibleAssets(CEconAsset asset, ref InventoryHandler inventoryHandler, TradeSide side) //side : 0 = anyone, 1 = us, 2 = them
+        public List<CEconAsset> FindCompatibleAssets(CEconAsset asset, ref InventoryHandler inventoryHandler, TradeSide side) //side : 0 = anyone, 1 = us, 2 = Them
         {
             List<CEconAsset> compatibleAssets = null;
             foreach (ValuedItem valuedItem in ValuedItems.Items)
             {
-                if (valuedItem.side != (int)side && valuedItem.side != (int)TradeSide.None) continue; //which side should we be searching?
+                if (valuedItem.Side != (int)side && valuedItem.Side != (int)TradeSide.None) continue; //which side should we be searching?
                 bool done = false;
 
-                switch (valuedItem.typeid)
+                switch (valuedItem.TypeId)
                 {
                     case 0: //exact match
-                        if (asset.GetMarketHashName(_apiKey) != valuedItem.typeobj) break;
-                        foreach (ValuedWorth valuedWorth in valuedItem.worth)
+                        if (asset.GetMarketHashName(_apiKey) != valuedItem.TypeObj) break;
+                        foreach (ValuedWorth valuedWorth in valuedItem.Worth)
                         {
-                            for (int i = 0; i < valuedWorth.amount; i++)
+                            for (int i = 0; i < valuedWorth.Amount; i++)
                             {
-                                rgInventory_Item rgInventoryItem =
-                                    inventoryHandler.FindUnusedItem(valuedWorth).items.FirstOrDefault(x => !x.inUse);
+                                RgInventoryItem rgInventoryItem =
+                                    inventoryHandler.FindUnusedItem(valuedWorth).Items.FirstOrDefault(x => !x.InUse);
                                 if (rgInventoryItem == null) return null;
-                                CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.appid.ToString());
-                                inventoryHandler.Inventories[valuedWorth.appid].MarkAsset(toAdd, true);
+                                CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.AppId.ToString());
+                                inventoryHandler.Inventories[valuedWorth.AppId].MarkAsset(toAdd, true);
                                 compatibleAssets.Add(toAdd);
                             }
                         }
                         break;
                     case 1: //contains match
-                        if (asset.GetMarketHashName(_apiKey).Contains(valuedItem.typeobj)) break;
-                        foreach (ValuedWorth valuedWorth in valuedItem.worth)
+                        if (asset.GetMarketHashName(_apiKey).Contains(valuedItem.TypeObj)) break;
+                        foreach (ValuedWorth valuedWorth in valuedItem.Worth)
                         {
-                            for (int i = 0; i < valuedWorth.amount; i++)
+                            for (int i = 0; i < valuedWorth.Amount; i++)
                             {
-                                rgInventory_Item rgInventoryItem =
-                                    inventoryHandler.FindUnusedItem(valuedWorth).items.FirstOrDefault(x => !x.inUse);
+                                RgInventoryItem rgInventoryItem =
+                                    inventoryHandler.FindUnusedItem(valuedWorth).Items.FirstOrDefault(x => !x.InUse);
                                 if (rgInventoryItem == null) return null;
-                                CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.appid.ToString());
-                                inventoryHandler.Inventories[valuedWorth.appid].MarkAsset(toAdd, true);
+                                CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.AppId.ToString());
+                                inventoryHandler.Inventories[valuedWorth.AppId].MarkAsset(toAdd, true);
                                 compatibleAssets.Add(toAdd);
                             }
                         }
                         break;
                     case 2: //starts with match
-                        if (asset.GetMarketHashName(_apiKey).StartsWith(valuedItem.typeobj)) break;
-                        foreach (ValuedWorth valuedWorth in valuedItem.worth)
+                        if (asset.GetMarketHashName(_apiKey).StartsWith(valuedItem.TypeObj)) break;
+                        foreach (ValuedWorth valuedWorth in valuedItem.Worth)
                         {
-                            for (int i = 0; i < valuedWorth.amount; i++)
+                            for (int i = 0; i < valuedWorth.Amount; i++)
                             {
-                                rgInventory_Item rgInventoryItem =
-                                    inventoryHandler.FindUnusedItem(valuedWorth).items.FirstOrDefault(x => !x.inUse);
+                                RgInventoryItem rgInventoryItem =
+                                    inventoryHandler.FindUnusedItem(valuedWorth).Items.FirstOrDefault(x => !x.InUse);
                                 if (rgInventoryItem == null) return null;
-                                CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.appid.ToString());
-                                inventoryHandler.Inventories[valuedWorth.appid].MarkAsset(toAdd, true);
+                                CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.AppId.ToString());
+                                inventoryHandler.Inventories[valuedWorth.AppId].MarkAsset(toAdd, true);
                                 compatibleAssets.Add(toAdd);
                             }
                         }
                         break;
                     case 3: //direct class id match
-                        if (asset.classid == valuedItem.typeobj)
-                            foreach (ValuedWorth valuedWorth in valuedItem.worth)
+                        if (asset.ClassId == valuedItem.TypeObj)
+                            foreach (ValuedWorth valuedWorth in valuedItem.Worth)
                             {
-                                for (int i = 0; i < valuedWorth.amount; i++)
+                                for (int i = 0; i < valuedWorth.Amount; i++)
                                 {
-                                    rgInventory_Item rgInventoryItem =
-                                        inventoryHandler.FindUnusedItem(valuedWorth).items.FirstOrDefault(x => !x.inUse);
+                                    RgInventoryItem rgInventoryItem =
+                                        inventoryHandler.FindUnusedItem(valuedWorth).Items.FirstOrDefault(x => !x.InUse);
                                     if (rgInventoryItem == null) return null;
-                                    CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.appid.ToString());
-                                    inventoryHandler.Inventories[valuedWorth.appid].MarkAsset(toAdd, true);
+                                    CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.AppId.ToString());
+                                    inventoryHandler.Inventories[valuedWorth.AppId].MarkAsset(toAdd, true);
                                     compatibleAssets.Add(toAdd);
                                 }
                             }
                         break;
                     case 4: //tag category match TODO: REDO
                         var handler = new SteamEconomyHandler(_apiKey);
-                        var IDs = new Dictionary<string, string>
+                        var ids = new Dictionary<string, string>
                         {
-                            {asset.classid, asset.instanceid}
+                            {asset.ClassId, asset.InstanceId}
                         };
-                        AssetClassInfo assetClassInfo = handler.GetAssetClassInfo(Convert.ToUInt32(asset.appid),
-                            IDs);
+                        AssetClassInfo assetClassInfo = handler.GetAssetClassInfo(Convert.ToUInt32(asset.AppId),
+                            ids);
 
-                        foreach (Tag tag in assetClassInfo.tags.Values.Where(tag => tag.category == valuedItem.typeobj)) //useless?
+                        foreach (Tag tag in assetClassInfo.Tags.Values.Where(tag => tag.Category == valuedItem.TypeObj)) //useless?
                         {
-                            foreach (ValuedWorth valuedWorth in valuedItem.worth)
+                            foreach (ValuedWorth valuedWorth in valuedItem.Worth)
                             {
-                                for (int i = 0; i < valuedWorth.amount; i++)
+                                for (int i = 0; i < valuedWorth.Amount; i++)
                                 {
-                                    rgInventory_Item rgInventoryItem =
-                                        inventoryHandler.FindUnusedItem(valuedWorth).items.FirstOrDefault(x => !x.inUse);
+                                    RgInventoryItem rgInventoryItem =
+                                        inventoryHandler.FindUnusedItem(valuedWorth).Items.FirstOrDefault(x => !x.InUse);
                                     if (rgInventoryItem == null) return null;
-                                    CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.appid.ToString());
-                                    inventoryHandler.Inventories[valuedWorth.appid].MarkAsset(toAdd, true);
+                                    CEconAsset toAdd = rgInventoryItem.ToCEconAsset(valuedWorth.AppId.ToString());
+                                    inventoryHandler.Inventories[valuedWorth.AppId].MarkAsset(toAdd, true);
                                     compatibleAssets.Add(toAdd);
                                 }
                             }
@@ -214,29 +213,40 @@ namespace CSharpTradeOffers.Trading
         [JsonObject(Title = "Worth")]
         public class ValuedWorth //TODO: definitely need a better name
         {
-            public string name { get; set; }
-            public uint appid { get; set; }
-            public int typeid { get; set; }
-            public string typeobj { get; set; }
-            public int amount { get; set; }
+            [JsonProperty("name")]
+            public string Name { get; set; }
+            [JsonProperty("appid")]
+            public uint AppId { get; set; }
+            [JsonProperty("typeid")]
+            public int TypeId { get; set; }
+            [JsonProperty("typeobj")]
+            public string TypeObj { get; set; }
+            [JsonProperty("amount")]
+            public int Amount { get; set; }
         }
 
         [JsonObject(Title = "Item")]
         public class ValuedItem
         {
-            public string name { get; set; }
-            public int typeid { get; set; }
-            public string typeobj { get; set; }
-            public int side { get; set; }
-            public int amount { get; set; }
-            public List<ValuedWorth> worth { get; set; }
+            [JsonProperty("name")]
+            public string Name { get; set; }
+            [JsonProperty("typeid")]
+            public int TypeId { get; set; }
+            [JsonProperty("typeobj")]
+            public string TypeObj { get; set; }
+            [JsonProperty("side")]
+            public int Side { get; set; }
+            [JsonProperty("amount")]
+            public int Amount { get; set; }
+            [JsonProperty("worth")]
+            public List<ValuedWorth> Worth { get; set; }
         }
 
         [JsonObject(Title = "RootObject")]
         public class ValuedItemsRoot //need a better name?
         {
+            [JsonProperty("Items")] // ToDo: Items in camelcase? Was Uppercase before 
             public List<ValuedItem> Items { get; set; }
         }
-#pragma warning restore 1591
     }
 }

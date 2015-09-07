@@ -1,9 +1,13 @@
 namespace CSharpTradeOffers.Trading
 {
+    using Newtonsoft.Json;
+
     public class Action
     {
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public string link { get; set; }
+        [JsonProperty("link")]
+        public string Link { get; set; }
     }
 }

@@ -228,15 +228,15 @@ namespace CSharpTradeOffers
 
             do
             {
-                bool captcha = loginJson != null && loginJson.captcha_needed;
-                bool steamGuard = loginJson != null && loginJson.emailauth_needed;
-                bool twoFactor = loginJson != null && loginJson.requires_twofactor;
+                bool captcha = loginJson != null && loginJson.CaptchaNeeded;
+                bool steamGuard = loginJson != null && loginJson.EmailAuthNeeded;
+                bool twoFactor = loginJson != null && loginJson.RequiresTwofactor;
 
-                var time = Uri.EscapeDataString(rsaHelper.RsaJson.timestamp);
+                var time = Uri.EscapeDataString(rsaHelper.RsaJson.TimeStamp);
                 var capGid = "-1";
 
-                if (loginJson != null && loginJson.captcha_needed)
-                    capGid = Uri.EscapeDataString(loginJson.captcha_gid);
+                if (loginJson != null && loginJson.CaptchaNeeded)
+                    capGid = Uri.EscapeDataString(loginJson.CaptchaGid);
 
                 data = new Dictionary<string, string>
                 {
@@ -249,7 +249,7 @@ namespace CSharpTradeOffers
                 string capText = "";
                 if (captcha)
                 {
-                    System.Diagnostics.Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.captcha_gid);
+                    System.Diagnostics.Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.CaptchaGid);
                     Console.WriteLine("Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.");
                     Console.Write("Please enter the numbers/letters from the picture that opened up: ");
                     capText = Console.ReadLine();
@@ -264,7 +264,7 @@ namespace CSharpTradeOffers
                 {
                     Console.Write("SteamGuard code required: ");
                     steamGuardText = Console.ReadLine();
-                    steamGuardId = loginJson.emailsteamid;
+                    steamGuardId = loginJson.EmailSteamId;
                 }
 
                 data.Add("emailauth", steamGuardText);
@@ -301,18 +301,18 @@ namespace CSharpTradeOffers
                         cookieCollection = webResponse.Cookies;
                     }
                 }
-            } while (loginJson.captcha_needed || loginJson.emailauth_needed || loginJson.requires_twofactor);
+            } while (loginJson.CaptchaNeeded || loginJson.EmailAuthNeeded || loginJson.RequiresTwofactor);
 
             Account account;
 
-            if (loginJson.emailsteamid != null)
-                account = new Account(Convert.ToUInt64(loginJson.emailsteamid));
-            else if (loginJson.transfer_parameters?.steamid != null)
-                account = new Account(Convert.ToUInt64(loginJson.transfer_parameters.steamid));
+            if (loginJson.EmailSteamId != null)
+                account = new Account(Convert.ToUInt64(loginJson.EmailSteamId));
+            else if (loginJson.TransferParameters?.Steamid != null)
+                account = new Account(Convert.ToUInt64(loginJson.TransferParameters.Steamid));
             else
                 return null;
 
-            if (loginJson.success)
+            if (loginJson.Success)
             {
                 _cookies = new CookieContainer();
                 foreach (Cookie cookie in cookieCollection)
@@ -348,7 +348,7 @@ namespace CSharpTradeOffers
 
                 return account;
             }
-            Console.WriteLine("SteamWeb Error: " + loginJson.message);
+            Console.WriteLine("SteamWeb Error: " + loginJson.Message);
             return null;
         }
 
@@ -381,7 +381,7 @@ namespace CSharpTradeOffers
                 var data = new Dictionary<string, string> { { "username", _username } };
                 string response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", data);
                 GetRsaKey rsaJson = JsonConvert.DeserializeObject<GetRsaKey>(response);
-                if (!rsaJson.success) return false;
+                if (!rsaJson.Success) return false;
                 RsaJson = rsaJson;
                 return true;
             }
@@ -394,8 +394,8 @@ namespace CSharpTradeOffers
                 var rsa = new RSACryptoServiceProvider();
                 var rsaParameters = new RSAParameters
                 {
-                    Exponent = HexToByte(RsaJson.publickey_exp),
-                    Modulus = HexToByte(RsaJson.publickey_mod)
+                    Exponent = HexToByte(RsaJson.PublicKeyExp),
+                    Modulus = HexToByte(RsaJson.PublicKeyMod)
                 };
 
 
@@ -435,47 +435,57 @@ namespace CSharpTradeOffers
 
         public class GetRsaKey
         {
-            public bool success { get; set; }
-            public string publickey_mod { get; set; }
-            public string publickey_exp { get; set; }
-            public string timestamp { get; set; }
+            [JsonProperty("success")]
+            public bool Success { get; set; }
+            [JsonProperty("publickey_mod")]
+            public string PublicKeyMod { get; set; }
+            [JsonProperty("publickey_exp")]
+            public string PublicKeyExp { get; set; }
+            [JsonProperty("timestamp")]
+            public string TimeStamp { get; set; }
         }
         
-        //public class DoLoginResult
-        //{
-        //    public bool success { get; set; }
-        //    public bool requires_twofactor { get; set; }
-        //    public string message { get; set; }
-        //    public bool captcha_needed { get; set; }
-        //    public string captcha_gid { get; set; }
-        //    public bool emailauth_needed { get; set; }
-        //    public string emaildomain { get; set; }
-        //    public string emailsteamid { get; set; }
-        //}
 
         [JsonObject(Title = "RootObject")]
         public class DoLoginResult
         {
-            public bool success { get; set; }
-            public bool requires_twofactor { get; set; }
-            public string message { get; set; }
-            public bool captcha_needed { get; set; }
-            public string captcha_gid { get; set; }
-            public bool emailauth_needed { get; set; }
-            public string emaildomain { get; set; }
-            public string emailsteamid { get; set; }
-            public bool login_complete { get; set; }
-            public string transfer_url { get; set; }
-            public Transfer_Parameters transfer_parameters { get; set; }
+            [JsonProperty("success")]
+            public bool Success { get; set; }
+            [JsonProperty("requires_twofactor")]
+            public bool RequiresTwofactor { get; set; }
+            [JsonProperty("message")]
+            public string Message { get; set; }
+            [JsonProperty("captcha_needed")]
+            public bool CaptchaNeeded { get; set; }
+            [JsonProperty("captcha_gid")]
+            public string CaptchaGid { get; set; }
+            [JsonProperty("emailauth_needed")]
+            public bool EmailAuthNeeded { get; set; }
+            [JsonProperty("emaildomain")]
+            public string EmailDomain { get; set; }
+            [JsonProperty("emailsteamid")]
+            public string EmailSteamId { get; set; }
+            [JsonProperty("login_complete")]
+            public bool LoginComplete { get; set; }
+            [JsonProperty("transfer_url")]
+            public string TransferUrl { get; set; }
+            [JsonProperty("transfer_parameters")]
+            public TransferParameters TransferParameters { get; set; }
         }
 
-        public class Transfer_Parameters
+        [JsonObject(Title = "Transfer_Parameters")]
+        public class TransferParameters
         {
-            public string steamid { get; set; }
-            public string token { get; set; }
-            public string auth { get; set; }
-            public bool remember_login { get; set; }
-            public string token_secure { get; set; }
+            [JsonProperty("steamid")]
+            public string Steamid { get; set; }
+            [JsonProperty("token")]
+            public string Token { get; set; }
+            [JsonProperty("auth")]
+            public string Auth { get; set; }
+            [JsonProperty("remember_login")]
+            public bool RememberLogin { get; set; }
+            [JsonProperty("token_secure")]
+            public string TokenSecure { get; set; }
         }
     }
 }

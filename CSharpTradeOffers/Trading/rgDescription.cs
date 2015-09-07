@@ -2,51 +2,75 @@ using System.Collections.Generic;
 
 namespace CSharpTradeOffers.Trading
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Description object contained in the dynamic JSON returned by RequestInventory.
     /// </summary>
-    public class rgDescription
+    [JsonObject(Title = "rgDescription")]
+    public class RgDescription
     {
-        public string appid { get; set; }
+        [JsonProperty("appid")]
+        public string AppId { get; set; }
 
-        public string classid { get; set; }
+        [JsonProperty("classid")]
+        public string ClassId { get; set; }
 
-        public string instanceid { get; set; }
+        [JsonProperty("instanceid")]
+        public string InstanceId { get; set; }
 
-        public string icon_url { get; set; }
+        [JsonProperty("icon_url")]
+        public string IconUrl { get; set; }
 
-        public string icon_url_large { get; set; }
+        [JsonProperty("icon_url_large")]
+        public string IconUrlLarge { get; set; }
 
-        public string icon_drag_url { get; set; }
+        [JsonProperty("icon_drag_url")]
+        public string IconDragUrl { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public string market_hash_name { get; set; }
+        [JsonProperty("market_hash_name")]
+        public string MarketHashName { get; set; }
 
-        public string market_name { get; set; }
+        [JsonProperty("market_name")]
+        public string MarketName { get; set; }
 
-        public string name_color { get; set; }
+        [JsonProperty("name_color")]
+        public string NameColor { get; set; }
 
-        public string background_color { get; set; }
+        [JsonProperty("background_color")]
+        public string BackgroundColor { get; set; }
 
-        public string type { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        public int tradable { get; set; }
+        [JsonProperty("tradable")]
+        public int Tradable { get; set; }
 
-        public int marketable { get; set; }
+        [JsonProperty("marketable")]
+        public int Marketable { get; set; }
 
-        public int commodity { get; set; }
+        [JsonProperty("commodity")] // ToDo: spelled wrong? Needs to be checked
+        public int Commodity { get; set; }
 
-        public string market_tradable_restriction { get; set; }
+        [JsonProperty("market_tradable_restriction")]
+        public string MarketTradableRestriction { get; set; }
 
-        public string market_marketable_restriction { get; set; }
+        [JsonProperty("market_marketable_restriction")]
+        public string MarketMarketableRestriction { get; set; }
 
-        public List<Description> descriptions = new List<Description>();
+        [JsonProperty("descriptions")]
+        public List<Description> Descriptions = new List<Description>();
 
-        public List<Action> actions = new List<Action>();
+        [JsonProperty("actions")]
+        public List<Action> Actions = new List<Action>();
 
-        public List<Tag> tags = new List<Tag>();
+        [JsonProperty("tags")]
+        public List<Tag> Tags = new List<Tag>();
 
-        public AppData app_data { get; set; }
+        [JsonProperty("app_data")]
+        public AppData AppData { get; set; }
     }
 }

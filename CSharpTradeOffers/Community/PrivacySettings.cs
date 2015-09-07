@@ -2,17 +2,25 @@
 
 namespace CSharpTradeOffers.Community
 {
-#pragma warning disable 1591
+    using Newtonsoft.Json;
+
     public class PrivacySettings
 
     {
-        public const string type = "profileSettings";
-        public EPrivacySetting privacySetting { get; set; }
-        public EPrivacySetting commentSetting { get; set; } //commentselfonly,commentfriendsonly,commentanyone
+        [JsonProperty("type")]
+        public const string Type = "profileSettings";
+        [JsonProperty("privacySetting")]
+        public EPrivacySetting PrivacySetting { get; set; }
+        [JsonProperty("commentSetting")]
+        public EPrivacySetting CommentSetting { get; set; } //commentselfonly,commentfriendsonly,commentanyone
+        [JsonProperty("InventoryPrivacySetting")]
         public EPrivacySetting InventoryPrivacySetting { get; set; }
-        public bool inventoryGiftPrivacy { get; set; }
-        public bool tradeConfirmationSetting { get; set; }
-        public bool marketConfirmationSetting { get; set; }
+        [JsonProperty("inventoryGiftPrivacy")]
+        public bool InventoryGiftPrivacy { get; set; }
+        [JsonProperty("tradeConfirmationSetting")]
+        public bool TradeConfirmationSetting { get; set; }
+        [JsonProperty("marketConfirmationSetting")]
+        public bool MarketConfirmationSetting { get; set; }
 
         public static string EPrivacySettingToCommentSetting(EPrivacySetting setting)
         {
@@ -37,4 +45,3 @@ namespace CSharpTradeOffers.Community
         Public = 3
     }
 }
-#pragma warning restore 1591

@@ -1,15 +1,22 @@
 namespace CSharpTradeOffers.Trading
 {
+    using Newtonsoft.Json;
+
     public class Tag
     {
-        public string internal_name { get; set; }
+        [JsonProperty("internal_name")]
+        public string InternalName { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public string category { get; set; }
+        [JsonProperty("category")]
+        public string Category { get; set; }
 
-        public string color { get; set; }
+        [JsonProperty("color")]
+        public string Color { get; set; }
 
-        public string category_name { get; set; }
+        [JsonProperty("category_name")]
+        public string CategoryName { get; set; }
     }
 }

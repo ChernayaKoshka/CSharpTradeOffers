@@ -6,20 +6,28 @@ namespace CSharpTradeOffers.Trading
     public class GetTradeOffersSummaryResponse
     {
 
-        public int pending_received_count { get; set; }
+        [JsonProperty("pending_received_count")]
+        public int PendingReceivedCount { get; set; }
 
-        public int new_received_count { get; set; }
+        [JsonProperty("new_received_count")]
+        public int NewReceivedCount { get; set; }
 
-        public int updated_received_count { get; set; }
+        [JsonProperty("updated_received_count")]
+        public int UpdatedReceivedCount { get; set; }
 
-        public int historical_received_count { get; set; }
+        [JsonProperty("historical_received_count")]
+        public int HistoricalReceivedCount { get; set; }
 
-        public int pending_sent_count { get; set; }
+        [JsonProperty("pending_sent_count")]
+        public int PendingSentCount { get; set; }
 
-        public int newly_accepted_sent_count { get; set; }
+        [JsonProperty("newly_accepted_sent_count")]
+        public int NewlyAcceptedSentCount { get; set; }
 
-        public int updated_sent_count { get; set; }
+        [JsonProperty("updated_sent_count")]
+        public int UpdatedSentCount { get; set; }
 
-        public int historical_sent_count { get; set; }
+        [JsonProperty("historical_sent_count")]
+        public int HistoricalSentCount { get; set; }
     }
 }
