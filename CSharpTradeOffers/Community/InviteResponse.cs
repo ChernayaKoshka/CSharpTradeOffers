@@ -8,8 +8,11 @@ namespace CSharpTradeOffers.Community
     [JsonObject(Title = "RootObject")]
     public class InviteResponse
     {
-        public string results { get; set; }
-        public string groupId { get; set; }
-        public bool duplicate { get; set; }
+        [JsonProperty("results")]
+        public string Results { get; set; }
+        [JsonProperty("groupId")]
+        public string GroupId { get; set; }
+        [JsonProperty("duplicate")]
+        public bool Duplicate { get; set; }
     }
 }

@@ -6,8 +6,10 @@ namespace CSharpTradeOffers.Community
     [JsonObject(Title = "Response")]
     public class GetUserGroupListResult
     {
-        public bool success { get; set; }
+        [JsonProperty("success")]
+        public bool Success { get; set; }
 
-        public List<Group> groups { get; set; }
+        [JsonProperty("groups")]
+        public List<Group> Groups { get; set; }
     }
 }

@@ -66,20 +66,20 @@ namespace CSharpTradeOffers.Trading
                 {
                     var description = new Item
                     {
-                        appid = descriptionObj.appid,
-                        classid = descriptionObj.classid,
-                        market_hash_name = descriptionObj.market_hash_name,
-                        commodity = descriptionObj.commodity,
-                        marketable = descriptionObj.marketable,
-                        tradable = descriptionObj.tradable,
-                        worth =
+                        AppId = descriptionObj.appid,
+                        ClassId = descriptionObj.classid,
+                        MarketHashName = descriptionObj.market_hash_name,
+                        Commodity = descriptionObj.commodity,
+                        Marketable = descriptionObj.marketable,
+                        Tradable = descriptionObj.tradable,
+                        Worth =
                             ItemWorth(Convert.ToInt32(descriptionObj.tradable),
                                 Convert.ToUInt32(descriptionObj.appid),
                                 descriptionObj.market_hash_name.ToString())
                     };
 
-                    if (!Items.ContainsKey(description.classid))
-                        Items.Add(description.classid, description);
+                    if (!Items.ContainsKey(description.ClassId))
+                        Items.Add(description.ClassId, description);
                 }
                 catch (NullReferenceException)
                 {
@@ -91,15 +91,15 @@ namespace CSharpTradeOffers.Trading
             {
                 dynamic item = JsonConvert.DeserializeObject<dynamic>(obj.Value.ToString());
 
-                var inventoryItem = new rgInventory_Item
+                var inventoryItem = new RgInventoryItem
                 {
-                    amount = item.amount,
-                    classid = item.classid,
-                    id = item.id,
-                    instanceid = item.instanceid,
-                    pos = item.pos
+                    Amount = item.amount,
+                    ClassId = item.classid,
+                    Id = item.id,
+                    InstanceId = item.instanceid,
+                    Pos = item.pos
                 };
-                Items[inventoryItem.classid.ToString()].items.Add(inventoryItem);
+                Items[inventoryItem.ClassId.ToString()].Items.Add(inventoryItem);
             }
         }
 
@@ -110,10 +110,10 @@ namespace CSharpTradeOffers.Trading
         /// <returns>A decimal worth in USD.</returns>
         public decimal ItemWorth(Item item)
         {
-            if (item.tradable != 1) return 0.0m;
+            if (item.Tradable != 1) return 0.0m;
             var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.appid), item.market_hash_name);
-            return Convert.ToDecimal(mv.median_price.Substring(1)); //skips $ symbol
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.AppId), item.MarketHashName);
+            return Convert.ToDecimal(mv.MedianPrice.Substring(1)); //skips $ symbol
         }
         
         /// <param name="tradable"></param>
@@ -125,7 +125,7 @@ namespace CSharpTradeOffers.Trading
             if (tradable.IntValue() != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
+            return Convert.ToDecimal(mv.MedianPrice.Substring(1));
         }
 
         /// <param name="tradable"></param>
@@ -137,17 +137,17 @@ namespace CSharpTradeOffers.Trading
             if (tradable != 1) return 0.0m;
             var handler = new MarketHandler();
             MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.median_price.Substring(1));
+            return Convert.ToDecimal(mv.MedianPrice.Substring(1));
         }
 
         /// <summary>
-        /// Finds the first rgInventory_Item that is not in use.
+        /// Finds the first rgInventoryItem that is not in use.
         /// </summary>
         /// <param name="classid">ClassId of items to search.</param>
-        /// <returns>An rgInventory_Item that is not marked in use.</returns>
-        public rgInventory_Item FindAvailableAsset(string classid)
+        /// <returns>An rgInventoryItem that is not marked in use.</returns>
+        public RgInventoryItem FindAvailableAsset(string classid)
         {
-            return Items[classid].items.FirstOrDefault(item => !item.inUse);
+            return Items[classid].Items.FirstOrDefault(item => !item.InUse);
         }
 
         /// <summary>
@@ -158,9 +158,9 @@ namespace CSharpTradeOffers.Trading
         /// <returns>True if successful, false if not.</returns>
         public bool MarkAsset(CEconAsset asset, bool inUse)
         {
-            foreach (rgInventory_Item item in Items[asset.classid].items.Where(item => item.id.ToString() == asset.assetid))
+            foreach (RgInventoryItem item in Items[asset.ClassId].Items.Where(item => item.Id.ToString() == asset.AssetId))
             {
-                item.inUse = inUse;
+                item.InUse = inUse;
                 return true;
             }
             return false;

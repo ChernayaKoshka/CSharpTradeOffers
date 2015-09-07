@@ -6,22 +6,31 @@ namespace CSharpTradeOffers.Community
     public class CommentResponse
     {
 
-        public bool success { get; set; }
+        [JsonProperty("success")]
+        public bool Success { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public int start { get; set; }
+        [JsonProperty("start")]
+        public int Start { get; set; }
 
-        public string pagesize { get; set; }
+        [JsonProperty("pagesize")]
+        public string PageSize { get; set; }
 
-        public int total_count { get; set; }
+        [JsonProperty("total_count")]
+        public int TotalCount { get; set; }
 
-        public int upvotes { get; set; }
+        [JsonProperty("upvotes")]
+        public int Upvotes { get; set; }
 
-        public int has_upvoted { get; set; }
+        [JsonProperty("has_upvoted")]
+        public int HasUpvoted { get; set; }
 
-        public string comments_html { get; set; }
+        [JsonProperty("comments_html")]
+        public string CommentsHTML { get; set; }
 
-        public int timelastpost { get; set; }
+        [JsonProperty("timelastpost")]
+        public int TimeLastPost { get; set; }
     }
 }

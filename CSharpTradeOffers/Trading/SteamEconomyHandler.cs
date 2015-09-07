@@ -23,19 +23,19 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="apiKey">Your Steam API key</param>
         /// <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
-        /// <param name="IDs">Dictionary MUST contain ClassID/InstanceID of item.</param>
+        /// <param name="Ids">Dictionary MUST contain ClassID/InstanceID of item.</param>
         /// <returns></returns>
-        public AssetClassInfo GetAssetClassInfo(uint appid, Dictionary<string, string> IDs)
+        public AssetClassInfo GetAssetClassInfo(uint appid, Dictionary<string, string> ids)
         {
             const string url = BaseUrl + "GetAssetClassInfo/v0001/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
                 {"appid", appid.ToString()},
-                {"class_count", IDs.Count.ToString()}
+                {"class_count", ids.Count.ToString()}
             };
             int currentClass = 0;
-            foreach (var key in IDs) //make only request per appid at a time
+            foreach (var key in ids) //make only request per appid at a time
             {
                 data.Add("classid" + currentClass, key.Key);
                 data.Add("instanceid" + currentClass, key.Value);

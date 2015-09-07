@@ -5,12 +5,16 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "RootObject")]
     public class MarketValue
     {
-        public bool success { get; set; }
+        [JsonProperty("success")]
+        public bool Success { get; set; }
 
-        public string lowest_price { get; set; }
+        [JsonProperty("lowest_price")]
+        public string LowestPrice { get; set; }
 
-        public string volume { get; set; }
+        [JsonProperty("volume")]
+        public string Volume { get; set; }
 
-        public string median_price { get; set; }
+        [JsonProperty("median_price")]
+        public string MedianPrice { get; set; }
     }
 }

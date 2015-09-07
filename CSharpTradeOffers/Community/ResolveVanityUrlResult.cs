@@ -1,9 +1,16 @@
 namespace CSharpTradeOffers.Community
 {
+    using Newtonsoft.Json;
+
     public class ResolveVanityUrlResult
     {
-        public string steamid { get; set; }
+        [JsonProperty("steamid")]
+        public string SteamId { get; set; }
 
-        public int success { get; set; }
+        [JsonProperty("success")]
+        public int Success { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }

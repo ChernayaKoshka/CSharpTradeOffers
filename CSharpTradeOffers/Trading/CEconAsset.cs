@@ -7,28 +7,35 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "ItemsToReceive")]
     public class CEconAsset
     {
-        public string appid { get; set; }
+        [JsonProperty("appid")]
+        public string AppId { get; set; }
 
-        public string contextid { get; set; }
+        [JsonProperty("contextid")]
+        public string ContextId { get; set; }
 
-        public string assetid { get; set; }
+        [JsonProperty("assetid")]
+        public string AssetId { get; set; }
 
-        public string classid { get; set; }
+        [JsonProperty("classid")]
+        public string ClassId { get; set; }
 
-        public string instanceid { get; set; }
+        [JsonProperty("instanceid")]
+        public string InstanceId { get; set; }
 
-        public string amount { get; set; }
+        [JsonProperty("amount")]
+        public string Amount { get; set; }
 
-        public bool missing { get; set; }
+        [JsonProperty("missing")]
+        public bool Missing { get; set; }
 
         /// <param name="apiKey"></param>
         /// <returns></returns>
         public string GetMarketHashName(string apiKey)
         {
-            var _handler = new SteamEconomyHandler(apiKey);
-            var data = new Dictionary<string, string> { { classid, instanceid } };
-            AssetClassInfo info = _handler.GetAssetClassInfo(Convert.ToUInt32(appid), data);
-            return info.market_hash_name;
+            var handler = new SteamEconomyHandler(apiKey);
+            var data = new Dictionary<string, string> { { this.ClassId, this.InstanceId } };
+            AssetClassInfo info = handler.GetAssetClassInfo(Convert.ToUInt32(this.AppId), data);
+            return info.MarketHashName;
         }
     }
 }

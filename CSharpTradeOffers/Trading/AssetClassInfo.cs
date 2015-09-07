@@ -6,68 +6,109 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "RootObject")]
     public class AssetClassInfo
     {
-        public string icon_url { get; set; }
-        public string icon_url_large { get; set; }
-        public string icon_drag_url { get; set; }
-        public string name { get; set; }
-        public string market_hash_name { get; set; }
-        public string market_name { get; set; }
-        public string name_color { get; set; }
-        public string background_color { get; set; }
-        public string type { get; set; }
-        public string tradable { get; set; }
-        public string marketable { get; set; }
-        public string commodity { get; set; }
-        public string market_tradable_restriction { get; set; }
-        public Dictionary<string, dynamic> fraudwarnings { get; set; }
-        public Dictionary<string, Description> descriptions { get; set; }
-        public string owner_descriptions { get; set; }
-        public Dictionary<string, Action> actions { get; set; }
-        public Dictionary<string, dynamic> market_actions { get; set; }
-        public Dictionary<string, Tag> tags { get; set; }
-        public string classid { get; set; }
-        public string instanceid { get; set; }
+        [JsonProperty("icon_url")]
+        public string IconUrl { get; set; }
+        [JsonProperty("icon_url_large")]
+        public string IconUrlLarge { get; set; }
+        [JsonProperty("icon_drag_url")]
+        public string IconDragUrl { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("market_hash_name")]
+        public string MarketHashName { get; set; }
+        [JsonProperty("market_name")]
+        public string MarketName { get; set; }
+        [JsonProperty("name_color")]
+        public string NameColor { get; set; }
+        [JsonProperty("background_color")]
+        public string BackgroundColor { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
+        [JsonProperty("tradable")]
+        public string Tradable { get; set; }
+        [JsonProperty("marketable")]
+        public string Marketable { get; set; }
+        [JsonProperty("commodity")]
+        public string Commodity { get; set; }
+        [JsonProperty("market_tradable_restriction")]
+        public string MarketTradableRestriction { get; set; }
+        [JsonProperty("fraudwarnings")]
+        public Dictionary<string, dynamic> FraudWarnings { get; set; }
+        [JsonProperty("descriptions")]
+        public Dictionary<string, Description> Descriptions { get; set; }
+        [JsonProperty("owner_descriptions")]
+        public string OwnerDescriptions { get; set; }
+        [JsonProperty("actions")]
+        public Dictionary<string, Action> Actions { get; set; }
+        [JsonProperty("market_actions")]
+        public Dictionary<string, dynamic> MarketActions { get; set; }
+        [JsonProperty("tags")]
+        public Dictionary<string, Tag> Tags { get; set; }
+        [JsonProperty("classid")]
+        public string ClassId { get; set; }
+        [JsonProperty("instanceid")]
+        public string InstanceId { get; set; }
     }
 
-    public class Element_IDs
+    [JsonObject(Title = "Element_IDs")]
+    public class Elements
     {
 
-        public List<string> ids = new List<string>();
+        [JsonProperty("ids")]
+        public List<string> Ids = new List<string>();
     }
+
     public class Description
     {
 
-        public string type { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        public string value { get; set; }
+        [JsonProperty("value")]
+        public string Value { get; set; }
 
-        public string color { get; set; }
+        [JsonProperty("color")]
+        public string Color { get; set; }
 
-        public string app_data { get; set; }
+        [JsonProperty("app_data")]
+        public string AppData { get; set; }
 
-        public string is_itemset_name { get; set; }
+        [JsonProperty("is_itemset_name")]
+        public string IsItemsetName { get; set; }
 
-        public string def_index { get; set; }
+        [JsonProperty("def_index")]
+        public string DefIndex { get; set; }
     }
+
     public class AppData2
     {
-        public string def_index { get; set; }
+        [JsonProperty("def_index")]
+        public string DefIndex { get; set; }
 
-        public string quality { get; set; }
+        [JsonProperty("quality")]
+        public string Quality { get; set; }
 
-        public string slot { get; set; }
+        [JsonProperty("slot")]
+        public string Slot { get; set; }
 
-        public string set_bundle_def_index { get; set; }
+        [JsonProperty("set_bundle_def_index")]
+        public string SetBundleDefIndex { get; set; }
 
-        public List<string> containing_bundles = new List<string>();
+        [JsonProperty("containing_bundles")]
+        public List<string> ContainingBundles = new List<string>();
 
-        public List<Filter_Data> filter_data = new List<Filter_Data>();
+        [JsonProperty("filter_data")]
+        public List<FilterData> FilterData = new List<FilterData>();
 
-        public List<string> player_class_ids = new List<string>();
+        [JsonProperty("player_class_ids")]
+        public List<string> PlayerClassIds = new List<string>();
     }
-    public class Filter_Data
+
+    [JsonObject(Title = "Filter_Data")]
+    public class FilterData
     {
 
-        public List<Element_IDs> element_ids = new List<Element_IDs>();
+        [JsonProperty("element_ids")]
+        public List<Elements> ElementIds = new List<Elements>();
     }
 }

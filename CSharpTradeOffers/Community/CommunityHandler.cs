@@ -350,23 +350,23 @@ namespace CSharpTradeOffers.Community
             var data = new Dictionary<string, string>
             {
                 {"sessionID", sessionid},
-                {"type", Profile.type},
-                {"weblink_1_title", profile.weblink_1_title},
-                {"weblink_1_url", profile.weblink_1_url},
-                {"weblink_2_title", profile.weblink_2_title},
-                {"weblink_2_url", profile.weblink_2_url},
-                {"weblink_3_title", profile.weblink_3_title},
-                {"weblink_3_url", profile.weblink_3_url},
-                {"personaName", profile.personaName},
-                {"real_name", profile.real_name},
-                {"country", profile.country},
-                {"state", profile.state},
-                {"city", profile.city},
-                {"customURL", profile.customURL},
-                {"summary", profile.summary},
-                {"favorite_badge_badgeid", profile.favorite_badge_badgeid.ToString()},
-                {"favorite_badge_communityitemid", profile.favorite_badge_communityitemid.ToString()},
-                {"primary_group_steamid", profile.primary_group_steamid.ToString()}
+                {"type", Profile.Type},
+                {"weblink_1_title", profile.Weblink1Title},
+                {"weblink_1_url", profile.Weblink1Url},
+                {"weblink_2_title", profile.Weblink2Title},
+                {"weblink_2_url", profile.Weblink2Url},
+                {"weblink_3_title", profile.Weblink3Title},
+                {"weblink_3_url", profile.Weblink3Url},
+                {"personaName", profile.PersonaName},
+                {"real_name", profile.RealName},
+                {"country", profile.Country},
+                {"state", profile.State},
+                {"city", profile.City},
+                {"customURL", profile.CustomUrl},
+                {"summary", profile.Summary},
+                {"favorite_badge_badgeid", profile.FavoriteBadgeBadgeId.ToString()},
+                {"favorite_badge_communityitemid", profile.FavoriteBadgeCommunityItemId.ToString()},
+                {"primary_group_steamid", profile.PrimaryGroupSteamId.ToString()}
             };
 
             string response = Web.Fetch(url, "POST", data, account.AuthContainer);
@@ -391,13 +391,13 @@ namespace CSharpTradeOffers.Community
             var data = new Dictionary<string, string>
             {
                 {"sessionID", sessionid},
-                {"type", PrivacySettings.type},
-                {"privacySetting", ((int) settings.privacySetting).ToString()},
-                {"commentSetting", PrivacySettings.EPrivacySettingToCommentSetting(settings.commentSetting)},
+                {"type", PrivacySettings.Type},
+                {"privacySetting", ((int) settings.PrivacySetting).ToString()},
+                {"commentSetting", PrivacySettings.EPrivacySettingToCommentSetting(settings.CommentSetting)},
                 {"inventoryPrivacySetting", ((int) settings.InventoryPrivacySetting).ToString()},
-                {"inventoryGiftPrivacy", settings.inventoryGiftPrivacy.IntValue().ToString()},
-                {"tradeConfirmationSetting", settings.tradeConfirmationSetting.IntValue().ToString()},
-                {"marketConfirmationSetting", settings.marketConfirmationSetting.IntValue().ToString()}
+                {"inventoryGiftPrivacy", settings.InventoryGiftPrivacy.IntValue().ToString()},
+                {"tradeConfirmationSetting", settings.TradeConfirmationSetting.IntValue().ToString()},
+                {"marketConfirmationSetting", settings.MarketConfirmationSetting.IntValue().ToString()}
             };
             Web.Fetch(url, "POST", data, account.AuthContainer);
         }
