@@ -1,10 +1,14 @@
 namespace CSharpTradeOffers.Trading
 {
+    using Newtonsoft.Json;
+
     public class AppData
     {
 
-        public string def_index { get; set; }
+        [JsonProperty("def_index")]
+        public string DefIndex { get; set; }
 
-        public string quality { get; set; }
+        [JsonProperty("quality")]
+        public string Quality { get; set; }
     }
 }

@@ -5,12 +5,13 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "RootObject")]
     public class SendOfferResponse
     {
+        [JsonProperty("tradeofferid")]
+        public string TradeOfferId { get; set; }
 
+        [JsonProperty("needs_email_confirmation")]
+        public bool NeedsEmailConfirmation { get; set; }
 
-        public string tradeofferid { get; set; }
-
-        public bool needs_email_confirmation { get; set; }
-
-        public string email_domain { get; set; }
+        [JsonProperty("email_domain")]
+        public string EmailDomain { get; set; }
     }
 }

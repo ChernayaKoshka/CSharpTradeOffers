@@ -5,7 +5,7 @@ namespace CSharpTradeOffers.Community
     [JsonObject(Title = "RootObject")]
     public class ResolveVanityUrlBaseResult
     {
-
-        public ResolveVanityUrlResult response { get; set; }
+        [JsonProperty("response")]
+        public ResolveVanityUrlResult Response { get; set; }
     }
 }

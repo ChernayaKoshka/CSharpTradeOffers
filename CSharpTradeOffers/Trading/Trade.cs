@@ -3,8 +3,9 @@ using Newtonsoft.Json;
 namespace CSharpTradeOffers.Trading
 {
     [JsonObject(Title = "RootObject")]
-    public class TradeId
+    public class Trade
     {
-        public ulong tradeid { get; set; }
+        [JsonProperty("tradeid")]
+        public ulong TradeId { get; set; }
     }
 }

@@ -1,9 +1,9 @@
+// ReSharper disable InconsistentNaming
 namespace CSharpTradeOffers.Trading
 {
     internal enum EResult
     {
         Invalid = 0,
-
         OK = 1,
         Fail = 2,
         NoConnection = 3,

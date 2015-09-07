@@ -11,35 +11,43 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// AppId of item
         /// </summary>
-        public string appid { get; set; }
+        [JsonProperty("appid")]
+        public string AppId { get; set; }
         /// <summary>
         /// ClassId of item
         /// </summary>
-        public string classid { get; set; }
+        [JsonProperty("classid")]
+        public string ClassId { get; set; }
         /// <summary>
         /// Market hash name of item, used for searching price as well as general matching.
         /// </summary>
-        public string market_hash_name { get; set; }
+        [JsonProperty("market_hash_name")]
+        public string MarketHashName { get; set; }
         /// <summary>
         /// 0 = not tradable, 1 = tradable.
         /// </summary>
-        public int tradable { get; set; }
+        [JsonProperty("tradable")]
+        public int Tradable { get; set; }
         /// <summary>
         /// 0 = not marketable, 1 = marketable
         /// </summary>
-        public int marketable { get; set; }
+        [JsonProperty("marketable")]
+        public int Marketable { get; set; }
         /// <summary>
         /// 0 = not commodity, 1 = commodity
         /// </summary>
-        public int commodity { get; set; }
+        [JsonProperty("commodity")] 
+        public int Commodity { get; set; } // ToDo: commodity spelled wrong!?
         /// <summary>
-        /// List of rgInventory_Item, this should be used for whenever you need to interact with a specific item rather than all of them.
+        /// List of rgInventoryItem, this should be used for whenever you need to interact with a specific item rather than all of them.
         /// </summary>
-        public List<rgInventory_Item> items = new List<rgInventory_Item>();
+        [JsonProperty("items")]
+        public List<RgInventoryItem> Items = new List<RgInventoryItem>();
         /// <summary>
         /// Market worth of the item.
         /// </summary>
         [JsonIgnore]
-        public decimal worth { get; set; }
+        [JsonProperty("worth")]
+        public decimal Worth { get; set; }
     }
 }

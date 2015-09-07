@@ -1,11 +1,16 @@
 namespace CSharpTradeOffers.Community
 {
+    using Newtonsoft.Json;
+
     public class Friend
     {
-        public string steamid { get; set; }
+        [JsonProperty("steamid")]
+        public string SteamId { get; set; }
 
-        public string relationship { get; set; }
+        [JsonProperty("relationship")]
+        public string Relationship { get; set; }
 
-        public int friend_since { get; set; }
+        [JsonProperty("friend_since")]
+        public int FriendSince { get; set; }
     }
 }

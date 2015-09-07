@@ -5,6 +5,7 @@ namespace CSharpTradeOffers.Trading
     [JsonObject(Title = "RootObject")]
     public class GetTradeOffersSummaryBaseResponse
     {
-        public GetTradeOffersSummaryResponse response { get; set; }
+        [JsonProperty("response")]
+        public GetTradeOffersSummaryResponse Response { get; set; }
     }
 }

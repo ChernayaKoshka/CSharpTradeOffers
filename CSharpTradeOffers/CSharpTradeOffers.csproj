@@ -22,6 +22,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Debug\CSharpTradeOffers.XML</DocumentationFile>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -95,7 +96,7 @@
     <Compile Include="Trading\MarketValue.cs" />
     <Compile Include="Trading\Offer.cs" />
     <Compile Include="Trading\rgDescription.cs" />
-    <Compile Include="Trading\rgInventory_Item.cs" />
+    <Compile Include="Trading\rgInventoryItem.cs" />
     <Compile Include="Trading\SendOfferResponse.cs" />
     <Compile Include="Trading\SteamEconomyHandler.cs" />
     <Compile Include="Community\SteamUserHandler.cs" />
@@ -104,7 +105,7 @@
     <Compile Include="SteamID.cs" />
     <Compile Include="Trading\ItemValueHandler.cs" />
     <Compile Include="Trading\Tag.cs" />
-    <Compile Include="Trading\TradeId.cs" />
+    <Compile Include="Trading\Trade.cs" />
     <Compile Include="Trading\TradeOffer.cs" />
     <Compile Include="Trading\TradeOffers.cs" />
     <Compile Include="Trading\TradeOffersList.cs" />

@@ -5,32 +5,46 @@ namespace CSharpTradeOffers.Community
     [JsonObject(Title = "Player")]
     public class PlayerSummary
     {
-        public string steamid { get; set; }
+        [JsonProperty("steamid")]
+        public string SteamId { get; set; }
 
-        public int communityvisibilitystate { get; set; }
+        [JsonProperty("communityvisibilitystate")]
+        public int CommunityVisibilityState { get; set; }
 
-        public int profilestate { get; set; }
+        [JsonProperty("profilestate")]
+        public int ProfileState { get; set; }
 
-        public string personaname { get; set; }
+        [JsonProperty("personaname")]
+        public string PersonaName { get; set; }
 
-        public int lastlogoff { get; set; }
+        [JsonProperty("lastlogoff")]
+        public int LastLogoff { get; set; }
 
-        public string profileurl { get; set; }
+        [JsonProperty("profileurl")]
+        public string ProfileUrl { get; set; }
 
-        public string avatar { get; set; }
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; }
 
-        public string avatarmedium { get; set; }
+        [JsonProperty("avatarmedium")]
+        public string AvatarMedium { get; set; }
 
-        public string avatarfull { get; set; }
+        [JsonProperty("avatarfull")]
+        public string AvatarFull { get; set; }
 
-        public int personastate { get; set; }
+        [JsonProperty("personastate")]
+        public int PersonaState { get; set; }
 
-        public string primaryclanid { get; set; }
+        [JsonProperty("primaryclanid")]
+        public string PrimaryClanId { get; set; }
 
-        public int timecreated { get; set; }
+        [JsonProperty("timecreated")]
+        public int TimeCreated { get; set; }
 
-        public int personastateflags { get; set; }
+        [JsonProperty("personastateflags")]
+        public int PersonaStateFlags { get; set; }
 
-        public string loccountrycode { get; set; }
+        [JsonProperty("loccountrycode")]
+        public string LocCountryCode { get; set; }
     }
 }
