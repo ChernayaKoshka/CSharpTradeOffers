@@ -440,7 +440,7 @@
             ex: [leftarrow]"get_sent_offers","1"[rightarrow]. Please note, [leftarrow] and [rightarrow] correspond to the keys on the keyboard.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffer(System.String,System.String)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffer(System.UInt64,System.String)">
             <summary>
             Requests a single trade offer based on the tradeofferid.
             </summary>
@@ -448,14 +448,14 @@
             <param name="language">The language to use. Default: english</param>
             <returns>A CEConTradeOffer object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.DeclineTradeOffer(System.String)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.DeclineTradeOffer(System.UInt64)">
             <summary>
             Declines a trade offer that was sent to you.
             </summary>
             <param name="tradeofferid">The ID of the offer to decline.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CancelTradeOffer(System.String)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CancelTradeOffer(System.UInt64)">
             <summary>
             Cancels a trade offer based on the specified tradeofferid.
             </summary>

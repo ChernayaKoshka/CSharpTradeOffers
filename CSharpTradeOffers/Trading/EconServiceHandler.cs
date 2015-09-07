@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using CSharpTradeOffers.Configuration;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Trading
@@ -11,7 +9,7 @@ namespace CSharpTradeOffers.Trading
     /// </summary>
     public class EconServiceHandler
     {
-        private readonly string _apiKey ;
+        private readonly string _apiKey;
 
         private const string BaseUrl = "https://api.steampowered.com/IEconService/";
 
@@ -42,13 +40,13 @@ namespace CSharpTradeOffers.Trading
         /// <param name="tradeofferid">The tradeofferid to request information on.</param>
         /// <param name="language">The language to use. Default: english</param>
         /// <returns>A CEConTradeOffer object.</returns>
-        public CEconTradeOffer GetTradeOffer(string tradeofferid, string language = "english")
+        public CEconTradeOffer GetTradeOffer(ulong tradeofferid, string language = "english")
         {
             const string url = BaseUrl + "GetTradeOffer/v1/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
-                {"tradeofferid", tradeofferid},
+                {"tradeofferid", tradeofferid.ToString()},
                 {"language", language},
                 {"format", "json"}
             };
@@ -62,13 +60,13 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="tradeofferid">The ID of the offer to decline.</param>
         /// <returns></returns>
-        public string DeclineTradeOffer(string tradeofferid)
+        public string DeclineTradeOffer(ulong tradeofferid)
         {
             const string url = BaseUrl + "DeclineTradeOffer/v1/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
-                {"tradeofferid", tradeofferid},
+                {"tradeofferid", tradeofferid.ToString()},
                 {"format", "json"}
             };
             return Web.Fetch(url, "POST", data);
@@ -79,13 +77,13 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="tradeofferid">The ID of the offer to cancel.</param>
         /// <returns></returns>
-        public string CancelTradeOffer(string tradeofferid)
+        public string CancelTradeOffer(ulong tradeofferid)
         {
             const string url = BaseUrl + "CancelTradeOffer/v1/";
             var data = new Dictionary<string, string>
             {
                 {"key", _apiKey},
-                {"tradeofferid", tradeofferid},
+                {"tradeofferid", tradeofferid.ToString()},
                 {"format", "json"}
             };
             return WebUtility.UrlDecode(Web.Fetch(url, "POST", data));
@@ -101,7 +99,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>The TradeId of the offer that was accepted.</returns>
         public TradeId AcceptTradeOffer(TradeId tradeId, CookieContainer container, uint partnerId, string serverid)
         {
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
             const string url = "https://steamcommunity.com/tradeoffer/{0}/accept";
             var data = new Dictionary<string, string>
             {
@@ -127,7 +125,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>The TradeId of the offer that was accepted.</returns>
         public TradeId AcceptTradeOffer(ulong tradeId, CookieContainer container, uint partnerId, string serverid)
         {
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
             const string url = "https://steamcommunity.com/tradeoffer/{0}/accept";
             var data = new Dictionary<string, string>
             {
@@ -156,7 +154,7 @@ namespace CSharpTradeOffers.Trading
             string serverid, TradeOffer offer)
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
 
             var data = new Dictionary<string, string>
             {
@@ -187,7 +185,7 @@ namespace CSharpTradeOffers.Trading
             string serverid, uint tradeofferidCountered, TradeOffer offer)
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
 
             var data = new Dictionary<string, string>
             {
