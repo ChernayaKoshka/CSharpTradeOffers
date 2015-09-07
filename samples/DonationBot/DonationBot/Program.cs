@@ -93,7 +93,7 @@ namespace DonationBot
                     }
                     else
                     {
-                        offerHandler.DeclineTradeOffer(cEconTradeOffer.tradeofferid);
+                        offerHandler.DeclineTradeOffer(Convert.ToUInt64(cEconTradeOffer.tradeofferid));
                         Console.WriteLine("Refused a \"donation\" that would have taken items from us.");
                     }
                 }
