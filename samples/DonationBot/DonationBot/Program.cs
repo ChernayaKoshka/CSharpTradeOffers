@@ -78,22 +78,22 @@ namespace DonationBot
                     //arbitrarily high number to retrieve latest offers
                 };
 
-                var offers = offerHandler.GetTradeOffers(recData).trade_offers_received;
+                var offers = offerHandler.GetTradeOffers(recData).TradeOffersReceived;
 
                 if (offers == null) continue;
 
                 foreach (CEconTradeOffer cEconTradeOffer in offers)
                 {
-                    if (cEconTradeOffer.items_to_give == null)
+                    if (cEconTradeOffer.ItemsToGive == null)
                     {
-                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.tradeofferid),
+                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.TradeofferId),
                             _account.AuthContainer,
-                            cEconTradeOffer.accountid_other, "1");
+                            cEconTradeOffer.AccountIdOther, "1");
                         Console.WriteLine("Accepted a donation!");
                     }
                     else
                     {
-                        offerHandler.DeclineTradeOffer(Convert.ToUInt64(cEconTradeOffer.tradeofferid));
+                        offerHandler.DeclineTradeOffer(Convert.ToUInt64(cEconTradeOffer.TradeofferId));
                         Console.WriteLine("Refused a \"donation\" that would have taken items from us.");
                     }
                 }
