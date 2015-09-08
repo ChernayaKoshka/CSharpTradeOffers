@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -97,11 +95,10 @@ namespace CSharpTradeOffers.Trading
         //needs to support side
         public List<CEconAsset> FindCompatibleAssets(CEconAsset asset, ref InventoryHandler inventoryHandler, TradeSide side) //side : 0 = anyone, 1 = us, 2 = Them
         {
-            List<CEconAsset> compatibleAssets = null;
+            List<CEconAsset> compatibleAssets = new List<CEconAsset>();
             foreach (ValuedItem valuedItem in ValuedItems.Items)
             {
                 if (valuedItem.Side != (int)side && valuedItem.Side != (int)TradeSide.None) continue; //which side should we be searching?
-                bool done = false;
 
                 switch (valuedItem.TypeId)
                 {
