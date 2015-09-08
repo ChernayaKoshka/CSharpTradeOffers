@@ -8,7 +8,7 @@ namespace CSharpTradeOffers.Trading
     {
 
         [JsonProperty("tradeofferid")]
-        public string TradeofferId { get; set; }
+        public ulong TradeOfferId { get; set; }
 
         [JsonProperty("accountid_other")]
         public uint AccountIdOther { get; set; }
@@ -38,7 +38,7 @@ namespace CSharpTradeOffers.Trading
         public ulong TimeUpdated { get; set; }
 
         [JsonProperty("tradeid")]
-        public string TradeId { get; set; }
+        public ulong TradeId { get; set; }
 
         [JsonProperty("from_real_time_trade")]
         public bool FromRealTimeTrade { get; set; }
