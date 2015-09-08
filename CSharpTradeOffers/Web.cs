@@ -6,9 +6,7 @@ using Newtonsoft.Json;
 using System.Net.Cache;
 using System.Threading;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Security.Cryptography;
-using CSharpTradeOffers.Configuration;
 
 namespace CSharpTradeOffers
 {
@@ -56,36 +54,40 @@ namespace CSharpTradeOffers
             }
 
             var request = WebRequest.Create(url) as HttpWebRequest;
-            request.Method = method;
-            request.Accept = "application/json, text/javascript;q=0.9, */*;q=0.5";
-            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
-
-            request.UserAgent =
-                "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
-            request.Referer = string.IsNullOrEmpty(referer) ? "http://steamcommunity.com/" : referer;
-            request.Timeout = 50000;
-            request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Revalidate);
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-
-            if (xHeaders)
+            if (request != null)
             {
-                request.Headers.Add("X-Requested-With", "XMLHttpRequest");
-                request.Headers.Add("X-Prototype-Version", "1.7");
-            }
-            request.CookieContainer = cookies ?? new CookieContainer();
+                request.Method = method;
+                request.Accept = "application/json, text/javascript;q=0.9, */*;q=0.5";
+                request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
 
-            if (data != null && !isGetMethod)
-            {
-                //string dataString = DictionaryToURLString(data);
-                byte[] dataBytes = Encoding.UTF8.GetBytes(DictionaryToUrlString(data));
-                request.ContentLength = dataBytes.Length;
+                request.UserAgent =
+                    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
+                request.Referer = string.IsNullOrEmpty(referer) ? "http://steamcommunity.com/" : referer;
+                request.Timeout = 50000;
+                request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Revalidate);
+                request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
 
-                using (var reqStream = request.GetRequestStream())
+                if (xHeaders)
                 {
-                    reqStream.Write(dataBytes, 0, dataBytes.Length);
+                    request.Headers.Add("X-Requested-With", "XMLHttpRequest");
+                    request.Headers.Add("X-Prototype-Version", "1.7");
                 }
+                request.CookieContainer = cookies ?? new CookieContainer();
+
+                if (data != null && !isGetMethod)
+                {
+                    //string dataString = DictionaryToURLString(data);
+                    byte[] dataBytes = Encoding.UTF8.GetBytes(DictionaryToUrlString(data));
+                    request.ContentLength = dataBytes.Length;
+
+                    using (var reqStream = request.GetRequestStream())
+                    {
+                        reqStream.Write(dataBytes, 0, dataBytes.Length);
+                    }
+                }
+                return request.GetResponse() as HttpWebResponse;
             }
-            return request.GetResponse() as HttpWebResponse;
+            return null;
         }
 
         /// <summary>
@@ -203,8 +205,7 @@ namespace CSharpTradeOffers
                     joined += "&";
 
                 //joined += $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}";
-                joined += string.Format("{0}={1}", WebUtility.UrlEncode(kvp.Key),
-                    WebUtility.UrlEncode(kvp.Value));
+                joined += $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}";
             }
             return joined;
         }
@@ -215,7 +216,6 @@ namespace CSharpTradeOffers
         public static Account DoLogin(string username, string password, string machineAuth = "")
         {
             Thread.Sleep(2000);
-            var data = new Dictionary<string, string> { { "username", username } };
             RsaHelper rsaHelper = new RsaHelper(username, password);
             string encryptedBase64Password = rsaHelper.EncryptPassword();
             if(encryptedBase64Password == null) return null;
@@ -238,7 +238,7 @@ namespace CSharpTradeOffers
                 if (loginJson != null && loginJson.CaptchaNeeded)
                     capGid = Uri.EscapeDataString(loginJson.CaptchaGid);
 
-                data = new Dictionary<string, string>
+                var data = new Dictionary<string, string>
                 {
                     {"password", encryptedBase64Password},
                     {"username", username},
@@ -344,7 +344,7 @@ namespace CSharpTradeOffers
 
                 account.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
 
-                SessionId = _cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"].Value;
+                SessionId = _cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]?.Value;
 
                 return account;
             }
@@ -356,12 +356,15 @@ namespace CSharpTradeOffers
         {
             var w = WebRequest.Create("https://steamcommunity.com/") as HttpWebRequest;
 
-            w.Method = "POST";
-            w.ContentType = "application/x-www-form-urlencoded";
-            w.CookieContainer = cookies;
-            w.ContentLength = 0;
+            if (w != null)
+            {
+                w.Method = "POST";
+                w.ContentType = "application/x-www-form-urlencoded";
+                w.CookieContainer = cookies;
+                w.ContentLength = 0;
 
-            w.GetResponse().Close();
+                w.GetResponse().Close();
+            }
         }
 
         public class RsaHelper

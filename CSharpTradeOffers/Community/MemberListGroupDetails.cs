@@ -9,36 +9,47 @@ namespace CSharpTradeOffers.Community
     public class MemberListGroupDetails
     {
         /// <remarks/>
-        public string groupName { get; set; }
+        [XmlElement("groupName")]
+        public string GroupName { get; set; }
 
         /// <remarks/>
-        public string groupURL { get; set; }
+        [XmlElement("groupURL")]
+        public string GroupUrl { get; set; }
 
         /// <remarks/>
-        public string headline { get; set; }
+        [XmlElement("headline")]
+        public string Headline { get; set; }
 
         /// <remarks/>
-        public string summary { get; set; }
+        [XmlElement("summary")]
+        public string Summary { get; set; }
 
         /// <remarks/>
-        public string avatarIcon { get; set; }
+        [XmlElement("avatarIcon")]
+        public string AvatarIcon { get; set; }
 
         /// <remarks/>
-        public string avatarMedium { get; set; }
+        [XmlElement("avatarMedium")]
+        public string AvatarMedium { get; set; }
 
         /// <remarks/>
-        public string avatarFull { get; set; }
+        [XmlElement("avatarFull")]
+        public string AvatarFull { get; set; }
 
         /// <remarks/>
-        public ulong memberCount { get; set; }
+        [XmlElement("memberCount")]
+        public ulong MemberCount { get; set; }
 
         /// <remarks/>
-        public ulong membersInChat { get; set; }
+        [XmlElement("membersInChat")]
+        public ulong MembersInChat { get; set; }
 
         /// <remarks/>
-        public ulong membersInGame { get; set; }
+        [XmlElement("membersInGame")]
+        public ulong MembersInGame { get; set; }
 
         /// <remarks/>
-        public ulong membersOnline { get; set; }
+        [XmlElement("membersOnline")]
+        public ulong MembersOnline { get; set; }
     }
 }

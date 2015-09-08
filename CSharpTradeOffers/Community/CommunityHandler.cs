@@ -263,7 +263,7 @@ namespace CSharpTradeOffers.Community
                     if (!firstRequest)
                     {
                         firstRequest = true;
-                        totalPages = populatedList.totalPages;
+                        totalPages = populatedList.TotalPages;
                     }
                 }
                 catch (WebException)
@@ -312,7 +312,7 @@ namespace CSharpTradeOffers.Community
                     if (!firstRequest)
                     {
                         firstRequest = true;
-                        totalPages = populatedList.totalPages;
+                        totalPages = populatedList.TotalPages;
                     }
                 }
                 catch (WebException)
