@@ -43,12 +43,34 @@ namespace CSharpTradeOffers.Trading
 
             dynamic dynamicinfo = JsonConvert.DeserializeObject<dynamic>(Web.Fetch(url, "GET", data, null, false)).result;
 
-            Dictionary<string,dynamic> desrDictionary =
+            Dictionary<string, dynamic> desrDictionary =
                 JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(dynamicinfo.ToString());
 
             desrDictionary.Remove("success");
 
             return JsonConvert.DeserializeObject<AssetClassInfo>(desrDictionary.Values.First().ToString());
+        }
+
+        /// <summary>
+        /// I think this retrieves coupons or something. Although it may do what it says.
+        /// </summary>
+        /// <param name="appId">AppId to find asset prices for.</param>
+        /// <param name="currency">Three letter string representing a currency to filter for, if left blank all currencies are returned. EX: USD or EUR, etc.</param>
+        /// <param name="language">The language to retrieve the results in.</param>
+        /// <returns>A GetAssetPricesResponse object.</returns>
+        public GetAssetPricesResponse GetAssetPrices(uint appId, string currency = "", string language = "en")
+        {
+            const string url = BaseUrl + "GetAssetPrices/v1/";
+            var data = new Dictionary<string, string>
+            {
+                {"key", _apiKey},
+                {"appid", appId.ToString()},
+                {"currency", currency},
+                {"language", language}
+            };
+            return
+                JsonConvert.DeserializeObject<GetAssetPricesBaseResponse>(Web.Fetch(url, "GET", data, null, false))
+                    .Result;
         }
     }
 }

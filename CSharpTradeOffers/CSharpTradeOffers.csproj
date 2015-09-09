@@ -83,6 +83,7 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Trading\Data Classes\CEconAsset.cs" />
     <Compile Include="Trading\Data Classes\CEconTradeOffer.cs" />
+    <Compile Include="Trading\Data Classes\GetAssetPricesResponse.cs" />
     <Compile Include="Trading\EconServiceHandler.cs" />
     <Compile Include="Trading\Data Classes\EResult.cs" />
     <Compile Include="Trading\Data Classes\ETradeOfferState.cs" />

@@ -711,6 +711,15 @@
             <param name="Ids">Dictionary MUST contain ClassID/InstanceID of item.</param>
             <returns></returns>
         </member>
+        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.GetAssetPrices(System.UInt32,System.String,System.String)">
+            <summary>
+            I think this retrieves coupons or something. Although it may do what it says.
+            </summary>
+            <param name="appId">AppId to find asset prices for.</param>
+            <param name="currency">Three letter string representing a currency to filter for, if left blank all currencies are returned. EX: USD or EUR, etc.</param>
+            <param name="language">The language to retrieve the results in.</param>
+            <returns>A GetAssetPricesResponse object.</returns>
+        </member>
         <member name="T:CSharpTradeOffers.Trading.ItemValueHandler">
             <summary>
             DO. NOT. USE. Under heavy construction.
