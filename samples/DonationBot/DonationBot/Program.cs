@@ -49,7 +49,7 @@ namespace DonationBot
 
             Console.WriteLine("Attempting web login...");
 
-            _account = Web.DoLogin(_user, _pass, Cfg.config.steamMachineAuth);
+            _account = Web.RetryDoLogin(_user, _pass, Cfg.config.steamMachineAuth);
 
             Console.WriteLine("Login was successful!");
 
@@ -66,10 +66,14 @@ namespace DonationBot
             var marketHandler = new MarketHandler();
 
             marketHandler.EligibilityCheck(_account.SteamId, _account.AuthContainer);
-                //required to perform trades (?). Checks to see whether or not we're allowed to trade.
+            //required to perform trades (?). Checks to see whether or not we're allowed to trade.
 
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            // ReSharper disable once LoopVariableIsNeverChangedInsideLoop
             while (isPolling) //permanent loop, can be changed 
             {
+                Thread.Sleep(10000);
+
                 var recData = new Dictionary<string, string>
                 {
                     {"get_received_offers", "1"},
@@ -97,7 +101,6 @@ namespace DonationBot
                         Console.WriteLine("Refused a \"donation\" that would have taken items from us.");
                     }
                 }
-                Thread.Sleep(10000);
             }
         }
     }
