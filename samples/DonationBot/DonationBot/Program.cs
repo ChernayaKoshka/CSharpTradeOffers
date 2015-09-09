@@ -86,14 +86,14 @@ namespace DonationBot
                 {
                     if (cEconTradeOffer.ItemsToGive == null)
                     {
-                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.TradeofferId),
+                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.TradeOfferId),
                             _account.AuthContainer,
                             cEconTradeOffer.AccountIdOther, "1");
                         Console.WriteLine("Accepted a donation!");
                     }
                     else
                     {
-                        offerHandler.DeclineTradeOffer(Convert.ToUInt64(cEconTradeOffer.TradeofferId));
+                        offerHandler.DeclineTradeOffer(Convert.ToUInt64(cEconTradeOffer.TradeOfferId));
                         Console.WriteLine("Refused a \"donation\" that would have taken items from us.");
                     }
                 }
