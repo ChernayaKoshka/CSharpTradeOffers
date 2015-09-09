@@ -10,22 +10,28 @@ namespace CSharpTradeOffers.Community
     public class MemberList
     {
         /// <remarks/>
-        public ulong groupID64 { get; set; }
+        [XmlElement("groupID64")]
+        public ulong GroupId64 { get; set; }
 
         /// <remarks/>
-        public MemberListGroupDetails groupDetails { get; set; }
+        [XmlElement("groupDetails")]
+        public MemberListGroupDetails GroupDetails { get; set; }
 
         /// <remarks/>
+        [XmlElement("memberCount")]
         public ulong memberCount { get; set; }
 
         /// <remarks/>
-        public ulong totalPages { get; set; }
+        [XmlElement("totalPages")]
+        public ulong TotalPages { get; set; }
 
         /// <remarks/>
-        public ulong currentPage { get; set; }
+        [XmlElement("currentPage")]
+        public ulong CurrentPage { get; set; }
 
         /// <remarks/>
-        public ulong startingMember { get; set; }
+        [XmlElement("startingMember")]
+        public ulong StartingMember { get; set; }
 
         /// <remarks/>
         [XmlArrayItem("steamID64", IsNullable = false)]

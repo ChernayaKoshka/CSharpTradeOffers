@@ -12,22 +12,22 @@
         <member name="T:CSharpTradeOffers.Community.MemberList">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.groupID64">
+        <member name="P:CSharpTradeOffers.Community.MemberList.GroupId64">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.groupDetails">
+        <member name="P:CSharpTradeOffers.Community.MemberList.GroupDetails">
             <remarks/>
         </member>
         <member name="P:CSharpTradeOffers.Community.MemberList.memberCount">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.totalPages">
+        <member name="P:CSharpTradeOffers.Community.MemberList.TotalPages">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.currentPage">
+        <member name="P:CSharpTradeOffers.Community.MemberList.CurrentPage">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.startingMember">
+        <member name="P:CSharpTradeOffers.Community.MemberList.StartingMember">
             <remarks/>
         </member>
         <member name="P:CSharpTradeOffers.Community.MemberList.members">
@@ -36,37 +36,37 @@
         <member name="T:CSharpTradeOffers.Community.MemberListGroupDetails">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.groupName">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.GroupName">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.groupURL">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.GroupUrl">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.headline">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.Headline">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.summary">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.Summary">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.avatarIcon">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.AvatarIcon">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.avatarMedium">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.AvatarMedium">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.avatarFull">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.AvatarFull">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.memberCount">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MemberCount">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.membersInChat">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MembersInChat">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.membersInGame">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MembersInGame">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.membersOnline">
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MembersOnline">
             <remarks/>
         </member>
         <member name="T:CSharpTradeOffers.Community.MultiInviteResponse">
