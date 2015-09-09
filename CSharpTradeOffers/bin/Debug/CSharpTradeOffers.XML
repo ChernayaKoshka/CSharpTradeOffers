@@ -524,6 +524,12 @@
             String is the ClassId linking to an Item object.
             </summary>
         </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.AssetCount">
+            <summary>
+            Returns the number of assets in the inventory.
+            </summary>
+            <returns>A ulong representing the number of assets.</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Trading.Inventory.RequestInventory(System.UInt32)">
             <summary>
             Requests the inventory for the specified steamId and appId.

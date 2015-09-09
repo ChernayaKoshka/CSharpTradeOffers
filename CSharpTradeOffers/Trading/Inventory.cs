@@ -26,6 +26,18 @@ namespace CSharpTradeOffers.Trading
         public Dictionary<string, Item> Items = new Dictionary<string, Item>();
 
         /// <summary>
+        /// Returns the number of assets in the inventory.
+        /// </summary>
+        /// <returns>A ulong representing the number of assets.</returns>
+        public ulong AssetCount()
+        {
+            ulong count = 0;
+            foreach (Item value in from value in Items.Values from rgInventoryItem in value.Items select value)
+                count++;
+            return count;
+        }
+
+        /// <summary>
         /// Requests the inventory for the specified steamId and appId.
         /// </summary>
         /// <param name="steamId">steamId64 of the inventory to request.</param>
