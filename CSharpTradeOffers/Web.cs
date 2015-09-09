@@ -352,6 +352,28 @@ namespace CSharpTradeOffers
             return null;
         }
 
+        public static Account RetryDoLogin(string username, string password, string machineAuth = "",
+            int retryLimit = 10, int retryWait = 500)
+        {
+            int retries = 0;
+            Account account = null;
+            do
+            {
+                try
+                {
+                    account = DoLogin(username, password, machineAuth);
+                }
+                catch (WebException)
+                {
+                    retries++;
+                    if (retries == retryLimit) throw;
+                    Console.WriteLine("Connection failed... retrying in: " + retryWait + "ms. Retries: " + retries);
+                    Thread.Sleep(retryWait);
+                }
+            } while (account == null);
+            return account;
+        }
+
         static void SubmitCookies(CookieContainer cookies)
         {
             var w = WebRequest.Create("https://steamcommunity.com/") as HttpWebRequest;
