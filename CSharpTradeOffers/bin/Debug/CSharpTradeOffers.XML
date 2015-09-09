@@ -889,7 +889,7 @@
             <param name="dict">The Dictionary to be converted.</param>
             <returns>A concatenated string of URL arguments.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.RetryDoLogin(System.String,System.String,System.String)">
+        <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,System.String)">
             <summary>
             Executes the login by using the Steam Website.
             </summary> 
