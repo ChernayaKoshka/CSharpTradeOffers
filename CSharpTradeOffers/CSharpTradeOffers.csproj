@@ -98,7 +98,7 @@
     <Compile Include="Trading\Data Classes\rgDescription.cs" />
     <Compile Include="Trading\Data Classes\rgInventoryItem.cs" />
     <Compile Include="Trading\Data Classes\SendOfferResponse.cs" />
-    <Compile Include="SteamEconomyHandler.cs" />
+    <Compile Include="Trading\SteamEconomyHandler.cs" />
     <Compile Include="Community\SteamUserHandler.cs" />
     <Compile Include="MarketHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
