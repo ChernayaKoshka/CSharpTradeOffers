@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel;
 
 namespace CSharpTradeOffers.Configuration
 {
@@ -7,6 +10,10 @@ namespace CSharpTradeOffers.Configuration
     /// A generic RootConfig object containing configuration information.
     /// </summary>
     [JsonObject(Title = "RootObject")]
+    [Serializable]
+    [DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false, ElementName = "Config")]
     public class Config
     {
         /// <summary>

@@ -1,22 +1,19 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace CSharpTradeOffers.Configuration
 {
-    /// <summary>
-    /// Generic config file handler
-    /// </summary>
-    public class ConfigHandler : IConfig
+    class XmlConfigHandler : IConfig
     {
+
         private readonly string _path;
 
         /// <summary>
         /// Initializes the Config and the path to use
         /// </summary>
         /// <param name="path"></param>
-        public ConfigHandler(string path)
+        public XmlConfigHandler(string path)
         {
             _path = path;
         }
@@ -39,20 +36,30 @@ namespace CSharpTradeOffers.Configuration
 
                 var sb = new StringBuilder();
 
-                sb.Append("{\r\n");
-                sb.Append("    \"Username\": \"\",\r\n");
-                sb.Append("    \"Password\": \"\",\r\n");
-                sb.Append("    \"ApiKey\": \"\",\r\n");
-                sb.Append("    \"SteamMachineAuth\": \"\",\r\n");
-                sb.Append("    \"Inventories\":[440,730]\r\n");
-                sb.Append("}\r\n");
+                sb.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+                sb.Append("<Config>\r\n");
+                sb.Append("    <Username></Username>\r\n");
+                sb.Append("    <Password></Password>\r\n");
+                sb.Append("    <ApiKey></ApiKey>\r\n");
+                sb.Append("    <SteamMachineAuth></SteamMachineAuth>\r\n");
+                sb.Append("    <Inventories>\r\n");
+                sb.Append("        <element>440</element>\r\n");
+                sb.Append("        <element>730</element>\r\n");
+                sb.Append("    </Inventories>\r\n");
+                sb.Append("</Config>\r\n");
 
                 #endregion
 
                 File.WriteAllText(_path, sb.ToString());
             }
 
-            config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(_path));
+            using (var sr = new StreamReader(_path))
+            {
+                sr.ReadToEnd();
+                config =
+                    (Config)
+                        new XmlSerializer(typeof (Config)).Deserialize(sr);
+            }
 
             return config;
         }
@@ -63,7 +70,7 @@ namespace CSharpTradeOffers.Configuration
         /// <param name="towrite"></param>
         public void WriteChanges(Config towrite)
         {
-            File.WriteAllText(_path, JsonConvert.SerializeObject(towrite));
+            File.WriteAllText(_path, towrite.SerializeToXml());
         }
     }
 }

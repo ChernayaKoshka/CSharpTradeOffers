@@ -72,12 +72,13 @@
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Configuration\Data Classes\Officer.cs" />
     <Compile Include="Configuration\Data Classes\Config.cs" />
+    <Compile Include="Configuration\XmlConfigHandler.cs" />
     <Compile Include="Trading\Data Classes\Action.cs" />
     <Compile Include="Trading\Data Classes\AppData.cs" />
     <Compile Include="Trading\Data Classes\AssetClassInfo.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Community\CommunityHandler.cs" />
-    <Compile Include="Configuration\ConfigHandler.cs" />
+    <Compile Include="Configuration\JsonConfigHandler.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Trading\Data Classes\CEconAsset.cs" />
     <Compile Include="Trading\Data Classes\CEconTradeOffer.cs" />

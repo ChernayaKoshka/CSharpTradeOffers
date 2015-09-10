@@ -299,24 +299,42 @@
             The key MUST be from the bot's account.
             </summary>
         </member>
-        <member name="T:CSharpTradeOffers.Configuration.ConfigHandler">
-            <summary>
-            Generic config file handler
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Configuration.ConfigHandler.#ctor(System.String)">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.#ctor(System.String)">
             <summary>
             Initializes the Config and the path to use
             </summary>
             <param name="path"></param>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.ConfigHandler.Reload">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.Reload">
             <summary>
             Reloads the configuration file (path). If file is not present, it will generate a new one.
             </summary>
             <returns>A RootConfig object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.ConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
+            <summary>
+            Writes the changes made to the config.
+            </summary>
+            <param name="towrite"></param>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.JsonConfigHandler">
+            <summary>
+            Generic config file handler
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.#ctor(System.String)">
+            <summary>
+            Initializes the Config and the path to use
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.Reload">
+            <summary>
+            Reloads the configuration file (path). If file is not present, it will generate a new one.
+            </summary>
+            <returns>A RootConfig object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
             <summary>
             Writes the changes made to the config.
             </summary>
