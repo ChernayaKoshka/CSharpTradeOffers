@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace CSharpTradeOffers.Configuration
 {
-    class XmlConfigHandler : IConfig
+    public class XmlConfigHandler : IConfig
     {
 
         private readonly string _path;
