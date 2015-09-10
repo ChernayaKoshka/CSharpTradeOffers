@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using CSharpTradeOffers;
+using CSharpTradeOffers.Configuration;
 using CSharpTradeOffers.Trading;
 
 namespace DonationBot
@@ -11,7 +12,8 @@ namespace DonationBot
         private static string _user, _pass;
         private static string _apiKey;
         private static Account _account;
-        private static readonly Config Cfg = new Config();
+        private static Config Config = new Config();
+        private static readonly XmlConfigHandler _ConfigHandler = new XmlConfigHandler("configuration.xml");
 
         private static void Main()
         {
@@ -20,18 +22,18 @@ namespace DonationBot
             Console.WriteLine(
                 "By using this software you agree to the terms in \"license.txt\".");
 
-            Cfg.Reload();
+            Config = _ConfigHandler.Reload();
 
-            if (string.IsNullOrEmpty(Cfg.config.apikey))
+            if (string.IsNullOrEmpty(Config.ApiKey))
             {
-                Console.WriteLine("Fatal error: API key is missing. Please fill in the API key field in \"config.cfg\"");
+                Console.WriteLine("Fatal error: API key is missing. Please fill in the API key field in \"configuration.xml\"");
                 Console.ReadLine();
                 Environment.Exit(-1);
             }
 
-            _apiKey = Cfg.config.apikey;
+            _apiKey = Config.ApiKey;
 
-            if (string.IsNullOrEmpty(Cfg.config.username) || string.IsNullOrEmpty(Cfg.config.password))
+            if (string.IsNullOrEmpty(Config.Username) || string.IsNullOrEmpty(Config.Password))
             {
                 Console.WriteLine("Please input your username and password.");
 
@@ -43,13 +45,13 @@ namespace DonationBot
             }
             else
             {
-                _user = Cfg.config.username;
-                _pass = Cfg.config.password;
+                _user = Config.Username;
+                _pass = Config.Password;
             }
 
             Console.WriteLine("Attempting web login...");
 
-            _account = Web.RetryDoLogin(_user, _pass, Cfg.config.steamMachineAuth);
+            _account = Web.RetryDoLogin(_user, _pass, Config.SteamMachineAuth);
 
             Console.WriteLine("Login was successful!");
 
