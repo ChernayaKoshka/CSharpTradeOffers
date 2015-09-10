@@ -36,8 +36,10 @@ namespace CSharpTradeOffers.Configuration
 
                 var sb = new StringBuilder();
 
-                sb.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-                sb.Append("<Config>\r\n");
+                sb.Append("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n");
+                sb.Append("<Config\r\n");
+                sb.Append("    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n");
+                sb.Append("    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n");
                 sb.Append("    <Username></Username>\r\n");
                 sb.Append("    <Password></Password>\r\n");
                 sb.Append("    <ApiKey></ApiKey>\r\n");
@@ -55,7 +57,6 @@ namespace CSharpTradeOffers.Configuration
 
             using (var sr = new StreamReader(_path))
             {
-                sr.ReadToEnd();
                 config =
                     (Config)
                         new XmlSerializer(typeof (Config)).Deserialize(sr);
