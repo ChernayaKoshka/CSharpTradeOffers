@@ -246,50 +246,10 @@
             </param>
             <returns>A ResolveVanityUrlResult object.</returns>
         </member>
-        <member name="T:CSharpTradeOffers.Configuration.Command_Permission">
+        <member name="T:CSharpTradeOffers.Configuration.IConfig">
             <summary>
-            Generic command permission class.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.Command_Permission.command_name">
-            <summary>
-            The exact name of the command.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.Command_Permission.permission_level">
-            <summary>
-            An integer representing a permission level.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Configuration.Command_Permission.ToKeyValuePair">
-            <summary>
-            Turns the Command_Permission into a KeyValuePair
-            </summary>
-            <returns>KeyValuePair</returns>
-        </member>
-        <member name="T:CSharpTradeOffers.Configuration.Dictionaries">
-            <summary>
-            Class containing Dictionary versions of Offer/CommandPermission
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Configuration.Dictionaries.Officers_Dict">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Configuration.Dictionaries.Command_Permissions_Dict">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Configuration.Dictionaries.ClearOfficer">
-            <summary>
-            Clear officers dictionary. This should not be called directly.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Configuration.Dictionaries.ClearPerms">
-            <summary>
-            Clear permissions dictionary. This shold not be called directly.
+            IConfig interface so the default ConfigHandler that
+            uses JSON does not have to be used.
             </summary>
         </member>
         <member name="T:CSharpTradeOffers.Configuration.Officer">
@@ -313,111 +273,50 @@
             </summary>
             <returns>KeyValuePair of steamid,permissionlevel</returns>
         </member>
-        <member name="T:CSharpTradeOffers.Configuration.RootConfig">
+        <member name="T:CSharpTradeOffers.Configuration.Config">
             <summary>
             A generic RootConfig object containing configuration information.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.Username">
+        <member name="P:CSharpTradeOffers.Configuration.Config.Username">
             <summary>
             Username to automatically log in to.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.Password">
+        <member name="P:CSharpTradeOffers.Configuration.Config.Password">
             <summary>
             Password to use to automatically log in.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.SteamMachineAuth">
+        <member name="P:CSharpTradeOffers.Configuration.Config.SteamMachineAuth">
             <summary>
             Special bytes sent to Steam to prove the user is the account holder.
             </summary>"
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.ApiKey">
+        <member name="P:CSharpTradeOffers.Configuration.Config.ApiKey">
             <summary>
             A special key retrieved from https://steamcommunity.com/dev/apikey
             The key MUST be from the bot's account.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.GreetMessage">
+        <member name="T:CSharpTradeOffers.Configuration.ConfigHandler">
             <summary>
-            Will be said upon a successful friend add.
+            Generic config file handler
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.AddOfficers">
-            <summary>
-            Determines whether or not the bot should attempt to friend all Officers.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.Verbose">
-            <summary>
-            Changes whether or not the Debug.Log should output verbose information.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.LogChat">
-            <summary>
-            Log all chat into .txt files with the date and time. A new file is generated every five minutes.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.Log">
-            <summary>
-            I can't remember.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.Officers">
-            <summary>
-            List of Officer objects.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.CommandPermissions">
-            <summary>
-            List of Command_Permission objects.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.Inventories">
-            <summary>
-            Inventories to create on load, refreshInventories method from Inventory handler also uses these.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.RootConfig.BannedUsers">
-            <summary>
-            Define users that are not allowed to use this bot.
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.Configuration.Config">
-            <summary>
-            Generic config file
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Configuration.Config.Cfg">
-            <summary>
-            The meat of the config
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Configuration.Config.ConfigDictionaries">
-            <summary>
-            Dictionary forms of the lists contained in for easy access/use
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Configuration.Config.MarketEligibilityJson">
-            <summary>
-            I forgot why I put this here but it's probably important.
-            I forgot or it's obvious. TODO: Add better documentation
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Configuration.Config.#ctor(System.String)">
+        <member name="M:CSharpTradeOffers.Configuration.ConfigHandler.#ctor(System.String)">
             <summary>
             Initializes the Config and the path to use
             </summary>
             <param name="path"></param>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.Config.Reload">
+        <member name="M:CSharpTradeOffers.Configuration.ConfigHandler.Reload">
             <summary>
             Reloads the configuration file (path). If file is not present, it will generate a new one.
             </summary>
             <returns>A RootConfig object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.Config.WriteChanges(CSharpTradeOffers.Configuration.RootConfig)">
+        <member name="M:CSharpTradeOffers.Configuration.ConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
             <summary>
             Writes the changes made to the config.
             </summary>
