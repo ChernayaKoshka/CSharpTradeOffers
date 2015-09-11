@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace CSharpTradeOffers.Community
@@ -35,6 +36,6 @@ namespace CSharpTradeOffers.Community
 
         /// <remarks/>
         [XmlArrayItem("steamID64", IsNullable = false)]
-        public ulong[] members { get; set; }
+        public List<ulong> members { get; set; }
     }
 }
