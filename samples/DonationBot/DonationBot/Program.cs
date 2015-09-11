@@ -12,8 +12,8 @@ namespace DonationBot
         private static string _user, _pass;
         private static string _apiKey;
         private static Account _account;
-        private static Config Config = new Config();
-        private static readonly XmlConfigHandler _ConfigHandler = new XmlConfigHandler("configuration.xml");
+        private static Config _config = new Config();
+        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
 
         private static void Main()
         {
@@ -22,18 +22,18 @@ namespace DonationBot
             Console.WriteLine(
                 "By using this software you agree to the terms in \"license.txt\".");
 
-            Config = _ConfigHandler.Reload();
+            _config = ConfigHandler.Reload();
 
-            if (string.IsNullOrEmpty(Config.ApiKey))
+            if (string.IsNullOrEmpty(_config.ApiKey))
             {
                 Console.WriteLine("Fatal error: API key is missing. Please fill in the API key field in \"configuration.xml\"");
                 Console.ReadLine();
                 Environment.Exit(-1);
             }
 
-            _apiKey = Config.ApiKey;
+            _apiKey = _config.ApiKey;
 
-            if (string.IsNullOrEmpty(Config.Username) || string.IsNullOrEmpty(Config.Password))
+            if (string.IsNullOrEmpty(_config.Username) || string.IsNullOrEmpty(_config.Password))
             {
                 Console.WriteLine("Please input your username and password.");
 
@@ -45,13 +45,19 @@ namespace DonationBot
             }
             else
             {
-                _user = Config.Username;
-                _pass = Config.Password;
+                _user = _config.Username;
+                _pass = _config.Password;
             }
 
             Console.WriteLine("Attempting web login...");
 
-            _account = Web.RetryDoLogin(_user, _pass, Config.SteamMachineAuth);
+            _account = Web.RetryDoLogin(_user, _pass, _config.SteamMachineAuth);
+
+            if (!string.IsNullOrEmpty(Web.SteamMachineAuth))
+            {
+                _config.SteamMachineAuth = Web.SteamMachineAuth;
+                ConfigHandler.WriteChanges(_config);
+            }
 
             Console.WriteLine("Login was successful!");
 
