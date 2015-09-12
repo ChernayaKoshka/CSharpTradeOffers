@@ -164,7 +164,7 @@
             <param name="groupName">The name of the group to request information about.</param>
             <returns>A memberList object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestAllMemberLists(System.UInt64,System.Int32,System.Int32)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestAllMemberLists(System.UInt64,System.TimeSpan,System.Int32)">
             <summary>
             Requests group information as well as all pages of users.
             </summary>
@@ -173,7 +173,7 @@
             <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
             <returns>A List of the MemberList object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestAllMemberLists(System.String,System.Int32,System.Int32)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestAllMemberLists(System.String,System.TimeSpan,System.Int32)">
             <summary>
             Requests group information as well as the all pages of users.
             </summary>
@@ -339,6 +339,13 @@
             Writes the changes made to the config.
             </summary>
             <param name="towrite"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamRequestHandler.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Converts a dictionary to URL parameters. Ex: ?param=arg
+            </summary>
+            <param name="dict">The Dictionary to be converted.</param>
+            <returns>A concatenated string of URL arguments.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
             <param name="apiKey"></param>
@@ -760,9 +767,15 @@
             </summary>
             <param name="url">The URL to request.</param>
             <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="data">
+            Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the
+            method.
+            </param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>An HttpWebResponse object from the requested URL.</returns>
         </member>
@@ -774,11 +787,14 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.RetryFetch(System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+        <member name="M:CSharpTradeOffers.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
             <summary>
             A web method to return the response string from the URL.
             </summary>
@@ -786,11 +802,14 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.RetryFetchStream(System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+        <member name="M:CSharpTradeOffers.Web.RetryFetchStream(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
             <summary>
             A web method to return the response string from the URL.
             </summary>
@@ -798,7 +817,10 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
@@ -810,21 +832,17 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>The response stream.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Converts a dictionary to URL parameters. Ex: ?param=arg
-            </summary>
-            <param name="dict">The Dictionary to be converted.</param>
-            <returns>A concatenated string of URL arguments.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,System.String)">
             <summary>
             Executes the login by using the Steam Website.
-            </summary> 
+            </summary>
         </member>
     </members>
 </doc>

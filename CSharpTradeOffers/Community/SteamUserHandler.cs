@@ -12,6 +12,8 @@ namespace CSharpTradeOffers.Community
         private const string BaseUrl = "http://api.steampowered.com/ISteamUser/";
         private readonly string _apiKey;
 
+        private readonly Web _web = new Web(new SteamRequestHandler());
+
         public SteamUserHandler(string apiKey)
         {
             _apiKey = apiKey;
@@ -35,7 +37,7 @@ namespace CSharpTradeOffers.Community
                 {"relationship", relationship}
             };
             return
-                JsonConvert.DeserializeObject<GetFriendListResult>(Web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetFriendListResult>(_web.Fetch(url, "GET", data, null, false))
                     .Friendslist.Friends;
         }
 
@@ -53,7 +55,7 @@ namespace CSharpTradeOffers.Community
                 {"steamids", CommaDelimit(playersBansToRequest)}
             };
             return
-                JsonConvert.DeserializeObject<GetPlayerBansResult>(Web.Fetch(url, "GET", data, null, false)).PlayerBans;
+                JsonConvert.DeserializeObject<GetPlayerBansResult>(_web.Fetch(url, "GET", data, null, false)).PlayerBans;
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace CSharpTradeOffers.Community
                 {"steamids", CommaDelimit(playerSummariesToRequest)}
             };
             return
-                JsonConvert.DeserializeObject<GetPlayerSummariesV2Result>(Web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetPlayerSummariesV2Result>(_web.Fetch(url, "GET", data, null, false))
                     .Response.PlayersSummaries;
         }
 
@@ -88,7 +90,7 @@ namespace CSharpTradeOffers.Community
                 {"steamid", steamId.ToString()}
             };
             return
-                JsonConvert.DeserializeObject<GetUserGroupListBaseResult>(Web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetUserGroupListBaseResult>(_web.Fetch(url, "GET", data, null, false))
                     .Result;
         }
 
@@ -112,7 +114,7 @@ namespace CSharpTradeOffers.Community
                 {"url_type", urlType.ToString()}
             };
             return
-                JsonConvert.DeserializeObject<ResolveVanityUrlBaseResult>(Web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<ResolveVanityUrlBaseResult>(_web.Fetch(url, "GET", data, null, false))
                     .Response;
         }
 

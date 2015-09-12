@@ -8,6 +8,8 @@ namespace CSharpTradeOffers.Trading
     public class Inventory
     {
         private readonly ulong _steamId;
+        private readonly Web _web = new Web(new SteamRequestHandler());
+        
 
         /// <summary>
         /// Class constructor, automatically initializes inventory.
@@ -46,7 +48,7 @@ namespace CSharpTradeOffers.Trading
         private dynamic RequestInventory(uint appId)
         {
             string url = "https://steamcommunity.com/profiles/" + _steamId + "/inventory/json/" + appId + "/2/";
-            return JsonConvert.DeserializeObject<dynamic>(Web.Fetch(url, "GET", null, null, false));
+            return JsonConvert.DeserializeObject<dynamic>(_web.Fetch(url, "GET", null, null, false));
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace CSharpTradeOffers.Trading
     public class EconServiceHandler
     {
         private readonly string _apiKey;
+        private readonly Web _web = new Web(new SteamRequestHandler());
 
         private const string BaseUrl = "https://api.steampowered.com/IEconService/";
 
@@ -31,7 +32,7 @@ namespace CSharpTradeOffers.Trading
             data.Add("format", "json");
             return
                 JsonConvert.DeserializeObject<TradeOffers>(
-                    WebUtility.UrlDecode(Web.Fetch(url, "GET", data))).Response;
+                    WebUtility.UrlDecode(_web.Fetch(url, "GET", data))).Response;
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace CSharpTradeOffers.Trading
             };
             return
                 JsonConvert.DeserializeObject<CEconTradeOffer>(
-                    WebUtility.UrlDecode(Web.Fetch(url, "GET", data)));
+                    WebUtility.UrlDecode(_web.Fetch(url, "GET", data)));
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace CSharpTradeOffers.Trading
                 {"tradeofferid", tradeofferid.ToString()},
                 {"format", "json"}
             };
-            return Web.Fetch(url, "POST", data);
+            return _web.Fetch(url, "POST", data);
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace CSharpTradeOffers.Trading
                 {"tradeofferid", tradeofferid.ToString()},
                 {"format", "json"}
             };
-            return WebUtility.UrlDecode(Web.Fetch(url, "POST", data));
+            return WebUtility.UrlDecode(_web.Fetch(url, "POST", data));
         }
 
         /// <summary>
@@ -111,7 +112,7 @@ namespace CSharpTradeOffers.Trading
             };
             return
                 JsonConvert.DeserializeObject<Trade>(
-                    WebUtility.UrlDecode(Web.Fetch(string.Format(url, tradeId.TradeId), "POST",
+                    WebUtility.UrlDecode(_web.Fetch(string.Format(url, tradeId.TradeId), "POST",
                         data, container, false, "https://steamcommunity.com/tradeoffer/" + tradeId.TradeId + "/")));
         }
 
@@ -137,7 +138,7 @@ namespace CSharpTradeOffers.Trading
             };
             return
                 JsonConvert.DeserializeObject<Trade>(
-                    WebUtility.UrlDecode(Web.Fetch(string.Format(url, tradeId), "POST",
+                    WebUtility.UrlDecode(_web.Fetch(string.Format(url, tradeId), "POST",
                         data, container, false, "https://steamcommunity.com/tradeoffer/" + tradeId + "/")));
         }
 
@@ -166,7 +167,7 @@ namespace CSharpTradeOffers.Trading
                 {"captcha", ""},
                 {"trade_offer_create_params", "{}"}
             };
-            return JsonConvert.DeserializeObject<SendOfferResponse>(Web.Fetch(url, "POST", data, container, false,
+            return JsonConvert.DeserializeObject<SendOfferResponse>(_web.Fetch(url, "POST", data, container, false,
                 "https://steamcommunity.com/tradeoffer/new/?partner=" +
                 SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid))));
         }
@@ -198,7 +199,7 @@ namespace CSharpTradeOffers.Trading
                 {"trade_offer_create_params", "{}"},
                 {"tradeofferid_countered", tradeofferidCountered.ToString()}
             };
-            return JsonConvert.DeserializeObject<SendOfferResponse>(Web.Fetch(url, "POST", data, container, false,
+            return JsonConvert.DeserializeObject<SendOfferResponse>(_web.Fetch(url, "POST", data, container, false,
                 "https://steamcommunity.com/tradeoffer/" + tradeofferidCountered + "/"));
         }
 
@@ -216,7 +217,7 @@ namespace CSharpTradeOffers.Trading
                 {"time_last_visit", timeLastVisit.ToString()}
             };
             return
-                JsonConvert.DeserializeObject<GetTradeOffersSummaryBaseResponse>(Web.Fetch(url, "GET", data)).Response;
+                JsonConvert.DeserializeObject<GetTradeOffersSummaryBaseResponse>(_web.Fetch(url, "GET", data)).Response;
         }
     }
 }
