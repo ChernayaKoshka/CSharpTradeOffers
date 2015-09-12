@@ -340,6 +340,13 @@
             </summary>
             <param name="towrite"></param>
         </member>
+        <member name="M:CSharpTradeOffers.SteamRequestHandler.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Converts a dictionary to URL parameters. Ex: ?param=arg
+            </summary>
+            <param name="dict">The Dictionary to be converted.</param>
+            <returns>A concatenated string of URL arguments.</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
             <param name="apiKey"></param>
             <returns></returns>
@@ -813,13 +820,6 @@
             <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>The response stream.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Converts a dictionary to URL parameters. Ex: ?param=arg
-            </summary>
-            <param name="dict">The Dictionary to be converted.</param>
-            <returns>A concatenated string of URL arguments.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,System.String)">
             <summary>

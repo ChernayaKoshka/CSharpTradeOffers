@@ -13,6 +13,8 @@ namespace CSharpTradeOffers.Community
     /// </summary>
     public class CommunityHandler
     {
+        private readonly Web _web = new Web(new SteamRequestHandler());
+
         /// <summary>
         /// Posts a comment to the specified profile.
         /// </summary>
@@ -35,7 +37,7 @@ namespace CSharpTradeOffers.Community
             };
 
             return
-                JsonConvert.DeserializeObject<CommentResponse>(Web.Fetch(url, "POST", data, authContainer, true,
+                JsonConvert.DeserializeObject<CommentResponse>(_web.Fetch(url, "POST", data, authContainer, true,
                     url.Substring(0, url.Length - 3)));
         }
 
@@ -64,7 +66,7 @@ namespace CSharpTradeOffers.Community
                 {"sessionid", sessionid}
             };
 
-            return JsonConvert.DeserializeObject<ClanCommentResponse>(Web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<ClanCommentResponse>(_web.Fetch(url, "POST", data, authContainer));
         }
 
         /// <summary>
@@ -88,7 +90,7 @@ namespace CSharpTradeOffers.Community
                 {"accept_invite", "0"}
             };
 
-            return JsonConvert.DeserializeObject<AddFriendResponse>(Web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<AddFriendResponse>(_web.Fetch(url, "POST", data, authContainer));
         }
 
         /// <summary>
@@ -112,7 +114,7 @@ namespace CSharpTradeOffers.Community
                 {"accept_invite","1" }
             };
 
-            return Convert.ToBoolean(Web.Fetch(url, "POST", data, authContainer));
+            return Convert.ToBoolean(_web.Fetch(url, "POST", data, authContainer));
         }
 
         /// <summary>
@@ -135,7 +137,7 @@ namespace CSharpTradeOffers.Community
                 {"steamid", steamId.ToString()},
             };
 
-            return Convert.ToBoolean(Web.Fetch(url, "POST", data, authContainer));
+            return Convert.ToBoolean(_web.Fetch(url, "POST", data, authContainer));
         }
 
         /// <summary>
@@ -161,7 +163,7 @@ namespace CSharpTradeOffers.Community
                 {"sessionID", sessionid},
                 {"invitee", steamId.ToString()}
             };
-            return JsonConvert.DeserializeObject<InviteResponse>(Web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<InviteResponse>(_web.Fetch(url, "POST", data, authContainer));
         }
 
         /// <summary>
@@ -187,7 +189,7 @@ namespace CSharpTradeOffers.Community
                 {"sessionID", sessionid},
                 {"invitee_list", ToJArray(steamIds)}
             };
-            return JsonConvert.DeserializeObject<MultiInviteResponse>(Web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<MultiInviteResponse>(_web.Fetch(url, "POST", data, authContainer));
         }
 
         /// <summary>
@@ -215,7 +217,7 @@ namespace CSharpTradeOffers.Community
 
             return
                 (MemberList)
-                    new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(string.Format(url, groupId),
+                    new XmlSerializer(typeof (MemberList)).Deserialize(_web.FetchStream(string.Format(url, groupId),
                         "GET"));
         }
 
@@ -230,7 +232,7 @@ namespace CSharpTradeOffers.Community
 
             return
                 (MemberList)
-                    new XmlSerializer(typeof (MemberList)).Deserialize(Web.FetchStream(string.Format(url, groupName),
+                    new XmlSerializer(typeof (MemberList)).Deserialize(_web.FetchStream(string.Format(url, groupName),
                         "GET"));
         }
 
@@ -257,7 +259,7 @@ namespace CSharpTradeOffers.Community
                 try
                 {
                     var populatedList = (MemberList)
-                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait, retryCount,
+                        (new XmlSerializer(typeof (MemberList)).Deserialize(_web.RetryFetchStream(retryWait, retryCount,
                             temp, "GET")));
                     membersList.Add(populatedList);
                     if (!firstRequest)
@@ -305,7 +307,7 @@ namespace CSharpTradeOffers.Community
                 try
                 {
                     var populatedList = (MemberList)
-                        (new XmlSerializer(typeof (MemberList)).Deserialize(Web.RetryFetchStream(retryWait, retryCount,
+                        (new XmlSerializer(typeof (MemberList)).Deserialize(_web.RetryFetchStream(retryWait, retryCount,
                             temp, "GET")));
                     membersList.Add(populatedList);
 
@@ -369,7 +371,7 @@ namespace CSharpTradeOffers.Community
                 {"primary_group_steamid", profile.PrimaryGroupSteamId.ToString()}
             };
 
-            string response = Web.Fetch(url, "POST", data, account.AuthContainer);
+            string response = _web.Fetch(url, "POST", data, account.AuthContainer);
             return response.Contains("<div class=\"saved_changes_msg\">");
         }
 
@@ -399,7 +401,7 @@ namespace CSharpTradeOffers.Community
                 {"tradeConfirmationSetting", settings.TradeConfirmationSetting.IntValue().ToString()},
                 {"marketConfirmationSetting", settings.MarketConfirmationSetting.IntValue().ToString()}
             };
-            Web.Fetch(url, "POST", data, account.AuthContainer);
+            _web.Fetch(url, "POST", data, account.AuthContainer);
         }
     }
 }

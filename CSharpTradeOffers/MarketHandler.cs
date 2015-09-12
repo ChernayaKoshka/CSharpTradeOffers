@@ -10,8 +10,10 @@ namespace CSharpTradeOffers
     /// </summary>
     public class MarketHandler
     {
-        const string BaseUrl = "https://steamcommunity.com/market/";
-        
+        private const string BaseUrl = "https://steamcommunity.com/market/";
+
+        private readonly Web _web = new Web(new SteamRequestHandler());
+
         /// <summary>
         /// Sets the container to contain a MarketEligibility cookie. Required before trading.
         /// </summary>
@@ -20,8 +22,8 @@ namespace CSharpTradeOffers
         public void EligibilityCheck(ulong steamId, CookieContainer container)
         {
             const string url = BaseUrl + "eligibilitycheck/";
-            var data = new Dictionary<string, string> { { "goto", "/profiles/" + steamId + "/tradeoffers/" } };
-            Web.Fetch(url, "GET", data, container, false);
+            var data = new Dictionary<string, string> {{"goto", "/profiles/" + steamId + "/tradeoffers/"}};
+            _web.Fetch(url, "GET", data, container, false);
         }
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace CSharpTradeOffers
                 {"appid", appId.ToString()},
                 {"market_hash_name", marketHashName}
             };
-            return JsonConvert.DeserializeObject<MarketValue>(Web.Fetch(url, "GET", data, null, false));
+            return JsonConvert.DeserializeObject<MarketValue>(_web.Fetch(url, "GET", data, null, false));
         }
     }
 }

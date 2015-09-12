@@ -11,6 +11,7 @@ namespace CSharpTradeOffers.Trading
     {
         private const string BaseUrl = "https://api.steampowered.com/ISteamEconomy/";
         private readonly string _apiKey;
+        private readonly Web _web = new Web(new SteamRequestHandler());
 
         public SteamEconomyHandler(string apiKey)
         {
@@ -41,7 +42,7 @@ namespace CSharpTradeOffers.Trading
                 currentClass++;
             }
 
-            dynamic dynamicinfo = JsonConvert.DeserializeObject<dynamic>(Web.Fetch(url, "GET", data, null, false)).result;
+            dynamic dynamicinfo = JsonConvert.DeserializeObject<dynamic>(_web.Fetch(url, "GET", data, null, false)).result;
 
             Dictionary<string, dynamic> desrDictionary =
                 JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(dynamicinfo.ToString());
@@ -69,7 +70,7 @@ namespace CSharpTradeOffers.Trading
                 {"language", language}
             };
             return
-                JsonConvert.DeserializeObject<GetAssetPricesBaseResponse>(Web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetAssetPricesBaseResponse>(_web.Fetch(url, "GET", data, null, false))
                     .Result;
         }
     }
