@@ -14,7 +14,7 @@ namespace CSharpTradeOffers.Community
     public class CommunityHandler
     {
         private readonly Web _web = new Web(new SteamRequestHandler());
-
+        private static TimeSpan defaultRetryRate = new TimeSpan(0,0,0,1000); 
         /// <summary>
         /// Posts a comment to the specified profile.
         /// </summary>
@@ -218,7 +218,7 @@ namespace CSharpTradeOffers.Community
             return
                 (MemberList)
                     new XmlSerializer(typeof (MemberList)).Deserialize(_web.FetchStream(string.Format(url, groupId),
-                        "GET"));
+                        "GET").GetUnderlyingStream());
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace CSharpTradeOffers.Community
             return
                 (MemberList)
                     new XmlSerializer(typeof (MemberList)).Deserialize(_web.FetchStream(string.Format(url, groupName),
-                        "GET"));
+                        "GET").GetUnderlyingStream());
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="retryWait">The number of miliseconds to wait between each retry.</param>
         /// <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
         /// <returns>A List of the MemberList object.</returns>
-        public List<MemberList> RequestAllMemberLists(ulong groupId, int retryWait = 1000, int retryCount = 10)
+        public List<MemberList> RequestAllMemberLists(ulong groupId, TimeSpan retryWait, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1&p={1}";
@@ -260,7 +260,7 @@ namespace CSharpTradeOffers.Community
                 {
                     var populatedList = (MemberList)
                         (new XmlSerializer(typeof (MemberList)).Deserialize(_web.RetryFetchStream(retryWait, retryCount,
-                            temp, "GET")));
+                            temp, "GET").GetUnderlyingStream()));
                     membersList.Add(populatedList);
                     if (!firstRequest)
                     {
@@ -291,7 +291,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="retryWait">The number of miliseconds to wait between each retry.</param>
         /// <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
         /// <returns>A List of the MemberList object.</returns>
-        public List<MemberList> RequestAllMemberLists(string groupName, int retryWait = 1000, int retryCount = 10)
+        public List<MemberList> RequestAllMemberLists(string groupName, TimeSpan retryWait, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
             groupName = groupName.Replace(" ", "");
@@ -308,7 +308,7 @@ namespace CSharpTradeOffers.Community
                 {
                     var populatedList = (MemberList)
                         (new XmlSerializer(typeof (MemberList)).Deserialize(_web.RetryFetchStream(retryWait, retryCount,
-                            temp, "GET")));
+                            temp, "GET").GetUnderlyingStream()));
                     membersList.Add(populatedList);
 
                     if (!firstRequest)

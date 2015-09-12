@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 using System.Threading;
@@ -63,10 +62,7 @@ namespace CSharpTradeOffers
         {
             IResponse response = Request(url, method, data, cookies, xHeaders, referer);
 
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-            {
-                return sr.ReadToEnd();
-            }
+            return response.GetResponseStream().ReadToEnd();
         }
 
         /// <summary>
@@ -79,7 +75,7 @@ namespace CSharpTradeOffers
         /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
-        public string RetryFetch(int retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+        public string RetryFetch(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             int attempts = 0;
@@ -87,12 +83,11 @@ namespace CSharpTradeOffers
             {
                 try
                 {
-                    var response = Request(url, method, data, cookies, xHeaders, referer);
+                    IResponse response = Request(url, method, data, cookies, xHeaders, referer);
 
-                    using (var sr = new StreamReader(response.GetResponseStream()))
-                    {
-                        return sr.ReadToEnd();
-                    }
+                    ISteamStream responseStream = response.GetResponseStream();
+
+                    return responseStream.ReadToEnd();
                 }
                 catch (WebException)
                 {
@@ -114,7 +109,7 @@ namespace CSharpTradeOffers
         /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
-        public Stream RetryFetchStream(int retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+        public ISteamStream RetryFetchStream(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             int attempts = 0;
@@ -145,7 +140,7 @@ namespace CSharpTradeOffers
         /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>The response stream.</returns>
-        public Stream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        public ISteamStream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             return Request(url, method, data, cookies, xHeaders, referer).GetResponseStream();
         }
@@ -238,12 +233,11 @@ namespace CSharpTradeOffers
 
                 using (IResponse webResponse = Request("https://steamcommunity.com/login/dologin/", "POST", data, cc))
                 {
-                    using (var reader = new StreamReader(webResponse.GetResponseStream()))
-                    {
-                        var json = reader.ReadToEnd();
-                        loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
-                        cookieCollection = webResponse.Cookies;
-                    }
+                    var steamStream = webResponse.GetResponseStream();
+
+                    string json = steamStream.ReadToEnd();
+                    loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
+                    cookieCollection = webResponse.Cookies;
                 }
             } while (loginJson.CaptchaNeeded || loginJson.EmailAuthNeeded || loginJson.RequiresTwofactor);
 

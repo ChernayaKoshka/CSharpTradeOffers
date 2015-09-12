@@ -75,12 +75,14 @@
     <Compile Include="Configuration\XmlConfigHandler.cs" />
     <Compile Include="IRequestHandler.cs" />
     <Compile Include="IResponse.cs" />
+    <Compile Include="ISteamStream.cs" />
     <Compile Include="Json\LoginResult.cs" />
     <Compile Include="Json\RsaKey.cs" />
     <Compile Include="Json\TransferParameters.cs" />
     <Compile Include="RsaHelper.cs" />
     <Compile Include="SteamRequestHandler.cs" />
     <Compile Include="SteamResponse.cs" />
+    <Compile Include="SteamStream.cs" />
     <Compile Include="Trading\Data Classes\Action.cs" />
     <Compile Include="Trading\Data Classes\AppData.cs" />
     <Compile Include="Trading\Data Classes\AssetClassInfo.cs" />

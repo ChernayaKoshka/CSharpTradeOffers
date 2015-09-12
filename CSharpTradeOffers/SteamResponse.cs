@@ -1,9 +1,8 @@
-using System.IO;
 using System.Net;
 
 namespace CSharpTradeOffers
 {
-    public class SteamResponse : IResponse
+    public sealed class SteamResponse : IResponse
     {
         private readonly HttpWebResponse _httpWebResponse;
 
@@ -14,9 +13,9 @@ namespace CSharpTradeOffers
 
         public CookieCollection Cookies => _httpWebResponse.Cookies;
 
-        public Stream GetResponseStream()
+        public ISteamStream GetResponseStream()
         {
-            return _httpWebResponse.GetResponseStream();
+            return new SteamStream(_httpWebResponse.GetResponseStream());
         }
 
         public void Dispose()

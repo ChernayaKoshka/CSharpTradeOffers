@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CSharpTradeOffers;
+using NUnit.Framework;
 
 namespace CSharpTradeOffers_Tests
 {
-    [TestClass]
+    [TestFixture]
     public class SteamIDOperations_Tests
     {
-        [TestMethod]
+        [Test]
         public void ConvertAccountIdtoUInt64_NoFail()
         {
             uint input = 100049908;
@@ -16,7 +16,7 @@ namespace CSharpTradeOffers_Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertAccountIdToSteamId_NoFail()
         {
             uint input = 100049908;
@@ -25,7 +25,7 @@ namespace CSharpTradeOffers_Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertSteamIdtoULong_NoFail()
         {
             string input = "STEAM_0:0:50024954";
@@ -34,7 +34,7 @@ namespace CSharpTradeOffers_Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void ConvertSteamIdtoUlong_Exception_IndexOutOfRangeException()
         {
@@ -44,7 +44,7 @@ namespace CSharpTradeOffers_Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertUlongToSteamId_NoFail()
         {
             ulong input = 76561198060315636;
@@ -53,7 +53,7 @@ namespace CSharpTradeOffers_Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertSteamIdToAccountId_NoFail()
         {
             string input = "STEAM_0:0:50024954"; 
@@ -61,6 +61,5 @@ namespace CSharpTradeOffers_Tests
             uint actual = SteamIdOperations.ConvertSteamIdToAccountId(input);
             Assert.AreEqual(expected, actual);
         }
-        //100049904
     }
 }
