@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Net;
-using Newtonsoft.Json;
-using System.Threading;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net;
+using System.Threading;
 using CSharpTradeOffers.Json;
+using Newtonsoft.Json;
 
 namespace CSharpTradeOffers
 {
@@ -12,8 +13,15 @@ namespace CSharpTradeOffers
     /// </summary>
     public class Web
     {
-        private readonly IRequestHandler<IResponse> _requestHandler;
         public const string SteamCommunityDomain = "steamcommunity.com";
+
+        private static CookieContainer _cookies = new CookieContainer();
+        private readonly IRequestHandler<IResponse> _requestHandler;
+
+        public Web(IRequestHandler<IResponse> requestHandler)
+        {
+            _requestHandler = requestHandler;
+        }
 
         public static string SteamLogin { get; private set; }
 
@@ -25,21 +33,20 @@ namespace CSharpTradeOffers
 
         public static string TimezoneOffset { get; private set; }
 
-        private static CookieContainer _cookies = new CookieContainer();
-
-        public Web(IRequestHandler<IResponse> requestHandler)
-        {
-            _requestHandler = requestHandler;
-        }
-
         /// <summary>
         /// Fetch calls this method.
         /// </summary>
         /// <param name="url">The URL to request.</param>
         /// <param name="method">The method to be used. Ex: POST</param>
-        /// <param name="data">Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+        /// <param name="data">
+        /// Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the
+        /// method.
+        /// </param>
         /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+        /// <param name="xHeaders">
+        /// Special parameter, should only be used with requests that need "X-Requested-With:
+        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
+        /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>An HttpWebResponse object from the requested URL.</returns>
         public IResponse Request(string url, string method, Dictionary<string, string> data = null,
@@ -55,7 +62,10 @@ namespace CSharpTradeOffers
         /// <param name="method">The method to be used. Ex: POST</param>
         /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
         /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+        /// <param name="xHeaders">
+        /// Special parameter, should only be used with requests that need "X-Requested-With:
+        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
+        /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
         public string Fetch(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
@@ -72,31 +82,18 @@ namespace CSharpTradeOffers
         /// <param name="method">The method to be used. Ex: POST</param>
         /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
         /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+        /// <param name="xHeaders">
+        /// Special parameter, should only be used with requests that need "X-Requested-With:
+        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
+        /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
         public string RetryFetch(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            int attempts = 0;
-            while (true)
-            {
-                try
-                {
-                    IResponse response = Request(url, method, data, cookies, xHeaders, referer);
+            ISteamStream response = RetryFetchStream(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
 
-                    ISteamStream responseStream = response.GetResponseStream();
-
-                    return responseStream.ReadToEnd();
-                }
-                catch (WebException)
-                {
-                    if (attempts >= retryCount)
-                        return null;
-                    attempts++;
-                }
-                Thread.Sleep(retryWait);
-            }
+            return response?.ReadToEnd();
         }
 
         /// <summary>
@@ -106,28 +103,18 @@ namespace CSharpTradeOffers
         /// <param name="method">The method to be used. Ex: POST</param>
         /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
         /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+        /// <param name="xHeaders">
+        /// Special parameter, should only be used with requests that need "X-Requested-With:
+        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
+        /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
         public ISteamStream RetryFetchStream(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            int attempts = 0;
-            while (true)
-            {
-                try
-                {
-                    return Request(url, method, data, cookies, xHeaders, referer).GetResponseStream();
+            IResponse response = RetryRequestProcessor(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
 
-                }
-                catch (WebException)
-                {
-                    if (attempts >= retryCount)
-                        return null;
-                    attempts++;
-                }
-                Thread.Sleep(retryWait);
-            }
+            return response?.GetResponseStream();
         }
 
         /// <summary>
@@ -137,7 +124,10 @@ namespace CSharpTradeOffers
         /// <param name="method">The method to be used. Ex: POST</param>
         /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
         /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+        /// <param name="xHeaders">
+        /// Special parameter, should only be used with requests that need "X-Requested-With:
+        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
+        /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>The response stream.</returns>
         public ISteamStream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
@@ -147,7 +137,7 @@ namespace CSharpTradeOffers
 
         /// <summary>
         /// Executes the login by using the Steam Website.
-        /// </summary> 
+        /// </summary>
         public Account DoLogin(string username, string password, string machineAuth = "")
         {
             Thread.Sleep(2000);
@@ -188,7 +178,7 @@ namespace CSharpTradeOffers
                 string capText = "";
                 if (captcha)
                 {
-                    System.Diagnostics.Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.CaptchaGid);
+                    Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.CaptchaGid);
                     Console.WriteLine("Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.");
                     Console.Write("Please enter the numbers/letters from the picture that opened up: ");
                     capText = Console.ReadLine();
@@ -310,6 +300,27 @@ namespace CSharpTradeOffers
                 }
             } while (account == null);
             return account;
+        }
+
+        private IResponse RetryRequestProcessor(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        {
+            int attempts = 0;
+            while (true)
+            {
+                try
+                {
+                    return Request(url, method, data, cookies, xHeaders, referer);
+                }
+                catch (WebException)
+                {
+                    if (attempts >= retryCount)
+                        return null;
+                    attempts++;
+                }
+
+                Thread.Sleep(retryWait);
+            }
         }
 
         private static void SubmitCookies(CookieContainer cookies)

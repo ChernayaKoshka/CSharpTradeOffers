@@ -767,9 +767,15 @@
             </summary>
             <param name="url">The URL to request.</param>
             <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="data">
+            Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the
+            method.
+            </param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>An HttpWebResponse object from the requested URL.</returns>
         </member>
@@ -781,7 +787,10 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
@@ -793,7 +802,10 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
@@ -805,7 +817,10 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
@@ -817,14 +832,17 @@
             <param name="method">The method to be used. Ex: POST</param>
             <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
             <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">Special parameter, should only be used with requests that need "X-Requested-With: XMLHttpRequest" and "X-Prototype-Version: 1.7"</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>The response stream.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,System.String)">
             <summary>
             Executes the login by using the Steam Website.
-            </summary> 
+            </summary>
         </member>
     </members>
 </doc>
