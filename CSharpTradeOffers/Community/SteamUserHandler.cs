@@ -12,7 +12,7 @@ namespace CSharpTradeOffers.Community
         private const string BaseUrl = "http://api.steampowered.com/ISteamUser/";
         private readonly string _apiKey;
 
-        private readonly Web _web = new Web(new SteamRequestHandler());
+        private readonly Web _web = new Web(new SteamWebRequestHandler());
 
         public SteamUserHandler(string apiKey)
         {

@@ -12,7 +12,7 @@ namespace CSharpTradeOffers
     {
         private const string BaseUrl = "https://steamcommunity.com/market/";
 
-        private readonly Web _web = new Web(new SteamRequestHandler());
+        private readonly Web _web = new Web(new SteamWebRequestHandler());
 
         /// <summary>
         /// Sets the container to contain a MarketEligibility cookie. Required before trading.

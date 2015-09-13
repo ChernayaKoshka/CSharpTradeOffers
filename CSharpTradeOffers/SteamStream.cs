@@ -1,17 +1,29 @@
 ﻿using System.IO;
+using System.Xml.Serialization;
 
 namespace CSharpTradeOffers
 {
-    internal sealed class SteamStream : ISteamStream
+    /// <summary>
+    /// A facade for a <see cref="Stream" /> from a Steam web request.
+    /// </summary>
+    internal sealed class SteamStream : IResponseStream
     {
         private readonly Stream _stream;
 
+        /// <summary>
+        /// Encapsulate a stream from a Steam Request.
+        /// </summary>
+        /// <param name="stream">The underlying steam stream.</param>
         public SteamStream(Stream stream)
         {
             _stream = stream;
         }
 
-        public string ReadToEnd()
+        /// <summary>
+        /// Read the steam stream to the end.
+        /// </summary>
+        /// <returns>The stream contents.</returns>
+        public string ReadStream()
         {
             using (StreamReader streamReader = new StreamReader(_stream))
             {
@@ -19,11 +31,14 @@ namespace CSharpTradeOffers
             }
         }
 
-        public Stream GetUnderlyingStream()
+        /// <summary>
+        /// Deserializes the stream to a serializable type with Xml.
+        /// </summary>
+        /// <typeparam name="TSerializable">An XML serializable type.</typeparam>
+        /// <returns>The deserialized type.</returns>
+        public TSerializable Deserialize<TSerializable>()
         {
-            // TODO: We don't really want to expose the Stream, as it defeats the point of having this SteamStream facade. 
-            // TODO: (cont.) It will make unit testing harder later on. But at the moment, some classes rely on this.
-            return _stream;
+            return (TSerializable) (new XmlSerializer(typeof (TSerializable)).Deserialize(_stream));
         }
     }
 }
