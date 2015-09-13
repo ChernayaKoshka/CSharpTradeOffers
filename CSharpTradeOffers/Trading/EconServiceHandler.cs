@@ -10,7 +10,7 @@ namespace CSharpTradeOffers.Trading
     public class EconServiceHandler
     {
         private readonly string _apiKey;
-        private readonly Web _web = new Web(new SteamRequestHandler());
+        private readonly Web _web = new Web(new SteamWebRequestHandler());
 
         private const string BaseUrl = "https://api.steampowered.com/IEconService/";
 

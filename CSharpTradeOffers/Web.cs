@@ -16,11 +16,11 @@ namespace CSharpTradeOffers
         public const string SteamCommunityDomain = "steamcommunity.com";
 
         private static CookieContainer _cookies = new CookieContainer();
-        private readonly IRequestHandler<IResponse> _requestHandler;
+        private readonly IWebRequestHandler<IResponse> _webRequestHandler;
 
-        public Web(IRequestHandler<IResponse> requestHandler)
+        public Web(IWebRequestHandler<IResponse> webRequestHandler)
         {
-            _requestHandler = requestHandler;
+            _webRequestHandler = webRequestHandler;
         }
 
         public static string SteamLogin { get; private set; }
@@ -52,7 +52,7 @@ namespace CSharpTradeOffers
         public IResponse Request(string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            return _requestHandler.HandleRequest(url, method, data, cookies, xHeaders, referer);
+            return _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace CSharpTradeOffers
         {
             IResponse response = Request(url, method, data, cookies, xHeaders, referer);
 
-            return response.GetResponseStream().ReadToEnd();
+            return response.GetResponseStream().ReadStream();
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace CSharpTradeOffers
         {
             ISteamStream response = RetryFetchStream(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
 
-            return response?.ReadToEnd();
+            return response?.ReadStream();
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace CSharpTradeOffers
                 {
                     var steamStream = webResponse.GetResponseStream();
 
-                    string json = steamStream.ReadToEnd();
+                    string json = steamStream.ReadStream();
                     loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
                     cookieCollection = webResponse.Cookies;
                 }

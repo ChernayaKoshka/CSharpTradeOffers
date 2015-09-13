@@ -11,7 +11,7 @@ namespace CSharpTradeOffers.Trading
     {
         private const string BaseUrl = "https://api.steampowered.com/ISteamEconomy/";
         private readonly string _apiKey;
-        private readonly Web _web = new Web(new SteamRequestHandler());
+        private readonly Web _web = new Web(new SteamWebRequestHandler());
 
         public SteamEconomyHandler(string apiKey)
         {

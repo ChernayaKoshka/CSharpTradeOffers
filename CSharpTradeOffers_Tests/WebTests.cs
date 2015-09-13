@@ -13,14 +13,14 @@ namespace CSharpTradeOffers_Tests
         public void BeforeEachTest()
         {
             _mockSteamStream = new Mock<ISteamStream>();
-            _mockSteamStream.Setup(x => x.ReadToEnd()).Returns(SteamStreamResponse);
+            _mockSteamStream.Setup(x => x.ReadStream()).Returns(SteamStreamResponse);
 
             _mockResponse = new Mock<IResponse>();
             _mockResponse.Setup(x => x.GetResponseStream()).Returns(_mockSteamStream.Object);
 
-            _mockRequestHandler = new Mock<IRequestHandler<IResponse>>();
+            _mockRequestHandler = new Mock<IWebRequestHandler<IResponse>>();
 
-            _mockRequestHandler.Setup(x => x.HandleRequest(Url, Method, null, null, true, "")).Returns(_mockResponse.Object);
+            _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "")).Returns(_mockResponse.Object);
 
             _web = new Web(_mockRequestHandler.Object);
         }
@@ -28,7 +28,7 @@ namespace CSharpTradeOffers_Tests
         private const string Url = "url";
         private const string Method = "method";
         private const string SteamStreamResponse = "Response From Steam";
-        private Mock<IRequestHandler<IResponse>> _mockRequestHandler;
+        private Mock<IWebRequestHandler<IResponse>> _mockRequestHandler;
         private Mock<ISteamStream> _mockSteamStream;
         private Mock<IResponse> _mockResponse;
         private Web _web;
@@ -44,7 +44,7 @@ namespace CSharpTradeOffers_Tests
         [Test]
         public void RetryFetch_ReturnsNull_WhenExceedingRetryCount()
         {
-            _mockRequestHandler.Setup(x => x.HandleRequest(Url, Method, null, null, true, "")).Throws<WebException>();
+            _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "")).Throws<WebException>();
 
             string response = _web.RetryFetch(new TimeSpan(1), 2, Url, Method);
             Assert.IsNull(response);
@@ -60,7 +60,7 @@ namespace CSharpTradeOffers_Tests
         [Test]
         public void RetryFetchStream_ReturnsNull_WhenExceedingRetryCount()
         {
-            _mockRequestHandler.Setup(x => x.HandleRequest(Url, Method, null, null, true, "")).Throws<WebException>();
+            _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "")).Throws<WebException>();
 
             ISteamStream steamStream = _web.RetryFetchStream(new TimeSpan(1), 2, Url, Method);
 
