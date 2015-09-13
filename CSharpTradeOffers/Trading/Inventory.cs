@@ -8,7 +8,7 @@ namespace CSharpTradeOffers.Trading
     public class Inventory
     {
         private readonly ulong _steamId;
-        private readonly Web _web = new Web(new SteamRequestHandler());
+        private readonly Web _web = new Web(new SteamWebRequestHandler());
         
 
         /// <summary>

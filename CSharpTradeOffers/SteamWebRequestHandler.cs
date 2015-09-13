@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Cache;
 using System.Text;
 
 namespace CSharpTradeOffers
 {
-    public class SteamRequestHandler : IRequestHandler<SteamResponse>
+    /// <summary>
+    /// Handles requests to the "www.SteamCommunity.com" page.
+    /// </summary>
+    public class SteamWebRequestHandler : IWebRequestHandler<SteamResponse>
     {
-        public SteamResponse HandleRequest(string url, string method, Dictionary<string, string> data = null,
+        /// <summary>
+        /// Sends a request to a url, refered from the steam community. Returns a steam response.
+        /// </summary>
+        /// <returns>A stream response</returns>
+        public SteamResponse HandleWebRequest(string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             bool isGetMethod = (method.ToLower() == "get");
@@ -31,7 +37,7 @@ namespace CSharpTradeOffers
 
                 request.UserAgent =
                     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
-                request.Referer = String.IsNullOrEmpty(referer) ? "http://steamcommunity.com/" : referer;
+                request.Referer = string.IsNullOrEmpty(referer) ? "http://steamcommunity.com/" : referer;
                 request.Timeout = 50000;
                 request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Revalidate);
                 request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
@@ -45,7 +51,6 @@ namespace CSharpTradeOffers
 
                 if (data != null && !isGetMethod)
                 {
-                    //string dataString = DictionaryToURLString(data);
                     byte[] dataBytes = Encoding.UTF8.GetBytes(DictionaryToUrlString(data));
                     request.ContentLength = dataBytes.Length;
 

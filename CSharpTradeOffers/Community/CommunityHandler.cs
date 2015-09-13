@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Community
@@ -13,8 +12,8 @@ namespace CSharpTradeOffers.Community
     /// </summary>
     public class CommunityHandler
     {
-        private readonly Web _web = new Web(new SteamRequestHandler());
-        private static TimeSpan defaultRetryRate = new TimeSpan(0,0,0,1000); 
+        private readonly Web _web = new Web(new SteamWebRequestHandler());
+
         /// <summary>
         /// Posts a comment to the specified profile.
         /// </summary>
@@ -215,10 +214,8 @@ namespace CSharpTradeOffers.Community
         {
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1";
 
-            return
-                (MemberList)
-                    new XmlSerializer(typeof (MemberList)).Deserialize(_web.FetchStream(string.Format(url, groupId),
-                        "GET").GetUnderlyingStream());
+            IResponseStream fetchedStream = _web.FetchStream(string.Format(url, groupId), "GET");
+            return fetchedStream.Deserialize<MemberList>();
         }
 
         /// <summary>
@@ -230,10 +227,8 @@ namespace CSharpTradeOffers.Community
         {
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1";
 
-            return
-                (MemberList)
-                    new XmlSerializer(typeof (MemberList)).Deserialize(_web.FetchStream(string.Format(url, groupName),
-                        "GET").GetUnderlyingStream());
+            IResponseStream fetchedStream = _web.FetchStream(string.Format(url, groupName), "GET");
+            return fetchedStream.Deserialize<MemberList>();
         }
 
         /// <summary>
@@ -254,14 +249,17 @@ namespace CSharpTradeOffers.Community
 
             do
             {
-                string temp = string.Format(url, groupId, count);
+                string requestUrl = string.Format(url, groupId, count);
 
                 try
                 {
-                    var populatedList = (MemberList)
-                        (new XmlSerializer(typeof (MemberList)).Deserialize(_web.RetryFetchStream(retryWait, retryCount,
-                            temp, "GET").GetUnderlyingStream()));
+                    IResponseStream fetchedStream = _web.RetryFetchStream(retryWait, retryCount,
+                        requestUrl, "GET");
+
+                    MemberList populatedList = fetchedStream.Deserialize<MemberList>();
+
                     membersList.Add(populatedList);
+
                     if (!firstRequest)
                     {
                         firstRequest = true;
@@ -306,10 +304,8 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    var populatedList = (MemberList)
-                        (new XmlSerializer(typeof (MemberList)).Deserialize(_web.RetryFetchStream(retryWait, retryCount,
-                            temp, "GET").GetUnderlyingStream()));
-                    membersList.Add(populatedList);
+                    IResponseStream steamStream = _web.RetryFetchStream(retryWait, retryCount, temp, "GET");
+                    var populatedList = steamStream.Deserialize<MemberList>();
 
                     if (!firstRequest)
                     {

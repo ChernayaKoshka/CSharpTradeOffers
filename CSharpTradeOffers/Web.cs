@@ -16,11 +16,11 @@ namespace CSharpTradeOffers
         public const string SteamCommunityDomain = "steamcommunity.com";
 
         private static CookieContainer _cookies = new CookieContainer();
-        private readonly IRequestHandler<IResponse> _requestHandler;
+        private readonly IWebRequestHandler<IResponse> _webRequestHandler;
 
-        public Web(IRequestHandler<IResponse> requestHandler)
+        public Web(IWebRequestHandler<IResponse> webRequestHandler)
         {
-            _requestHandler = requestHandler;
+            _webRequestHandler = webRequestHandler;
         }
 
         public static string SteamLogin { get; private set; }
@@ -52,7 +52,7 @@ namespace CSharpTradeOffers
         public IResponse Request(string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            return _requestHandler.HandleRequest(url, method, data, cookies, xHeaders, referer);
+            return _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace CSharpTradeOffers
         {
             IResponse response = Request(url, method, data, cookies, xHeaders, referer);
 
-            return response.GetResponseStream().ReadToEnd();
+            return response.GetResponseStream().ReadStream();
         }
 
         /// <summary>
@@ -91,9 +91,9 @@ namespace CSharpTradeOffers
         public string RetryFetch(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            ISteamStream response = RetryFetchStream(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
+            IResponseStream response = RetryFetchStream(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
 
-            return response?.ReadToEnd();
+            return response?.ReadStream();
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace CSharpTradeOffers
         /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
-        public ISteamStream RetryFetchStream(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+        public IResponseStream RetryFetchStream(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             IResponse response = RetryRequestProcessor(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
@@ -130,7 +130,7 @@ namespace CSharpTradeOffers
         /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>The response stream.</returns>
-        public ISteamStream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        public IResponseStream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             return Request(url, method, data, cookies, xHeaders, referer).GetResponseStream();
         }
@@ -144,7 +144,7 @@ namespace CSharpTradeOffers
             RsaHelper rsaHelper = new RsaHelper(password);
 
             var loginDetails = new Dictionary<string, string> {{"username", username}};
-            string response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
+            IResponse response = Request("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
 
             string encryptedBase64Password = rsaHelper.EncryptPasswordResponse(response);
             if (encryptedBase64Password == null) return null;
@@ -225,7 +225,7 @@ namespace CSharpTradeOffers
                 {
                     var steamStream = webResponse.GetResponseStream();
 
-                    string json = steamStream.ReadToEnd();
+                    string json = steamStream.ReadStream();
                     loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
                     cookieCollection = webResponse.Cookies;
                 }
