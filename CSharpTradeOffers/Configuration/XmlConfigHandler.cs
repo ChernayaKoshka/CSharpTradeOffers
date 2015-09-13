@@ -24,7 +24,7 @@ namespace CSharpTradeOffers.Configuration
         /// <returns>A RootConfig object.</returns>
         public Config Reload()
         {
-            var config = new Config();
+            Config config;
 
             if (!File.Exists(_path))
             {

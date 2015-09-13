@@ -14,6 +14,7 @@ namespace DonationBot
         private static Account _account;
         private static Config _config = new Config();
         private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
+        private static readonly Web Web = new Web(new SteamRequestHandler());
 
         private static void Main()
         {
