@@ -75,7 +75,7 @@
     <Compile Include="Configuration\XmlConfigHandler.cs" />
     <Compile Include="IWebRequestHandler.cs" />
     <Compile Include="IResponse.cs" />
-    <Compile Include="ISteamStream.cs" />
+    <Compile Include="IResponseStream.cs" />
     <Compile Include="Json\LoginResult.cs" />
     <Compile Include="Json\RsaKey.cs" />
     <Compile Include="Json\TransferParameters.cs" />

@@ -344,7 +344,7 @@
             <summary>
             A generic Request Handler from the web.
             </summary>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResponse">The response type to get</typeparam>
         </member>
         <member name="M:CSharpTradeOffers.IWebRequestHandler`1.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
             <summary>
@@ -352,23 +352,39 @@
             </summary>
             <returns>Return's a generic <see cref="T:CSharpTradeOffers.IResponse" /> from the request.</returns>
         </member>
-        <member name="T:CSharpTradeOffers.ISteamStream">
+        <member name="T:CSharpTradeOffers.IResponse">
             <summary>
-            A Stream from Steam.
+            A response from the web.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.ISteamStream.ReadStream">
+        <member name="M:CSharpTradeOffers.IResponse.GetResponseStream">
+            <summary>
+            The stream created from the response.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:CSharpTradeOffers.IResponse.Cookies">
+            <summary>
+            Any cookies created from the response.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.IResponseStream">
+            <summary>
+            A response stream.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.IResponseStream.ReadStream">
             <summary>
             Read the contents of the Stream.
             </summary>
-            <returns></returns>
+            <returns>The stream contents.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.ISteamStream.Deserialize``1">
+        <member name="M:CSharpTradeOffers.IResponseStream.Deserialize``1">
             <summary>
-            Deserializes the <see cref="T:CSharpTradeOffers.ISteamStream" /> to a type.
+            Deserializes the stream to a serializable type.
             </summary>
-            <typeparam name="TSerializable"></typeparam>
-            <returns></returns>
+            <typeparam name="TSerializable">A serializable type.</typeparam>
+            <returns>The deserialized type.</returns>
         </member>
         <member name="T:CSharpTradeOffers.SteamWebRequestHandler">
             <summary>
@@ -379,7 +395,7 @@
             <summary>
             Sends a request to a url, refered from the steam community. Returns a steam response.
             </summary>
-            <returns></returns>
+            <returns>A stream response</returns>
         </member>
         <member name="M:CSharpTradeOffers.SteamWebRequestHandler.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
@@ -387,6 +403,33 @@
             </summary>
             <param name="dict">The Dictionary to be converted.</param>
             <returns>A concatenated string of URL arguments.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.SteamResponse">
+            <summary>
+            A response from Steam.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamResponse.#ctor(System.Net.HttpWebResponse)">
+            <summary>
+            Create a steam response from a web response.
+            </summary>
+            <param name="httpWebResponse">A Web Response from Steam.</param>
+        </member>
+        <member name="P:CSharpTradeOffers.SteamResponse.Cookies">
+            <summary>
+            Cookies collected from the response.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamResponse.GetResponseStream">
+            <summary>
+            The response stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamResponse.Dispose">
+            <summary>
+            Disposes the object.
+            </summary>
         </member>
         <member name="T:CSharpTradeOffers.SteamStream">
             <summary>
@@ -403,7 +446,7 @@
             <summary>
             Read the steam stream to the end.
             </summary>
-            <returns></returns>
+            <returns>The stream contents.</returns>
         </member>
         <member name="M:CSharpTradeOffers.SteamStream.Deserialize``1">
             <summary>

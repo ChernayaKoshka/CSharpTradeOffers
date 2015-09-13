@@ -1,9 +1,9 @@
 namespace CSharpTradeOffers
 {
     /// <summary>
-    /// A Stream from Steam.
+    /// A response stream.
     /// </summary>
-    public interface ISteamStream
+    public interface IResponseStream
     {
         /// <summary>
         /// Read the contents of the Stream.

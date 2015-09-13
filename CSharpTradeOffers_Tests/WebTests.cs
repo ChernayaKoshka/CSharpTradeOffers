@@ -12,7 +12,7 @@ namespace CSharpTradeOffers_Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            _mockSteamStream = new Mock<ISteamStream>();
+            _mockSteamStream = new Mock<IResponseStream>();
             _mockSteamStream.Setup(x => x.ReadStream()).Returns(SteamStreamResponse);
 
             _mockResponse = new Mock<IResponse>();
@@ -29,14 +29,14 @@ namespace CSharpTradeOffers_Tests
         private const string Method = "method";
         private const string SteamStreamResponse = "Response From Steam";
         private Mock<IWebRequestHandler<IResponse>> _mockRequestHandler;
-        private Mock<ISteamStream> _mockSteamStream;
+        private Mock<IResponseStream> _mockSteamStream;
         private Mock<IResponse> _mockResponse;
         private Web _web;
 
         [Test]
         public void FetchStream_ShouldFetchStream()
         {
-            ISteamStream steamStream = _web.FetchStream(Url, Method);
+            IResponseStream steamStream = _web.FetchStream(Url, Method);
 
             Assert.AreEqual(steamStream, _mockSteamStream.Object);
         }
@@ -62,7 +62,7 @@ namespace CSharpTradeOffers_Tests
         {
             _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "")).Throws<WebException>();
 
-            ISteamStream steamStream = _web.RetryFetchStream(new TimeSpan(1), 2, Url, Method);
+            IResponseStream steamStream = _web.RetryFetchStream(new TimeSpan(1), 2, Url, Method);
 
             Assert.IsNull(steamStream);
         }
@@ -70,7 +70,7 @@ namespace CSharpTradeOffers_Tests
         [Test]
         public void RetryFetchStream_ReturnsSteamStream_WhenNotExceedingRetryCount()
         {
-            ISteamStream steamStream = _web.RetryFetchStream(new TimeSpan(1), 2, Url, Method);
+            IResponseStream steamStream = _web.RetryFetchStream(new TimeSpan(1), 2, Url, Method);
 
             Assert.AreEqual(steamStream, _mockSteamStream.Object);
         }

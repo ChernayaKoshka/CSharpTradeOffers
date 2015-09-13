@@ -91,7 +91,7 @@ namespace CSharpTradeOffers
         public string RetryFetch(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            ISteamStream response = RetryFetchStream(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
+            IResponseStream response = RetryFetchStream(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
 
             return response?.ReadStream();
         }
@@ -109,7 +109,7 @@ namespace CSharpTradeOffers
         /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
-        public ISteamStream RetryFetchStream(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+        public IResponseStream RetryFetchStream(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             IResponse response = RetryRequestProcessor(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
@@ -130,7 +130,7 @@ namespace CSharpTradeOffers
         /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>The response stream.</returns>
-        public ISteamStream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        public IResponseStream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
             return Request(url, method, data, cookies, xHeaders, referer).GetResponseStream();
         }

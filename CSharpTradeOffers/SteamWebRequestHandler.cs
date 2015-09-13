@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Cache;
 using System.Text;
@@ -14,7 +13,7 @@ namespace CSharpTradeOffers
         /// <summary>
         /// Sends a request to a url, refered from the steam community. Returns a steam response.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A stream response</returns>
         public SteamResponse HandleWebRequest(string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {

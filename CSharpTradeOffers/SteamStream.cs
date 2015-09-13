@@ -6,7 +6,7 @@ namespace CSharpTradeOffers
     /// <summary>
     /// A facade for a <see cref="Stream" /> from a Steam web request.
     /// </summary>
-    internal sealed class SteamStream : ISteamStream
+    internal sealed class SteamStream : IResponseStream
     {
         private readonly Stream _stream;
 

@@ -214,7 +214,7 @@ namespace CSharpTradeOffers.Community
         {
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1";
 
-            ISteamStream fetchedStream = _web.FetchStream(string.Format(url, groupId), "GET");
+            IResponseStream fetchedStream = _web.FetchStream(string.Format(url, groupId), "GET");
             return fetchedStream.Deserialize<MemberList>();
         }
 
@@ -227,7 +227,7 @@ namespace CSharpTradeOffers.Community
         {
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1";
 
-            ISteamStream fetchedStream = _web.FetchStream(string.Format(url, groupName), "GET");
+            IResponseStream fetchedStream = _web.FetchStream(string.Format(url, groupName), "GET");
             return fetchedStream.Deserialize<MemberList>();
         }
 
@@ -253,7 +253,7 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    ISteamStream fetchedStream = _web.RetryFetchStream(retryWait, retryCount,
+                    IResponseStream fetchedStream = _web.RetryFetchStream(retryWait, retryCount,
                         requestUrl, "GET");
 
                     MemberList populatedList = fetchedStream.Deserialize<MemberList>();
@@ -304,7 +304,7 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    ISteamStream steamStream = _web.RetryFetchStream(retryWait, retryCount, temp, "GET");
+                    IResponseStream steamStream = _web.RetryFetchStream(retryWait, retryCount, temp, "GET");
                     var populatedList = steamStream.Deserialize<MemberList>();
 
                     if (!firstRequest)

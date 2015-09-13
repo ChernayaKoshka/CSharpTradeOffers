@@ -6,7 +6,7 @@ namespace CSharpTradeOffers
     /// <summary>
     /// A generic Request Handler from the web.
     /// </summary>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResponse">The response type to get</typeparam>
     public interface IWebRequestHandler<out TResponse> where TResponse : IResponse
     {
         /// <summary>
