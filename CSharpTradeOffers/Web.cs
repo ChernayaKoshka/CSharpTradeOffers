@@ -144,7 +144,7 @@ namespace CSharpTradeOffers
             RsaHelper rsaHelper = new RsaHelper(password);
 
             var loginDetails = new Dictionary<string, string> {{"username", username}};
-            string response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
+            IResponse response = Request("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
 
             string encryptedBase64Password = rsaHelper.EncryptPasswordResponse(response);
             if (encryptedBase64Password == null) return null;

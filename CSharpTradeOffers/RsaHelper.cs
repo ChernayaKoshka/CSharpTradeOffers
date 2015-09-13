@@ -15,9 +15,9 @@ namespace CSharpTradeOffers
             _password = password;
         }
 
-        public string EncryptPasswordResponse(string response)
+        public string EncryptPasswordResponse(IResponse response)
         {
-            if (!RequestRsaKey(response)) return null;
+            if (!RequestRsaKey(response.GetResponseStream().ReadStream())) return null;
 
             //RSA Encryption
             var rsa = new RSACryptoServiceProvider();
