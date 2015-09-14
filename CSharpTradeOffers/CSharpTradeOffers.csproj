@@ -47,10 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Community\Data Classes\AddFriendResponse.cs" />
+    <Compile Include="Community\Data Classes\ChatLogResponse.cs" />
     <Compile Include="Community\Data Classes\ClanCommentResponse.cs" />
     <Compile Include="Community\Data Classes\CommentResponse.cs" />
     <Compile Include="Community\Data Classes\Friend.cs" />
     <Compile Include="Community\Data Classes\Friendslist.cs" />
+    <Compile Include="Community\Data Classes\FriendStateResponse.cs" />
     <Compile Include="Community\Data Classes\GetFriendListResult.cs" />
     <Compile Include="Community\Data Classes\GetPlayerBansResult.cs" />
     <Compile Include="Community\Data Classes\GetPlayerSummariesV2Result.cs" />
@@ -64,11 +66,15 @@
     <Compile Include="Community\Data Classes\PlayerBans.cs" />
     <Compile Include="Community\Data Classes\PlayersSummaries.cs" />
     <Compile Include="Community\Data Classes\PlayerSummary.cs" />
+    <Compile Include="Community\Data Classes\PollResponse.cs" />
     <Compile Include="Community\Data Classes\PrivacySettings.cs" />
     <Compile Include="Community\Data Classes\Profile.cs" />
     <Compile Include="Community\Data Classes\ResolveVanityUrlBaseResult.cs" />
     <Compile Include="Community\Data Classes\ResolveVanityUrlResult.cs" />
     <Compile Include="Community\Data Classes\ResponseV2.cs" />
+    <Compile Include="Community\Data Classes\SendChatMessageResponse.cs" />
+    <Compile Include="Community\SteamChatHandler.cs" />
+    <Compile Include="Community\Data Classes\WebPresenceOAuthLogonResponse.cs" />
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Configuration\Data Classes\Officer.cs" />
     <Compile Include="Configuration\Data Classes\Config.cs" />

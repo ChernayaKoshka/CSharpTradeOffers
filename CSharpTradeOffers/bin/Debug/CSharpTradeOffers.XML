@@ -74,6 +74,12 @@
             MultiInviteResponse
             </summary>
         </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.UnixTimeNow">
+            <summary>
+            Gets the Unix time. Also known as Epoch.
+            </summary>
+            <returns>A long integer of the number of seconds since 1,1,1970</returns>
+        </member>
         <member name="T:CSharpTradeOffers.Community.CommunityHandler">
             <summary>
             Handles commmunity related tasks
