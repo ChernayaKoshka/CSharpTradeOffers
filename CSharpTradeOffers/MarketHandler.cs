@@ -44,7 +44,7 @@ namespace CSharpTradeOffers
                 {"appid", appId.ToString()},
                 {"market_hash_name", marketHashName}
             };
-            return JsonConvert.DeserializeObject<MarketValue>(_web.Fetch(url, "GET", data, null, false));
+            return JsonConvert.DeserializeObject<MarketValue>(_web.Fetch(url, "GET", data, null, false).ReadStream());
         }
     }
 }

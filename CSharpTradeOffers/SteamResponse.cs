@@ -1,4 +1,8 @@
+using System;
+using System.IO;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
+using System.Xml.Serialization;
 
 namespace CSharpTradeOffers
 {
@@ -27,9 +31,24 @@ namespace CSharpTradeOffers
         /// The response stream.
         /// </summary>
         /// <returns></returns>
-        public IResponseStream GetResponseStream()
+        private Stream SteamStream => _httpWebResponse.GetResponseStream();
+
+        public string ReadStream()
         {
-            return new SteamStream(_httpWebResponse.GetResponseStream());
+            using (var streamReader = new StreamReader(SteamStream))
+            {
+                return streamReader.ReadToEnd();
+            }
+        }
+
+        /// <summary>
+        /// Deserializes the stream to a serializable type with Xml.
+        /// </summary>
+        /// <typeparam name="TSerializable">An XML serializable type.</typeparam>
+        /// <returns>The deserialized type.</returns>
+        public TSerializable Deserialize<TSerializable>()
+        {
+            return (TSerializable)(new XmlSerializer(typeof(TSerializable)).Deserialize(SteamStream));
         }
 
         /// <summary>

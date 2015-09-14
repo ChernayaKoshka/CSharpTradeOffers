@@ -37,7 +37,7 @@ namespace CSharpTradeOffers.Community
                 {"relationship", relationship}
             };
             return
-                JsonConvert.DeserializeObject<GetFriendListResult>(_web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetFriendListResult>(_web.Fetch(url, "GET", data, null, false).ReadStream())
                     .Friendslist.Friends;
         }
 
@@ -55,7 +55,7 @@ namespace CSharpTradeOffers.Community
                 {"steamids", CommaDelimit(playersBansToRequest)}
             };
             return
-                JsonConvert.DeserializeObject<GetPlayerBansResult>(_web.Fetch(url, "GET", data, null, false)).PlayerBans;
+                JsonConvert.DeserializeObject<GetPlayerBansResult>(_web.Fetch(url, "GET", data, null, false).ReadStream()).PlayerBans;
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace CSharpTradeOffers.Community
                 {"steamids", CommaDelimit(playerSummariesToRequest)}
             };
             return
-                JsonConvert.DeserializeObject<GetPlayerSummariesV2Result>(_web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetPlayerSummariesV2Result>(_web.Fetch(url, "GET", data, null, false).ReadStream())
                     .Response.PlayersSummaries;
         }
 
@@ -90,7 +90,7 @@ namespace CSharpTradeOffers.Community
                 {"steamid", steamId.ToString()}
             };
             return
-                JsonConvert.DeserializeObject<GetUserGroupListBaseResult>(_web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetUserGroupListBaseResult>(_web.Fetch(url, "GET", data, null, false).ReadStream())
                     .Result;
         }
 
@@ -114,7 +114,7 @@ namespace CSharpTradeOffers.Community
                 {"url_type", urlType.ToString()}
             };
             return
-                JsonConvert.DeserializeObject<ResolveVanityUrlBaseResult>(_web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<ResolveVanityUrlBaseResult>(_web.Fetch(url, "GET", data, null, false).ReadStream())
                     .Response;
         }
 

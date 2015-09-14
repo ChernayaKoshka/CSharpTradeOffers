@@ -16,6 +16,7 @@ namespace CSharpTradeOffers
         public const string SteamCommunityDomain = "steamcommunity.com";
 
         private static CookieContainer _cookies = new CookieContainer();
+
         private readonly IWebRequestHandler<IResponse> _webRequestHandler;
 
         public Web(IWebRequestHandler<IResponse> webRequestHandler)
@@ -34,28 +35,6 @@ namespace CSharpTradeOffers
         public static string TimezoneOffset { get; private set; }
 
         /// <summary>
-        /// Fetch calls this method.
-        /// </summary>
-        /// <param name="url">The URL to request.</param>
-        /// <param name="method">The method to be used. Ex: POST</param>
-        /// <param name="data">
-        /// Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the
-        /// method.
-        /// </param>
-        /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">
-        /// Special parameter, should only be used with requests that need "X-Requested-With:
-        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
-        /// </param>
-        /// <param name="referer">Sets the referrer for the request.</param>
-        /// <returns>An HttpWebResponse object from the requested URL.</returns>
-        public IResponse Request(string url, string method, Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
-        {
-            return _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer);
-        }
-
-        /// <summary>
         /// A web method to return the response string from the URL.
         /// </summary>
         /// <param name="url">The URL to request.</param>
@@ -68,37 +47,19 @@ namespace CSharpTradeOffers
         /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
-        public string Fetch(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
-        {
-            IResponse response = Request(url, method, data, cookies, xHeaders, referer);
-
-            return response.GetResponseStream().ReadStream();
-        }
-
-        /// <summary>
-        /// A web method to return the response string from the URL.
-        /// </summary>
-        /// <param name="url">The URL to request.</param>
-        /// <param name="method">The method to be used. Ex: POST</param>
-        /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-        /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">
-        /// Special parameter, should only be used with requests that need "X-Requested-With:
-        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
-        /// </param>
-        /// <param name="referer">Sets the referrer for the request.</param>
-        /// <returns>A string from the response stream.</returns>
-        public string RetryFetch(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+        public IResponse Fetch(string url, string method, Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            IResponseStream response = RetryFetchStream(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
+            IResponse response = _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer);
 
-            return response?.ReadStream();
+            return response;
         }
 
         /// <summary>
-        /// A web method to return the response string from the URL.
+        /// Retries a Fetch until success or fail conditions have been met.
         /// </summary>
+        /// <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+        /// <param name="retryLimit">The max number of requests to perform before failing.</param>
         /// <param name="url">The URL to request.</param>
         /// <param name="method">The method to be used. Ex: POST</param>
         /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
@@ -108,43 +69,60 @@ namespace CSharpTradeOffers
         /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
         /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
-        /// <returns>A string from the response stream.</returns>
-        public IResponseStream RetryFetchStream(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
+        /// <returns>IResponse interace.</returns>
+        public IResponse RetryFetch(TimeSpan retryWait, int retryLimit, string url, string method,
+            Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            IResponse response = RetryRequestProcessor(retryWait, retryCount, url, method, data, cookies, xHeaders, referer);
-
-            return response?.GetResponseStream();
+            IResponse response = RetryRequestProcessor(retryWait, retryLimit, url, method, data, cookies, xHeaders,
+                referer);
+            return response;
         }
 
         /// <summary>
-        /// A web method to return the response string from the URL.
+        /// Processes retry attempts
         /// </summary>
-        /// <param name="url">The URL to request.</param>
-        /// <param name="method">The method to be used. Ex: POST</param>
-        /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-        /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">
-        /// Special parameter, should only be used with requests that need "X-Requested-With:
-        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
-        /// </param>
-        /// <param name="referer">Sets the referrer for the request.</param>
-        /// <returns>The response stream.</returns>
-        public IResponseStream FetchStream(string url, string method, Dictionary<string, string> data = null, CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+        /// <returns>IResponse interace.</returns>
+        private IResponse RetryRequestProcessor(TimeSpan retryWait, int retryLimit, string url, string method,
+            Dictionary<string, string> data = null,
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
         {
-            return Request(url, method, data, cookies, xHeaders, referer).GetResponseStream();
+            int attempts = 0;
+            while (true)
+            {
+                try
+                {
+                    return Fetch(url, method, data, cookies, xHeaders, referer);
+                }
+                catch (WebException)
+                {
+                    if (attempts >= retryLimit)
+                        return null;
+                    attempts++;
+                }
+
+                Thread.Sleep(retryWait);
+            }
         }
 
         /// <summary>
-        /// Executes the login by using the Steam Website.
+        /// Executes the web login using the Steam website.
         /// </summary>
+        /// <param name="username">Username to use</param>
+        /// <param name="password">Password to use</param>
+        /// <param name="machineAuth">Steam machine auth string. 
+        /// You should save Web.SteamMachineAuth after the code has been entered and the request has 
+        /// been successful and pass it to DoLogin in future attempts to login. 
+        /// This field can be left blank, but if the account is SteamGuard protected 
+        /// it will ask you for a new code every time.</param>
+        /// <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
         public Account DoLogin(string username, string password, string machineAuth = "")
         {
             Thread.Sleep(2000);
-            RsaHelper rsaHelper = new RsaHelper(password);
+            var rsaHelper = new RsaHelper(password);
 
             var loginDetails = new Dictionary<string, string> {{"username", username}};
-            IResponse response = Request("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
+            IResponse response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
 
             string encryptedBase64Password = rsaHelper.EncryptPasswordResponse(response);
             if (encryptedBase64Password == null) return null;
@@ -179,7 +157,8 @@ namespace CSharpTradeOffers
                 if (captcha)
                 {
                     Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.CaptchaGid);
-                    Console.WriteLine("Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.");
+                    Console.WriteLine(
+                        "Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.");
                     Console.Write("Please enter the numbers/letters from the picture that opened up: ");
                     capText = Console.ReadLine();
                 }
@@ -221,11 +200,11 @@ namespace CSharpTradeOffers
                     cc.Add(new Uri("https://steamcommunity.com/login/dologin/"), machineCookie);
                 }
 
-                using (IResponse webResponse = Request("https://steamcommunity.com/login/dologin/", "POST", data, cc))
+                using (IResponse webResponse = Fetch("https://steamcommunity.com/login/dologin/", "POST", data, cc))
                 {
-                    var steamStream = webResponse.GetResponseStream();
+                    //var steamStream = webResponse.GetResponseStream();
 
-                    string json = steamStream.ReadStream();
+                    string json = webResponse.ReadStream();
                     loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
                     cookieCollection = webResponse.Cookies;
                 }
@@ -280,8 +259,21 @@ namespace CSharpTradeOffers
             return null;
         }
 
-        public Account RetryDoLogin(string username, string password, string machineAuth = "",
-            int retryLimit = 10, int retryWait = 500)
+        /// <summary>
+        /// Retries the DoLogin method until success or fail conditions have been met.
+        /// </summary>
+        /// <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+        /// <param name="retryLimit">The max number of requests to perform before failing.</param>
+        /// <param name="username">Username to use</param>
+        /// <param name="password">Password to use</param>
+        /// <param name="machineAuth">Steam machine auth string. 
+        ///     You should save Web.SteamMachineAuth after the code has been entered and the request has 
+        ///     been successful and pass it to DoLogin in future attempts to login. 
+        ///     This field can be left blank, but if the account is SteamGuard protected 
+        ///     it will ask you for a new code every time.</param>
+        /// <returns></returns>
+        public Account RetryDoLogin(TimeSpan retryWait, int retryLimit, string username, string password,
+            string machineAuth = "")
         {
             int retries = 0;
             Account account = null;
@@ -295,32 +287,12 @@ namespace CSharpTradeOffers
                 {
                     retries++;
                     if (retries == retryLimit) throw;
-                    Console.WriteLine("Connection failed... retrying in: " + retryWait + "ms. Retries: " + retries);
+                    Console.WriteLine("Connection failed... retrying in: " + retryWait.Milliseconds + "ms. Retries: " +
+                                      retries);
                     Thread.Sleep(retryWait);
                 }
             } while (account == null);
             return account;
-        }
-
-        private IResponse RetryRequestProcessor(TimeSpan retryWait, int retryCount, string url, string method, Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
-        {
-            int attempts = 0;
-            while (true)
-            {
-                try
-                {
-                    return Request(url, method, data, cookies, xHeaders, referer);
-                }
-                catch (WebException)
-                {
-                    if (attempts >= retryCount)
-                        return null;
-                    attempts++;
-                }
-
-                Thread.Sleep(retryWait);
-            }
         }
 
         private static void SubmitCookies(CookieContainer cookies)

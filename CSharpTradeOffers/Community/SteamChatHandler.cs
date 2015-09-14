@@ -53,7 +53,7 @@ namespace CSharpTradeOffers.Community
                 {"access_token", AccessToken} //public realm iirc
             };
 
-            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false); //returns an annoying JSON string that can't quite be deserialized yet
+            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false).ReadStream(); //returns an annoying JSON string that can't quite be deserialized yet
             response = StripjQueryArtifacts(response); //remove /**/jQuery11110010656769154593349_1442204142816( and remove )
             return JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
         }
@@ -92,7 +92,7 @@ namespace CSharpTradeOffers.Community
                 {"access_token", AccessToken}
             };
 
-            string response = _web.Fetch(url, "GET", data, xHeaders: false);
+            string response = _web.Fetch(url, "GET", data, xHeaders: false).ReadStream();
             _pollId++;
             response = StripjQueryArtifacts(response);
             return JsonConvert.DeserializeObject<PollResponse>(response);
@@ -118,7 +118,7 @@ namespace CSharpTradeOffers.Community
         {
             string url = BaseChatUrl + "friendstate/" + accountId;
             return
-                JsonConvert.DeserializeObject<FriendStateResponse>(_web.Fetch(url, "GET", null, _account.AuthContainer));
+                JsonConvert.DeserializeObject<FriendStateResponse>(_web.Fetch(url, "GET", null, _account.AuthContainer).ReadStream());
         }
 
         public List<ChatLogMessage> ChatLog(uint accountId)
@@ -130,7 +130,7 @@ namespace CSharpTradeOffers.Community
             var data = new Dictionary<string, string> {{"sessionid", sessionid}};
 
             return
-                JsonConvert.DeserializeObject<List<ChatLogMessage>>(_web.Fetch(url, "GET", data, _account.AuthContainer));
+                JsonConvert.DeserializeObject<List<ChatLogMessage>>(_web.Fetch(url, "GET", data, _account.AuthContainer).ReadStream());
         } 
 
         //saytext = send chat message
@@ -149,7 +149,7 @@ namespace CSharpTradeOffers.Community
                 {"access_token", AccessToken}
             };
 
-            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, xHeaders: false);
+            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, xHeaders: false).ReadStream();
             response = StripjQueryArtifacts(response);
             return JsonConvert.DeserializeObject<SendChatMessageResponse>(response);
         }

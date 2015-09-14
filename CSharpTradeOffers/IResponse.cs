@@ -9,10 +9,17 @@ namespace CSharpTradeOffers
     public interface IResponse : IDisposable
     {
         /// <summary>
-        /// The stream created from the response.
+        /// Reads the stream to a string 
         /// </summary>
         /// <returns></returns>
-        IResponseStream GetResponseStream();
+        string ReadStream();
+
+        /// <summary>
+        /// Deserializes the stream to a serializable type.
+        /// </summary>
+        /// <typeparam name="TSerializable">A serializable type.</typeparam>
+        /// <returns>The deserialized type.</returns>
+        TSerializable Deserialize<TSerializable>();
 
         /// <summary>
         /// Any cookies created from the response.

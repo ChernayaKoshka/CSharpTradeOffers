@@ -48,7 +48,7 @@ namespace CSharpTradeOffers.Trading
         private dynamic RequestInventory(uint appId)
         {
             string url = "https://steamcommunity.com/profiles/" + _steamId + "/inventory/json/" + appId + "/2/";
-            return JsonConvert.DeserializeObject<dynamic>(_web.Fetch(url, "GET", null, null, false));
+            return JsonConvert.DeserializeObject<dynamic>(_web.Fetch(url, "GET", null, null, false).ReadStream());
         }
 
         /// <summary>

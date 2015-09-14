@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace CSharpTradeOffers
 {
-    public class RsaHelper
+    class RsaHelper
     {
         private readonly string _password;
 
@@ -17,7 +17,7 @@ namespace CSharpTradeOffers
 
         public string EncryptPasswordResponse(IResponse response)
         {
-            if (!RequestRsaKey(response.GetResponseStream().ReadStream())) return null;
+            if (!RequestRsaKey(response.ReadStream())) return null;
 
             //RSA Encryption
             var rsa = new RSACryptoServiceProvider();

@@ -37,7 +37,7 @@ namespace CSharpTradeOffers.Community
 
             return
                 JsonConvert.DeserializeObject<CommentResponse>(_web.Fetch(url, "POST", data, authContainer, true,
-                    url.Substring(0, url.Length - 3)));
+                    url.Substring(0, url.Length - 3)).ReadStream());
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace CSharpTradeOffers.Community
                 {"sessionid", sessionid}
             };
 
-            return JsonConvert.DeserializeObject<ClanCommentResponse>(_web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<ClanCommentResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace CSharpTradeOffers.Community
                 {"accept_invite", "0"}
             };
 
-            return JsonConvert.DeserializeObject<AddFriendResponse>(_web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<AddFriendResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace CSharpTradeOffers.Community
                 {"sessionID", sessionid},
                 {"invitee", steamId.ToString()}
             };
-            return JsonConvert.DeserializeObject<InviteResponse>(_web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<InviteResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace CSharpTradeOffers.Community
                 {"sessionID", sessionid},
                 {"invitee_list", ToJArray(steamIds)}
             };
-            return JsonConvert.DeserializeObject<MultiInviteResponse>(_web.Fetch(url, "POST", data, authContainer));
+            return JsonConvert.DeserializeObject<MultiInviteResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace CSharpTradeOffers.Community
         {
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1";
 
-            IResponseStream fetchedStream = _web.FetchStream(string.Format(url, groupId), "GET");
+            IResponse fetchedStream = _web.Fetch(string.Format(url, groupId), "GET");
             return fetchedStream.Deserialize<MemberList>();
         }
 
@@ -227,7 +227,7 @@ namespace CSharpTradeOffers.Community
         {
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1";
 
-            IResponseStream fetchedStream = _web.FetchStream(string.Format(url, groupName), "GET");
+            IResponse fetchedStream = _web.Fetch(string.Format(url, groupName), "GET");
             return fetchedStream.Deserialize<MemberList>();
         }
 
@@ -253,10 +253,10 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    IResponseStream fetchedStream = _web.RetryFetchStream(retryWait, retryCount,
+                    IResponse fetched = _web.RetryFetch(retryWait, retryCount,
                         requestUrl, "GET");
 
-                    MemberList populatedList = fetchedStream.Deserialize<MemberList>();
+                    MemberList populatedList = fetched.Deserialize<MemberList>();
 
                     membersList.Add(populatedList);
 
@@ -304,7 +304,7 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    IResponseStream steamStream = _web.RetryFetchStream(retryWait, retryCount, temp, "GET");
+                    IResponse steamStream = _web.RetryFetch(retryWait, retryCount, temp, "GET");
                     var populatedList = steamStream.Deserialize<MemberList>();
 
                     if (!firstRequest)
@@ -367,7 +367,7 @@ namespace CSharpTradeOffers.Community
                 {"primary_group_steamid", profile.PrimaryGroupSteamId.ToString()}
             };
 
-            string response = _web.Fetch(url, "POST", data, account.AuthContainer);
+            string response = _web.Fetch(url, "POST", data, account.AuthContainer).ReadStream();
             return response.Contains("<div class=\"saved_changes_msg\">");
         }
 

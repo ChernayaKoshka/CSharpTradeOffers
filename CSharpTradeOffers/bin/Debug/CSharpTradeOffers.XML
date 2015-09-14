@@ -363,34 +363,23 @@
             A response from the web.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.IResponse.GetResponseStream">
+        <member name="M:CSharpTradeOffers.IResponse.ReadStream">
             <summary>
-            The stream created from the response.
+            Reads the stream to a string 
             </summary>
             <returns></returns>
         </member>
-        <member name="P:CSharpTradeOffers.IResponse.Cookies">
-            <summary>
-            Any cookies created from the response.
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.IResponseStream">
-            <summary>
-            A response stream.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.IResponseStream.ReadStream">
-            <summary>
-            Read the contents of the Stream.
-            </summary>
-            <returns>The stream contents.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.IResponseStream.Deserialize``1">
+        <member name="M:CSharpTradeOffers.IResponse.Deserialize``1">
             <summary>
             Deserializes the stream to a serializable type.
             </summary>
             <typeparam name="TSerializable">A serializable type.</typeparam>
             <returns>The deserialized type.</returns>
+        </member>
+        <member name="P:CSharpTradeOffers.IResponse.Cookies">
+            <summary>
+            Any cookies created from the response.
+            </summary>
         </member>
         <member name="T:CSharpTradeOffers.SteamWebRequestHandler">
             <summary>
@@ -426,40 +415,23 @@
             Cookies collected from the response.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.SteamResponse.GetResponseStream">
+        <member name="P:CSharpTradeOffers.SteamResponse.SteamStream">
             <summary>
             The response stream.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.SteamResponse.Dispose">
-            <summary>
-            Disposes the object.
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.SteamStream">
-            <summary>
-            A facade for a <see cref="T:System.IO.Stream" /> from a Steam web request.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.SteamStream.#ctor(System.IO.Stream)">
-            <summary>
-            Encapsulate a stream from a Steam Request.
-            </summary>
-            <param name="stream">The underlying steam stream.</param>
-        </member>
-        <member name="M:CSharpTradeOffers.SteamStream.ReadStream">
-            <summary>
-            Read the steam stream to the end.
-            </summary>
-            <returns>The stream contents.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.SteamStream.Deserialize``1">
+        <member name="M:CSharpTradeOffers.SteamResponse.Deserialize``1">
             <summary>
             Deserializes the stream to a serializable type with Xml.
             </summary>
             <typeparam name="TSerializable">An XML serializable type.</typeparam>
             <returns>The deserialized type.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamResponse.Dispose">
+            <summary>
+            Disposes the object.
+            </summary>
         </member>
         <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
             <param name="apiKey"></param>
@@ -875,24 +847,6 @@
             Handles Web related tasks like logging in and fetching
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Web.Request(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            Fetch calls this method.
-            </summary>
-            <param name="url">The URL to request.</param>
-            <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">
-            Dictionary> containing the paramters to be sent in the URL or in the Stream, depending on the
-            method.
-            </param>
-            <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">
-            Special parameter, should only be used with requests that need "X-Requested-With:
-            XMLHttpRequest" and "X-Prototype-Version: 1.7"
-            </param>
-            <param name="referer">Sets the referrer for the request.</param>
-            <returns>An HttpWebResponse object from the requested URL.</returns>
-        </member>
         <member name="M:CSharpTradeOffers.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
             <summary>
             A web method to return the response string from the URL.
@@ -907,51 +861,6 @@
             </param>
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            A web method to return the response string from the URL.
-            </summary>
-            <param name="url">The URL to request.</param>
-            <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-            <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">
-            Special parameter, should only be used with requests that need "X-Requested-With:
-            XMLHttpRequest" and "X-Prototype-Version: 1.7"
-            </param>
-            <param name="referer">Sets the referrer for the request.</param>
-            <returns>A string from the response stream.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.RetryFetchStream(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            A web method to return the response string from the URL.
-            </summary>
-            <param name="url">The URL to request.</param>
-            <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-            <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">
-            Special parameter, should only be used with requests that need "X-Requested-With:
-            XMLHttpRequest" and "X-Prototype-Version: 1.7"
-            </param>
-            <param name="referer">Sets the referrer for the request.</param>
-            <returns>A string from the response stream.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.FetchStream(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            A web method to return the response string from the URL.
-            </summary>
-            <param name="url">The URL to request.</param>
-            <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-            <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">
-            Special parameter, should only be used with requests that need "X-Requested-With:
-            XMLHttpRequest" and "X-Prototype-Version: 1.7"
-            </param>
-            <param name="referer">Sets the referrer for the request.</param>
-            <returns>The response stream.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,System.String)">
             <summary>

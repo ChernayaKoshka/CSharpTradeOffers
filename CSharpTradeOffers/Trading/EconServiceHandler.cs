@@ -32,7 +32,7 @@ namespace CSharpTradeOffers.Trading
             data.Add("format", "json");
             return
                 JsonConvert.DeserializeObject<TradeOffers>(
-                    WebUtility.UrlDecode(_web.Fetch(url, "GET", data))).Response;
+                    WebUtility.UrlDecode(_web.Fetch(url, "GET", data).ReadStream())).Response;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace CSharpTradeOffers.Trading
             };
             return
                 JsonConvert.DeserializeObject<CEconTradeOffer>(
-                    WebUtility.UrlDecode(_web.Fetch(url, "GET", data)));
+                    WebUtility.UrlDecode(_web.Fetch(url, "GET", data).ReadStream()));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace CSharpTradeOffers.Trading
                 {"tradeofferid", tradeofferid.ToString()},
                 {"format", "json"}
             };
-            return _web.Fetch(url, "POST", data);
+            return _web.Fetch(url, "POST", data).ReadStream();
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace CSharpTradeOffers.Trading
                 {"tradeofferid", tradeofferid.ToString()},
                 {"format", "json"}
             };
-            return WebUtility.UrlDecode(_web.Fetch(url, "POST", data));
+            return WebUtility.UrlDecode(_web.Fetch(url, "POST", data).ReadStream());
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace CSharpTradeOffers.Trading
             return
                 JsonConvert.DeserializeObject<Trade>(
                     WebUtility.UrlDecode(_web.Fetch(string.Format(url, tradeId.TradeId), "POST",
-                        data, container, false, "https://steamcommunity.com/tradeoffer/" + tradeId.TradeId + "/")));
+                        data, container, false, "https://steamcommunity.com/tradeoffer/" + tradeId.TradeId + "/").ReadStream()));
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace CSharpTradeOffers.Trading
             return
                 JsonConvert.DeserializeObject<Trade>(
                     WebUtility.UrlDecode(_web.Fetch(string.Format(url, tradeId), "POST",
-                        data, container, false, "https://steamcommunity.com/tradeoffer/" + tradeId + "/")));
+                        data, container, false, "https://steamcommunity.com/tradeoffer/" + tradeId + "/").ReadStream()));
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace CSharpTradeOffers.Trading
             };
             return JsonConvert.DeserializeObject<SendOfferResponse>(_web.Fetch(url, "POST", data, container, false,
                 "https://steamcommunity.com/tradeoffer/new/?partner=" +
-                SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid))));
+                SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid))).ReadStream());
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace CSharpTradeOffers.Trading
                 {"tradeofferid_countered", tradeofferidCountered.ToString()}
             };
             return JsonConvert.DeserializeObject<SendOfferResponse>(_web.Fetch(url, "POST", data, container, false,
-                "https://steamcommunity.com/tradeoffer/" + tradeofferidCountered + "/"));
+                "https://steamcommunity.com/tradeoffer/" + tradeofferidCountered + "/").ReadStream());
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace CSharpTradeOffers.Trading
                 {"time_last_visit", timeLastVisit.ToString()}
             };
             return
-                JsonConvert.DeserializeObject<GetTradeOffersSummaryBaseResponse>(_web.Fetch(url, "GET", data)).Response;
+                JsonConvert.DeserializeObject<GetTradeOffersSummaryBaseResponse>(_web.Fetch(url, "GET", data).ReadStream()).Response;
         }
     }
 }

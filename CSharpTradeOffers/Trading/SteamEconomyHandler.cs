@@ -42,7 +42,7 @@ namespace CSharpTradeOffers.Trading
                 currentClass++;
             }
 
-            dynamic dynamicinfo = JsonConvert.DeserializeObject<dynamic>(_web.Fetch(url, "GET", data, null, false)).result;
+            dynamic dynamicinfo = JsonConvert.DeserializeObject<dynamic>(_web.Fetch(url, "GET", data, null, false).ReadStream()).result;
 
             Dictionary<string, dynamic> desrDictionary =
                 JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(dynamicinfo.ToString());
@@ -70,7 +70,7 @@ namespace CSharpTradeOffers.Trading
                 {"language", language}
             };
             return
-                JsonConvert.DeserializeObject<GetAssetPricesBaseResponse>(_web.Fetch(url, "GET", data, null, false))
+                JsonConvert.DeserializeObject<GetAssetPricesBaseResponse>(_web.Fetch(url, "GET", data, null, false).ReadStream())
                     .Result;
         }
     }
