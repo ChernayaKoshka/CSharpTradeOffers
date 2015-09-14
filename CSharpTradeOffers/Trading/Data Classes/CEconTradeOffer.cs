@@ -8,7 +8,7 @@ namespace CSharpTradeOffers.Trading
     {
 
         [JsonProperty("tradeofferid")]
-        public ulong TradeOfferId { get; set; }
+        public uint TradeOfferId { get; set; }
 
         [JsonProperty("accountid_other")]
         public uint AccountIdOther { get; set; }
