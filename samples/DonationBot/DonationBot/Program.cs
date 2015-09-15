@@ -14,7 +14,7 @@ namespace DonationBot
         private static Account _account;
         private static Config _config = new Config();
         private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
-        private static readonly Web Web = new Web(new SteamRequestHandler());
+        private static readonly Web Web = new Web(new SteamWebRequestHandler());
 
         private static void Main()
         {
@@ -52,7 +52,7 @@ namespace DonationBot
 
             Console.WriteLine("Attempting web login...");
 
-            _account = Web.RetryDoLogin(_user, _pass, _config.SteamMachineAuth);
+            _account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, _user, _pass, _config.SteamMachineAuth);
 
             if (!string.IsNullOrEmpty(Web.SteamMachineAuth))
             {
