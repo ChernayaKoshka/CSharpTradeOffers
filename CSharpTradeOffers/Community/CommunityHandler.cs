@@ -256,7 +256,7 @@ namespace CSharpTradeOffers.Community
                     IResponse fetched = _web.RetryFetch(retryWait, retryCount,
                         requestUrl, "GET");
 
-                    MemberList populatedList = fetched.Deserialize<MemberList>();
+                    var populatedList = fetched.Deserialize<MemberList>();
 
                     membersList.Add(populatedList);
 
@@ -304,8 +304,9 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    IResponse steamStream = _web.RetryFetch(retryWait, retryCount, temp, "GET");
-                    var populatedList = steamStream.Deserialize<MemberList>();
+                    IResponse fetched = _web.RetryFetch(retryWait, retryCount, temp, "GET");
+                    var populatedList = fetched.Deserialize<MemberList>();
+                    membersList.Add(populatedList);
 
                     if (!firstRequest)
                     {
