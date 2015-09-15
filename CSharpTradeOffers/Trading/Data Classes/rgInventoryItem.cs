@@ -23,26 +23,23 @@ namespace CSharpTradeOffers.Trading
         [JsonProperty("pos")]
         public ulong Pos { get; set; }
 
-        [JsonIgnore] 
-        [JsonProperty("inUse")]
+        [JsonIgnore] [JsonProperty("inUse")]
         public bool InUse;
-
 
         /// <param name="appId"></param>
         /// <returns></returns>
-        public CEconAsset ToCEconAsset(string appId)
+        public CEconAsset ToCEconAsset(uint appId)
         {
-            var asset = new CEconAsset
+            return new CEconAsset
             {
-                AppId = appId,
+                AppId = appId.ToString(),
                 Amount = "1",
-                AssetId = this.Id.ToString(),
+                AssetId = Id.ToString(),
                 ContextId = "2",
-                ClassId = this.ClassId.ToString(),
-                InstanceId = this.InstanceId.ToString(),
+                ClassId = ClassId.ToString(),
+                InstanceId = InstanceId.ToString(),
                 Missing = false
             };
-            return asset;
         }
     }
 }
