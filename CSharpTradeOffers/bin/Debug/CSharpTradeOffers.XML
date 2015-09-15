@@ -862,10 +862,56 @@
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
+        <member name="M:CSharpTradeOffers.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Retries a Fetch until success or fail conditions have been met.
+            </summary>
+            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+            <param name="retryLimit">The max number of requests to perform before failing.</param>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>IResponse interace.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.RetryRequestProcessor(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Processes retry attempts
+            </summary>
+            <returns>IResponse interace.</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Web.DoLogin(System.String,System.String,System.String)">
             <summary>
-            Executes the login by using the Steam Website.
+            Executes the web login using the Steam website.
             </summary>
+            <param name="username">Username to use</param>
+            <param name="password">Password to use</param>
+            <param name="machineAuth">Steam machine auth string. 
+            You should save Web.SteamMachineAuth after the code has been entered and the request has 
+            been successful and pass it to DoLogin in future attempts to login. 
+            This field can be left blank, but if the account is SteamGuard protected 
+            it will ask you for a new code every time.</param>
+            <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.RetryDoLogin(System.TimeSpan,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Retries the DoLogin method until success or fail conditions have been met.
+            </summary>
+            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+            <param name="retryLimit">The max number of requests to perform before failing.</param>
+            <param name="username">Username to use</param>
+            <param name="password">Password to use</param>
+            <param name="machineAuth">Steam machine auth string. 
+                You should save Web.SteamMachineAuth after the code has been entered and the request has 
+                been successful and pass it to DoLogin in future attempts to login. 
+                This field can be left blank, but if the account is SteamGuard protected 
+                it will ask you for a new code every time.</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

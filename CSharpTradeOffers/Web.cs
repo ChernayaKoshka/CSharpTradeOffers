@@ -34,6 +34,8 @@ namespace CSharpTradeOffers
 
         public static string TimezoneOffset { get; private set; }
 
+        public static ulong SteamId { get; private set; }
+
         /// <summary>
         /// A web method to return the response string from the URL.
         /// </summary>
@@ -180,9 +182,9 @@ namespace CSharpTradeOffers
                 // SteamGuard end
 
                 //TwoFactor
-                if (twoFactor)
+                if (twoFactor && !loginJson.Success)
                 {
-                    Console.WriteLine("TwoFactor code required: ");
+                    Console.Write("TwoFactor code required: ");
                     twoFactorText = Console.ReadLine();
                 }
 
@@ -193,7 +195,7 @@ namespace CSharpTradeOffers
                 CookieContainer cc = null;
                 if (!string.IsNullOrEmpty(machineAuth))
                 {
-                    SteamMachineAuth = machineAuth;
+                    Web.SteamMachineAuth = machineAuth;
                     cc = new CookieContainer();
                     var split = machineAuth.Split('=');
                     var machineCookie = new Cookie(split[0], split[1]);
@@ -208,7 +210,7 @@ namespace CSharpTradeOffers
                     loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
                     cookieCollection = webResponse.Cookies;
                 }
-            } while (loginJson.CaptchaNeeded || loginJson.EmailAuthNeeded || loginJson.RequiresTwofactor);
+            } while (loginJson.CaptchaNeeded || loginJson.EmailAuthNeeded || (loginJson.RequiresTwofactor && !loginJson.Success));
 
             Account account;
 
@@ -229,7 +231,7 @@ namespace CSharpTradeOffers
                     {
                         case "steamLogin":
                             account.AuthContainer.Add(cookie);
-                            SteamLogin = cookie.Value;
+                           SteamLogin = cookie.Value;
                             break;
                         case "steamLoginSecure":
                             account.AuthContainer.Add(cookie);
