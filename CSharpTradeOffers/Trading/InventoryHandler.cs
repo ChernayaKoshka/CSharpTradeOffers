@@ -35,60 +35,6 @@ namespace CSharpTradeOffers.Trading
             return rgInventoryItem.InUse;
         }
 
-        /// <summary>
-        /// Locates an Item in the inventory.
-        /// </summary>
-        /// <param name="assetToFind">Specifies search params.</param>
-        /// <returns>An item matching the params</returns>
-        public Item FindUnusedItem(ItemValueHandler.ValuedWorth assetToFind)
-        {
-            Inventory inv = Inventories[assetToFind.AppId];
-            switch (assetToFind.TypeId)
-            {
-                case 0: //exact
-                    foreach (Item item in inv.Items.Values.Where(item => item.MarketHashName == assetToFind.TypeObj).Where(item => !item.Items.TrueForAll(BeingUsed)))
-                        return item;
-                    break;
-                case 1: //contains
-                    foreach (Item item in inv.Items.Values.Where(item => item.MarketHashName.ToLower().Contains(assetToFind.TypeObj)).Where(item => !item.Items.TrueForAll(BeingUsed)))
-                        return item;
-                    break;
-                case 2: //startswirth
-                    foreach (Item item in inv.Items.Values.Where(item => item.MarketHashName.ToLower().StartsWith(assetToFind.TypeObj)).Where(item => !item.Items.TrueForAll(BeingUsed)))
-                        return item;
-                    break;
-                case 3: //classid
-                    foreach (
-                        Item item in
-                            inv.Items.Values.Where(
-                                item => item.ClassId == assetToFind.TypeObj && item.Items.TrueForAll(BeingUsed)))
-                        return item;
-                    return null;
-                case 4: //tags
-                    var handler = new SteamEconomyHandler(_apiKey);
-                    foreach (var item in inv.Items.Values)
-                    {
-                        Dictionary<string, string> classid = new Dictionary<string, string>
-                        {
-                            {item.ClassId, null}
-                        };
-                        AssetClassInfo info = handler.GetAssetClassInfo(Convert.ToUInt32(item.AppId), classid);
-                        foreach (var tag in info.Tags.Values)
-                        {
-                            if (tag.Name == assetToFind.TypeObj)
-                            {
-                                if (!item.Items.TrueForAll(BeingUsed)) return item;
-                                break;
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    throw new Exception("Unknown TypeId!");
-            }
-            return null;
-        }
-
         /// <param name="marketHashName">Name to search</param>
         /// <param name="appid">Appid of the inventory to search</param>
         /// <returns>A list of items whose market_hash_name contains marketHashName</returns>
