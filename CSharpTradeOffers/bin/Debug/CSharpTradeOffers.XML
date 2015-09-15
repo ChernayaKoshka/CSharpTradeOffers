@@ -594,13 +594,6 @@
             Handles Inventory-Related tasks for a specific account.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItem(CSharpTradeOffers.Trading.ItemValueHandler.ValuedWorth)">
-            <summary>
-            Locates an Item in the inventory.
-            </summary>
-            <param name="assetToFind">Specifies search params.</param>
-            <returns>An item matching the params</returns>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItems(System.String,System.UInt32)">
             <param name="marketHashName">Name to search</param>
             <param name="appid">Appid of the inventory to search</param>
@@ -709,7 +702,7 @@
             An item within an inventory list.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.RgInventoryItem.ToCEconAsset(System.String)">
+        <member name="M:CSharpTradeOffers.Trading.RgInventoryItem.ToCEconAsset(System.UInt32)">
             <param name="appId"></param>
             <returns></returns>
         </member>
@@ -735,16 +728,6 @@
             <param name="currency">Three letter string representing a currency to filter for, if left blank all currencies are returned. EX: USD or EUR, etc.</param>
             <param name="language">The language to retrieve the results in.</param>
             <returns>A GetAssetPricesResponse object.</returns>
-        </member>
-        <member name="T:CSharpTradeOffers.Trading.ItemValueHandler">
-            <summary>
-            DO. NOT. USE. Under heavy construction.
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.Trading.ItemValueHandler.TypeIds">
-            <summary>
-            TypeIds for use in trade config, mostly for reference and not actually used anywhere
-            </summary>
         </member>
         <member name="T:CSharpTradeOffers.Account">
             <summary>
