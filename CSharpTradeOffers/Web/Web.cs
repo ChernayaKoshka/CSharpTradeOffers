@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Threading;
-using CSharpTradeOffers.Json;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Web
@@ -126,7 +125,7 @@ namespace CSharpTradeOffers.Web
             var loginDetails = new Dictionary<string, string> {{"username", username}};
             IResponse response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
 
-            string encryptedBase64Password = rsaHelper.EncryptPasswordResponse(response);
+            string encryptedBase64Password = rsaHelper.EncryptPassword(response);
             if (encryptedBase64Password == null) return null;
 
             LoginResult loginJson = null;
