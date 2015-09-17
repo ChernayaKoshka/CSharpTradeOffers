@@ -81,9 +81,9 @@
     <Compile Include="Configuration\XmlConfigHandler.cs" />
     <Compile Include="Web\IWebRequestHandler.cs" />
     <Compile Include="Web\IResponse.cs" />
-    <Compile Include="Json\LoginResult.cs" />
-    <Compile Include="Json\RsaKey.cs" />
-    <Compile Include="Json\TransferParameters.cs" />
+    <Compile Include="Web\Data Classes\LoginResult.cs" />
+    <Compile Include="Web\Data Classes\RsaKey.cs" />
+    <Compile Include="Web\Data Classes\TransferParameters.cs" />
     <Compile Include="Web\RsaHelper.cs" />
     <Compile Include="Web\SteamWebRequestHandler.cs" />
     <Compile Include="Web\SteamResponse.cs" />
