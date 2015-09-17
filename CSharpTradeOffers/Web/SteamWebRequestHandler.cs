@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Cache;
 using System.Text;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Web
 {
     /// <summary>
     /// Handles requests to the "www.SteamCommunity.com" page.

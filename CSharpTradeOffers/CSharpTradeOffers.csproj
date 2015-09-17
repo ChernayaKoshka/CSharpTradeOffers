@@ -79,18 +79,18 @@
     <Compile Include="Configuration\Data Classes\Officer.cs" />
     <Compile Include="Configuration\Data Classes\Config.cs" />
     <Compile Include="Configuration\XmlConfigHandler.cs" />
-    <Compile Include="IWebRequestHandler.cs" />
-    <Compile Include="IResponse.cs" />
+    <Compile Include="Web\IWebRequestHandler.cs" />
+    <Compile Include="Web\IResponse.cs" />
     <Compile Include="Json\LoginResult.cs" />
     <Compile Include="Json\RsaKey.cs" />
     <Compile Include="Json\TransferParameters.cs" />
-    <Compile Include="RsaHelper.cs" />
-    <Compile Include="SteamWebRequestHandler.cs" />
-    <Compile Include="SteamResponse.cs" />
+    <Compile Include="Web\RsaHelper.cs" />
+    <Compile Include="Web\SteamWebRequestHandler.cs" />
+    <Compile Include="Web\SteamResponse.cs" />
     <Compile Include="Trading\Data Classes\Action.cs" />
     <Compile Include="Trading\Data Classes\AppData.cs" />
     <Compile Include="Trading\Data Classes\AssetClassInfo.cs" />
-    <Compile Include="Account.cs" />
+    <Compile Include="Web\Data Classes\Account.cs" />
     <Compile Include="Community\CommunityHandler.cs" />
     <Compile Include="Configuration\JsonConfigHandler.cs" />
     <Compile Include="ExtensionMethods.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Trading\Data Classes\SendOfferResponse.cs" />
     <Compile Include="Trading\SteamEconomyHandler.cs" />
     <Compile Include="Community\SteamUserHandler.cs" />
-    <Compile Include="MarketHandler.cs" />
+    <Compile Include="Trading\MarketHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SteamID.cs" />
     <Compile Include="Trading\Data Classes\Tag.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="Trading\Data Classes\TradeOffer.cs" />
     <Compile Include="Trading\Data Classes\TradeOffers.cs" />
     <Compile Include="Trading\Data Classes\TradeOffersList.cs" />
-    <Compile Include="Web.cs" />
+    <Compile Include="Web\Web.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

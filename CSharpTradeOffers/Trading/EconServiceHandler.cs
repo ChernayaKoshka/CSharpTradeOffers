@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Trading
@@ -10,7 +11,7 @@ namespace CSharpTradeOffers.Trading
     public class EconServiceHandler
     {
         private readonly string _apiKey;
-        private readonly Web _web = new Web(new SteamWebRequestHandler());
+        private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
 
         private const string BaseUrl = "https://api.steampowered.com/IEconService/";
 
@@ -104,7 +105,7 @@ namespace CSharpTradeOffers.Trading
             const string url = "https://steamcommunity.com/tradeoffer/{0}/accept";
             var data = new Dictionary<string, string>
             {
-                {"sessionid", Web.SessionId},
+                {"sessionid", Web.Web.SessionId},
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.TradeId.ToString()},
                 {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
@@ -130,7 +131,7 @@ namespace CSharpTradeOffers.Trading
             const string url = "https://steamcommunity.com/tradeoffer/{0}/accept";
             var data = new Dictionary<string, string>
             {
-                {"sessionid", Web.SessionId},
+                {"sessionid", Web.Web.SessionId},
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.ToString()},
                 {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
@@ -159,7 +160,7 @@ namespace CSharpTradeOffers.Trading
 
             var data = new Dictionary<string, string>
             {
-                {"sessionid", Web.SessionId},
+                {"sessionid", Web.Web.SessionId},
                 {"serverid", serverid},
                 {"partner", partnerSid.ToString()},
                 {"tradeoffermessage", tradeoffermessage},
@@ -190,7 +191,7 @@ namespace CSharpTradeOffers.Trading
 
             var data = new Dictionary<string, string>
             {
-                {"sessionid", Web.SessionId},
+                {"sessionid", Web.Web.SessionId},
                 {"serverid", serverid},
                 {"partner", partnerSid.ToString()},
                 {"tradeoffermessage", tradeoffermessage},

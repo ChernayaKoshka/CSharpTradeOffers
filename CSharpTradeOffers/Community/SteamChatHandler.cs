@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Community
 {
     public class SteamChatHandler
     {
-        private readonly Web _web = new Web(new SteamWebRequestHandler());
+        private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
         private readonly Account _account;
 
         private const string BaseAuthUrl = "https://api.steampowered.com/ISteamWebUserPresenceOAuth/";

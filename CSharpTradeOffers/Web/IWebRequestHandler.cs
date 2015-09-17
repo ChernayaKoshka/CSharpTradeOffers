@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Web
 {
     /// <summary>
     /// A generic Request Handler from the web.

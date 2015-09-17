@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Community
@@ -12,7 +13,7 @@ namespace CSharpTradeOffers.Community
     /// </summary>
     public class CommunityHandler
     {
-        private readonly Web _web = new Web(new SteamWebRequestHandler());
+        private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
 
         /// <summary>
         /// Posts a comment to the specified profile.

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using CSharpTradeOffers.Trading;
+using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Trading
 {
     /// <summary>
     /// Handles market related tasks.
@@ -12,7 +12,7 @@ namespace CSharpTradeOffers
     {
         private const string BaseUrl = "https://steamcommunity.com/market/";
 
-        private readonly Web _web = new Web(new SteamWebRequestHandler());
+        private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
 
         /// <summary>
         /// Sets the container to contain a MarketEligibility cookie. Required before trading.

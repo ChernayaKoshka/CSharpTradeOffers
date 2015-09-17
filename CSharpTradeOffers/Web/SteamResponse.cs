@@ -1,10 +1,8 @@
-using System;
 using System.IO;
 using System.Net;
-using System.Runtime.Remoting.Messaging;
 using System.Xml.Serialization;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Web
 {
     /// <summary>
     /// A response from Steam.

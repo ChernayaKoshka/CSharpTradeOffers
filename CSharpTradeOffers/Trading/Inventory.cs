@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Trading
@@ -8,7 +9,7 @@ namespace CSharpTradeOffers.Trading
     public class Inventory
     {
         private readonly ulong _steamId;
-        private readonly Web _web = new Web(new SteamWebRequestHandler());
+        private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
         
 
         /// <summary>

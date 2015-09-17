@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Web
 {
     /// <summary>
     /// A response from the web.

@@ -6,7 +6,7 @@ using System.Threading;
 using CSharpTradeOffers.Json;
 using Newtonsoft.Json;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Web
 {
     /// <summary>
     /// Handles Web related tasks like logging in and fetching

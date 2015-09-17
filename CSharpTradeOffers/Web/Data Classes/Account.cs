@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace CSharpTradeOffers
+namespace CSharpTradeOffers.Web
 {
     /// <summary>
     /// Generic account
