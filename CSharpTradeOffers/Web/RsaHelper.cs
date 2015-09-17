@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using CSharpTradeOffers.Json;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Web
@@ -15,9 +14,9 @@ namespace CSharpTradeOffers.Web
             _password = password;
         }
 
-        public string EncryptPasswordResponse(IResponse response)
+        public string EncryptPassword(IResponse response)
         {
-            if (!RequestRsaKey(response.ReadStream())) return null;
+            if (!DeserializeRsaKey(response.ReadStream())) return null;
 
             //RSA Encryption
             var rsa = new RSACryptoServiceProvider();
@@ -34,7 +33,7 @@ namespace CSharpTradeOffers.Web
             return Convert.ToBase64String(encodedPassword);
         }
 
-        private bool RequestRsaKey(string response)
+        private bool DeserializeRsaKey(string response)
         {
             RsaKey rsaJson = JsonConvert.DeserializeObject<RsaKey>(response);
             if (!rsaJson.Success) return false;
@@ -65,6 +64,6 @@ namespace CSharpTradeOffers.Web
             return val - (val < 58 ? 48 : 55);
         }
 
-        public RsaKey RsaJson { get; private set; }
+        public RsaKey RsaJson { get; private set;  }
     }
 }
