@@ -121,7 +121,7 @@ namespace CSharpTradeOffers.Community
 
         static string CommaDelimit(List<ulong> toDelimit)
         {
-            string returned = toDelimit.Aggregate("", (current, @ulong) => current + (@ulong + ","));
+            string returned = toDelimit.Aggregate(string.Empty, (current, @ulong) => current + (@ulong + ","));
             return returned.Substring(0, returned.Length - 1);
         }
     }

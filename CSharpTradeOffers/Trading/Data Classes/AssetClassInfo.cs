@@ -74,7 +74,7 @@ namespace CSharpTradeOffers.Trading
     public class Elements
     {
         [JsonProperty("ids")]
-        public List<string> Ids = new List<string>();
+        public List<string> Ids { get; } = new List<string>();
     }
 
     public class Description
@@ -122,19 +122,19 @@ namespace CSharpTradeOffers.Trading
         public string SetBundleDefIndex { get; set; }
 
         [JsonProperty("containing_bundles")]
-        public List<string> ContainingBundles = new List<string>();
+        public List<string> ContainingBundles { get; } = new List<string>();
 
         [JsonProperty("filter_data")]
-        public List<FilterData> FilterData = new List<FilterData>();
+        public List<FilterData> Data { get; } = new List<FilterData>();
 
         [JsonProperty("player_class_ids")]
-        public List<string> PlayerClassIds = new List<string>();
+        public List<string> PlayerClassIds { get; } = new List<string>();
     }
 
     [JsonObject(Title = "Filter_Data")]
     public class FilterData
     {
         [JsonProperty("element_ids")]
-        public List<Elements> ElementIds = new List<Elements>();
+        public List<Elements> ElementIds { get; } = new List<Elements>();
     }
 }

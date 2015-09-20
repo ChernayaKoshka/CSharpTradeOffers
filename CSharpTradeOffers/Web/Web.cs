@@ -130,9 +130,9 @@ namespace CSharpTradeOffers.Web
 
             LoginResult loginJson = null;
             CookieCollection cookieCollection;
-            string steamGuardText = "";
-            string steamGuardId = "";
-            string twoFactorText = "";
+            string steamGuardText = string.Empty;
+            string steamGuardId = string.Empty;
+            string twoFactorText = string.Empty;
 
             do
             {
@@ -150,11 +150,11 @@ namespace CSharpTradeOffers.Web
                 {
                     {"password", encryptedBase64Password},
                     {"username", username},
-                    {"loginfriendlyname", ""},
+                    {"loginfriendlyname", string.Empty},
                     {"rememberlogin", "false"}
                 };
                 // Captcha
-                string capText = "";
+                string capText = string.Empty;
                 if (captcha)
                 {
                     Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.CaptchaGid);
@@ -164,8 +164,8 @@ namespace CSharpTradeOffers.Web
                     capText = Console.ReadLine();
                 }
 
-                data.Add("captchagid", captcha ? capGid : "");
-                data.Add("captcha_text", captcha ? capText : "");
+                data.Add("captchagid", captcha ? capGid : string.Empty);
+                data.Add("captcha_text", captcha ? capText : string.Empty);
                 // Captcha end
 
                 // SteamGuard
@@ -187,14 +187,14 @@ namespace CSharpTradeOffers.Web
                     twoFactorText = Console.ReadLine();
                 }
 
-                data.Add("twofactorcode", twoFactor ? twoFactorText : "");
+                data.Add("twofactorcode", twoFactor ? twoFactorText : string.Empty);
 
                 data.Add("rsatimestamp", time);
 
                 CookieContainer cc = null;
                 if (!string.IsNullOrEmpty(machineAuth))
                 {
-                    Web.SteamMachineAuth = machineAuth;
+                    SteamMachineAuth = machineAuth;
                     cc = new CookieContainer();
                     var split = machineAuth.Split('=');
                     var machineCookie = new Cookie(split[0], split[1]);

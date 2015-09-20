@@ -293,7 +293,7 @@ namespace CSharpTradeOffers.Community
         public List<MemberList> RequestAllMemberLists(string groupName, TimeSpan retryWait, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
-            groupName = groupName.Replace(" ", "");
+            groupName = groupName.Replace(" ", string.Empty);
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1&p={1}";
 
             ulong count = 1;

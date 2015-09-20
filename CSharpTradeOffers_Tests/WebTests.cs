@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using CSharpTradeOffers;
 using CSharpTradeOffers.Web;
 using Moq;
 using NUnit.Framework;
