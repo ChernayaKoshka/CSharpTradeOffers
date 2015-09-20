@@ -9,7 +9,7 @@ namespace CSharpTradeOffers.Trading
         public bool NewVersion { get; } = true;
 
         [JsonProperty("version")]
-        public int Version = 2;
+        public int Version { get; } = 2;
 
         [JsonProperty("me")]
         public Offer Me { get; } = new Offer();
