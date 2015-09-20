@@ -26,7 +26,7 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// String is the ClassId linking to an Item object.
         /// </summary>
-        public Dictionary<string, Item> Items = new Dictionary<string, Item>();
+        public Dictionary<string, Item> Items { get; } = new Dictionary<string, Item>();
 
         /// <summary>
         /// Returns the number of assets in the inventory.
@@ -35,7 +35,7 @@ namespace CSharpTradeOffers.Trading
         public ulong AssetCount()
         {
             ulong count = 0;
-            foreach (Item value in from value in Items.Values from rgInventoryItem in value.Items select value)
+            foreach (Item value in from value in this.Items.Values from rgInventoryItem in value.Items select value)
                 count++;
             return count;
         }
@@ -93,8 +93,8 @@ namespace CSharpTradeOffers.Trading
                                 descriptionObj.market_hash_name.ToString())
                     };
 
-                    if (!Items.ContainsKey(description.ClassId))
-                        Items.Add(description.ClassId, description);
+                    if (!this.Items.ContainsKey(description.ClassId))
+                        this.Items.Add(description.ClassId, description);
                 }
                 catch (NullReferenceException)
                 {
@@ -114,7 +114,7 @@ namespace CSharpTradeOffers.Trading
                     InstanceId = item.instanceid,
                     Pos = item.pos
                 };
-                Items[inventoryItem.ClassId.ToString()].Items.Add(inventoryItem);
+                this.Items[inventoryItem.ClassId.ToString()].Items.Add(inventoryItem);
             }
         }
 
@@ -162,7 +162,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>An rgInventoryItem that is not marked in use.</returns>
         public RgInventoryItem FindAvailableAsset(string classid)
         {
-            return Items[classid].Items.FirstOrDefault(item => !item.InUse);
+            return this.Items[classid].Items.FirstOrDefault(item => !item.InUse);
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>True if successful, false if not.</returns>
         public bool MarkAsset(CEconAsset asset, bool inUse)
         {
-            foreach (RgInventoryItem item in Items[asset.ClassId].Items.Where(item => item.Id.ToString() == asset.AssetId))
+            foreach (RgInventoryItem item in this.Items[asset.ClassId].Items.Where(item => item.Id.ToString() == asset.AssetId))
             {
                 item.InUse = inUse;
                 return true;

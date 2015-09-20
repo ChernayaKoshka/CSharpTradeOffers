@@ -18,7 +18,7 @@
         <member name="P:CSharpTradeOffers.Community.MemberList.GroupDetails">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.memberCount">
+        <member name="P:CSharpTradeOffers.Community.MemberList.MemberCount">
             <remarks/>
         </member>
         <member name="P:CSharpTradeOffers.Community.MemberList.TotalPages">
@@ -30,7 +30,7 @@
         <member name="P:CSharpTradeOffers.Community.MemberList.StartingMember">
             <remarks/>
         </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.members">
+        <member name="P:CSharpTradeOffers.Community.MemberList.Members">
             <remarks/>
         </member>
         <member name="T:CSharpTradeOffers.Community.MemberListGroupDetails">

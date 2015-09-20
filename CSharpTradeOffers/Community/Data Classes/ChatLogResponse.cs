@@ -4,9 +4,14 @@ namespace CSharpTradeOffers.Community
 {
     public class ChatLogMessage
     {
-        public int m_unAccountID { get; set; }
-        public int m_tsTimestamp { get; set; }
-        public string m_strMessage { get; set; }
+        [JsonProperty("m_unAccountID")]
+        public int AccountID { get; set; }
+
+        [JsonProperty("m_tsTimestamp")]
+        public int Timestamp { get; set; }
+
+        [JsonProperty("m_strMessage")]
+        public string Message { get; set; }
     }
 
 }

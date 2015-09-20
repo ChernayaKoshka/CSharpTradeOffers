@@ -72,10 +72,10 @@ namespace CSharpTradeOffers.Web
         /// <returns>A concatenated string of URL arguments.</returns>
         private static string DictionaryToUrlString(Dictionary<string, string> dict)
         {
-            string joined = "";
+            string joined = string.Empty;
             foreach (KeyValuePair<string, string> kvp in dict)
             {
-                if (joined != "")
+                if (joined != string.Empty)
                     joined += "&";
 
                 joined += $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}";

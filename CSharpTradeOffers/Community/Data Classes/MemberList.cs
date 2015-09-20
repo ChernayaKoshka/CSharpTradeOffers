@@ -20,7 +20,7 @@ namespace CSharpTradeOffers.Community
 
         /// <remarks/>
         [XmlElement("memberCount")]
-        public ulong memberCount { get; set; }
+        public ulong MemberCount { get; set; }
 
         /// <remarks/>
         [XmlElement("totalPages")]
@@ -36,6 +36,6 @@ namespace CSharpTradeOffers.Community
 
         /// <remarks/>
         [XmlArrayItem("steamID64", IsNullable = false)]
-        public List<ulong> members { get; set; }
+        public List<ulong> Members { get; set; }
     }
 }

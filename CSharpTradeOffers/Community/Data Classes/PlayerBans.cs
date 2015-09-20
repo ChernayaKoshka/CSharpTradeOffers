@@ -9,8 +9,10 @@ namespace CSharpTradeOffers.Community
 
         public bool CommunityBanned { get; set; }
 
+        // ReSharper disable once InconsistentNaming
         public bool VACBanned { get; set; }
 
+        // ReSharper disable once InconsistentNaming
         public int NumberOfVACBans { get; set; }
 
         public int DaysSinceLastBan { get; set; }

@@ -28,7 +28,7 @@ namespace CSharpTradeOffers.Community
         public int HasUpvoted { get; set; }
 
         [JsonProperty("comments_html")]
-        public string CommentsHTML { get; set; }
+        public string CommentsHtml { get; set; }
 
         [JsonProperty("timelastpost")]
         public int TimeLastPost { get; set; }
