@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using CSharpTradeOffers;
 using CSharpTradeOffers.Configuration;
 using CSharpTradeOffers.Trading;
+using CSharpTradeOffers.Web;
 
 namespace DonationBot
 {
