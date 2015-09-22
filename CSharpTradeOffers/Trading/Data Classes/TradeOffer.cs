@@ -6,15 +6,15 @@ namespace CSharpTradeOffers.Trading
     public class TradeOffer
     {
         [JsonProperty("newversion")]
-        public bool NewVersion = true;
+        public bool NewVersion { get; } = true;
 
         [JsonProperty("version")]
-        public int Version = 2;
+        public int Version { get; } = 2;
 
         [JsonProperty("me")]
-        public Offer Me = new Offer();
+        public Offer Me { get; } = new Offer();
 
         [JsonProperty("them")]
-        public Offer Them = new Offer();
+        public Offer Them { get; } = new Offer();
     }
 }

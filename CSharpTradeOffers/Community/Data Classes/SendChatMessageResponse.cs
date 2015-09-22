@@ -5,8 +5,10 @@ namespace CSharpTradeOffers.Community
     [JsonObject(Title = "RootObject")]
     public class SendChatMessageResponse
     {
-        public int utc_timestamp { get; set; }
-        public string error { get; set; }
+        [JsonProperty("utc_timestamp")]
+        public int UtcTimestamp { get; set; }
+        [JsonProperty("error")]
+        public string Error { get; set; }
     }
 
 }

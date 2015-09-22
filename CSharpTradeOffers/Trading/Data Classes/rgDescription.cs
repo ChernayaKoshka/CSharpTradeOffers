@@ -62,13 +62,13 @@ namespace CSharpTradeOffers.Trading
         public string MarketMarketableRestriction { get; set; }
 
         [JsonProperty("descriptions")]
-        public List<Description> Descriptions = new List<Description>();
+        public List<Description> Descriptions { get; } = new List<Description>();
 
         [JsonProperty("actions")]
-        public List<Action> Actions = new List<Action>();
+        public List<Action> Actions { get; } = new List<Action>();
 
         [JsonProperty("tags")]
-        public List<Tag> Tags = new List<Tag>();
+        public List<Tag> Tags { get; } = new List<Tag>();
 
         [JsonProperty("app_data")]
         public AppData AppData { get; set; }

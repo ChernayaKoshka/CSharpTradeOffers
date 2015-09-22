@@ -109,7 +109,7 @@ namespace CSharpTradeOffers.Trading
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.TradeId.ToString()},
                 {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
-                {"captcha", ""}
+                {"captcha", string.Empty}
             };
             return
                 JsonConvert.DeserializeObject<Trade>(
@@ -135,7 +135,7 @@ namespace CSharpTradeOffers.Trading
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.ToString()},
                 {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
-                {"captcha", ""}
+                {"captcha", string.Empty}
             };
             return
                 JsonConvert.DeserializeObject<Trade>(
@@ -165,7 +165,7 @@ namespace CSharpTradeOffers.Trading
                 {"partner", partnerSid.ToString()},
                 {"tradeoffermessage", tradeoffermessage},
                 {"json_tradeoffer", JsonConvert.SerializeObject(offer)},
-                {"captcha", ""},
+                {"captcha", string.Empty},
                 {"trade_offer_create_params", "{}"}
             };
             return JsonConvert.DeserializeObject<SendOfferResponse>(_web.Fetch(url, "POST", data, container, false,
@@ -196,7 +196,7 @@ namespace CSharpTradeOffers.Trading
                 {"partner", partnerSid.ToString()},
                 {"tradeoffermessage", tradeoffermessage},
                 {"json_tradeoffer", JsonConvert.SerializeObject(offer)},
-                {"captcha", ""},
+                {"captcha", string.Empty},
                 {"trade_offer_create_params", "{}"},
                 {"tradeofferid_countered", tradeofferidCountered.ToString()}
             };
