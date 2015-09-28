@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -39,19 +38,6 @@ namespace CSharpTradeOffers
             {
                 throw new Exception("An error occurred", ex);
             }
-        }
-
-        // Deep clone
-        public static T DeepClone<T>(this T a)
-        {
-            using (var stream = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(stream, a);
-                stream.Position = 0;
-                return (T) formatter.Deserialize(stream);
-            }
-
         }
     }
 }
