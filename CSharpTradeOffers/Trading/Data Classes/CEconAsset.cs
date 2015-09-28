@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 namespace CSharpTradeOffers.Trading
 {
     [JsonObject(Title = "ItemsToReceive")]
+    [Serializable]
     public class CEconAsset
     {
         [JsonProperty("appid")]

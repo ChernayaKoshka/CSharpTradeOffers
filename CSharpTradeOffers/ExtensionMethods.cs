@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -22,13 +23,11 @@ namespace CSharpTradeOffers
 
         public static string SerializeToXml<T>(this T value)
         {
-            if (value == null)
-            {
-                return string.Empty;
-            }
+            if (value == null) return string.Empty;
+
             try
             {
-                var xmlserializer = new XmlSerializer(typeof(T));
+                var xmlserializer = new XmlSerializer(typeof (T));
                 var stringWriter = new StringWriter();
                 using (var writer = XmlWriter.Create(stringWriter))
                 {
@@ -40,6 +39,19 @@ namespace CSharpTradeOffers
             {
                 throw new Exception("An error occurred", ex);
             }
+        }
+
+        // Deep clone
+        public static T DeepClone<T>(this T a)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(stream, a);
+                stream.Position = 0;
+                return (T) formatter.Deserialize(stream);
+            }
+
         }
     }
 }

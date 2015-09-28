@@ -622,7 +622,7 @@
             <param name="steamId">steamId64 of the inventory.</param>
             <param name="appId">App ID of the inventory.</param>
         </member>
-        <member name="F:CSharpTradeOffers.Trading.Inventory.Items">
+        <member name="P:CSharpTradeOffers.Trading.Inventory.Items">
             <summary>
             String is the ClassId linking to an Item object.
             </summary>
@@ -775,7 +775,7 @@
             0 = not commodity, 1 = commodity
             </summary>
         </member>
-        <member name="F:CSharpTradeOffers.Trading.Item.Items">
+        <member name="P:CSharpTradeOffers.Trading.Item.Items">
             <summary>
             List of rgInventoryItem, this should be used for whenever you need to interact with a specific item rather than all of them.
             </summary>
