@@ -11,12 +11,9 @@ namespace CSharpTradeOffers.Trading
     {
         private readonly ulong _steamId;
 
-        private readonly string _apiKey;
-
-        public InventoryHandler(ulong steamId, string apiKey)
+        public InventoryHandler(ulong steamId)
         {
             _steamId = steamId;
-            _apiKey = apiKey;
             Inventories = new Dictionary<uint, Inventory>();
         }
 
