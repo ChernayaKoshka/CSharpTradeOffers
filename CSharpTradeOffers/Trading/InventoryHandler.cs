@@ -38,7 +38,7 @@ namespace CSharpTradeOffers.Trading
         public List<Item> FindUnusedItems(string marketHashName, uint appid)
         {
             Inventory inv = Inventories[appid];
-            List<Item> items = inv.Items.Values.Where(item => item.MarketHashName.ToLower().Contains(marketHashName) && !item.Items.TrueForAll(BeingUsed)).ToList();
+            List<Item> items = inv.Items.Values.Where(item => item.Description.MarketHashName.ToLower().Contains(marketHashName) && !item.Items.TrueForAll(BeingUsed)).ToList();
             return items;
         }
 
@@ -94,9 +94,9 @@ namespace CSharpTradeOffers.Trading
         /// <returns>A decimal worth in USD.</returns>
         public decimal ItemWorth(Item item)
         {
-            if (item.Tradable != 1) return 0.0m;
+            if (item.Description.Tradable != 1) return 0.0m;
             var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.AppId), item.MarketHashName);
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.Description.AppId), item.Description.MarketHashName);
             return Convert.ToDecimal(mv.MedianPrice.Substring(1));
         }
 

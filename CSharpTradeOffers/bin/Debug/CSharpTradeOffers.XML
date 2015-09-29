@@ -346,186 +346,6 @@
             </summary>
             <param name="towrite"></param>
         </member>
-        <member name="T:CSharpTradeOffers.Web.IWebRequestHandler`1">
-            <summary>
-            A generic Request Handler from the web.
-            </summary>
-            <typeparam name="TResponse">The response type to get</typeparam>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.IWebRequestHandler`1.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            Send a request to a URL and receives a response of type <see cref="T:CSharpTradeOffers.Web.IResponse" />.
-            </summary>
-            <returns>Return's a generic <see cref="T:CSharpTradeOffers.Web.IResponse" /> from the request.</returns>
-        </member>
-        <member name="T:CSharpTradeOffers.Web.IResponse">
-            <summary>
-            A response from the web.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.IResponse.ReadStream">
-            <summary>
-            Reads the stream to a string 
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.IResponse.Deserialize``1">
-            <summary>
-            Deserializes the stream to a serializable type.
-            </summary>
-            <typeparam name="TSerializable">A serializable type.</typeparam>
-            <returns>The deserialized type.</returns>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.IResponse.Cookies">
-            <summary>
-            Any cookies created from the response.
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.Web.SteamWebRequestHandler">
-            <summary>
-            Handles requests to the "www.SteamCommunity.com" page.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            Sends a request to a url, refered from the steam community. Returns a steam response.
-            </summary>
-            <returns>A stream response</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Converts a dictionary to URL parameters. Ex: ?param=arg
-            </summary>
-            <param name="dict">The Dictionary to be converted.</param>
-            <returns>A concatenated string of URL arguments.</returns>
-        </member>
-        <member name="T:CSharpTradeOffers.Web.SteamResponse">
-            <summary>
-            A response from Steam.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.SteamResponse.#ctor(System.Net.HttpWebResponse)">
-            <summary>
-            Create a steam response from a web response.
-            </summary>
-            <param name="httpWebResponse">A Web Response from Steam.</param>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.SteamResponse.Cookies">
-            <summary>
-            Cookies collected from the response.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.SteamResponse.SteamStream">
-            <summary>
-            The response stream.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.SteamResponse.Deserialize``1">
-            <summary>
-            Deserializes the stream to a serializable type with Xml.
-            </summary>
-            <typeparam name="TSerializable">An XML serializable type.</typeparam>
-            <returns>The deserialized type.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.SteamResponse.Dispose">
-            <summary>
-            Disposes the object.
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.Web.Account">
-            <summary>
-            Generic account
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.Account.SteamId">
-            <summary>
-            The bot's Sid64.
-            </summary>
-        </member>
-        <member name="F:CSharpTradeOffers.Web.Account.AuthContainer">
-            <summary>
-            The Auth Cookies for the bot.
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.Account.AddMachineAuthCookies(System.String)">
-            <summary>
-            Adds the steamMachineAuth cookie to the AuthContainer.
-            This can also be used for any string separated by [name]=[value]
-            </summary>
-            <param name="authstring">String to turn into a cookie and add.</param>
-        </member>
-        <member name="T:CSharpTradeOffers.Web.Web">
-            <summary>
-            Handles Web related tasks like logging in and fetching
-            </summary>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            A web method to return the response string from the URL.
-            </summary>
-            <param name="url">The URL to request.</param>
-            <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-            <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">
-            Special parameter, should only be used with requests that need "X-Requested-With:
-            XMLHttpRequest" and "X-Prototype-Version: 1.7"
-            </param>
-            <param name="referer">Sets the referrer for the request.</param>
-            <returns>A string from the response stream.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            Retries a Fetch until success or fail conditions have been met.
-            </summary>
-            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
-            <param name="retryLimit">The max number of requests to perform before failing.</param>
-            <param name="url">The URL to request.</param>
-            <param name="method">The method to be used. Ex: POST</param>
-            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-            <param name="cookies">A cookiecontainer with cookies to send.</param>
-            <param name="xHeaders">
-            Special parameter, should only be used with requests that need "X-Requested-With:
-            XMLHttpRequest" and "X-Prototype-Version: 1.7"
-            </param>
-            <param name="referer">Sets the referrer for the request.</param>
-            <returns>IResponse interace.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.Web.RetryRequestProcessor(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
-            <summary>
-            Processes retry attempts
-            </summary>
-            <returns>IResponse interace.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.Web.DoLogin(System.String,System.String,System.String)">
-            <summary>
-            Executes the web login using the Steam website.
-            </summary>
-            <param name="username">Username to use</param>
-            <param name="password">Password to use</param>
-            <param name="machineAuth">Steam machine auth string. 
-            You should save Web.SteamMachineAuth after the code has been entered and the request has 
-            been successful and pass it to DoLogin in future attempts to login. 
-            This field can be left blank, but if the account is SteamGuard protected 
-            it will ask you for a new code every time.</param>
-            <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Web.Web.RetryDoLogin(System.TimeSpan,System.Int32,System.String,System.String,System.String)">
-            <summary>
-            Retries the DoLogin method until success or fail conditions have been met.
-            </summary>
-            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
-            <param name="retryLimit">The max number of requests to perform before failing.</param>
-            <param name="username">Username to use</param>
-            <param name="password">Password to use</param>
-            <param name="machineAuth">Steam machine auth string. 
-                You should save Web.SteamMachineAuth after the code has been entered and the request has 
-                been successful and pass it to DoLogin in future attempts to login. 
-                This field can be left blank, but if the account is SteamGuard protected 
-                it will ask you for a new code every time.</param>
-            <returns></returns>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
             <param name="apiKey"></param>
             <returns></returns>
@@ -745,49 +565,14 @@
             An inventory item type class.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Trading.Item.AppId">
+        <member name="P:CSharpTradeOffers.Trading.Item.Description">
             <summary>
-            AppId of item
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.Item.ClassId">
-            <summary>
-            ClassId of item
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.Item.MarketHashName">
-            <summary>
-            Market hash name of item, used for searching price as well as general matching.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.Item.Tradable">
-            <summary>
-            0 = not tradable, 1 = tradable.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.Item.Marketable">
-            <summary>
-            0 = not marketable, 1 = marketable
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.Item.Commodity">
-            <summary>
-            0 = not commodity, 1 = commodity
+            RgDescription of an item, kind of like AssetClassInfo but with less information.
             </summary>
         </member>
         <member name="P:CSharpTradeOffers.Trading.Item.Items">
             <summary>
             List of rgInventoryItem, this should be used for whenever you need to interact with a specific item rather than all of them.
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Trading.Item.Worth">
-            <summary>
-            Market worth of the item.
-            </summary>
-        </member>
-        <member name="T:CSharpTradeOffers.Trading.RgDescription">
-            <summary>
-            Description object contained in the dynamic JSON returned by RequestInventory.
             </summary>
         </member>
         <member name="T:CSharpTradeOffers.Trading.RgInventoryItem">
@@ -843,6 +628,186 @@
             <param name="country">Country to check in. (ISO)</param>
             <param name="currency">Currency code, I forget what. 1 = US $</param>
             <returns>A MarketValue object containing the data.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.IWebRequestHandler`1">
+            <summary>
+            A generic Request Handler from the web.
+            </summary>
+            <typeparam name="TResponse">The response type to get</typeparam>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.IWebRequestHandler`1.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Send a request to a URL and receives a response of type <see cref="T:CSharpTradeOffers.Web.IResponse" />.
+            </summary>
+            <returns>Return's a generic <see cref="T:CSharpTradeOffers.Web.IResponse" /> from the request.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.IResponse">
+            <summary>
+            A response from the web.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.IResponse.ReadStream">
+            <summary>
+            Reads the stream to a string 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.IResponse.Deserialize``1">
+            <summary>
+            Deserializes the stream to a serializable type.
+            </summary>
+            <typeparam name="TSerializable">A serializable type.</typeparam>
+            <returns>The deserialized type.</returns>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.IResponse.Cookies">
+            <summary>
+            Any cookies created from the response.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.SteamWebRequestHandler">
+            <summary>
+            Handles requests to the "www.SteamCommunity.com" page.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Sends a request to a url, refered from the steam community. Returns a steam response.
+            </summary>
+            <returns>A stream response</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Converts a dictionary to URL parameters. Ex: ?param=arg
+            </summary>
+            <param name="dict">The Dictionary to be converted.</param>
+            <returns>A concatenated string of URL arguments.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.SteamResponse">
+            <summary>
+            A response from Steam.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.#ctor(System.Net.HttpWebResponse)">
+            <summary>
+            Create a steam response from a web response.
+            </summary>
+            <param name="httpWebResponse">A Web Response from Steam.</param>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResponse.Cookies">
+            <summary>
+            Cookies collected from the response.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResponse.SteamStream">
+            <summary>
+            The response stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.Deserialize``1">
+            <summary>
+            Deserializes the stream to a serializable type with Xml.
+            </summary>
+            <typeparam name="TSerializable">An XML serializable type.</typeparam>
+            <returns>The deserialized type.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.Dispose">
+            <summary>
+            Disposes the object.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.Account">
+            <summary>
+            Generic account
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Account.SteamId">
+            <summary>
+            The bot's Sid64.
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Web.Account.AuthContainer">
+            <summary>
+            The Auth Cookies for the bot.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Account.AddMachineAuthCookies(System.String)">
+            <summary>
+            Adds the steamMachineAuth cookie to the AuthContainer.
+            This can also be used for any string separated by [name]=[value]
+            </summary>
+            <param name="authstring">String to turn into a cookie and add.</param>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.Web">
+            <summary>
+            Handles Web related tasks like logging in and fetching
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            A web method to return the response string from the URL.
+            </summary>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>A string from the response stream.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Retries a Fetch until success or fail conditions have been met.
+            </summary>
+            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+            <param name="retryLimit">The max number of requests to perform before failing.</param>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>IResponse interace.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.RetryRequestProcessor(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Processes retry attempts
+            </summary>
+            <returns>IResponse interace.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.DoLogin(System.String,System.String,System.String)">
+            <summary>
+            Executes the web login using the Steam website.
+            </summary>
+            <param name="username">Username to use</param>
+            <param name="password">Password to use</param>
+            <param name="machineAuth">Steam machine auth string. 
+            You should save Web.SteamMachineAuth after the code has been entered and the request has 
+            been successful and pass it to DoLogin in future attempts to login. 
+            This field can be left blank, but if the account is SteamGuard protected 
+            it will ask you for a new code every time.</param>
+            <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.RetryDoLogin(System.TimeSpan,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Retries the DoLogin method until success or fail conditions have been met.
+            </summary>
+            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+            <param name="retryLimit">The max number of requests to perform before failing.</param>
+            <param name="username">Username to use</param>
+            <param name="password">Password to use</param>
+            <param name="machineAuth">Steam machine auth string. 
+                You should save Web.SteamMachineAuth after the code has been entered and the request has 
+                been successful and pass it to DoLogin in future attempts to login. 
+                This field can be left blank, but if the account is SteamGuard protected 
+                it will ask you for a new code every time.</param>
+            <returns></returns>
         </member>
         <member name="T:CSharpTradeOffers.ExtensionMethods">
             <summary>

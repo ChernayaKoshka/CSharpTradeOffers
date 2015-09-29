@@ -105,6 +105,8 @@ namespace CSharpTradeOffers.Trading
         public int DefIndex { get; set; }
         [JsonProperty("is_itemset_name")]
         public int IsItemSetName { get; set; }
+        [JsonProperty("limited")]
+        public int Limited { get; set; }
     }
 
     public class AppData2

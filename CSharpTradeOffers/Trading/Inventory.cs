@@ -73,28 +73,17 @@ namespace CSharpTradeOffers.Trading
 
             dynamic rgInventory = inventoryJson.rgInventory;
             dynamic rgDescriptions = inventoryJson.rgDescriptions;
+            Dictionary<string, RgDescription> deserializedDescriptions =
+                JsonConvert.DeserializeObject<Dictionary<string, RgDescription>>(rgDescriptions.ToString());
 
-            foreach (dynamic obj in rgDescriptions)
+            foreach (RgDescription rgDescription in deserializedDescriptions.Values)
             {
-                dynamic descriptionObj = JsonConvert.DeserializeObject<dynamic>(obj.Value.ToString());
                 try
                 {
-                    var description = new Item
-                    {
-                        AppId = descriptionObj.appid,
-                        ClassId = descriptionObj.classid,
-                        MarketHashName = descriptionObj.market_hash_name,
-                        Commodity = descriptionObj.commodity,
-                        Marketable = descriptionObj.marketable,
-                        Tradable = descriptionObj.tradable,
-                        Worth =
-                            ItemWorth(Convert.ToInt32(descriptionObj.tradable),
-                                Convert.ToUInt32(descriptionObj.appid),
-                                descriptionObj.market_hash_name.ToString())
-                    };
+                    var description = new Item {Description = rgDescription};
 
-                    if (!this.Items.ContainsKey(description.ClassId))
-                        this.Items.Add(description.ClassId, description);
+                    if (!Items.ContainsKey(rgDescription.ClassId))
+                        Items.Add(rgDescription.ClassId, description);
                 }
                 catch (NullReferenceException)
                 {
@@ -102,6 +91,7 @@ namespace CSharpTradeOffers.Trading
                 }
             }
 
+            //later implement RgInventory like I did with RgDescription
             foreach (dynamic obj in rgInventory)
             {
                 dynamic item = JsonConvert.DeserializeObject<dynamic>(obj.Value.ToString());
@@ -125,9 +115,9 @@ namespace CSharpTradeOffers.Trading
         /// <returns>A decimal worth in USD.</returns>
         public decimal ItemWorth(Item item)
         {
-            if (item.Tradable != 1) return 0.0m;
+            if (item.Description.Tradable != 1) return 0.0m;
             var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.AppId), item.MarketHashName);
+            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.Description.AppId), item.Description.MarketHashName);
             return Convert.ToDecimal(mv.MedianPrice.Substring(1)); //skips $ symbol
         }
         

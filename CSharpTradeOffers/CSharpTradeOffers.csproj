@@ -79,6 +79,7 @@
     <Compile Include="Configuration\Data Classes\Officer.cs" />
     <Compile Include="Configuration\Data Classes\Config.cs" />
     <Compile Include="Configuration\XmlConfigHandler.cs" />
+    <Compile Include="Trading\Data Classes\RgDescription.cs" />
     <Compile Include="Web\IWebRequestHandler.cs" />
     <Compile Include="Web\IResponse.cs" />
     <Compile Include="Web\Data Classes\LoginResult.cs" />
@@ -109,8 +110,7 @@
     <Compile Include="Trading\Data Classes\Item.cs" />
     <Compile Include="Trading\Data Classes\MarketValue.cs" />
     <Compile Include="Trading\Data Classes\Offer.cs" />
-    <Compile Include="Trading\Data Classes\rgDescription.cs" />
-    <Compile Include="Trading\Data Classes\rgInventoryItem.cs" />
+    <Compile Include="Trading\Data Classes\RgInventoryItem.cs" />
     <Compile Include="Trading\Data Classes\SendOfferResponse.cs" />
     <Compile Include="Trading\SteamEconomyHandler.cs" />
     <Compile Include="Community\SteamUserHandler.cs" />
