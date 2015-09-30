@@ -94,38 +94,12 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// Accepts a specified trade offer.
         /// </summary>
-        /// <param name="tradeId">A TradeId object containing the id of the trade to accept.</param>
-        /// <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
-        /// <param name="partnerId">The AccountId of the person to trade with.</param>
-        /// <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
-        /// <returns>The TradeId of the offer that was accepted.</returns>
-        public Trade AcceptTradeOffer(Trade tradeId, CookieContainer container, uint partnerId, string serverid)
-        {
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
-            const string url = "https://steamcommunity.com/tradeoffer/{0}/accept";
-            var data = new Dictionary<string, string>
-            {
-                {"sessionid", Web.Web.SessionId},
-                {"serverid", serverid},
-                {"tradeofferid", tradeId.TradeId.ToString()},
-                {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
-                {"captcha", string.Empty}
-            };
-            return
-                JsonConvert.DeserializeObject<Trade>(
-                    WebUtility.UrlDecode(_web.Fetch(string.Format(url, tradeId.TradeId), "POST",
-                        data, container, false, "https://steamcommunity.com/tradeoffer/" + tradeId.TradeId + "/").ReadStream()));
-        }
-
-        /// <summary>
-        /// Accepts a specified trade offer.
-        /// </summary>
         /// <param name="tradeId">A ulong representing the trade to accept.</param>
         /// <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
         /// <param name="partnerId">The AccountId of the person to trade with.</param>
         /// <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
         /// <returns>The TradeId of the offer that was accepted.</returns>
-        public Trade AcceptTradeOffer(ulong tradeId, CookieContainer container, uint partnerId, string serverid)
+        public Trade AcceptTradeOffer(uint tradeId, uint partnerId, CookieContainer container, string serverid)
         {
             container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
             const string url = "https://steamcommunity.com/tradeoffer/{0}/accept";
@@ -147,13 +121,13 @@ namespace CSharpTradeOffers.Trading
         /// Sends a trade offer to the specified recipient. 
         /// </summary>
         /// <param name="partnerSid">The SteamId64 (ulong) of the person to send the offer to.</param>
-        /// <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
         /// <param name="tradeoffermessage">An optional message to be sent with the offer. Can be null.</param>
         /// <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
         /// <param name="offer">A TradeOffer object containing the trade parameters.</param>
+        /// <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
         /// <returns>A SendOfferResponse object.</returns>
-        public SendOfferResponse SendTradeOffer(ulong partnerSid, CookieContainer container, string tradeoffermessage,
-            string serverid, TradeOffer offer)
+        public SendOfferResponse SendTradeOffer(ulong partnerSid, string tradeoffermessage,
+            string serverid, TradeOffer offer, CookieContainer container)
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
             container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
@@ -177,14 +151,14 @@ namespace CSharpTradeOffers.Trading
         /// Modifies an existing trade offer.
         /// </summary>
         /// <param name="partnerSid">The SteamId64 (ulong) of the person whose offer will be modified.</param>
-        /// <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
         /// <param name="tradeoffermessage">An otpional message to be sent with the trade offer. Can be null.</param>
         /// <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
         /// <param name="tradeofferidCountered">The TradeId of the offer to counter or modify.</param>
         /// <param name="offer">A TradeOffer object containing the trade parameters. </param>
+        /// <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
         /// <returns>A SendOfferResponse object.</returns>
-        public SendOfferResponse ModifyTradeOffer(ulong partnerSid, CookieContainer container, string tradeoffermessage,
-            string serverid, uint tradeofferidCountered, TradeOffer offer)
+        public SendOfferResponse ModifyTradeOffer(ulong partnerSid, string tradeoffermessage,
+            string serverid, uint tradeofferidCountered, TradeOffer offer, CookieContainer container)
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
             container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
