@@ -244,8 +244,8 @@ namespace CSharpTradeOffers.Community
             var membersList = new List<MemberList>();
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1&p={1}";
 
-            ulong count = 1;
-            ulong totalPages = 1;
+            int count = 1;
+            int totalPages = 1;
             bool firstRequest = false;
 
             do
@@ -296,8 +296,8 @@ namespace CSharpTradeOffers.Community
             groupName = groupName.Replace(" ", string.Empty);
             const string url = "http://steamcommunity.com/groups/{0}/memberslistxml/?xml=1&p={1}";
 
-            ulong count = 1;
-            ulong totalPages = 1;
+            int count = 1;
+            int totalPages = 1;
             bool firstRequest = false;
             do
             {
