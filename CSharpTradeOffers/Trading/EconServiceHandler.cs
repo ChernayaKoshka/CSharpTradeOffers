@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
@@ -142,9 +143,12 @@ namespace CSharpTradeOffers.Trading
                 {"captcha", string.Empty},
                 {"trade_offer_create_params", "{}"}
             };
-            return JsonConvert.DeserializeObject<SendOfferResponse>(_web.Fetch(url, "POST", data, container, false,
-                "https://steamcommunity.com/tradeoffer/new/?partner=" +
-                SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid))).ReadStream());
+            return
+                JsonConvert.DeserializeObject<SendOfferResponse>(
+                    _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
+                        "https://steamcommunity.com/tradeoffer/new/?partner=" +
+                        SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid)))
+                        .ReadStream());
         }
 
         /// <summary>

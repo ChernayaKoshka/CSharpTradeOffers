@@ -9,30 +9,6 @@
             InviteResponse
             </summary>
         </member>
-        <member name="T:CSharpTradeOffers.Community.MemberList">
-            <remarks/>
-        </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.GroupId64">
-            <remarks/>
-        </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.GroupDetails">
-            <remarks/>
-        </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.MemberCount">
-            <remarks/>
-        </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.TotalPages">
-            <remarks/>
-        </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.CurrentPage">
-            <remarks/>
-        </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.StartingMember">
-            <remarks/>
-        </member>
-        <member name="P:CSharpTradeOffers.Community.MemberList.Members">
-            <remarks/>
-        </member>
         <member name="T:CSharpTradeOffers.Community.MemberListGroupDetails">
             <remarks/>
         </member>
@@ -385,17 +361,7 @@
             <param name="tradeofferid">The ID of the offer to cancel.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.AcceptTradeOffer(CSharpTradeOffers.Trading.Trade,System.Net.CookieContainer,System.UInt32,System.String)">
-            <summary>
-            Accepts a specified trade offer.
-            </summary>
-            <param name="tradeId">A TradeId object containing the id of the trade to accept.</param>
-            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
-            <param name="partnerId">The AccountId of the person to trade with.</param>
-            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
-            <returns>The TradeId of the offer that was accepted.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.AcceptTradeOffer(System.UInt64,System.Net.CookieContainer,System.UInt32,System.String)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.AcceptTradeOffer(System.UInt32,System.UInt32,System.Net.CookieContainer,System.String)">
             <summary>
             Accepts a specified trade offer.
             </summary>
@@ -405,27 +371,27 @@
             <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
             <returns>The TradeId of the offer that was accepted.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.SendTradeOffer(System.UInt64,System.Net.CookieContainer,System.String,System.String,CSharpTradeOffers.Trading.TradeOffer)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.SendTradeOffer(System.UInt64,System.String,System.String,CSharpTradeOffers.Trading.TradeOffer,System.Net.CookieContainer)">
             <summary>
             Sends a trade offer to the specified recipient. 
             </summary>
             <param name="partnerSid">The SteamId64 (ulong) of the person to send the offer to.</param>
-            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <param name="tradeoffermessage">An optional message to be sent with the offer. Can be null.</param>
             <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
             <param name="offer">A TradeOffer object containing the trade parameters.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A SendOfferResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.ModifyTradeOffer(System.UInt64,System.Net.CookieContainer,System.String,System.String,System.UInt32,CSharpTradeOffers.Trading.TradeOffer)">
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.ModifyTradeOffer(System.UInt64,System.String,System.String,System.UInt32,CSharpTradeOffers.Trading.TradeOffer,System.Net.CookieContainer)">
             <summary>
             Modifies an existing trade offer.
             </summary>
             <param name="partnerSid">The SteamId64 (ulong) of the person whose offer will be modified.</param>
-            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <param name="tradeoffermessage">An otpional message to be sent with the trade offer. Can be null.</param>
             <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
             <param name="tradeofferidCountered">The TradeId of the offer to counter or modify.</param>
             <param name="offer">A TradeOffer object containing the trade parameters. </param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A SendOfferResponse object.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffersSummary(System.UInt32)">
@@ -468,30 +434,23 @@
             <param name="steamId">steamId64 of the inventory to request.</param>
             <param name="appId">App ID of the inventory to request.</param>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(CSharpTradeOffers.Trading.Item)">
+        <member name="M:CSharpTradeOffers.Trading.Inventory.FindUnusedItems(System.String)">
+            <param name="marketHashName">Name to search</param>
+            <param name="appid">Appid of the inventory to search</param>
+            <returns>A list of items whose market_hash_name contains marketHashName</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.FindFirstItem(CSharpTradeOffers.Trading.CEconAsset)">
             <summary>
-            Requests decimal worth of an Item.
+            Locates an Item in the inventory.
             </summary>
-            <param name="item">An Item object to get the value of.</param>
-            <returns>A decimal worth in USD.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Boolean,System.UInt32,System.String)">
-            <param name="tradable"></param>
-            <param name="appid"></param>
-            <param name="marketHashName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.ItemWorth(System.Int32,System.UInt32,System.String)">
-            <param name="tradable"></param>
-            <param name="appid"></param>
-            <param name="marketHashName"></param>
+            <param name="assetToFind">Specifies search params.</param>
             <returns></returns>
         </member>
         <member name="M:CSharpTradeOffers.Trading.Inventory.FindAvailableAsset(System.String)">
             <summary>
             Finds the first rgInventoryItem that is not in use.
             </summary>
-            <param name="classid">ClassId of items to search.</param>
+            <param name="classId">ClassId of items to search.</param>
             <returns>An rgInventoryItem that is not marked in use.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Trading.Inventory.MarkAsset(CSharpTradeOffers.Trading.CEconAsset,System.Boolean)">
@@ -507,26 +466,6 @@
             Handles Inventory-Related tasks for a specific account.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItems(System.String,System.UInt32)">
-            <param name="marketHashName">Name to search</param>
-            <param name="appid">Appid of the inventory to search</param>
-            <returns>A list of items whose market_hash_name contains marketHashName</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindUnusedItem(CSharpTradeOffers.Trading.CEconAsset,CSharpTradeOffers.Trading.Inventory)">
-            <summary>
-            Locates an Item in the inventory.
-            </summary>
-            <param name="assetToFind">Specifies search params.</param>
-            <param name="inv">Inventory to search.providing the </param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.FindFirstItem(CSharpTradeOffers.Trading.CEconAsset)">
-            <summary>
-            Locates an Item in the inventory.
-            </summary>
-            <param name="assetToFind">Specifies search params.</param>
-            <returns></returns>
-        </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.CEconTradeOffer,System.Boolean)">
             <summary>
             Marks the inUse bool of the assets specified in the trade offer.
@@ -540,25 +479,6 @@
             </summary>
             <param name="offer">TradeOffer to mark.</param>
             <param name="inUse">Bool to set.</param>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.ItemWorth(CSharpTradeOffers.Trading.Item)">
-            <summary>
-            Requests decimal worth of an Item.
-            </summary>
-            <param name="item">An Item object to get the value of.</param>
-            <returns>A decimal worth in USD.</returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.ItemWorth(System.Boolean,System.UInt32,System.String)">
-            <param name="marketable"></param>
-            <param name="appid"></param>
-            <param name="marketHashName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.ItemWorth(System.Int32,System.UInt32,System.String)">
-            <param name="marketable"></param>
-            <param name="appid"></param>
-            <param name="marketHashName"></param>
-            <returns></returns>
         </member>
         <member name="T:CSharpTradeOffers.Trading.Item">
             <summary>

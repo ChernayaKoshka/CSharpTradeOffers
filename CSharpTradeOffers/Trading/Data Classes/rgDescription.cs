@@ -6,11 +6,11 @@ namespace CSharpTradeOffers.Trading
     public class RgDescription
     {
         [JsonProperty("appid")]
-        public string AppId { get; set; }
+        public uint AppId { get; set; }
         [JsonProperty("classid")]
-        public string ClassId { get; set; }
+        public ulong ClassId { get; set; }
         [JsonProperty("instanceid")]
-        public string InstanceId { get; set; }
+        public ulong InstanceId { get; set; }
         [JsonProperty("icon_url")]
         public string IconUrl { get; set; }
         [JsonProperty("icon_drag_url")]

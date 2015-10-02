@@ -35,7 +35,7 @@ namespace CSharpTradeOffers.Trading
         public ulong AssetCount()
         {
             ulong count = 0;
-            foreach (Item value in from value in this.Items.Values from rgInventoryItem in value.Items select value)
+            foreach (Item value in from value in Items.Values from rgInventoryItem in value.Items select value)
                 count++;
             return count;
         }
@@ -82,8 +82,8 @@ namespace CSharpTradeOffers.Trading
                 {
                     var description = new Item {Description = rgDescription};
 
-                    if (!Items.ContainsKey(rgDescription.ClassId))
-                        Items.Add(rgDescription.ClassId, description);
+                    if (!Items.ContainsKey(rgDescription.ClassId.ToString()))
+                        Items.Add(rgDescription.ClassId.ToString(), description);
                 }
                 catch (NullReferenceException)
                 {
@@ -104,55 +104,43 @@ namespace CSharpTradeOffers.Trading
                     InstanceId = item.instanceid,
                     Pos = item.pos
                 };
-                this.Items[inventoryItem.ClassId.ToString()].Items.Add(inventoryItem);
+                Items[inventoryItem.ClassId.ToString()].Items.Add(inventoryItem);
             }
         }
 
-        /// <summary>
-        /// Requests decimal worth of an Item.
-        /// </summary>
-        /// <param name="item">An Item object to get the value of.</param>
-        /// <returns>A decimal worth in USD.</returns>
-        public decimal ItemWorth(Item item)
+        //predicate
+        private static bool BeingUsed(RgInventoryItem rgInventoryItem)
         {
-            if (item.Description.Tradable != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(item.Description.AppId), item.Description.MarketHashName);
-            return Convert.ToDecimal(mv.MedianPrice.Substring(1)); //skips $ symbol
-        }
-        
-        /// <param name="tradable"></param>
-        /// <param name="appid"></param>
-        /// <param name="marketHashName"></param>
-        /// <returns></returns>
-        public decimal ItemWorth(bool tradable, uint appid, string marketHashName)
-        {
-            if (tradable.IntValue() != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.MedianPrice.Substring(1));
+            return rgInventoryItem.InUse;
         }
 
-        /// <param name="tradable"></param>
-        /// <param name="appid"></param>
-        /// <param name="marketHashName"></param>
-        /// <returns></returns>
-        public decimal ItemWorth(int tradable, uint appid, string marketHashName)
+        /// <param name="marketHashName">Name to search</param>
+        /// <param name="appid">Appid of the inventory to search</param>
+        /// <returns>A list of items whose market_hash_name contains marketHashName</returns>
+        public List<Item> FindUnusedItems(string marketHashName)
         {
-            if (tradable != 1) return 0.0m;
-            var handler = new MarketHandler();
-            MarketValue mv = handler.GetPriceOverview(Convert.ToUInt32(appid), marketHashName);
-            return Convert.ToDecimal(mv.MedianPrice.Substring(1));
+            List<Item> items = Items.Values.Where(item => item.Description.MarketHashName.ToLower().Contains(marketHashName) && !item.Items.TrueForAll(BeingUsed)).ToList();
+            return items;
+        }
+
+        /// <summary>
+        /// Locates an Item in the inventory.
+        /// </summary>
+        /// <param name="assetToFind">Specifies search params.</param>
+        /// <returns></returns>
+        public Item FindFirstItem(CEconAsset assetToFind)
+        {
+            return Items[assetToFind.ClassId];
         }
 
         /// <summary>
         /// Finds the first rgInventoryItem that is not in use.
         /// </summary>
-        /// <param name="classid">ClassId of items to search.</param>
+        /// <param name="classId">ClassId of items to search.</param>
         /// <returns>An rgInventoryItem that is not marked in use.</returns>
-        public RgInventoryItem FindAvailableAsset(string classid)
+        public RgInventoryItem FindAvailableAsset(string classId)
         {
-            return this.Items[classid].Items.FirstOrDefault(item => !item.InUse);
+            return Items[classId].Items.FirstOrDefault(item => !item.InUse);
         }
 
         /// <summary>
@@ -163,7 +151,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>True if successful, false if not.</returns>
         public bool MarkAsset(CEconAsset asset, bool inUse)
         {
-            foreach (RgInventoryItem item in this.Items[asset.ClassId].Items.Where(item => item.Id.ToString() == asset.AssetId))
+            foreach (RgInventoryItem item in Items[asset.ClassId].Items.Where(item => item.Id.ToString() == asset.AssetId))
             {
                 item.InUse = inUse;
                 return true;
