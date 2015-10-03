@@ -9,9 +9,9 @@ namespace CSharpTradeOffers.Trading
     public class Inventory
     {
         private readonly ulong _steamId;
+
         private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
         
-
         /// <summary>
         /// Class constructor, automatically initializes inventory.
         /// </summary>
