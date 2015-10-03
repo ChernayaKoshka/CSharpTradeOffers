@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
+using System.Data;
+using System.Globalization;
 
 namespace CSharpTradeOffers.Trading
 {
@@ -44,7 +47,14 @@ namespace CSharpTradeOffers.Trading
                 {"appid", appId.ToString()},
                 {"market_hash_name", marketHashName}
             };
-            return JsonConvert.DeserializeObject<MarketValue>(_web.Fetch(url, "GET", data, null, false).ReadStream());
+            var marketValueResponse = JsonConvert.DeserializeObject<MarketValueResponse>(_web.Fetch(url, "GET", data, null, false).ReadStream());
+            return new MarketValue
+            {
+                Success = marketValueResponse.Success,
+                LowestPrice = decimal.Parse(marketValueResponse.LowestPrice, NumberStyles.Currency),
+                Volume = Convert.ToInt32(marketValueResponse.Volume),
+                MedianPrice = decimal.Parse(marketValueResponse.MedianPrice, NumberStyles.Currency)
+            };
         }
     }
 }

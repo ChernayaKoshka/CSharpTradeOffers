@@ -79,6 +79,7 @@
     <Compile Include="Configuration\Data Classes\Officer.cs" />
     <Compile Include="Configuration\Data Classes\Config.cs" />
     <Compile Include="Configuration\XmlConfigHandler.cs" />
+    <Compile Include="Trading\Data Classes\MarketValue.cs" />
     <Compile Include="Trading\Data Classes\RgDescription.cs" />
     <Compile Include="Web\IWebRequestHandler.cs" />
     <Compile Include="Web\IResponse.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="Trading\Data Classes\InventoryException.cs" />
     <Compile Include="Trading\InventoryHandler.cs" />
     <Compile Include="Trading\Data Classes\Item.cs" />
-    <Compile Include="Trading\Data Classes\MarketValue.cs" />
+    <Compile Include="Trading\Data Classes\MarketValueResponse.cs" />
     <Compile Include="Trading\Data Classes\Offer.cs" />
     <Compile Include="Trading\Data Classes\RgInventoryItem.cs" />
     <Compile Include="Trading\Data Classes\SendOfferResponse.cs" />
