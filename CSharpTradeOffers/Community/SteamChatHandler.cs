@@ -21,6 +21,10 @@ namespace CSharpTradeOffers.Community
 
         private int _pollId = 1;
 
+        /// <summary>
+        /// Creates a new SteamChatHandler. Generates a random jQueryId to use.
+        /// </summary>
+        /// <param name="account">Account object of the account to use.</param>
         public SteamChatHandler(Account account)
         {
             _account = account;
@@ -33,16 +37,10 @@ namespace CSharpTradeOffers.Community
             _auth = Logon();
         }
 
-        /*https://api.steampowered.com/
-            ISteamWebUserPresenceOAuth/
-            Logon/
-            v0001/
-            ?jsonp=
-            jQuery11110010656769154593349_1442204142816
-            &ui_mode=web
-            &access_token=901ee4203d44b369fceabe2da9b4c88d
-            &_=1442204142817*/
-
+        /// <summary>
+        /// Logs on to Steam community chat.
+        /// </summary>
+        /// <returns>WebPresenceOAuthLogonResponse</returns>
         private WebPresenceOAuthLogonResponse Logon()
         {
             const string url = BaseAuthUrl + "Logon/v0001/";
@@ -58,26 +56,21 @@ namespace CSharpTradeOffers.Community
             response = StripjQueryArtifacts(response); //remove /**/jQuery11110010656769154593349_1442204142816( and remove )
             return JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
         }
-
-        /*https://api.steampowered.com/ISteamWebUserPresenceOAuth/
-        Poll/
-        v0001/
-        ?jsonp=jQuery11110010656769154593349_1442204142816
-        &umqid=6194219628342327081
-        &message=29
-        &pollid=1
-        &sectimeout=20
-        &secidletime=0
-        &use_accountids=1
-        &access_token=901ee4203d44b369fceabe2da9b4c88d
-        */
-        /*
-        Message numbers that I know:
-        29 = poll me
-        30 = poll friends
-        35 = poll new messages
-        */
-        public PollResponse Poll(int message,int secTimeOut,int secIdleTime,bool useAccountIds)
+        
+        /// <summary>
+        /// Pretty sure this function does persona states (among other things?)
+        /// Message 29 = Go online
+        /// </summary>
+        /// <param name="message">
+        /// Message numbers that I know:
+        /// 29 = poll me
+        /// 30 = poll friends (?)
+        /// 35 = poll new messages</param>
+        /// <param name="secTimeOut">Seconds until a timeout event occurs?</param>
+        /// <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
+        /// <param name="useAccountIds">Probably always true.</param>
+        /// <returns>PollResponse object</returns>
+        public PollResponse Poll(int message,int secTimeOut,int secIdleTime,bool useAccountIds = true)
         {
             const string url = BaseAuthUrl + "Poll/v0001/";
             string jQuery = string.Format(_basejQuery, UnixTimeNow());
@@ -115,6 +108,11 @@ namespace CSharpTradeOffers.Community
             return (long)timeSpan.TotalSeconds;
         }
 
+        /// <summary>
+        /// Gets the state of a friend.
+        /// </summary>
+        /// <param name="accountId">AccountId of friend.</param>
+        /// <returns>A FriendStateResponse object.</returns>
         public FriendStateResponse FriendState(uint accountId)
         {
             string url = BaseChatUrl + "friendstate/" + accountId;
@@ -122,6 +120,11 @@ namespace CSharpTradeOffers.Community
                 JsonConvert.DeserializeObject<FriendStateResponse>(_web.Fetch(url, "GET", null, _account.AuthContainer).ReadStream());
         }
 
+        /// <summary>
+        /// Request chat log of conversation.
+        /// </summary>
+        /// <param name="accountId">AccountId of the person to request the chat log of.</param>
+        /// <returns>A List of ChatLogMessage objects.</returns>
         public List<ChatLogMessage> ChatLog(uint accountId)
         {
             string url = BaseChatUrl + "chatlog/" + accountId;
@@ -136,6 +139,13 @@ namespace CSharpTradeOffers.Community
 
         //saytext = send chat message
         //there are others but I don't know them yet
+        /// <summary>
+        /// Sends a message to Steam
+        /// </summary>
+        /// <param name="sendTo">The SteamId64 of the person to send the message to.</param>
+        /// <param name="type">Message type. (saytext = send message, others but idk)</param>
+        /// <param name="message">Message to send</param>
+        /// <returns>SendChatMessageResponse</returns>
         public SendChatMessageResponse Message(ulong sendTo, string type, string message)
         {
             const string url = BaseAuthUrl + "Message/v0001/";
