@@ -65,9 +65,9 @@ namespace CSharpTradeOffers.Community
         private string GetAccessToken()
         {
             string response = _web.Fetch(BaseChatUrl, "GET", null, _account.AuthContainer).ReadStream();
-            string removed = response.Remove(0, response.IndexOf("\'https://api.steampowered.com/\', \"") + 34);
-            string token = removed.Substring(0, 32);
-            return token;
+            string removed = response.Remove(0, response.IndexOf("\'https://api.steampowered.com/\', \"", StringComparison.Ordinal) + 34);
+            return removed.Substring(0, 32);
+            
         }
 
         /// <summary>
