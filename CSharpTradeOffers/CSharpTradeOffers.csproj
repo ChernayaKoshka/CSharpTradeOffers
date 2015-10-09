@@ -64,14 +64,11 @@
     <Compile Include="Community\Data Classes\MemberListGroupDetails.cs" />
     <Compile Include="Community\Data Classes\MultiInviteResponse.cs" />
     <Compile Include="Community\Data Classes\PlayerBans.cs" />
-    <Compile Include="Community\Data Classes\PlayersSummaries.cs" />
-    <Compile Include="Community\Data Classes\PlayerSummary.cs" />
     <Compile Include="Community\Data Classes\PollResponse.cs" />
     <Compile Include="Community\Data Classes\PrivacySettings.cs" />
     <Compile Include="Community\Data Classes\Profile.cs" />
     <Compile Include="Community\Data Classes\ResolveVanityUrlBaseResult.cs" />
     <Compile Include="Community\Data Classes\ResolveVanityUrlResult.cs" />
-    <Compile Include="Community\Data Classes\ResponseV2.cs" />
     <Compile Include="Community\Data Classes\SendChatMessageResponse.cs" />
     <Compile Include="Community\SteamChatHandler.cs" />
     <Compile Include="Community\Data Classes\WebPresenceOAuthLogonResponse.cs" />

@@ -73,8 +73,9 @@ namespace CSharpTradeOffers.Community
                 {"steamids", CommaDelimit(playerSummariesToRequest)}
             };
             return
-                JsonConvert.DeserializeObject<GetPlayerSummariesV2Result>(_web.Fetch(url, "GET", data, null, false).ReadStream())
-                    .Response.PlayersSummaries;
+                JsonConvert.DeserializeObject<GetPlayerSummariesV2BaseResult>(
+                    _web.Fetch(url, "GET", data, null, false).ReadStream())
+                    .Response.PlayerSummaries;
         }
 
         /// <summary>
