@@ -48,13 +48,17 @@ namespace CSharpTradeOffers.Trading
                 {"market_hash_name", marketHashName}
             };
             var marketValueResponse = JsonConvert.DeserializeObject<MarketValueResponse>(_web.Fetch(url, "GET", data, null, false).ReadStream());
-            return new MarketValue
-            {
-                Success = marketValueResponse.Success,
-                LowestPrice = decimal.Parse(marketValueResponse.LowestPrice, NumberStyles.Currency),
-                Volume = Convert.ToInt32(marketValueResponse.Volume),
-                MedianPrice = decimal.Parse(marketValueResponse.MedianPrice, NumberStyles.Currency)
-            };
+            var mv = new MarketValue {Success = marketValueResponse.Success};
+            
+            if (!marketValueResponse.Success)
+                return mv;
+            if (!string.IsNullOrEmpty(marketValueResponse.LowestPrice))
+                mv.LowestPrice = decimal.Parse(marketValueResponse.LowestPrice, NumberStyles.Currency);
+            if (!string.IsNullOrEmpty(marketValueResponse.MedianPrice))
+                mv.MedianPrice = decimal.Parse(marketValueResponse.MedianPrice, NumberStyles.Currency);
+            if (!string.IsNullOrEmpty(marketValueResponse.Volume))
+                mv.Volume = int.Parse(marketValueResponse.Volume, NumberStyles.AllowThousands);
+            return mv;
         }
     }
 }
