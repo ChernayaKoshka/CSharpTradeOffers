@@ -50,11 +50,61 @@
             MultiInviteResponse
             </summary>
         </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.#ctor(CSharpTradeOffers.Web.Account)">
+            <summary>
+            Creates a new SteamChatHandler. Generates a random jQueryId to use.
+            </summary>
+            <param name="account">Account object of the account to use.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Logon">
+            <summary>
+            Logs on to Steam community chat.
+            </summary>
+            <returns>WebPresenceOAuthLogonResponse</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Poll(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Pretty sure this function does persona states (among other things?)
+            Message 29 = Go online
+            </summary>
+            <param name="message">
+            Message numbers that I know:
+            29 = poll me
+            30 = poll friends (?)
+            35 = poll new messages</param>
+            <param name="secTimeOut">Seconds until a timeout event occurs?</param>
+            <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
+            <param name="useAccountIds">Probably always true.</param>
+            <returns>PollResponse object</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Community.SteamChatHandler.UnixTimeNow">
             <summary>
             Gets the Unix time. Also known as Epoch.
             </summary>
             <returns>A long integer of the number of seconds since 1,1,1970</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.FriendState(System.UInt32)">
+            <summary>
+            Gets the state of a friend.
+            </summary>
+            <param name="accountId">AccountId of friend.</param>
+            <returns>A FriendStateResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.ChatLog(System.UInt32)">
+            <summary>
+            Request chat log of conversation.
+            </summary>
+            <param name="accountId">AccountId of the person to request the chat log of.</param>
+            <returns>A List of ChatLogMessage objects.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Message(System.UInt64,System.String,System.String)">
+            <summary>
+            Sends a message to Steam
+            </summary>
+            <param name="sendTo">The SteamId64 of the person to send the message to.</param>
+            <param name="type">Message type. (saytext = send message, others but idk)</param>
+            <param name="message">Message to send</param>
+            <returns>SendChatMessageResponse</returns>
         </member>
         <member name="T:CSharpTradeOffers.Community.CommunityHandler">
             <summary>

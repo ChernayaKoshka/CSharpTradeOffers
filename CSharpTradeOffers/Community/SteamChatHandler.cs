@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
@@ -17,7 +18,7 @@ namespace CSharpTradeOffers.Community
 
         private readonly WebPresenceOAuthLogonResponse _auth;
         private readonly string _basejQuery;
-        private const string AccessToken = "901ee4203d44b369fceabe2da9b4c88d";
+        private readonly string _accessToken;
 
         private int _pollId = 1;
 
@@ -29,12 +30,16 @@ namespace CSharpTradeOffers.Community
         {
             _account = account;
 
+            //sloppy way to do it, but couldn't get Regex to love me
+            _accessToken = GetAccessToken();
+
             var rand = new Random();
             var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 99999999999); //might be able to be larger, haven't checked
             if (jQueryId < 0) jQueryId = -jQueryId;
             _basejQuery = "jQuery" + jQueryId + _account.SteamId + "_{0}";
 
             _auth = Logon();
+            
         }
 
         /// <summary>
@@ -49,14 +54,22 @@ namespace CSharpTradeOffers.Community
             {
                 {"jsonp", jQuery},
                 {"ui_mode", "web"},
-                {"access_token", AccessToken} //public realm iirc
+                {"access_token", _accessToken} //special id, like SteamId but not for some reason
             };
 
             string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false).ReadStream(); //returns an annoying JSON string that can't quite be deserialized yet
             response = StripjQueryArtifacts(response); //remove /**/jQuery11110010656769154593349_1442204142816( and remove )
             return JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
         }
-        
+
+        private string GetAccessToken()
+        {
+            string response = _web.Fetch(BaseChatUrl, "GET", null, _account.AuthContainer).ReadStream();
+            string removed = response.Remove(0, response.IndexOf("\'https://api.steampowered.com/\', \"") + 34);
+            string token = removed.Substring(0, 32);
+            return token;
+        }
+
         /// <summary>
         /// Pretty sure this function does persona states (among other things?)
         /// Message 29 = Go online
@@ -83,7 +96,7 @@ namespace CSharpTradeOffers.Community
                 {"sectimeout", secTimeOut.ToString()},
                 {"secidletime", secIdleTime.ToString()},
                 {"use_accountids", useAccountIds.IntValue().ToString()},
-                {"access_token", AccessToken}
+                {"access_token", _accessToken}
             };
 
             string response = _web.Fetch(url, "GET", data, xHeaders: false).ReadStream();
@@ -157,7 +170,7 @@ namespace CSharpTradeOffers.Community
                 {"type", type},
                 {"steamid_dst", sendTo.ToString()},
                 {"text", message},
-                {"access_token", AccessToken}
+                {"access_token", _accessToken}
             };
 
             string response = _web.Fetch(url, "GET", data, _account.AuthContainer, xHeaders: false).ReadStream();
