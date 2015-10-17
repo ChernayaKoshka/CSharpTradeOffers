@@ -37,7 +37,7 @@ namespace CSharpTradeOffers.Trading
         /// <param name="country">Country to check in. (ISO)</param>
         /// <param name="currency">Currency code, I forget what. 1 = US $</param>
         /// <returns>A MarketValue object containing the data.</returns>
-        public MarketValue GetPriceOverview(uint appId, string marketHashName, string country = "US", string currency = "1")
+        public MarketValue GetPriceOverview(uint appId, string marketHashName, CultureInfo culture, string country = "US", string currency = "1")
         {
             const string url = BaseUrl + "priceoverview/";
             var data = new Dictionary<string, string>
@@ -53,9 +53,9 @@ namespace CSharpTradeOffers.Trading
             if (!marketValueResponse.Success)
                 return mv;
             if (!string.IsNullOrEmpty(marketValueResponse.LowestPrice))
-                mv.LowestPrice = decimal.Parse(marketValueResponse.LowestPrice, NumberStyles.Currency);
+                mv.LowestPrice = decimal.Parse(marketValueResponse.LowestPrice, NumberStyles.Currency, culture);
             if (!string.IsNullOrEmpty(marketValueResponse.MedianPrice))
-                mv.MedianPrice = decimal.Parse(marketValueResponse.MedianPrice, NumberStyles.Currency);
+                mv.MedianPrice = decimal.Parse(marketValueResponse.MedianPrice, NumberStyles.Currency, culture);
             if (!string.IsNullOrEmpty(marketValueResponse.Volume))
                 mv.Volume = int.Parse(marketValueResponse.Volume, NumberStyles.AllowThousands);
             return mv;

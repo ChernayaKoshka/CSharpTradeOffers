@@ -589,7 +589,7 @@
             <param name="steamId">The SteamId of the bot.</param>
             <param name="container">The bot CookieContainer</param>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.MarketHandler.GetPriceOverview(System.UInt32,System.String,System.String,System.String)">
+        <member name="M:CSharpTradeOffers.Trading.MarketHandler.GetPriceOverview(System.UInt32,System.String,System.Globalization.CultureInfo,System.String,System.String)">
             <summary>
             Gets the price overview of an item.
             </summary>
