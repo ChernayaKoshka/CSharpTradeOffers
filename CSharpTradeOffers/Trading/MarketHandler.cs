@@ -25,7 +25,7 @@ namespace CSharpTradeOffers.Trading
         public void EligibilityCheck(ulong steamId, CookieContainer container)
         {
             const string url = BaseUrl + "eligibilitycheck/";
-            var data = new Dictionary<string, string> {{"goto", "/profiles/" + steamId + "/tradeoffers/"}};
+            var data = new Dictionary<string, string> { { "goto", "/profiles/" + steamId + "/tradeoffers/" } };
             _web.Fetch(url, "GET", data, container, false);
         }
 
@@ -48,16 +48,25 @@ namespace CSharpTradeOffers.Trading
                 {"market_hash_name", marketHashName}
             };
             var marketValueResponse = JsonConvert.DeserializeObject<MarketValueResponse>(_web.Fetch(url, "GET", data, null, false).ReadStream());
-            var mv = new MarketValue {Success = marketValueResponse.Success};
-            
+            var mv = new MarketValue { Success = marketValueResponse.Success };
+
             if (!marketValueResponse.Success)
                 return mv;
+
             if (!string.IsNullOrEmpty(marketValueResponse.LowestPrice))
                 mv.LowestPrice = decimal.Parse(marketValueResponse.LowestPrice, NumberStyles.Currency, culture);
+            else mv.LowestPrice = -1.0m;
+
             if (!string.IsNullOrEmpty(marketValueResponse.MedianPrice))
                 mv.MedianPrice = decimal.Parse(marketValueResponse.MedianPrice, NumberStyles.Currency, culture);
+            else
+                mv.LowestPrice = -1.0m;
+
             if (!string.IsNullOrEmpty(marketValueResponse.Volume))
                 mv.Volume = int.Parse(marketValueResponse.Volume, NumberStyles.AllowThousands);
+            else
+                mv.Volume = -1;
+
             return mv;
         }
     }
