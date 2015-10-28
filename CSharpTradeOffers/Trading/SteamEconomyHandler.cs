@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
@@ -51,6 +52,12 @@ namespace CSharpTradeOffers.Trading
             desrDictionary.Remove("success");
 
             return JsonConvert.DeserializeObject<AssetClassInfo>(desrDictionary.Values.First().ToString());
+        }
+
+        public AssetClassInfo GetAssetClassInfo(CEconAsset asset)
+        {
+            return GetAssetClassInfo(Convert.ToUInt32(asset.AppId),
+                new Dictionary<string, string> {{asset.ClassId, asset.InstanceId}});
         }
 
         /// <summary>
