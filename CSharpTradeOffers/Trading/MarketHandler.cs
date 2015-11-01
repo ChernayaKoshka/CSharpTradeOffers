@@ -48,7 +48,7 @@ namespace CSharpTradeOffers.Trading
                 {"market_hash_name", marketHashName}
             };
             var marketValueResponse = JsonConvert.DeserializeObject<MarketValueResponse>(_web.Fetch(url, "GET", data, null, false).ReadStream());
-            var mv = new MarketValue { Success = marketValueResponse.Success };
+            var mv = new MarketValue { Success = marketValueResponse.Success, BaseResponse = marketValueResponse };
 
             if (!marketValueResponse.Success)
                 return mv;
@@ -63,7 +63,7 @@ namespace CSharpTradeOffers.Trading
                 mv.LowestPrice = -1.0m;
 
             if (!string.IsNullOrEmpty(marketValueResponse.Volume))
-                mv.Volume = int.Parse(marketValueResponse.Volume, NumberStyles.AllowThousands);
+                mv.Volume = int.Parse(marketValueResponse.Volume, NumberStyles.AllowThousands, culture);
             else
                 mv.Volume = -1;
 

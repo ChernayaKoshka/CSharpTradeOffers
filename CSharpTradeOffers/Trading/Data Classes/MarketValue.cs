@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace CSharpTradeOffers.Trading
 {
     public class MarketValue
@@ -9,5 +11,8 @@ namespace CSharpTradeOffers.Trading
         public int Volume { get; set; }
             
         public decimal MedianPrice { get; set; }
+
+        [JsonIgnore]
+        public MarketValueResponse BaseResponse { get; set; }
     }
 }
