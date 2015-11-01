@@ -589,7 +589,16 @@
             <param name="steamId">The SteamId of the bot.</param>
             <param name="container">The bot CookieContainer</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:CSharpTradeOffers.Trading.MarketHandler.GetPriceOverview(System.UInt32,System.String,System.Globalization.CultureInfo,System.String,System.String)" -->
+        <member name="M:CSharpTradeOffers.Trading.MarketHandler.GetPriceOverview(System.UInt32,System.String,System.Globalization.CultureInfo,System.String,System.String)">
+            <summary>
+            Gets the price overview of an item.
+            </summary>
+            <param name="appId">The appId of the item.</param>
+            <param name="marketHashName">The market_hash_name of the item</param>
+            <param name="country">Country to check in. (ISO)</param>
+            <param name="currency">Currency code, I forget what. 1 = US $</param>
+            <returns>A MarketValue object containing the data.</returns>
+        </member>
         <member name="T:CSharpTradeOffers.Web.IWebRequestHandler`1">
             <summary>
             A generic Request Handler from the web.

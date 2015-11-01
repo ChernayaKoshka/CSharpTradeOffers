@@ -99,9 +99,8 @@ namespace DonationBot
                 {
                     if (cEconTradeOffer.ItemsToGive == null)
                     {
-                        offerHandler.AcceptTradeOffer(Convert.ToUInt64(cEconTradeOffer.TradeOfferId),
-                            _account.AuthContainer,
-                            cEconTradeOffer.AccountIdOther, "1");
+                        offerHandler.AcceptTradeOffer(cEconTradeOffer.TradeOfferId, cEconTradeOffer.AccountIdOther,
+                            _account.AuthContainer, "1");
                         Console.WriteLine("Accepted a donation!");
                     }
                     else
