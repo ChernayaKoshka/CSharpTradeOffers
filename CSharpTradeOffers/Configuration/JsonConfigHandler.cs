@@ -14,7 +14,7 @@ namespace CSharpTradeOffers.Configuration
         /// <summary>
         /// Initializes the Config and the path to use
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">Path of the config file, will be created if it does not exist.</param>
         public JsonConfigHandler(string path)
         {
             _path = path;
