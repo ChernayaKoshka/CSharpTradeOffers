@@ -15,6 +15,10 @@ namespace CSharpTradeOffers.Community
 
         private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
 
+        /// <summary>
+        /// Initializes a new SteamUserHandler, it is used to GetFriendList and other similiar functions.
+        /// </summary>
+        /// <param name="apiKey">Api key to use</param>
         public SteamUserHandler(string apiKey)
         {
             _apiKey = apiKey;

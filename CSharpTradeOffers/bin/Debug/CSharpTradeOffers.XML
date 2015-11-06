@@ -235,6 +235,12 @@
             Handles steam user related tasks.
             </summary>
         </member>
+        <member name="M:CSharpTradeOffers.Community.SteamUserHandler.#ctor(System.String)">
+            <summary>
+            Initializes a new SteamUserHandler, it is used to GetFriendList and other similiar functions.
+            </summary>
+            <param name="apiKey">Api key to use</param>
+        </member>
         <member name="M:CSharpTradeOffers.Community.SteamUserHandler.GetFriendList(System.UInt64,System.String)">
             <summary>
             Retrieves the friends list of the specified steamid64. 
@@ -516,6 +522,23 @@
             Handles Inventory-Related tasks for a specific account.
             </summary>
         </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.#ctor(System.UInt64)">
+            <summary>
+            Initializes an InventoryHandler for the specified SteamId.
+            </summary>
+            <param name="steamId">SteamId of the inventory to use.</param>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.InventoryHandler.Inventories">
+            <summary>
+            List of all inventories added.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt32[])">
+            <summary>
+            Clears the Inventories dictionary and retrieves all inventories associated with the appid array provided.
+            </summary>
+            <param name="appids">Array of AppIds of inventories to retrieve.</param>
+        </member>
         <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.CEconTradeOffer,System.Boolean)">
             <summary>
             Marks the inUse bool of the assets specified in the trade offer.
@@ -558,6 +581,12 @@
             <summary>
             Handles Steam Economy related tasks, like retrieving class info
             </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.#ctor(System.String)">
+            <summary>
+            Initializes a new SteamEconomyHandler that handles tasks like GetAssetClassInfo and GetAssetPrices (not to be confused with GetPriceOverview)
+            </summary>
+            <param name="apiKey">Api key to use</param>
         </member>
         <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.GetAssetClassInfo(System.UInt32,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
@@ -620,7 +649,7 @@
             <summary>
             Reads the stream to a string 
             </summary>
-            <returns></returns>
+            <returns>The stream as a string</returns>
         </member>
         <member name="M:CSharpTradeOffers.Web.IResponse.Deserialize``1">
             <summary>
@@ -633,6 +662,19 @@
             <summary>
             Any cookies created from the response.
             </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.RsaHelper.#ctor(System.String)">
+            <summary>
+            Initializes the RsaHelper with the specified password
+            </summary>
+            <param name="password">Password to use</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.RsaHelper.EncryptPassword(CSharpTradeOffers.Web.IResponse)">
+            <summary>
+            Encrypts the password retrieved through according to the response getting encryption keys from steam.
+            </summary>
+            <param name="response">Response containing encryption keys.</param>
+            <returns>Encrypted password</returns>
         </member>
         <member name="T:CSharpTradeOffers.Web.SteamWebRequestHandler">
             <summary>
@@ -711,6 +753,42 @@
         <member name="T:CSharpTradeOffers.Web.Web">
             <summary>
             Handles Web related tasks like logging in and fetching
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Web.Web.SteamCommunityDomain">
+            <summary>
+            steamcommunity.com
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.#ctor(CSharpTradeOffers.Web.IWebRequestHandler{CSharpTradeOffers.Web.IResponse})">
+            <summary>
+            Initializes a new Web class in accordance to the IWebRequestHandler IResponse provided.
+            </summary>
+            <param name="webRequestHandler"></param>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Web.SteamLogin">
+            <summary>
+            SteamLogin cookie value
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Web.SessionId">
+            <summary>
+            SessionId cookie value
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Web.SteamLoginSecure">
+            <summary>
+            SteamLoginSecure cookie value
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Web.SteamMachineAuth">
+            <summary>
+            SteamMachineAuth cookie value
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Web.SteamId">
+            <summary>
+            SteamId retrieved from Steam.
             </summary>
         </member>
         <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">

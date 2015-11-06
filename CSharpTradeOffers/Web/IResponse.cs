@@ -11,7 +11,7 @@ namespace CSharpTradeOffers.Web
         /// <summary>
         /// Reads the stream to a string 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The stream as a string</returns>
         string ReadStream();
 
         /// <summary>

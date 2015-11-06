@@ -26,8 +26,6 @@ namespace CSharpTradeOffers.Configuration
         /// <returns>A RootConfig object.</returns>
         public Config Reload()
         {
-            var config = new Config();
-
             if (!File.Exists(_path))
             {
                 File.Create(_path).Close();
@@ -51,7 +49,7 @@ namespace CSharpTradeOffers.Configuration
                 File.WriteAllText(_path, sb.ToString());
             }
 
-            config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(_path));
+            var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(_path));
 
             return config;
         }

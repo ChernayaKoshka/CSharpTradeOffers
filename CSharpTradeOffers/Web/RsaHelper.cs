@@ -9,11 +9,20 @@ namespace CSharpTradeOffers.Web
     {
         private readonly string _password;
 
+        /// <summary>
+        /// Initializes the RsaHelper with the specified password
+        /// </summary>
+        /// <param name="password">Password to use</param>
         public RsaHelper(string password)
         {
             _password = password;
         }
-
+        
+        /// <summary>
+        /// Encrypts the password retrieved through according to the response getting encryption keys from steam.
+        /// </summary>
+        /// <param name="response">Response containing encryption keys.</param>
+        /// <returns>Encrypted password</returns>
         public string EncryptPassword(IResponse response)
         {
             if (!DeserializeRsaKey(response.ReadStream())) return null;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
@@ -103,10 +104,14 @@ namespace CSharpTradeOffers.Trading
         public Trade AcceptTradeOffer(uint tradeId, uint partnerId, CookieContainer container, string serverid)
         {
             container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
+            string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
+                                where cookie.Name == "sessionid"
+                                select cookie.Value).FirstOrDefault();
+
             const string url = "https://steamcommunity.com/tradeoffer/{0}/accept";
             var data = new Dictionary<string, string>
             {
-                {"sessionid", Web.Web.SessionId},
+                {"sessionid", sessionid},
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.ToString()},
                 {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
@@ -132,10 +137,13 @@ namespace CSharpTradeOffers.Trading
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
             container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
+            string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
+                                where cookie.Name == "sessionid"
+                                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
-                {"sessionid", Web.Web.SessionId},
+                {"sessionid", sessionid},
                 {"serverid", serverid},
                 {"partner", partnerSid.ToString()},
                 {"tradeoffermessage", tradeoffermessage},
@@ -166,10 +174,13 @@ namespace CSharpTradeOffers.Trading
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
             container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
+            string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
+                                where cookie.Name == "sessionid"
+                                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
-                {"sessionid", Web.Web.SessionId},
+                {"sessionid", sessionid},
                 {"serverid", serverid},
                 {"partner", partnerSid.ToString()},
                 {"tradeoffermessage", tradeoffermessage},

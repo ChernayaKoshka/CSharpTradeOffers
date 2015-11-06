@@ -12,28 +12,48 @@ namespace CSharpTradeOffers.Web
     /// </summary>
     public class Web
     {
+        /// <summary>
+        /// steamcommunity.com
+        /// </summary>
         public const string SteamCommunityDomain = "steamcommunity.com";
 
         private static CookieContainer _cookies = new CookieContainer();
 
         private readonly IWebRequestHandler<IResponse> _webRequestHandler;
 
+        /// <summary>
+        /// Initializes a new Web class in accordance to the IWebRequestHandler IResponse provided.
+        /// </summary>
+        /// <param name="webRequestHandler"></param>
         public Web(IWebRequestHandler<IResponse> webRequestHandler)
         {
             _webRequestHandler = webRequestHandler;
         }
 
-        public static string SteamLogin { get; private set; }
+        /// <summary>
+        /// SteamLogin cookie value
+        /// </summary>
+        private static string SteamLogin { get; set; }
 
-        public static string SessionId { get; private set; }
+        /// <summary>
+        /// SessionId cookie value
+        /// </summary>
+        private static string SessionId { get; set; }
 
-        public static string SteamLoginSecure { get; private set; }
+        /// <summary>
+        /// SteamLoginSecure cookie value
+        /// </summary>
+        private static string SteamLoginSecure { get; set; }
 
-        public static string SteamMachineAuth { get; private set; }
+        /// <summary>
+        /// SteamMachineAuth cookie value
+        /// </summary>
+        private static string SteamMachineAuth { get; set; }
 
-        public static string TimezoneOffset { get; private set; }
-
-        public static ulong SteamId { get; private set; }
+        /// <summary>
+        /// SteamId retrieved from Steam.
+        /// </summary>
+        private static ulong SteamId { get; set; }
 
         /// <summary>
         /// A web method to return the response string from the URL.
@@ -238,7 +258,6 @@ namespace CSharpTradeOffers.Web
                             break;
                         case "timezoneOffset":
                             account.AuthContainer.Add(cookie);
-                            TimezoneOffset = cookie.Value;
                             break;
                     }
                     if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
@@ -300,15 +319,14 @@ namespace CSharpTradeOffers.Web
         {
             var w = WebRequest.Create("https://steamcommunity.com/") as HttpWebRequest;
 
-            if (w != null)
-            {
-                w.Method = "POST";
-                w.ContentType = "application/x-www-form-urlencoded";
-                w.CookieContainer = cookies;
-                w.ContentLength = 0;
+            if (w == null) return;
 
-                w.GetResponse().Close();
-            }
+            w.Method = "POST";
+            w.ContentType = "application/x-www-form-urlencoded";
+            w.CookieContainer = cookies;
+            w.ContentLength = 0;
+
+            w.GetResponse().Close();
         }
     }
 }

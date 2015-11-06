@@ -11,14 +11,25 @@ namespace CSharpTradeOffers.Trading
     {
         private readonly ulong _steamId;
 
+        /// <summary>
+        /// Initializes an InventoryHandler for the specified SteamId.
+        /// </summary>
+        /// <param name="steamId">SteamId of the inventory to use.</param>
         public InventoryHandler(ulong steamId)
         {
             _steamId = steamId;
             Inventories = new Dictionary<uint, Inventory>();
         }
 
+        /// <summary>
+        /// List of all inventories added.
+        /// </summary>
         public Dictionary<uint, Inventory> Inventories { get; }
 
+        /// <summary>
+        /// Clears the Inventories dictionary and retrieves all inventories associated with the appid array provided.
+        /// </summary>
+        /// <param name="appids">Array of AppIds of inventories to retrieve.</param>
         public void RefreshInventories(uint[] appids)
         {
             Inventories.Clear();

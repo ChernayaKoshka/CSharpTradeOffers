@@ -15,6 +15,10 @@ namespace CSharpTradeOffers.Trading
         private readonly string _apiKey;
         private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
 
+        /// <summary>
+        /// Initializes a new SteamEconomyHandler that handles tasks like GetAssetClassInfo and GetAssetPrices (not to be confused with GetPriceOverview)
+        /// </summary>
+        /// <param name="apiKey">Api key to use</param>
         public SteamEconomyHandler(string apiKey)
         {
             _apiKey = apiKey;

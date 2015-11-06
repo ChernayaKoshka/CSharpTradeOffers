@@ -77,7 +77,7 @@ namespace CSharpTradeOffers.Community
         /// <returns>An AddFriendResponse object.</returns>
         public AddFriendResponse AddFriend(ulong steamId, CookieContainer authContainer)
         {
-            string url = "https://steamcommunity.com/actions/AddFriendAjax";
+            const string url = "https://steamcommunity.com/actions/AddFriendAjax";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
@@ -101,7 +101,7 @@ namespace CSharpTradeOffers.Community
         /// <returns>Boolean representing the success of the function.</returns>
         public bool AcceptFriendRequest(ulong steamId, CookieContainer authContainer)
         {
-            string url = "https://steamcommunity.com/actions/AddFriendAjax";
+            const string url = "https://steamcommunity.com/actions/AddFriendAjax";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
@@ -125,7 +125,7 @@ namespace CSharpTradeOffers.Community
         /// <returns>Bollean representing the successs of the function.</returns>
         public bool RemoveFriend(ulong steamId, CookieContainer authContainer)
         {
-            string url = "https://steamcommunity.com/actions/RemoveFriendAjax";
+            const string url = "https://steamcommunity.com/actions/RemoveFriendAjax";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
@@ -152,9 +152,11 @@ namespace CSharpTradeOffers.Community
             CookieContainer authContainer)
         {
             const string url = "https://steamcommunity.com/actions/GroupInvite/";
+
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
                 where cookie.Name == "sessionid"
                 select cookie.Value).FirstOrDefault();
+
             var data = new Dictionary<string, string>
             {
                 {"json", json.IntValue().ToString()},
@@ -178,9 +180,11 @@ namespace CSharpTradeOffers.Community
             CookieContainer authContainer)
         {
             const string url = "https://steamcommunity.com/actions/GroupInvite/";
+
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
                 where cookie.Name == "sessionid"
                 select cookie.Value).FirstOrDefault();
+
             var data = new Dictionary<string, string>
             {
                 {"json", json.IntValue().ToString()},
