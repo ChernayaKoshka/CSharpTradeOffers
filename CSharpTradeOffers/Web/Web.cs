@@ -33,7 +33,7 @@ namespace CSharpTradeOffers.Web
         /// <summary>
         /// SteamMachineAuth cookie value
         /// </summary>
-        private string SteamMachineAuth { get; set; }
+        public string SteamMachineAuth { get; set; }
 
         /// <summary>
         /// A web method to return the response string from the URL.
