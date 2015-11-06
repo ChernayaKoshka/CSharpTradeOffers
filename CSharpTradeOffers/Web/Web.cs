@@ -31,29 +31,9 @@ namespace CSharpTradeOffers.Web
         }
 
         /// <summary>
-        /// SteamLogin cookie value
-        /// </summary>
-        private static string SteamLogin { get; set; }
-
-        /// <summary>
-        /// SessionId cookie value
-        /// </summary>
-        private static string SessionId { get; set; }
-
-        /// <summary>
-        /// SteamLoginSecure cookie value
-        /// </summary>
-        private static string SteamLoginSecure { get; set; }
-
-        /// <summary>
         /// SteamMachineAuth cookie value
         /// </summary>
-        private static string SteamMachineAuth { get; set; }
-
-        /// <summary>
-        /// SteamId retrieved from Steam.
-        /// </summary>
-        private static ulong SteamId { get; set; }
+        private string SteamMachineAuth { get; set; }
 
         /// <summary>
         /// A web method to return the response string from the URL.
@@ -223,8 +203,6 @@ namespace CSharpTradeOffers.Web
 
                 using (IResponse webResponse = Fetch("https://steamcommunity.com/login/dologin/", "POST", data, cc))
                 {
-                    //var steamStream = webResponse.GetResponseStream();
-
                     string json = webResponse.ReadStream();
                     loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
                     cookieCollection = webResponse.Cookies;
@@ -250,11 +228,9 @@ namespace CSharpTradeOffers.Web
                     {
                         case "steamLogin":
                             account.AuthContainer.Add(cookie);
-                           SteamLogin = cookie.Value;
                             break;
                         case "steamLoginSecure":
                             account.AuthContainer.Add(cookie);
-                            SteamLoginSecure = cookie.Value;
                             break;
                         case "timezoneOffset":
                             account.AuthContainer.Add(cookie);
@@ -269,9 +245,8 @@ namespace CSharpTradeOffers.Web
 
                 SubmitCookies(_cookies);
 
+                // ReSharper disable once AssignNullToNotNullAttribute
                 account.AuthContainer.Add(_cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]);
-
-                SessionId = _cookies.GetCookies(new Uri("https://steamcommunity.com"))["sessionid"]?.Value;
 
                 return account;
             }

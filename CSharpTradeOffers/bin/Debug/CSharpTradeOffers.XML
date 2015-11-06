@@ -364,7 +364,7 @@
             <summary>
             Initializes the Config and the path to use
             </summary>
-            <param name="path"></param>
+            <param name="path">Path of the config file, will be created if it does not exist.</param>
         </member>
         <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.Reload">
             <summary>
@@ -766,29 +766,9 @@
             </summary>
             <param name="webRequestHandler"></param>
         </member>
-        <member name="P:CSharpTradeOffers.Web.Web.SteamLogin">
-            <summary>
-            SteamLogin cookie value
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.Web.SessionId">
-            <summary>
-            SessionId cookie value
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.Web.SteamLoginSecure">
-            <summary>
-            SteamLoginSecure cookie value
-            </summary>
-        </member>
         <member name="P:CSharpTradeOffers.Web.Web.SteamMachineAuth">
             <summary>
             SteamMachineAuth cookie value
-            </summary>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.Web.SteamId">
-            <summary>
-            SteamId retrieved from Steam.
             </summary>
         </member>
         <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
