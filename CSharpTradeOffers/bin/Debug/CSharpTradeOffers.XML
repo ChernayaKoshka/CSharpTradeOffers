@@ -743,6 +743,11 @@
             The Auth Cookies for the bot.
             </summary>
         </member>
+        <member name="P:CSharpTradeOffers.Web.Account.SteamMachineAuth">
+            <summary>
+            Sets the SteamMachineAuth string as well as adding the auth string to the AuthContainer.
+            </summary>
+        </member>
         <member name="M:CSharpTradeOffers.Web.Account.AddMachineAuthCookies(System.String)">
             <summary>
             Adds the steamMachineAuth cookie to the AuthContainer.
@@ -765,11 +770,6 @@
             Initializes a new Web class in accordance to the IWebRequestHandler IResponse provided.
             </summary>
             <param name="webRequestHandler"></param>
-        </member>
-        <member name="P:CSharpTradeOffers.Web.Web.SteamMachineAuth">
-            <summary>
-            SteamMachineAuth cookie value
-            </summary>
         </member>
         <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
             <summary>

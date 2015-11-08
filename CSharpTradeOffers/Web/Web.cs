@@ -33,7 +33,7 @@ namespace CSharpTradeOffers.Web
         /// <summary>
         /// SteamMachineAuth cookie value
         /// </summary>
-        public string SteamMachineAuth { get; set; }
+        //public string SteamMachineAuth { get; set; }
 
         /// <summary>
         /// A web method to return the response string from the URL.
@@ -194,7 +194,6 @@ namespace CSharpTradeOffers.Web
                 CookieContainer cc = null;
                 if (!string.IsNullOrEmpty(machineAuth))
                 {
-                    SteamMachineAuth = machineAuth;
                     cc = new CookieContainer();
                     var split = machineAuth.Split('=');
                     var machineCookie = new Cookie(split[0], split[1]);
@@ -217,7 +216,7 @@ namespace CSharpTradeOffers.Web
                 account = new Account(Convert.ToUInt64(loginJson.TransferParameters.Steamid));
             else
                 return null;
-
+            
             if (loginJson.Success)
             {
                 _cookies = new CookieContainer();
@@ -237,11 +236,8 @@ namespace CSharpTradeOffers.Web
                             break;
                     }
                     if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
-                    SteamMachineAuth = cookie.Name + "=" + cookie.Value;
+                        account.SteamMachineAuth = cookie.Name + "=" + cookie.Value;
                 }
-
-                if (!string.IsNullOrEmpty(SteamMachineAuth))
-                    account.AddMachineAuthCookies(SteamMachineAuth);
 
                 SubmitCookies(_cookies);
 
