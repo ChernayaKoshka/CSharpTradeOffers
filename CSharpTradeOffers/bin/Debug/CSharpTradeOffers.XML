@@ -849,6 +849,12 @@
             <param name="b"></param>
             <returns></returns>
         </member>
+        <member name="T:CSharpTradeOffers.SteamId">
+            <summary>
+            Initializes a new SteamId.
+            Automatically performs conversions to AccountId/SteamId64/SteamIdText as needed.
+            </summary>
+        </member>
         <member name="T:CSharpTradeOffers.SteamIdOperations">
             <summary>
             Helps with conversion operations
