@@ -54,9 +54,9 @@ namespace DonationBot
 
             _account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, _user, _pass, _config.SteamMachineAuth);
 
-            if (!string.IsNullOrEmpty(Web.SteamMachineAuth))
+            if (!string.IsNullOrEmpty(_account.SteamMachineAuth))
             {
-                _config.SteamMachineAuth = Web.SteamMachineAuth;
+                _config.SteamMachineAuth = _account.SteamMachineAuth;
                 ConfigHandler.WriteChanges(_config);
             }
 
