@@ -122,7 +122,7 @@ namespace CSharpTradeOffers.Web
             Thread.Sleep(2000);
             var rsaHelper = new RsaHelper(password);
 
-            var loginDetails = new Dictionary<string, string> {{"username", username}};
+            var loginDetails = new Dictionary<string, string> { { "username", username } };
             IResponse response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
 
             string encryptedBase64Password = rsaHelper.EncryptPassword(response);
@@ -216,7 +216,7 @@ namespace CSharpTradeOffers.Web
                 account = new Account(Convert.ToUInt64(loginJson.TransferParameters.Steamid));
             else
                 return null;
-            
+
             if (loginJson.Success)
             {
                 _cookies = new CookieContainer();
@@ -235,8 +235,14 @@ namespace CSharpTradeOffers.Web
                             account.AuthContainer.Add(cookie);
                             break;
                     }
-                    if (!cookie.Name.StartsWith("steamMachineAuth")) continue;
+                    if (cookie.Name.StartsWith("steamMachineAuth"))
+                    {
                         account.SteamMachineAuth = cookie.Name + "=" + cookie.Value;
+                    }
+                    else if (!string.IsNullOrEmpty(machineAuth))
+                    {
+                        account.SteamMachineAuth = machineAuth;
+                    }
                 }
 
                 SubmitCookies(_cookies);
