@@ -103,7 +103,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>The TradeId of the offer that was accepted.</returns>
         public Trade AcceptTradeOffer(uint tradeId, uint partnerId, CookieContainer container, string serverid)
         {
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
             string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
                                 select cookie.Value).FirstOrDefault();
@@ -114,7 +114,7 @@ namespace CSharpTradeOffers.Trading
                 {"sessionid", sessionid},
                 {"serverid", serverid},
                 {"tradeofferid", tradeId.ToString()},
-                {"partner", SteamIdOperations.ConvertAccountIdToUlong(partnerId).ToString()},
+                {"partner", IdConversions.AccountIdToUlong(partnerId).ToString()},
                 {"captcha", string.Empty}
             };
             return
@@ -136,7 +136,7 @@ namespace CSharpTradeOffers.Trading
             string serverid, TradeOffer offer, CookieContainer container)
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
             string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
                                 select cookie.Value).FirstOrDefault();
@@ -155,7 +155,7 @@ namespace CSharpTradeOffers.Trading
                 JsonConvert.DeserializeObject<SendOfferResponse>(
                     _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
                         "https://steamcommunity.com/tradeoffer/new/?partner=" +
-                        SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid)))
+                        IdConversions.UlongToAccountId(partnerSid))
                         .ReadStream());
         }
 
@@ -173,7 +173,7 @@ namespace CSharpTradeOffers.Trading
             string serverid, uint tradeofferidCountered, TradeOffer offer, CookieContainer container)
         {
             const string url = "https://steamcommunity.com/tradeoffer/new/send";
-            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") {Domain = "steamcommunity.com"});
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
             string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
                                 select cookie.Value).FirstOrDefault();
