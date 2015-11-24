@@ -45,7 +45,7 @@ namespace CSharpTradeOffers.Web
         private void AddMachineAuthCookies(string authstring)
         {
             string[] split = authstring.Split('=');
-            AuthContainer.Add(new Cookie(split[0], split[1]) { Domain = "steamcommunity.com" });
+            AuthContainer.Add(new Cookie(split[0], split[1]) { Domain = "steamcommunity.com", Secure = true, HttpOnly = true });
         }
     }
 }
