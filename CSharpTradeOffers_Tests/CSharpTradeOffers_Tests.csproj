@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="IdConversions_Tests.cs" />
     <Compile Include="RsaHelperTests.cs" />
-    <Compile Include="SteamIDOperations_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebTests.cs" />
   </ItemGroup>
