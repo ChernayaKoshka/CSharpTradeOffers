@@ -158,6 +158,45 @@ namespace CSharpTradeOffers.Trading
                         IdConversions.UlongToAccountId(partnerSid))
                         .ReadStream());
         }
+        
+        /// <summary>
+        /// Sends a trade offer to the specified recipient that's not on your friends list using the trade url. If is not the case, use SendTradeOffer function.
+        /// </summary>
+        /// <param name="partnerSid">The SteamId64 (ulong) of the person to send the offer to.</param>
+        /// <param name="token">The token part from the recipient's trade url. Example: a1b2cdEF</param>
+        /// <param name="tradeoffermessage">An optional message to be sent with the offer. Can be null.</param>
+        /// <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+        /// <param name="offer">A TradeOffer object containing the trade parameters.</param>
+        /// <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+        /// <returns>A SendOfferResponse object.</returns>
+        public SendOfferResponse SendTradeOfferWithLink(ulong partnerSid, string token, string tradeoffermessage,
+            string serverid, TradeOffer offer, CookieContainer container)
+        {
+            const string url = "https://steamcommunity.com/tradeoffer/new/send";
+            container.Add(new Cookie("bCompletedTradeOfferTutorial", "true") { Domain = "steamcommunity.com" });
+            string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
+                                where cookie.Name == "sessionid"
+                                select cookie.Value).FirstOrDefault();
+            
+            CEconTradeOffer offerToken = new CEconTradeOffer();
+            offerToken.TradeOfferAccessToken = token;
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionid", sessionid},
+                {"serverid", serverid},
+                {"partner", partnerSid.ToString()},
+                {"tradeoffermessage", tradeoffermessage},
+                {"json_tradeoffer", JsonConvert.SerializeObject(offer)},
+                {"captcha", string.Empty},
+                {"trade_offer_create_params", JsonConvert.SerializeObject(offerToken)}
+            };
+            return
+                JsonConvert.DeserializeObject<SendOfferResponse>(
+                    _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
+                        string.Format("https://steamcommunity.com/tradeoffer/new/?partner={0}&token={1}",
+                        SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid)), token)).ReadStream());
+        }
 
         /// <summary>
         /// Modifies an existing trade offer.

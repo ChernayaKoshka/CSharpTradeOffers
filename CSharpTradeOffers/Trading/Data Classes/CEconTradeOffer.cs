@@ -43,6 +43,9 @@ namespace CSharpTradeOffers.Trading
         [JsonProperty("from_real_time_trade")]
         public bool FromRealTimeTrade { get; set; }
         
+        [JsonProperty("trade_offer_access_token")]
+        public string TradeOfferAccessToken { get; set; }
+        
         public TradeOffer ToTradeOffer()
         {
             return new TradeOffer
