@@ -158,7 +158,7 @@ namespace CSharpTradeOffers.Trading
                         IdConversions.UlongToAccountId(partnerSid))
                         .ReadStream());
         }
-        
+
         /// <summary>
         /// Sends a trade offer to the specified recipient that's not on your friends list using the trade url. If is not the case, use SendTradeOffer function.
         /// </summary>
@@ -177,9 +177,8 @@ namespace CSharpTradeOffers.Trading
             string sessionid = (from Cookie cookie in container.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
                                 select cookie.Value).FirstOrDefault();
-            
-            CEconTradeOffer offerToken = new CEconTradeOffer();
-            offerToken.TradeOfferAccessToken = token;
+
+            CEconTradeOffer offerToken = new CEconTradeOffer {TradeOfferAccessToken = token};
 
             var data = new Dictionary<string, string>
             {
@@ -194,8 +193,7 @@ namespace CSharpTradeOffers.Trading
             return
                 JsonConvert.DeserializeObject<SendOfferResponse>(
                     _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
-                        string.Format("https://steamcommunity.com/tradeoffer/new/?partner={0}&token={1}",
-                        SteamIdOperations.ConvertSteamIdToAccountId(SteamIdOperations.ConvertUlongToSteamId(partnerSid)), token)).ReadStream());
+                        $"https://steamcommunity.com/tradeoffer/new/?partner={IdConversions.UlongToAccountId(partnerSid)}&token={token}").ReadStream());
         }
 
         /// <summary>
