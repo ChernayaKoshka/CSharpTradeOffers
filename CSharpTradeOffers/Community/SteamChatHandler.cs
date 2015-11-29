@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Community
 {
+    public class ChatException : Exception
+    {
+        public ChatException() { }
+
+        public ChatException(string message) : base(message) { }
+
+        public ChatException(string message, Exception inner) : base(message, inner) { }
+    }
+
     public class SteamChatHandler
     {
         private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
@@ -32,6 +40,12 @@ namespace CSharpTradeOffers.Community
 
             //sloppy way to do it, but couldn't get Regex to love me
             _accessToken = GetAccessToken();
+            if (string.IsNullOrEmpty(_accessToken))
+            {
+                throw new ChatException(
+                    "Error fetching access token, the account specified is not authorized to use this feature.");
+            }
+
 
             var rand = new Random();
             var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 99999999999); //might be able to be larger, haven't checked
@@ -39,7 +53,7 @@ namespace CSharpTradeOffers.Community
             _basejQuery = "jQuery" + jQueryId + _account.SteamId + "_{0}";
 
             _auth = Logon();
-            
+
         }
 
         /// <summary>
@@ -65,9 +79,9 @@ namespace CSharpTradeOffers.Community
         private string GetAccessToken()
         {
             string response = _web.Fetch(BaseChatUrl, "GET", null, _account.AuthContainer).ReadStream();
+            if (response.Contains("This account is not authorized to use this feature.")) return null; //hideous and sloppy. :(
             string removed = response.Remove(0, response.IndexOf("\'https://api.steampowered.com/\', \"", StringComparison.Ordinal) + 34);
             return removed.Substring(0, 32);
-            
         }
 
         /// <summary>
@@ -83,7 +97,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
         /// <param name="useAccountIds">Probably always true.</param>
         /// <returns>PollResponse object</returns>
-        public PollResponse Poll(int message,int secTimeOut,int secIdleTime,bool useAccountIds = true)
+        public PollResponse Poll(int message, int secTimeOut, int secIdleTime, bool useAccountIds = true)
         {
             const string url = BaseAuthUrl + "Poll/v0001/";
             string jQuery = string.Format(_basejQuery, UnixTimeNow());
@@ -144,11 +158,11 @@ namespace CSharpTradeOffers.Community
             string sessionid = (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
                                 where cookie.Name == "sessionid"
                                 select cookie.Value).FirstOrDefault();
-            var data = new Dictionary<string, string> {{"sessionid", sessionid}};
+            var data = new Dictionary<string, string> { { "sessionid", sessionid } };
 
             return
                 JsonConvert.DeserializeObject<List<ChatLogMessage>>(_web.Fetch(url, "GET", data, _account.AuthContainer).ReadStream());
-        } 
+        }
 
         //saytext = send chat message
         //there are others but I don't know them yet

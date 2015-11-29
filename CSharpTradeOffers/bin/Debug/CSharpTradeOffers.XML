@@ -1,0 +1,877 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSharpTradeOffers</name>
+    </assembly>
+    <members>
+        <member name="T:CSharpTradeOffers.Community.InviteResponse">
+            <summary>
+            InviteResponse
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Community.MemberListGroupDetails">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.GroupName">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.GroupUrl">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.Headline">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.Summary">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.AvatarIcon">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.AvatarMedium">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.AvatarFull">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MemberCount">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MembersInChat">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MembersInGame">
+            <remarks/>
+        </member>
+        <member name="P:CSharpTradeOffers.Community.MemberListGroupDetails.MembersOnline">
+            <remarks/>
+        </member>
+        <member name="T:CSharpTradeOffers.Community.MultiInviteResponse">
+            <summary>
+            MultiInviteResponse
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.#ctor(CSharpTradeOffers.Web.Account)">
+            <summary>
+            Creates a new SteamChatHandler. Generates a random jQueryId to use.
+            </summary>
+            <param name="account">Account object of the account to use.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Logon">
+            <summary>
+            Logs on to Steam community chat.
+            </summary>
+            <returns>WebPresenceOAuthLogonResponse</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Poll(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Pretty sure this function does persona states (among other things?)
+            Message 29 = Go online
+            </summary>
+            <param name="message">
+            Message numbers that I know:
+            29 = poll me
+            30 = poll friends (?)
+            35 = poll new messages</param>
+            <param name="secTimeOut">Seconds until a timeout event occurs?</param>
+            <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
+            <param name="useAccountIds">Probably always true.</param>
+            <returns>PollResponse object</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.UnixTimeNow">
+            <summary>
+            Gets the Unix time. Also known as Epoch.
+            </summary>
+            <returns>A long integer of the number of seconds since 1,1,1970</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.FriendState(System.UInt32)">
+            <summary>
+            Gets the state of a friend.
+            </summary>
+            <param name="accountId">AccountId of friend.</param>
+            <returns>A FriendStateResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.ChatLog(System.UInt32)">
+            <summary>
+            Request chat log of conversation.
+            </summary>
+            <param name="accountId">AccountId of the person to request the chat log of.</param>
+            <returns>A List of ChatLogMessage objects.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Message(System.UInt64,System.String,System.String)">
+            <summary>
+            Sends a message to Steam
+            </summary>
+            <param name="sendTo">The SteamId64 of the person to send the message to.</param>
+            <param name="type">Message type. (saytext = send message, others but idk)</param>
+            <param name="message">Message to send</param>
+            <returns>SendChatMessageResponse</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Community.CommunityHandler">
+            <summary>
+            Handles commmunity related tasks
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostComment(System.UInt64,System.String,System.Net.CookieContainer)">
+            <summary>
+            Posts a comment to the specified profile.
+            </summary>
+            <param name="steamId">The SteamId64 of the profile to post to.</param>
+            <param name="comment">The comment text.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A CommentResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostClanComment(System.UInt64,System.String,System.Net.CookieContainer,System.Int32)">
+            <summary>
+            Posts a comment to the specified clan.
+            </summary>
+            <param name="clanId">SteamID64 of the clan to post the comment to.</param>
+            <param name="comment">The comment to post.</param>
+            <param name="authContainer">Authcontainer of the user to post from.</param>
+            <param name="count">Almost certainly useless and never needs to be touched.
+            I assume that it is the member count but it can be null, non-existant, or any number under the sun.</param>
+            <returns>A ClanCommentResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AddFriend(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Sends a friend request to the specified user.
+            </summary>
+            <param name="steamId">SteamId64 of the user to add.</param>
+            <param name="authContainer">Auth container of the user.</param>
+            <returns>An AddFriendResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AcceptFriendRequest(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Accepts a friend request.
+            </summary>
+            <param name="steamId">SteamId64 of the person who sent the request.</param>
+            <param name="authContainer">Auth container of the user.</param>
+            <returns>Boolean representing the success of the function.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RemoveFriend(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Removes a friend.
+            </summary>
+            <param name="steamId">SteamId64 of the friend to remove.</param>
+            <param name="authContainer">Auth container of the user.</param>
+            <returns>Bollean representing the successs of the function.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Invites the specified user to a group.
+            </summary>
+            <param name="steamId">The SteamId64 of the person to invite.</param>
+            <param name="json">I forgot... oops.</param>
+            <param name="group">The SteamId64 of the group to invite to.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>An InviteResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUsersToGroup(System.UInt64[],System.Boolean,System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Invites the specified users to a group.
+            </summary>
+            <param name="steamIds">The SteamId64s of the users to invite.</param>
+            <param name="json">I forgot... oops.</param>
+            <param name="group">The SteamId64 of the group to invite the users to.</param>
+            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A MultiInviteResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.ToJArray(System.UInt64[])">
+            <summary>
+            Converts an array of SteamId64s to an array of the format ["0","1"]
+            </summary>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestMemberList(System.UInt64)">
+            <summary>
+            Requests group information as well as the first page of users.
+            </summary>
+            <param name="groupId">The SteamId64 of the group to request information about.</param>
+            <returns>A memberList object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestMemberList(System.String)">
+            <summary>
+            Requests group information as well as the first page of users.
+            </summary>
+            <param name="groupName">The name of the group to request information about.</param>
+            <returns>A memberList object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestAllMemberLists(System.UInt64,System.TimeSpan,System.Int32)">
+            <summary>
+            Requests group information as well as all pages of users.
+            </summary>
+            <param name="groupId">The SteamId64 of the group to request information about.</param>
+            <param name="retryWait">The number of miliseconds to wait between each retry.</param>
+            <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
+            <returns>A List of the MemberList object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RequestAllMemberLists(System.String,System.TimeSpan,System.Int32)">
+            <summary>
+            Requests group information as well as the all pages of users.
+            </summary>
+            <param name="groupName">The name of the group to request information about.</param>
+            <param name="retryWait">The number of miliseconds to wait between each retry.</param>
+            <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
+            <returns>A List of the MemberList object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.SetProfile(CSharpTradeOffers.Community.Profile,CSharpTradeOffers.Web.Account)">
+            <summary>
+            Sets the user's public profile settings to the exact settings specified in
+            the Profile object.
+            </summary>
+            <param name="profile">The object to specify the new profile data.</param>
+            <param name="account">The account of the profile to modify.</param>
+            <returns>Bool depending on the success of the request.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.SetPrivacySettings(CSharpTradeOffers.Community.PrivacySettings,CSharpTradeOffers.Web.Account)">
+            <summary>
+            Sets the privacy settings of the account.
+            </summary>
+            <param name="settings">Settings to set.</param>
+            <param name="account">Account of settings to change.</param>
+        </member>
+        <member name="T:CSharpTradeOffers.Community.SteamUserHandler">
+            <summary>
+            Handles steam user related tasks.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamUserHandler.#ctor(System.String)">
+            <summary>
+            Initializes a new SteamUserHandler, it is used to GetFriendList and other similiar functions.
+            </summary>
+            <param name="apiKey">Api key to use</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamUserHandler.GetFriendList(System.UInt64,System.String)">
+            <summary>
+            Retrieves the friends list of the specified steamid64. 
+            The profile must be set to public or the owner of the api key must be friends with them.
+            The profile cannot be private or the method will fail and it will return null.
+            </summary>
+            <param name="steamId">SteamId64 to retrieve the friends list from.</param>
+            <param name="relationship">All/Friend, there are others but I do not know what.</param>
+            <returns>Null upon failure, otherwise a list of Friend objects.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamUserHandler.GetPlayerBans(System.Collections.Generic.List{System.UInt64})">
+            <summary>
+            Gets the bans of the specified SteamId64s
+            </summary>
+            <param name="playersBansToRequest">A List of steamid64s to retrieve ban information about.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamUserHandler.GetPlayerSummariesV2(System.Collections.Generic.List{System.UInt64})">
+            <summary>
+            Requests a list of player summaries of the players in the list.
+            </summary>
+            <param name="playerSummariesToRequest">A list of SteamIds to request their summaries.</param>
+            <returns>A list of PlayerSummary objects.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamUserHandler.GetUserGroupList(System.UInt64)">
+            <summary>
+            Requests the GroupIds of the groups of the specified player.
+            </summary>
+            <param name="steamId">SteamId64 of the player.</param>
+            <returns>A GetUserGroupListResult object that contains a list of group ids.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.SteamUserHandler.ResolveVanityUrl(System.String,System.Int32)">
+            <summary>
+            Resolves a vanity url into a SteamId64.
+            </summary>
+            <param name="vanityUrl">The vanity url part of the url (not whole url). ex: fatherfoxxy NOT https://steamcommunity.com/id/FatherFoxxy </param>
+            <param name="urlType">
+            1 - (default) Individual profile
+            2 - Group Profile
+            3 - Offical Game Group Profile
+            </param>
+            <returns>A ResolveVanityUrlResult object.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.IConfig">
+            <summary>
+            IConfig interface so the default ConfigHandler that
+            uses JSON does not have to be used.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.Officer">
+            <summary>
+            Generic officer class.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Officer.steamid">
+            <summary>
+            The UInt64 version of a SteamID
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Officer.permission_level">
+            <summary>
+            The permission level the SteamID has.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.Officer.ToKeyValuePair">
+            <summary>
+            Turns the Officer into a KeyValuePair
+            </summary>
+            <returns>KeyValuePair of steamid,permissionlevel</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.Config">
+            <summary>
+            A generic RootConfig object containing configuration information.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.Username">
+            <summary>
+            Username to automatically log in to.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.Password">
+            <summary>
+            Password to use to automatically log in.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.SteamMachineAuth">
+            <summary>
+            Special bytes sent to Steam to prove the user is the account holder.
+            </summary>"
+        </member>
+        <member name="P:CSharpTradeOffers.Configuration.Config.ApiKey">
+            <summary>
+            A special key retrieved from https://steamcommunity.com/dev/apikey
+            The key MUST be from the bot's account.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.#ctor(System.String)">
+            <summary>
+            Initializes the Config and the path to use
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.Reload">
+            <summary>
+            Reloads the configuration file (path). If file is not present, it will generate a new one.
+            </summary>
+            <returns>A RootConfig object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
+            <summary>
+            Writes the changes made to the config.
+            </summary>
+            <param name="towrite"></param>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.JsonConfigHandler">
+            <summary>
+            Generic config file handler
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.#ctor(System.String)">
+            <summary>
+            Initializes the Config and the path to use
+            </summary>
+            <param name="path">Path of the config file, will be created if it does not exist.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.Reload">
+            <summary>
+            Reloads the configuration file (path). If file is not present, it will generate a new one.
+            </summary>
+            <returns>A RootConfig object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
+            <summary>
+            Writes the changes made to the config.
+            </summary>
+            <param name="towrite"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.CEconAsset.GetMarketHashName(System.String)">
+            <param name="apiKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.EconServiceHandler">
+            <summary>
+            Handles EconService related tasks such as trade offers.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffers(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Requests all trade offers.
+            </summary>
+            <param name="data">A dictionary containing the URL params found here: https://developer.valvesoftware.com/wiki/Steam_Web_API/IEconService at GetTradeOffers (v1).
+            ex: [leftarrow]"get_sent_offers","1"[rightarrow]. Please note, [leftarrow] and [rightarrow] correspond to the keys on the keyboard.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffer(System.UInt64,System.String)">
+            <summary>
+            Requests a single trade offer based on the tradeofferid.
+            </summary>
+            <param name="tradeofferid">The tradeofferid to request information on.</param>
+            <param name="language">The language to use. Default: english</param>
+            <returns>A CEConTradeOffer object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.DeclineTradeOffer(System.UInt64)">
+            <summary>
+            Declines a trade offer that was sent to you.
+            </summary>
+            <param name="tradeofferid">The ID of the offer to decline.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.CancelTradeOffer(System.UInt64)">
+            <summary>
+            Cancels a trade offer based on the specified tradeofferid.
+            </summary>
+            <param name="tradeofferid">The ID of the offer to cancel.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.AcceptTradeOffer(System.UInt32,System.UInt32,System.Net.CookieContainer,System.String)">
+            <summary>
+            Accepts a specified trade offer.
+            </summary>
+            <param name="tradeId">A ulong representing the trade to accept.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="partnerId">The AccountId of the person to trade with.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <returns>The TradeId of the offer that was accepted.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.SendTradeOffer(System.UInt64,System.String,System.String,CSharpTradeOffers.Trading.TradeOffer,System.Net.CookieContainer)">
+            <summary>
+            Sends a trade offer to the specified recipient. 
+            </summary>
+            <param name="partnerSid">The SteamId64 (ulong) of the person to send the offer to.</param>
+            <param name="tradeoffermessage">An optional message to be sent with the offer. Can be null.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <param name="offer">A TradeOffer object containing the trade parameters.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A SendOfferResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.SendTradeOfferWithLink(System.UInt64,System.String,System.String,System.String,CSharpTradeOffers.Trading.TradeOffer,System.Net.CookieContainer)">
+            <summary>
+            Sends a trade offer to the specified recipient that's not on your friends list using the trade url. If is not the case, use SendTradeOffer function.
+            </summary>
+            <param name="partnerSid">The SteamId64 (ulong) of the person to send the offer to.</param>
+            <param name="token">The token part from the recipient's trade url. Example: a1b2cdEF</param>
+            <param name="tradeoffermessage">An optional message to be sent with the offer. Can be null.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <param name="offer">A TradeOffer object containing the trade parameters.</param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A SendOfferResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.ModifyTradeOffer(System.UInt64,System.String,System.String,System.UInt32,CSharpTradeOffers.Trading.TradeOffer,System.Net.CookieContainer)">
+            <summary>
+            Modifies an existing trade offer.
+            </summary>
+            <param name="partnerSid">The SteamId64 (ulong) of the person whose offer will be modified.</param>
+            <param name="tradeoffermessage">An otpional message to be sent with the trade offer. Can be null.</param>
+            <param name="serverid">Almost always 1, not quite sure what other numbers do.</param>
+            <param name="tradeofferidCountered">The TradeId of the offer to counter or modify.</param>
+            <param name="offer">A TradeOffer object containing the trade parameters. </param>
+            <param name="container">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <returns>A SendOfferResponse object.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.GetTradeOffersSummary(System.UInt32)">
+            <summary>
+            Requestss TradeOffer statistics. ie: historical_received_count
+            </summary>
+            <param name="timeLastVisit">Unix time for historical cutoff.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.#ctor(System.UInt64,System.UInt32)">
+            <summary>
+            Class constructor, automatically initializes inventory.
+            </summary>
+            <param name="steamId">steamId64 of the inventory.</param>
+            <param name="appId">App ID of the inventory.</param>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Inventory.Items">
+            <summary>
+            String is the ClassId linking to an Item object.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.AssetCount">
+            <summary>
+            Returns the number of assets in the inventory.
+            </summary>
+            <returns>A ulong representing the number of assets.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.RequestInventory(System.UInt32)">
+            <summary>
+            Requests the inventory for the specified steamId and appId.
+            </summary>
+            <param name="steamId">steamId64 of the inventory to request.</param>
+            <param name="appId">App ID of the inventory to request.</param>
+            <returns>Returns a dynamic JSON object of the inventory to request.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.InitializeInventory(System.UInt32)">
+            <summary>
+            Initializes the inventory for the specified steamId and appId.
+            </summary>
+            <param name="steamId">steamId64 of the inventory to request.</param>
+            <param name="appId">App ID of the inventory to request.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.FindUnusedItems(System.String)">
+            <param name="marketHashName">Name to search</param>
+            <param name="appid">Appid of the inventory to search</param>
+            <returns>A list of items whose market_hash_name contains marketHashName</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.FindFirstItem(CSharpTradeOffers.Trading.CEconAsset)">
+            <summary>
+            Locates an Item in the inventory.
+            </summary>
+            <param name="assetToFind">Specifies search params.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.FindAvailableAsset(System.String)">
+            <summary>
+            Finds the first rgInventoryItem that is not in use.
+            </summary>
+            <param name="classId">ClassId of items to search.</param>
+            <returns>An rgInventoryItem that is not marked in use.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.Inventory.MarkAsset(CSharpTradeOffers.Trading.CEconAsset,System.Boolean)">
+            <summary>
+            Locates asset in Items[classid].items and marks it's inUse bool according to the inUse argument.
+            </summary>
+            <param name="asset">Asset to mark</param>
+            <param name="inUse">Value to set</param>
+            <returns>True if successful, false if not.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.InventoryHandler">
+            <summary>
+            Handles Inventory-Related tasks for a specific account.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.#ctor(System.UInt64)">
+            <summary>
+            Initializes an InventoryHandler for the specified SteamId.
+            </summary>
+            <param name="steamId">SteamId of the inventory to use.</param>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.InventoryHandler.Inventories">
+            <summary>
+            List of all inventories added.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.RefreshInventories(System.UInt32[])">
+            <summary>
+            Clears the Inventories dictionary and retrieves all inventories associated with the appid array provided.
+            </summary>
+            <param name="appids">Array of AppIds of inventories to retrieve.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.CEconTradeOffer,System.Boolean)">
+            <summary>
+            Marks the inUse bool of the assets specified in the trade offer.
+            </summary>
+            <param name="offer">TradeOffer to mark.</param>
+            <param name="inUse">Bool to set.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.InventoryHandler.MarkMyAssets(CSharpTradeOffers.Trading.TradeOffer,System.Boolean)">
+            <summary>
+            Marks the inUse bool of the assets specified in the trade offer.
+            </summary>
+            <param name="offer">TradeOffer to mark.</param>
+            <param name="inUse">Bool to set.</param>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.Item">
+            <summary>
+            An inventory item type class.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.Description">
+            <summary>
+            RgDescription of an item, kind of like AssetClassInfo but with less information.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Trading.Item.Items">
+            <summary>
+            List of rgInventoryItem, this should be used for whenever you need to interact with a specific item rather than all of them.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.RgInventoryItem">
+            <summary>
+            An item within an inventory list.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.RgInventoryItem.ToCEconAsset(System.UInt32)">
+            <param name="appId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.SteamEconomyHandler">
+            <summary>
+            Handles Steam Economy related tasks, like retrieving class info
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.#ctor(System.String)">
+            <summary>
+            Initializes a new SteamEconomyHandler that handles tasks like GetAssetClassInfo and GetAssetPrices (not to be confused with GetPriceOverview)
+            </summary>
+            <param name="apiKey">Api key to use</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.GetAssetClassInfo(System.UInt32,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Gets the asset class info of an item, must provide ClassID/InstanceID in IDs
+            </summary>
+            <param name="apiKey">Your Steam API key</param>
+            <param name="appid">Uint32 number that represents the game to retrieve item data from.</param>
+            <param name="Ids">Dictionary MUST contain ClassID/InstanceID of item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.SteamEconomyHandler.GetAssetPrices(System.UInt32,System.String,System.String)">
+            <summary>
+            I think this retrieves coupons or something. Although it may do what it says.
+            </summary>
+            <param name="appId">AppId to find asset prices for.</param>
+            <param name="currency">Three letter string representing a currency to filter for, if left blank all currencies are returned. EX: USD or EUR, etc.</param>
+            <param name="language">The language to retrieve the results in.</param>
+            <returns>A GetAssetPricesResponse object.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Trading.MarketHandler">
+            <summary>
+            Handles market related tasks.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.MarketHandler.EligibilityCheck(System.UInt64,System.Net.CookieContainer)">
+            <summary>
+            Sets the container to contain a MarketEligibility cookie. Required before trading.
+            </summary>
+            <param name="steamId">The SteamId of the bot.</param>
+            <param name="container">The bot CookieContainer</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Trading.MarketHandler.GetPriceOverview(System.UInt32,System.String,System.Globalization.CultureInfo,System.String,System.String)">
+            <summary>
+            Gets the price overview of an item.
+            </summary>
+            <param name="appId">The appId of the item.</param>
+            <param name="marketHashName">The market_hash_name of the item</param>
+            <param name="country">Country to check in. (ISO)</param>
+            <param name="currency">Currency code, I forget what. 1 = US $</param>
+            <returns>A MarketValue object containing the data.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.IWebRequestHandler`1">
+            <summary>
+            A generic Request Handler from the web.
+            </summary>
+            <typeparam name="TResponse">The response type to get</typeparam>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.IWebRequestHandler`1.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Send a request to a URL and receives a response of type <see cref="T:CSharpTradeOffers.Web.IResponse" />.
+            </summary>
+            <returns>Return's a generic <see cref="T:CSharpTradeOffers.Web.IResponse" /> from the request.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.IResponse">
+            <summary>
+            A response from the web.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.IResponse.ReadStream">
+            <summary>
+            Reads the stream to a string 
+            </summary>
+            <returns>The stream as a string</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.IResponse.Deserialize``1">
+            <summary>
+            Deserializes the stream to a serializable type.
+            </summary>
+            <typeparam name="TSerializable">A serializable type.</typeparam>
+            <returns>The deserialized type.</returns>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.IResponse.Cookies">
+            <summary>
+            Any cookies created from the response.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.RsaHelper.#ctor(System.String)">
+            <summary>
+            Initializes the RsaHelper with the specified password
+            </summary>
+            <param name="password">Password to use</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.RsaHelper.EncryptPassword(CSharpTradeOffers.Web.IResponse)">
+            <summary>
+            Encrypts the password retrieved through according to the response getting encryption keys from steam.
+            </summary>
+            <param name="response">Response containing encryption keys.</param>
+            <returns>Encrypted password</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.SteamWebRequestHandler">
+            <summary>
+            Handles requests to the "www.SteamCommunity.com" page.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Sends a request to a url, refered from the steam community. Returns a steam response.
+            </summary>
+            <returns>A stream response</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.DictionaryToUrlString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Converts a dictionary to URL parameters. Ex: ?param=arg
+            </summary>
+            <param name="dict">The Dictionary to be converted.</param>
+            <returns>A concatenated string of URL arguments.</returns>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.SteamResponse">
+            <summary>
+            A response from Steam.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.#ctor(System.Net.HttpWebResponse)">
+            <summary>
+            Create a steam response from a web response.
+            </summary>
+            <param name="httpWebResponse">A Web Response from Steam.</param>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResponse.Cookies">
+            <summary>
+            Cookies collected from the response.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.SteamResponse.SteamStream">
+            <summary>
+            The response stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.Deserialize``1">
+            <summary>
+            Deserializes the stream to a serializable type with Xml.
+            </summary>
+            <typeparam name="TSerializable">An XML serializable type.</typeparam>
+            <returns>The deserialized type.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.Dispose">
+            <summary>
+            Disposes the object.
+            </summary>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.Account">
+            <summary>
+            Generic account
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Account.SteamId">
+            <summary>
+            The bot's Sid64.
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Web.Account.AuthContainer">
+            <summary>
+            The Auth Cookies for the bot.
+            </summary>
+        </member>
+        <member name="P:CSharpTradeOffers.Web.Account.SteamMachineAuth">
+            <summary>
+            Sets the SteamMachineAuth string as well as adding the auth string to the AuthContainer.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Account.AddMachineAuthCookies(System.String)">
+            <summary>
+            Adds the steamMachineAuth cookie to the AuthContainer.
+            This can also be used for any string separated by [name]=[value]
+            </summary>
+            <param name="authstring">String to turn into a cookie and add.</param>
+        </member>
+        <member name="T:CSharpTradeOffers.Web.Web">
+            <summary>
+            Handles Web related tasks like logging in and fetching
+            </summary>
+        </member>
+        <member name="F:CSharpTradeOffers.Web.Web.SteamCommunityDomain">
+            <summary>
+            steamcommunity.com
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.#ctor(CSharpTradeOffers.Web.IWebRequestHandler{CSharpTradeOffers.Web.IResponse})">
+            <summary>
+            Initializes a new Web class in accordance to the IWebRequestHandler IResponse provided.
+            </summary>
+            <param name="webRequestHandler"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            A web method to return the response string from the URL.
+            </summary>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>A string from the response stream.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Retries a Fetch until success or fail conditions have been met.
+            </summary>
+            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+            <param name="retryLimit">The max number of requests to perform before failing.</param>
+            <param name="url">The URL to request.</param>
+            <param name="method">The method to be used. Ex: POST</param>
+            <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
+            <param name="cookies">A cookiecontainer with cookies to send.</param>
+            <param name="xHeaders">
+            Special parameter, should only be used with requests that need "X-Requested-With:
+            XMLHttpRequest" and "X-Prototype-Version: 1.7"
+            </param>
+            <param name="referer">Sets the referrer for the request.</param>
+            <returns>IResponse interace.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.RetryRequestProcessor(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+            <summary>
+            Processes retry attempts
+            </summary>
+            <returns>IResponse interace.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.DoLogin(System.String,System.String,System.String)">
+            <summary>
+            Executes the web login using the Steam website.
+            </summary>
+            <param name="username">Username to use</param>
+            <param name="password">Password to use</param>
+            <param name="machineAuth">Steam machine auth string. 
+            You should save Web.SteamMachineAuth after the code has been entered and the request has 
+            been successful and pass it to DoLogin in future attempts to login. 
+            This field can be left blank, but if the account is SteamGuard protected 
+            it will ask you for a new code every time.</param>
+            <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.Web.RetryDoLogin(System.TimeSpan,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Retries the DoLogin method until success or fail conditions have been met.
+            </summary>
+            <param name="retryWait">The TimeSpan in which to wait between requests.</param>
+            <param name="retryLimit">The max number of requests to perform before failing.</param>
+            <param name="username">Username to use</param>
+            <param name="password">Password to use</param>
+            <param name="machineAuth">Steam machine auth string. 
+                You should save Web.SteamMachineAuth after the code has been entered and the request has 
+                been successful and pass it to DoLogin in future attempts to login. 
+                This field can be left blank, but if the account is SteamGuard protected 
+                it will ask you for a new code every time.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.ExtensionMethods">
+            <summary>
+            Various extension methods used in the library.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.ExtensionMethods.IntValue(System.Boolean)">
+            <summary>
+            Converts the bool variable to its integer representation of 0 for false and 1 for true.
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpTradeOffers.SteamId">
+            <summary>
+            Initializes a new SteamId.
+            Automatically performs conversions to AccountId/SteamIdUlong/SteamIdText as needed.
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.SteamId.#ctor(System.UInt32)">
+            <summary>
+            Initializes a new SteamId as well as automatically performing the conversions to 'AccountId' 'SteamIdUlong' 'SteamIdText'
+            </summary>
+            <param name="accountId"></param>
+        </member>
+    </members>
+</doc>
