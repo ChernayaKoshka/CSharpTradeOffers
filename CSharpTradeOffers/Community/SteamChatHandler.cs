@@ -49,7 +49,7 @@ namespace CSharpTradeOffers.Community
 
             var rand = new Random();
             var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 99999999999); //might be able to be larger, haven't checked
-            if (jQueryId < 0) jQueryId = -jQueryId;
+            jQueryId = Math.Abs(jQueryId);
             _basejQuery = "jQuery" + jQueryId + _account.SteamId + "_{0}";
 
             _auth = Logon();
