@@ -9,19 +9,19 @@ namespace CSharpTradeOffers.Trading
     public class RgInventoryItem
     {
         [JsonProperty("amount")]
-        public ulong Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("classid")]
-        public ulong ClassId { get; set; }
+        public long ClassId { get; set; }
 
         [JsonProperty("id")]
-        public ulong Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("instanceid")]
-        public ulong InstanceId { get; set; }
+        public long InstanceId { get; set; }
 
         [JsonProperty("pos")]
-        public ulong Pos { get; set; }
+        public long Pos { get; set; }
 
         [JsonIgnore]
         [JsonProperty("inUse")]
@@ -33,12 +33,12 @@ namespace CSharpTradeOffers.Trading
         {
             return new CEconAsset
             {
-                AppId = appId.ToString(),
-                Amount = "1",
-                AssetId = Id.ToString(),
-                ContextId = "2",
-                ClassId = ClassId.ToString(),
-                InstanceId = InstanceId.ToString(),
+                AppId = appId,
+                Amount = 1,
+                AssetId = Id,
+                ContextId = 2,
+                ClassId = ClassId,
+                InstanceId = InstanceId,
                 Missing = false
             };
         }

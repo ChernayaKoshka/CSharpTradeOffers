@@ -61,7 +61,7 @@ namespace CSharpTradeOffers.Trading
         public AssetClassInfo GetAssetClassInfo(CEconAsset asset)
         {
             return GetAssetClassInfo(Convert.ToUInt32(asset.AppId),
-                new Dictionary<string, string> {{asset.ClassId, asset.InstanceId}});
+                new Dictionary<string, string> {{asset.ClassId.ToString(), asset.InstanceId.ToString()}});
         }
 
         /// <summary>

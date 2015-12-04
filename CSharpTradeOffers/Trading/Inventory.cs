@@ -26,7 +26,7 @@ namespace CSharpTradeOffers.Trading
         /// <summary>
         /// String is the ClassId linking to an Item object.
         /// </summary>
-        public Dictionary<string, Item> Items { get; } = new Dictionary<string, Item>();
+        public Dictionary<long, Item> Items { get; } = new Dictionary<long, Item>();
 
         /// <summary>
         /// Returns the number of assets in the inventory.
@@ -82,8 +82,8 @@ namespace CSharpTradeOffers.Trading
                 {
                     var description = new Item {Description = rgDescription};
 
-                    if (!Items.ContainsKey(rgDescription.ClassId.ToString()))
-                        Items.Add(rgDescription.ClassId.ToString(), description);
+                    if (!Items.ContainsKey(rgDescription.ClassId))
+                        Items.Add(rgDescription.ClassId, description);
                 }
                 catch (NullReferenceException)
                 {
@@ -104,7 +104,7 @@ namespace CSharpTradeOffers.Trading
                     InstanceId = item.instanceid,
                     Pos = item.pos
                 };
-                Items[inventoryItem.ClassId.ToString()].Items.Add(inventoryItem);
+                Items[inventoryItem.ClassId].Items.Add(inventoryItem);
             }
         }
 
@@ -138,7 +138,7 @@ namespace CSharpTradeOffers.Trading
         /// </summary>
         /// <param name="classId">ClassId of items to search.</param>
         /// <returns>An rgInventoryItem that is not marked in use.</returns>
-        public RgInventoryItem FindAvailableAsset(string classId)
+        public RgInventoryItem FindAvailableAsset(long classId)
         {
             return Items[classId].Items.FirstOrDefault(item => !item.InUse);
         }
@@ -151,7 +151,7 @@ namespace CSharpTradeOffers.Trading
         /// <returns>True if successful, false if not.</returns>
         public bool MarkAsset(CEconAsset asset, bool inUse)
         {
-            foreach (RgInventoryItem item in Items[asset.ClassId].Items.Where(item => item.Id.ToString() == asset.AssetId))
+            foreach (RgInventoryItem item in Items[asset.ClassId].Items.Where(item => item.Id == asset.AssetId))
             {
                 item.InUse = inUse;
                 return true;

@@ -8,22 +8,22 @@ namespace CSharpTradeOffers.Trading
     public class CEconAsset
     {
         [JsonProperty("appid")]
-        public string AppId { get; set; }
+        public uint AppId { get; set; }
 
         [JsonProperty("contextid")]
-        public string ContextId { get; set; }
+        public long ContextId { get; set; }
 
         [JsonProperty("assetid")]
-        public string AssetId { get; set; }
+        public long AssetId { get; set; }
 
         [JsonProperty("classid")]
-        public string ClassId { get; set; }
+        public long ClassId { get; set; }
 
         [JsonProperty("instanceid")]
-        public string InstanceId { get; set; }
+        public long InstanceId { get; set; }
 
         [JsonProperty("amount")]
-        public string Amount { get; set; }
+        public int Amount { get; set; }
 
         [JsonProperty("missing")]
         public bool Missing { get; set; }
@@ -33,7 +33,7 @@ namespace CSharpTradeOffers.Trading
         public string GetMarketHashName(string apiKey)
         {
             var handler = new SteamEconomyHandler(apiKey);
-            var data = new Dictionary<string, string> { { this.ClassId, this.InstanceId } };
+            var data = new Dictionary<string, string> { { this.ClassId.ToString(), this.InstanceId.ToString() } };
             AssetClassInfo info = handler.GetAssetClassInfo(Convert.ToUInt32(this.AppId), data);
             return info.MarketHashName;
         }

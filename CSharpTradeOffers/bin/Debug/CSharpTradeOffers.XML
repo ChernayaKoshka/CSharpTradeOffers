@@ -514,7 +514,7 @@
             <param name="assetToFind">Specifies search params.</param>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Trading.Inventory.FindAvailableAsset(System.String)">
+        <member name="M:CSharpTradeOffers.Trading.Inventory.FindAvailableAsset(System.Int64)">
             <summary>
             Finds the first rgInventoryItem that is not in use.
             </summary>
