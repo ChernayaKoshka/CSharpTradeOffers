@@ -178,7 +178,7 @@ namespace CSharpTradeOffers.Trading
                                 where cookie.Name == "sessionid"
                                 select cookie.Value).FirstOrDefault();
 
-            CEconTradeOffer offerToken = new CEconTradeOffer {TradeOfferAccessToken = token};
+            CEconTradeOffer offerToken = new CEconTradeOffer { TradeOfferAccessToken = token };
 
             var data = new Dictionary<string, string>
             {
