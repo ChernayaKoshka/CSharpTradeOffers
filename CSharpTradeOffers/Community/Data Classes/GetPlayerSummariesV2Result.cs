@@ -6,37 +6,52 @@ namespace CSharpTradeOffers.Community
     public class PlayerSummary
     {
         [JsonProperty("steamid")]
-        public string Steamid { get; set; }
+        public ulong SteamId { get; set; }
+
         [JsonProperty("communityvisibilitystate")]
-        public int Communityvisibilitystate { get; set; }
+        public int CommunityVisibilityState { get; set; }
+
         [JsonProperty("profilestate")]
-        public int Profilestate { get; set; }
+        public int ProfileState { get; set; }
+
         [JsonProperty("personaname")]
-        public string Personaname { get; set; }
+        public string PersonaName { get; set; }
+
         [JsonProperty("lastlogoff")]
-        public int Lastlogoff { get; set; }
+        public int LastLogoff { get; set; }
+
         [JsonProperty("commentpermission")]
-        public int Commentpermission { get; set; }
+        public int CommentPermission { get; set; }
+
         [JsonProperty("profileurl")]
-        public string Profileurl { get; set; }
+        public string ProfileUrl { get; set; }
+
         [JsonProperty("avatar")]
         public string Avatar { get; set; }
+
         [JsonProperty("avatarmedium")]
-        public string Avatarmedium { get; set; }
+        public string AvatarMedium { get; set; }
+
         [JsonProperty("avatarfull")]
-        public string Avatarfull { get; set; }
+        public string AvatarFull { get; set; }
+
         [JsonProperty("personastate")]
-        public int Personastate { get; set; }
+        public int PersonaState { get; set; }
+
         [JsonProperty("primaryclanid")]
-        public string Primaryclanid { get; set; }
+        public string PrimaryClanId { get; set; }
+
         [JsonProperty("timecreated")]
-        public int Timecreated { get; set; }
+        public int TimeCreated { get; set; }
+
         [JsonProperty("personastateflags")]
-        public int Personastateflags { get; set; }
+        public int PersonaStateFlags { get; set; }
+
         [JsonProperty("realname")]
-        public string Realname { get; set; }
+        public string RealName { get; set; }
+
         [JsonProperty("loccountrycode")]
-        public string Loccountrycode { get; set; }
+        public string LocCountryCode { get; set; }
     }
 
     [JsonObject(Title = "response")]
