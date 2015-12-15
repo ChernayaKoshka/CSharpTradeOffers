@@ -29,6 +29,7 @@ namespace CSharpTradeOffers.Community
         private readonly string _accessToken;
 
         private int _pollId = 1;
+        private int _message = 1;
 
         /// <summary>
         /// Creates a new SteamChatHandler. Generates a random jQueryId to use.
@@ -46,9 +47,8 @@ namespace CSharpTradeOffers.Community
                     "Error fetching access token, the account specified is not authorized to use this feature.");
             }
 
-
-            var rand = new Random();
-            var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 99999999999); //might be able to be larger, haven't checked
+            var rand = new Random();                                                //6228287338999220263
+            var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 9999999999999999999); //might be able to be larger, haven't checked
             jQueryId = Math.Abs(jQueryId);
             _basejQuery = "jQuery" + jQueryId + _account.SteamId + "_{0}";
 
@@ -73,13 +73,16 @@ namespace CSharpTradeOffers.Community
 
             string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false).ReadStream(); //returns an annoying JSON string that can't quite be deserialized yet
             response = StripjQueryArtifacts(response); //remove /**/jQuery11110010656769154593349_1442204142816( and remove )
-            return JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
+
+            WebPresenceOAuthLogonResponse webPresenceOAuthLogonResponse = JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
+            _message = webPresenceOAuthLogonResponse.Message;
+            return webPresenceOAuthLogonResponse;
         }
 
         private string GetAccessToken()
         {
             string response = _web.Fetch(BaseChatUrl, "GET", null, _account.AuthContainer).ReadStream();
-            if (response.Contains("This account is not authorized to use this feature.")) return null; //hideous and sloppy. :(
+            if (response.Contains("not authorized")) return null; //hideous and sloppy. :(
             string removed = response.Remove(0, response.IndexOf("\'https://api.steampowered.com/\', \"", StringComparison.Ordinal) + 34);
             return removed.Substring(0, 32);
         }
@@ -88,16 +91,11 @@ namespace CSharpTradeOffers.Community
         /// Pretty sure this function does persona states (among other things?)
         /// Message 29 = Go online
         /// </summary>
-        /// <param name="message">
-        /// Message numbers that I know:
-        /// 29 = poll me
-        /// 30 = poll friends (?)
-        /// 35 = poll new messages</param>
         /// <param name="secTimeOut">Seconds until a timeout event occurs?</param>
         /// <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
         /// <param name="useAccountIds">Probably always true.</param>
         /// <returns>PollResponse object</returns>
-        public PollResponse Poll(int message, int secTimeOut, int secIdleTime, bool useAccountIds = true)
+        public PollResponse Poll(int secTimeOut, int secIdleTime, bool useAccountIds = true)
         {
             const string url = BaseAuthUrl + "Poll/v0001/";
             string jQuery = string.Format(_basejQuery, UnixTimeNow());
@@ -105,7 +103,7 @@ namespace CSharpTradeOffers.Community
             {
                 {"jsonp", jQuery},
                 {"umqid", _auth.UmqId},
-                {"message", message.ToString()},
+                {"message", _message.ToString()},
                 {"pollid", _pollId.ToString()},
                 {"sectimeout", secTimeOut.ToString()},
                 {"secidletime", secIdleTime.ToString()},
@@ -116,7 +114,10 @@ namespace CSharpTradeOffers.Community
             string response = _web.Fetch(url, "GET", data, xHeaders: false).ReadStream();
             _pollId++;
             response = StripjQueryArtifacts(response);
-            return JsonConvert.DeserializeObject<PollResponse>(response);
+            PollResponse pollResponse = JsonConvert.DeserializeObject<PollResponse>(response);
+            if(pollResponse.MessageLast != 0)
+                _message = pollResponse.MessageLast;
+            return pollResponse;
         }
 
         static string StripjQueryArtifacts(string toStrip)
@@ -186,8 +187,7 @@ namespace CSharpTradeOffers.Community
                 {"text", message},
                 {"access_token", _accessToken}
             };
-
-            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, xHeaders: false).ReadStream();
+            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false).ReadStream();
             response = StripjQueryArtifacts(response);
             return JsonConvert.DeserializeObject<SendChatMessageResponse>(response);
         }
