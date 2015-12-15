@@ -76,6 +76,8 @@
     <Compile Include="Configuration\Data Classes\Officer.cs" />
     <Compile Include="Configuration\Data Classes\Config.cs" />
     <Compile Include="Configuration\XmlConfigHandler.cs" />
+    <Compile Include="ConsoleInputOutput.cs" />
+    <Compile Include="IUserInputOutputHandler.cs" />
     <Compile Include="Trading\Data Classes\MarketValue.cs" />
     <Compile Include="Trading\Data Classes\RgDescription.cs" />
     <Compile Include="Web\IWebRequestHandler.cs" />

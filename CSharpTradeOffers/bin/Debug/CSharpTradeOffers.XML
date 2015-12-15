@@ -821,20 +821,21 @@
             </summary>
             <returns>IResponse interace.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.Web.DoLogin(System.String,System.String,System.String)">
+        <member name="M:CSharpTradeOffers.Web.Web.DoLogin(System.String,System.String,System.String,CSharpTradeOffers.IUserInputOutputHandler)">
             <summary>
             Executes the web login using the Steam website.
             </summary>
             <param name="username">Username to use</param>
             <param name="password">Password to use</param>
             <param name="machineAuth">Steam machine auth string. 
-            You should save Web.SteamMachineAuth after the code has been entered and the request has 
+            <param name="userInputOutput">The user I/O handler to use. If null, defaults to Console.Write/Read</param>
+            You should save Account.SteamMachineAuth after the code has been entered and the request has 
             been successful and pass it to DoLogin in future attempts to login. 
             This field can be left blank, but if the account is SteamGuard protected 
             it will ask you for a new code every time.</param>
             <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.Web.RetryDoLogin(System.TimeSpan,System.Int32,System.String,System.String,System.String)">
+        <member name="M:CSharpTradeOffers.Web.Web.RetryDoLogin(System.TimeSpan,System.Int32,System.String,System.String,System.String,CSharpTradeOffers.IUserInputOutputHandler)">
             <summary>
             Retries the DoLogin method until success or fail conditions have been met.
             </summary>
