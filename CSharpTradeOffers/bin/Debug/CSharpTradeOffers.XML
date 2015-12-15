@@ -62,16 +62,11 @@
             </summary>
             <returns>WebPresenceOAuthLogonResponse</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Poll(System.Int32,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Poll(System.Int32,System.Int32,System.Boolean)">
             <summary>
             Pretty sure this function does persona states (among other things?)
             Message 29 = Go online
             </summary>
-            <param name="message">
-            Message numbers that I know:
-            29 = poll me
-            30 = poll friends (?)
-            35 = poll new messages</param>
             <param name="secTimeOut">Seconds until a timeout event occurs?</param>
             <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
             <param name="useAccountIds">Probably always true.</param>

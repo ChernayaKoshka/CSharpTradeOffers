@@ -62,9 +62,9 @@
     <Compile Include="Community\Data Classes\InviteResponse.cs" />
     <Compile Include="Community\Data Classes\MemberList.cs" />
     <Compile Include="Community\Data Classes\MemberListGroupDetails.cs" />
+    <Compile Include="Community\Data Classes\PollResponse.cs" />
     <Compile Include="Community\Data Classes\MultiInviteResponse.cs" />
     <Compile Include="Community\Data Classes\PlayerBans.cs" />
-    <Compile Include="Community\Data Classes\PollResponse.cs" />
     <Compile Include="Community\Data Classes\PrivacySettings.cs" />
     <Compile Include="Community\Data Classes\Profile.cs" />
     <Compile Include="Community\Data Classes\ResolveVanityUrlBaseResult.cs" />
