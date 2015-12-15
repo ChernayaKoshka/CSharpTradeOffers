@@ -112,13 +112,16 @@ namespace CSharpTradeOffers.Web
         /// <param name="username">Username to use</param>
         /// <param name="password">Password to use</param>
         /// <param name="machineAuth">Steam machine auth string. 
-        /// You should save Web.SteamMachineAuth after the code has been entered and the request has 
+        /// <param name="userInputOutput">The user I/O handler to use. If null, defaults to Console.Write/Read</param>
+        /// You should save Account.SteamMachineAuth after the code has been entered and the request has 
         /// been successful and pass it to DoLogin in future attempts to login. 
         /// This field can be left blank, but if the account is SteamGuard protected 
         /// it will ask you for a new code every time.</param>
         /// <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
-        public Account DoLogin(string username, string password, string machineAuth = "")
+        public Account DoLogin(string username, string password, string machineAuth = "", IUserInputOutputHandler userInputOutput = null)
         {
+            if(userInputOutput == null) userInputOutput = new ConsoleInputOutput();
+
             Thread.Sleep(2000);
             var rsaHelper = new RsaHelper(password);
 
@@ -158,10 +161,10 @@ namespace CSharpTradeOffers.Web
                 if (captcha)
                 {
                     Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.CaptchaGid);
-                    Console.WriteLine(
+                    userInputOutput.OutputMessage(
                         "Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.");
-                    Console.Write("Please enter the numbers/letters from the picture that opened up: ");
-                    capText = Console.ReadLine();
+                    userInputOutput.OutputMessage("Please enter the numbers/letters from the picture that opened up: ");
+                    capText = userInputOutput.GetInput();
                 }
 
                 data.Add("captchagid", captcha ? capGid : string.Empty);
@@ -171,8 +174,8 @@ namespace CSharpTradeOffers.Web
                 // SteamGuard
                 if (steamGuard)
                 {
-                    Console.Write("SteamGuard code required: ");
-                    steamGuardText = Console.ReadLine();
+                    userInputOutput.OutputMessage("SteamGuard code required: ");
+                    steamGuardText = userInputOutput.GetInput();
                     steamGuardId = loginJson.EmailSteamId;
                 }
 
@@ -183,8 +186,8 @@ namespace CSharpTradeOffers.Web
                 //TwoFactor
                 if (twoFactor && !loginJson.Success)
                 {
-                    Console.Write("TwoFactor code required: ");
-                    twoFactorText = Console.ReadLine();
+                    userInputOutput.OutputMessage("TwoFactor code required: ");
+                    twoFactorText = userInputOutput.GetInput();
                 }
 
                 data.Add("twofactorcode", twoFactor ? twoFactorText : string.Empty);
@@ -252,7 +255,7 @@ namespace CSharpTradeOffers.Web
 
                 return account;
             }
-            Console.WriteLine("SteamWeb Error: " + loginJson.Message);
+            userInputOutput.OutputMessage("SteamWeb Error: " + loginJson.Message);
             return null;
         }
 
@@ -270,8 +273,10 @@ namespace CSharpTradeOffers.Web
         ///     it will ask you for a new code every time.</param>
         /// <returns></returns>
         public Account RetryDoLogin(TimeSpan retryWait, int retryLimit, string username, string password,
-            string machineAuth = "")
+            string machineAuth = "", IUserInputOutputHandler userInputOutput = null)
         {
+            if(userInputOutput == null) userInputOutput = new ConsoleInputOutput();
+
             int retries = 0;
             Account account = null;
             do
@@ -284,7 +289,7 @@ namespace CSharpTradeOffers.Web
                 {
                     retries++;
                     if (retries == retryLimit) throw;
-                    Console.WriteLine("Connection failed... retrying in: " + retryWait.Milliseconds + "ms. Retries: " +
+                    userInputOutput.OutputMessage("Connection failed... retrying in: " + retryWait.Milliseconds + "ms. Retries: " +
                                       retries);
                     Thread.Sleep(retryWait);
                 }
