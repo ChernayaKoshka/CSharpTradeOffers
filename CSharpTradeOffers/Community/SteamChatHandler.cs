@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
@@ -16,6 +17,15 @@ namespace CSharpTradeOffers.Community
         public ChatException(string message, Exception inner) : base(message, inner) { }
     }
 
+    public class MessageArgs : EventArgs
+    {
+        public MessageArgs(PollResponse response)
+        {
+            Response = response;
+        }
+        public PollResponse Response;
+    }
+
     public class SteamChatHandler
     {
         private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
@@ -28,8 +38,13 @@ namespace CSharpTradeOffers.Community
         private readonly string _basejQuery;
         private readonly string _accessToken;
 
+        public delegate void OnMessageReceived(object sender, MessageArgs e);
+
+        public event OnMessageReceived MessageReceived;
+
         private int _pollId = 1;
         private int _message = 1;
+        private bool _searching;
 
         /// <summary>
         /// Creates a new SteamChatHandler. Generates a random jQueryId to use.
@@ -95,7 +110,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
         /// <param name="useAccountIds">Probably always true.</param>
         /// <returns>PollResponse object</returns>
-        public PollResponse Poll(int secTimeOut, int secIdleTime, bool useAccountIds = true)
+        public PollResponse Poll(int secTimeOut = 0, int secIdleTime = 0, bool useAccountIds = true)
         {
             const string url = BaseAuthUrl + "Poll/v0001/";
             string jQuery = string.Format(_basejQuery, UnixTimeNow());
@@ -115,7 +130,7 @@ namespace CSharpTradeOffers.Community
             _pollId++;
             response = StripjQueryArtifacts(response);
             PollResponse pollResponse = JsonConvert.DeserializeObject<PollResponse>(response);
-            if(pollResponse.MessageLast != 0)
+            if (pollResponse.MessageLast != 0)
                 _message = pollResponse.MessageLast;
             return pollResponse;
         }
@@ -124,6 +139,30 @@ namespace CSharpTradeOffers.Community
         {
             toStrip = toStrip.Remove(0, toStrip.IndexOf("(", StringComparison.Ordinal) + 1);
             return toStrip.Substring(0, toStrip.Length - 1);
+        }
+
+        public void BeginMessageLoop()
+        {
+            if (_searching) return;
+            var messageThread = new Thread(MessageLoop);
+            messageThread.Start();
+        }
+
+        private void MessageLoop()
+        {
+            _searching = true;
+            while (_searching)
+            {
+                PollResponse response = Poll();
+                if (response.Messages == null) continue;
+                MessageReceived?.Invoke(this, new MessageArgs(response));
+                Thread.Sleep(500);
+            }
+        }
+
+        public void EndMessageLoop()
+        {
+            if (_searching) _searching = false;
         }
 
         /// <summary>
@@ -191,6 +230,5 @@ namespace CSharpTradeOffers.Community
             response = StripjQueryArtifacts(response);
             return JsonConvert.DeserializeObject<SendChatMessageResponse>(response);
         }
-
     }
 }
