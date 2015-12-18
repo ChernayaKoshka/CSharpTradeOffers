@@ -60,6 +60,7 @@
     <Compile Include="Community\Data Classes\GetUserGroupListResult.cs" />
     <Compile Include="Community\Data Classes\Group.cs" />
     <Compile Include="Community\Data Classes\InviteResponse.cs" />
+    <Compile Include="Community\Data Classes\LogoffResponse.cs" />
     <Compile Include="Community\Data Classes\MemberList.cs" />
     <Compile Include="Community\Data Classes\MemberListGroupDetails.cs" />
     <Compile Include="Community\Data Classes\PollResponse.cs" />

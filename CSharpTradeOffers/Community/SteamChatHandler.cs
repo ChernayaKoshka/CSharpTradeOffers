@@ -103,8 +103,7 @@ namespace CSharpTradeOffers.Community
         }
 
         /// <summary>
-        /// Pretty sure this function does persona states (among other things?)
-        /// Message 29 = Go online
+        /// Polls Steam for messages/persona states. Making a Poll also assures Steam that you are online.
         /// </summary>
         /// <param name="secTimeOut">Seconds until a timeout event occurs?</param>
         /// <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
@@ -141,22 +140,22 @@ namespace CSharpTradeOffers.Community
             return toStrip.Substring(0, toStrip.Length - 1);
         }
 
-        public void BeginMessageLoop()
+        public void BeginMessageLoop(TimeSpan waitAfterPoll)
         {
             if (_searching) return;
-            var messageThread = new Thread(MessageLoop);
+            var messageThread = new Thread(() => MessageLoop(waitAfterPoll));
             messageThread.Start();
         }
 
-        private void MessageLoop()
+        private void MessageLoop(TimeSpan waitAfterPoll)
         {
             _searching = true;
             while (_searching)
             {
+                Thread.Sleep(waitAfterPoll);
                 PollResponse response = Poll();
                 if (response.Messages == null) continue;
                 MessageReceived?.Invoke(this, new MessageArgs(response));
-                Thread.Sleep(500);
             }
         }
 

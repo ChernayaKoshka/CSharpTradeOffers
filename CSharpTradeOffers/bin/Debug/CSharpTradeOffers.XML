@@ -64,8 +64,7 @@
         </member>
         <member name="M:CSharpTradeOffers.Community.SteamChatHandler.Poll(System.Int32,System.Int32,System.Boolean)">
             <summary>
-            Pretty sure this function does persona states (among other things?)
-            Message 29 = Go online
+            Polls Steam for messages/persona states. Making a Poll also assures Steam that you are online.
             </summary>
             <param name="secTimeOut">Seconds until a timeout event occurs?</param>
             <param name="secIdleTime">Seconds idle, I assume Steam uses this to set your state to "away"</param>
