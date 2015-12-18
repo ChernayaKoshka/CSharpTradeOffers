@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Community\ChatEventsManager.cs" />
     <Compile Include="Community\Data Classes\AddFriendResponse.cs" />
     <Compile Include="Community\Data Classes\ChatLogResponse.cs" />
     <Compile Include="Community\Data Classes\ClanCommentResponse.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Community\Data Classes\GetUserGroupListResult.cs" />
     <Compile Include="Community\Data Classes\Group.cs" />
     <Compile Include="Community\Data Classes\InviteResponse.cs" />
-    <Compile Include="Community\Data Classes\LogoffResponse.cs" />
     <Compile Include="Community\Data Classes\MemberList.cs" />
     <Compile Include="Community\Data Classes\MemberListGroupDetails.cs" />
     <Compile Include="Community\Data Classes\PollResponse.cs" />

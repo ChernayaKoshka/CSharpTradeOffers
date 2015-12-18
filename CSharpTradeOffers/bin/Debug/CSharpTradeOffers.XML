@@ -4,6 +4,23 @@
         <name>CSharpTradeOffers</name>
     </assembly>
     <members>
+        <member name="M:CSharpTradeOffers.Community.ChatEventsManager.BeginMessageLoop(System.TimeSpan)">
+            <summary>
+            Automatically polls, required to subscribe to chat-related events
+            </summary>
+            <param name="waitAfterPoll">Time to wait wait before each poll</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.ChatEventsManager.MessageLoop(System.TimeSpan)">
+            <summary>
+            Starts a message loop that allows events to be subsribed to.
+            </summary>
+            <param name="waitAfterPoll">Wait before each poll.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.ChatEventsManager.EndMessageLoop">
+            <summary>
+            Stops the message loop
+            </summary>
+        </member>
         <member name="T:CSharpTradeOffers.Community.InviteResponse">
             <summary>
             InviteResponse
