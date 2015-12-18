@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Threading;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
 
@@ -17,15 +16,6 @@ namespace CSharpTradeOffers.Community
         public ChatException(string message, Exception inner) : base(message, inner) { }
     }
 
-    public class MessageArgs : EventArgs
-    {
-        public MessageArgs(PollResponse response)
-        {
-            Response = response;
-        }
-        public PollResponse Response;
-    }
-
     public class SteamChatHandler
     {
         private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
@@ -38,13 +28,8 @@ namespace CSharpTradeOffers.Community
         private readonly string _basejQuery;
         private readonly string _accessToken;
 
-        public delegate void OnMessageReceived(object sender, MessageArgs e);
-
-        public event OnMessageReceived MessageReceived;
-
         private int _pollId = 1;
         private int _message = 1;
-        private bool _searching;
 
         /// <summary>
         /// Creates a new SteamChatHandler. Generates a random jQueryId to use.
@@ -138,30 +123,6 @@ namespace CSharpTradeOffers.Community
         {
             toStrip = toStrip.Remove(0, toStrip.IndexOf("(", StringComparison.Ordinal) + 1);
             return toStrip.Substring(0, toStrip.Length - 1);
-        }
-
-        public void BeginMessageLoop(TimeSpan waitAfterPoll)
-        {
-            if (_searching) return;
-            var messageThread = new Thread(() => MessageLoop(waitAfterPoll));
-            messageThread.Start();
-        }
-
-        private void MessageLoop(TimeSpan waitAfterPoll)
-        {
-            _searching = true;
-            while (_searching)
-            {
-                Thread.Sleep(waitAfterPoll);
-                PollResponse response = Poll();
-                if (response.Messages == null) continue;
-                MessageReceived?.Invoke(this, new MessageArgs(response));
-            }
-        }
-
-        public void EndMessageLoop()
-        {
-            if (_searching) _searching = false;
         }
 
         /// <summary>
