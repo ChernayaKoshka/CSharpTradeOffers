@@ -5,71 +5,15 @@ namespace CSharpTradeOffers.Community
 {
     public class ChatEventsManager
     {
-        private bool _searching;
-
-        #region OnMessageReceived
-        public class MessageArgs : EventArgs
-        {
-            public MessageArgs(Message message)
-            {
-                Message = message;
-            }
-
-            public Message Message;
-        }
-
-        public delegate void OnMessageReceived(object sender, MessageArgs e);
-
-        public event OnMessageReceived MessageReceived;
-        #endregion
-
-        #region OnPoll
-        public class PollArgs : EventArgs
-        {
-            public PollArgs(PollResponse response)
-            {
-                Response = response;
-            }
-
-            public PollResponse Response;
-        }
-
-        public delegate void OnPoll(object sender, PollArgs e);
-
-        public event OnPoll PollReceived;
-        #endregion
-
-        #region OnChatMessage
-        public class ChatMessageArgs : EventArgs
-        {
-            public ChatMessageArgs(Message chatMessage)
-            {
-                ChatMessage = chatMessage;
-            }
-
-            public Message ChatMessage;
-        }
-
-        public delegate void OnChatMessage(object sender, ChatMessageArgs e);
+        public event OnTyping OnUserTyping;
 
         public event OnChatMessage ChatMessageReceived;
-        #endregion
 
-        #region OnUserTyping
-        public class TypingArgs : EventArgs
-        {
-            public TypingArgs(Message typingMessage)
-            {
-                TypingMessage = typingMessage;
-            }
+        public event OnPoll PollReceived;
 
-            public Message TypingMessage;
-        }
+        public event OnMessageReceived MessageReceived;
 
-        public delegate void OnTyping(object sender, EventArgs e);
-
-        public event OnTyping OnUserTyping;
-        #endregion
+        private bool _searching;
 
         private readonly SteamChatHandler _chatHandler;
 
@@ -134,4 +78,60 @@ namespace CSharpTradeOffers.Community
             if (_searching) _searching = false;
         }
     }
+
+    #region OnMessageReceived
+    public class MessageArgs : EventArgs
+    {
+        public MessageArgs(Message message)
+        {
+            Message = message;
+        }
+
+        public Message Message;
+    }
+
+    public delegate void OnMessageReceived(object sender, MessageArgs e);
+    #endregion
+
+    #region OnPoll
+    public class PollArgs : EventArgs
+    {
+        public PollArgs(PollResponse response)
+        {
+            Response = response;
+        }
+
+        public PollResponse Response;
+    }
+
+    public delegate void OnPoll(object sender, PollArgs e);
+    #endregion
+
+    #region OnChatMessage
+    public class ChatMessageArgs : EventArgs
+    {
+        public ChatMessageArgs(Message chatMessage)
+        {
+            ChatMessage = chatMessage;
+        }
+
+        public Message ChatMessage;
+    }
+
+    public delegate void OnChatMessage(object sender, ChatMessageArgs e);
+    #endregion
+
+    #region OnUserTyping
+    public class TypingArgs : EventArgs
+    {
+        public TypingArgs(Message typingMessage)
+        {
+            TypingMessage = typingMessage;
+        }
+
+        public Message TypingMessage;
+    }
+
+    public delegate void OnTyping(object sender, EventArgs e);
+    #endregion
 }
