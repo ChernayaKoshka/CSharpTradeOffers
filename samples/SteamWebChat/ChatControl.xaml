@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="SteamWebChat.ChatControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SteamWebChat"
+             mc:Ignorable="d" 
+             d:DesignHeight="318.54" d:DesignWidth="386.798">
+    <Grid Margin="0">
+        <Grid Margin="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="189*"/>
+                <RowDefinition Height="55*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+                <TextBlock x:Name="chatBox" Margin="0,-1,0,0" TextWrapping="Wrap" Text="Never share your password with anyone." ScrollViewer.CanContentScroll="True"/>
+            </Border>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*"/>
+                    <ColumnDefinition Width="312*"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="1" Grid.Column="0" BorderBrush="Black" Margin="0,2,0,0">
+                    <Image x:Name="avatarImage" StretchDirection="DownOnly" Width="55" Height="55" Margin="-1" RenderTransformOrigin="0.805,0.964"/>
+                </Border>
+                <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black" Margin="0,2,0,0">
+                    <Label x:Name="personaNameLabel" Content="No name set" Margin="-1,-1,-9,-1" Height ="55"  VerticalContentAlignment="Center" FontSize="24"/>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="305*"/>
+                    <ColumnDefinition Width="62*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="messageBox" TextWrapping="Wrap"/>
+                <Button x:Name="sendMessage" Content="Send" Grid.Column="1" Click="sendMessage_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

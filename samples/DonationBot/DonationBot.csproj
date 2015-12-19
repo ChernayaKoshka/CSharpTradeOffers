@@ -51,7 +51,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CSharpTradeOffers\CSharpTradeOffers.csproj">
+    <ProjectReference Include="..\..\CSharpTradeOffers\CSharpTradeOffers.csproj">
       <Project>{11ce73a4-5123-46f1-b668-892d6bafcc40}</Project>
       <Name>CSharpTradeOffers</Name>
     </ProjectReference>
