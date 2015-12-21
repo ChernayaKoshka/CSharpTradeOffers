@@ -51,6 +51,7 @@
     <Compile Include="Community\Data Classes\ChatLogResponse.cs" />
     <Compile Include="Community\Data Classes\ClanCommentResponse.cs" />
     <Compile Include="Community\Data Classes\CommentResponse.cs" />
+    <Compile Include="Community\Data Classes\EPersonaState.cs" />
     <Compile Include="Community\Data Classes\Friend.cs" />
     <Compile Include="Community\Data Classes\Friendslist.cs" />
     <Compile Include="Community\Data Classes\FriendStateResponse.cs" />
