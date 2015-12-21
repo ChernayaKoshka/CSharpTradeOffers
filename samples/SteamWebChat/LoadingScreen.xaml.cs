@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SteamWebChat
+﻿namespace SteamWebChat
 {
     /// <summary>
     /// Interaction logic for LoadingScreen.xaml

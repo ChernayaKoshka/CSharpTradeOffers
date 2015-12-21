@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using CSharpTradeOffers;
 using CSharpTradeOffers.Community;
 
@@ -15,8 +13,6 @@ namespace SteamWebChat
 
         public static SteamUserHandler SteamUserHandler;
 
-        public bool Polling;
-
         public ChatWindow(ChatEventsManager chatEventsManager, SteamChatHandler chatHandler, SteamUserHandler steamUserHandler)
         {
             var loadingScreen = new LoadingScreen();
@@ -30,28 +26,16 @@ namespace SteamWebChat
             InitializeComponent();
         }
 
-        public void AddChatWindow(PlayerSummary summary, string message = "")
+        public void AddChatWindow(ChatUser friend, string message)
         {
-            InvokeAddTab(summary, message);
+            InvokeAddTab(friend, message);
         }
 
         void OnChatMessage(object sender, ChatMessageArgs e)
         {
             ChatControl control = FindMatchingChatControl(IdConversions.AccountIdToUlong(e.ChatMessage.AccountIdFrom));
-            if (control != null)
-            {
-                InvokeHandleMessage(control, e.ChatMessage.Text);
-            }
-            else
-            {
-                PlayerSummary summary =
-                    SteamUserHandler.GetPlayerSummariesV2(new List<ulong>
-                    {
-                                        IdConversions.AccountIdToUlong(e.ChatMessage.AccountIdFrom)
-                    }).FirstOrDefault();
-
-                InvokeAddTab(summary, e.ChatMessage.Text);
-            }
+            if (control == null) return;
+            InvokeHandleMessage(control, e.ChatMessage.Text);
         }
 
         ChatControl FindMatchingChatControl(ulong steamId)
@@ -61,37 +45,37 @@ namespace SteamWebChat
                 object itemObject = null;
                 item.Dispatcher.Invoke(() => { itemObject = item.Content; });
                 var control = itemObject as ChatControl;
-                if (control?.Chatter.SteamId != steamId)
+                if (control?.ChatterId != steamId)
                     continue;
                 return control;
             }
             return null;
         }
 
-        void InvokeAddTab(PlayerSummary summary, string message)
+        void InvokeAddTab(ChatUser friend, string message)
         {
-            if (summary == null) return;
-            if (FindMatchingChatControl(summary.SteamId) != null) return;
+            if (FindMatchingChatControl(friend.Summary.SteamId) != null) return;
 
             if (!chatTabs.Dispatcher.CheckAccess())
                 chatTabs.Dispatcher.Invoke(() =>
                 {
-                    var tabItem = new TabItem { Header = summary.PersonaName };
-                    var chatControl = new ChatControl(ChatHandler, summary);
+                    var tabItem = new TabItem { Header = friend.Summary.PersonaName };
+                    var chatControl = new ChatControl(this, tabItem, ChatHandler, friend);
                     tabItem.Content = chatControl;
                     chatTabs.Items.Add(tabItem);
                     if (!string.IsNullOrEmpty(message))
                         InvokeHandleMessage(chatControl, message);
+                    chatTabs.SelectedIndex = chatTabs.Items.Count - 1;
                 });
             else
             {
-                var tabItem = new TabItem { Header = summary.PersonaName };
-                var chatControl = new ChatControl(ChatHandler, summary);
+                var tabItem = new TabItem { Header = friend.Summary.PersonaName };
+                var chatControl = new ChatControl(this, tabItem, ChatHandler, friend);
                 tabItem.Content = chatControl;
                 chatTabs.Items.Add(tabItem);
-
                 if (!string.IsNullOrEmpty(message))
                     InvokeHandleMessage(chatControl, message);
+                chatTabs.SelectedIndex = chatTabs.Items.Count - 1;
             }
         }
 
@@ -101,6 +85,21 @@ namespace SteamWebChat
                 control.Dispatcher.Invoke(() => { control.HandleMessage(message); });
             else
                 control.HandleMessage(message);
+        }
+
+        public void InvokeRemoveTab(TabItem item)
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => { chatTabs.Items.Remove(item); });
+            }
+            else
+            {
+                chatTabs.Items.Remove(item);
+            }
+
+            if (chatTabs.Items.Count == 0)
+                Close();
         }
     }
 }

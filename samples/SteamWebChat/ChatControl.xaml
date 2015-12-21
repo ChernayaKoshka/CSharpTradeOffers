@@ -6,35 +6,36 @@
              xmlns:local="clr-namespace:SteamWebChat"
              mc:Ignorable="d" 
              d:DesignHeight="318.54" d:DesignWidth="386.798">
-    <Grid Margin="0">
+    <Grid Margin="0" Background="#FF1C1C1D">
         <Grid Margin="10,10,10,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
                 <RowDefinition Height="55*"/>
                 <RowDefinition Height="189*"/>
                 <RowDefinition Height="55*"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
-                <TextBlock x:Name="chatBox" Margin="0,-1,0,0" TextWrapping="Wrap" Text="Never share your password with anyone." ScrollViewer.CanContentScroll="True"/>
-            </Border>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="55*"/>
                     <ColumnDefinition Width="312*"/>
+                    <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderThickness="1" Grid.Column="0" BorderBrush="Black" Margin="0,2,0,0">
-                    <Image x:Name="avatarImage" StretchDirection="DownOnly" Width="55" Height="55" Margin="-1" RenderTransformOrigin="0.805,0.964"/>
-                </Border>
-                <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black" Margin="0,2,0,0">
-                    <Label x:Name="personaNameLabel" Content="No name set" Margin="-1,-1,-9,-1" Height ="55"  VerticalContentAlignment="Center" FontSize="24"/>
+                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+                    <Button x:Name="closeTab" Content="X" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="8" Click="closeTab_Click" />
                 </Border>
             </Grid>
-            <Grid Grid.Row="2">
+            <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1">
+                <TextBlock x:Name="chatBox" Margin="0,-1,0,0" TextWrapping="Wrap" Text="Never share your password with anyone." ScrollViewer.CanContentScroll="True" Foreground="#FF929B96"/>
+            </Border>
+            <Grid Grid.Row="1">
+                <local:FriendControl x:Name="chatterFriendControl" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="367" Height="54"/>
+            </Grid>
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="305*"/>
                     <ColumnDefinition Width="62*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="messageBox" TextWrapping="Wrap"/>
-                <Button x:Name="sendMessage" Content="Send" Grid.Column="1" Click="sendMessage_Click"/>
+                <TextBox x:Name="messageBox" Margin="0,5,0,5" TextWrapping="Wrap"/>
+                <Button x:Name="sendMessage" Margin="5,5,0,5" Content="Send" Grid.Column="1" Click="sendMessage_Click"/>
             </Grid>
         </Grid>
     </Grid>

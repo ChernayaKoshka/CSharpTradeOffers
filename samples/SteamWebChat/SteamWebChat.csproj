@@ -63,6 +63,7 @@
     <Compile Include="FriendControl.xaml.cs">
       <DependentUpon>FriendControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChatUser.cs" />
     <Compile Include="InputDialogBox.xaml.cs">
       <DependentUpon>InputDialogBox.xaml</DependentUpon>
     </Compile>

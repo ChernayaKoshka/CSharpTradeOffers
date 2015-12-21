@@ -4,12 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using CSharpTradeOffers;
-using CSharpTradeOffers.Web;
 using CSharpTradeOffers.Community;
 using CSharpTradeOffers.Configuration;
-using CSharpTradeOffers.Trading;
+using CSharpTradeOffers.Web;
 
 namespace SteamWebChat
 {
@@ -34,6 +32,7 @@ namespace SteamWebChat
 
         public FriendsListWindow()
         {
+
             var loadingScreen = new LoadingScreen();
             loadingScreen.Show();
 
@@ -88,12 +87,10 @@ namespace SteamWebChat
 
         void FriendsListWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var control in FriendSummaries.OrderBy(x => x.PersonaName).Select(friend => new FriendControl
+            foreach (var friend in FriendSummaries.OrderBy(x => x.PersonaName))
             {
-                personaName = { Content = friend.PersonaName },
-                avatarImage = { Source = new BitmapImage(new Uri(friend.AvatarMedium)) }
-            }))
-            {
+                FriendStateResponse state = ChatHandler.FriendState(IdConversions.UlongToAccountId(friend.SteamId));
+                var control = new FriendControl(new ChatUser{State = state, Summary = friend});
                 control.MouseDoubleClick += FriendItem_Clicked;
                 friendsStackPanel.Children.Add(control);
             }
@@ -101,18 +98,69 @@ namespace SteamWebChat
 
         static void FriendsListWindow_Closed(object sender, EventArgs e)
         {
-            if(ChatWindow == null) return;
-            ChatWindow.Polling = false;
-            ChatWindow.Close();
+            ChatWindow?.Close();
+            ChatEventsManager.EndMessageLoop();
+        }
+
+        static void ChatWindow_Closed(object sender, EventArgs e)
+        {
+            var window = sender as ChatWindow;
+            if (window == null) return;
+            ChatWindow = null;
+        }
+
+        void FriendItem_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            var control = sender as FriendControl;
+            if (control == null) return;
+
+            CheckCreateChatWindow();
+
+            PlayerSummary summary = FriendSummaries.FirstOrDefault(x => x.PersonaName == control.personaName.Text);
+            if (summary != null)
+                ChatWindow.AddChatWindow(control.Friend, string.Empty);
+        }
+
+        void ComplainQuit(string message, string title = "Error")
+        {
+            MessageBox.Show(message, title);
+            Close();
         }
 
         void OnMessage(object sender, ChatMessageArgs e)
         {
             CheckCreateChatWindow();
 
-            ChatWindow.AddChatWindow(
+            PlayerSummary summary =
                 FriendSummaries.FirstOrDefault(
-                    x => x.SteamId == IdConversions.AccountIdToUlong(e.ChatMessage.AccountIdFrom)), e.ChatMessage.Text);
+                    x => x.SteamId == IdConversions.AccountIdToUlong(e.ChatMessage.AccountIdFrom));
+
+            if (summary == null)
+            {
+                MessageBox.Show("I was lazy and I don't poll for new friends. They attempted to send you a message.");
+                return;
+            }
+
+            List<FriendControl> friendControls = new List<FriendControl>();
+            ChatUser friend = null;
+
+            friendsStackPanel.Dispatcher.Invoke(() =>
+            {
+                friendControls = friendsStackPanel.Children.Cast<FriendControl>().ToList();
+            });
+
+            foreach (FriendControl control in friendControls)
+            {
+                ulong steamId = 0;
+                control.Dispatcher.Invoke(() => { steamId = control.Friend.Summary.SteamId; });
+                if (steamId != summary.SteamId) continue;
+                control.Dispatcher.Invoke(()=> { friend = control.Friend; });
+                break;
+            }
+
+            if (friend == null) throw new Exception("Could not locate friend, please report this!");
+
+            ChatWindow.AddChatWindow(friend, e.ChatMessage.Text);
         }
 
         void CheckCreateChatWindow()
@@ -134,30 +182,6 @@ namespace SteamWebChat
                 ChatWindow.Closed += ChatWindow_Closed;
                 ChatWindow.Show();
             }
-        }
-
-        static void ChatWindow_Closed(object sender, EventArgs e)
-        {
-            var window = sender as ChatWindow;
-            if (window == null) return;
-            window.Polling = false;
-            ChatWindow = null;
-        }
-
-        void FriendItem_Clicked(object sender, MouseButtonEventArgs e)
-        {
-            var control = sender as FriendControl;
-            if (control == null) return;
-
-            CheckCreateChatWindow();
-
-            ChatWindow.AddChatWindow(FriendSummaries.FirstOrDefault(x => x.PersonaName == (string)control.personaName.Content));
-        }
-
-        void ComplainQuit(string message, string title = "Error")
-        {
-            MessageBox.Show(message, title);
-            Close();
         }
     }
 }

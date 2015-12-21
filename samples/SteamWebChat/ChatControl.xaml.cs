@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using CSharpTradeOffers.Community;
 
@@ -12,23 +11,34 @@ namespace SteamWebChat
     /// </summary>
     public partial class ChatControl
     {
-        private readonly SteamChatHandler _chatHandler;
-        public readonly PlayerSummary Chatter;
+        public readonly TabItem ContainingTab;
+        public readonly ulong ChatterId;
+        public ChatUser Friend;
 
-        public ChatControl(SteamChatHandler chatHandler, PlayerSummary chatter)
+        private readonly ChatWindow _window;
+        private readonly SteamChatHandler _chatHandler;
+
+        public ChatControl(ChatWindow window, TabItem containingTab, SteamChatHandler chatHandler, ChatUser friend)
         {
+            Friend = friend;
+            ChatterId = friend.Summary.SteamId;
+            _window = window;
+            ContainingTab = containingTab;
             _chatHandler = chatHandler;
-            Chatter = chatter;
 
             Loaded += ChatControl_Loaded;
 
             InitializeComponent();
         }
 
+        public void HandleMessage(string message)
+        {
+            AddMessage(Friend.Summary.PersonaName, message);
+        }
+
         void ChatControl_Loaded(object sender, RoutedEventArgs e)
         {
-            SetAvatarUri(new Uri(Chatter.AvatarMedium));
-            personaNameLabel.Content = Chatter.PersonaName;
+            chatterFriendControl.SetFromFriendObject(Friend);
             messageBox.PreviewKeyUp += MessageBox_KeyPress;
         }
 
@@ -37,27 +47,9 @@ namespace SteamWebChat
             e.Handled = true; //because dumb windows shit
             if (e.Key != Key.Enter) return;
 
-            _chatHandler.Message(Chatter.SteamId, "saytext", messageBox.Text);
+            _chatHandler.Message(ChatterId, "saytext", messageBox.Text);
             AddMessage(FriendsListWindow.MySummary.PersonaName, messageBox.Text);
             messageBox.Text = string.Empty;
-        }
-
-        public void HandleMessage(string message)
-        {
-            AddMessage(Chatter.PersonaName, message);
-        }
-
-        void SetAvatarUri(Uri uri)
-        {
-            if (!avatarImage.Dispatcher.CheckAccess())
-            {
-                avatarImage.Dispatcher.Invoke(() => avatarImage.Source = new BitmapImage(uri),
-                    DispatcherPriority.Normal);
-            }
-            else
-            {
-                avatarImage.Source = new BitmapImage(uri);
-            }
         }
 
         void AddMessage(string username, string message)
@@ -73,11 +65,16 @@ namespace SteamWebChat
             }
         }
 
-        private void sendMessage_Click(object sender, RoutedEventArgs e)
+        void sendMessage_Click(object sender, RoutedEventArgs e)
         {
-            _chatHandler.Message(Chatter.SteamId, "saytext", messageBox.Text);
+            _chatHandler.Message(ChatterId, "saytext", messageBox.Text);
             AddMessage(FriendsListWindow.MySummary.PersonaName, messageBox.Text);
             messageBox.Text = string.Empty;
+        }
+
+        void closeTab_Click(object sender, RoutedEventArgs e)
+        {
+            _window.InvokeRemoveTab(ContainingTab);
         }
     }
 }
