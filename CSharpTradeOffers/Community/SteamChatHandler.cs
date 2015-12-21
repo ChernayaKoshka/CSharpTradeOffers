@@ -79,6 +79,7 @@ namespace CSharpTradeOffers.Community
             return webPresenceOAuthLogonResponse;
         }
 
+        //icky
         private string GetAccessToken()
         {
             string response = _web.Fetch(BaseChatUrl, "GET", null, _account.AuthContainer).ReadStream();
