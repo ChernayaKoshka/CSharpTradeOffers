@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using CSharpTradeOffers;
 using CSharpTradeOffers.Community;
 
@@ -100,6 +102,17 @@ namespace SteamWebChat
 
             if (chatTabs.Items.Count == 0)
                 Close();
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
+
+        void AnimatedCloseButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Close();
         }
     }
 }
