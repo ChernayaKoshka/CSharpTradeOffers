@@ -46,7 +46,7 @@ namespace SteamWebChat
 
         void MessageBox_KeyPress(object sender, KeyEventArgs e)
         {
-            e.Handled = true; //because dumb windows shit
+            e.Handled = true; //because dumb Windows shit
             if (e.Key != Key.Enter) return;
 
             _chatHandler.Message(ChatterId, "saytext", messageBox.Text);
@@ -73,7 +73,7 @@ namespace SteamWebChat
             messageBox.Text = string.Empty;
         }
 
-        void CustomCloseButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        void AnimatedCloseButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             _window.InvokeRemoveTab(ContainingTab);
         }

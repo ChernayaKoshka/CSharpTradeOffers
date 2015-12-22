@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="SteamWebChat.AnimatedCloseButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SteamWebChat"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50">
+
+    <Border BorderThickness="2" BorderBrush="Black">
+        <Grid x:Name="buttonGrid" Margin="0">
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Grid.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard x:Name="onEnter" >
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="buttonGrid"
+                                        Storyboard.TargetProperty = "(Grid.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                        To="#FFF38000" Duration="0:0:.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Grid.MouseLeave">
+                    <EventTrigger.Actions>
+                        <PauseStoryboard BeginStoryboardName="onEnter"/>
+                        <BeginStoryboard x:Name="onLeave" >
+                            <Storyboard>
+                                <ColorAnimation  Storyboard.TargetName="buttonGrid"
+                                        Storyboard.TargetProperty = "(Grid.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                        To="#00000000" Duration="0:0:.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#00000000" Offset="0.0" />
+                </LinearGradientBrush >
+            </Grid.Background>
+            <Line X1="1" Y1="1" Stroke="#FF929B96" StrokeThickness="1.5" Stretch="UniformToFill" Margin="1"/>
+            <Line X2="1" Y1="1" Stroke="#FF929B96" StrokeThickness="1.5" Stretch="UniformToFill" Margin="1"/>
+        </Grid>
+    </Border>
+</UserControl>
