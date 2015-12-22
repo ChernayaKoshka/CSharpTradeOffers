@@ -51,16 +51,15 @@ namespace CSharpTradeOffers.Web
             }
             request.CookieContainer = cookies ?? new CookieContainer();
 
-            if (data != null && !isGetMethod)
-            {
-                if (isWebkit) request.ContentType = "multipart/form-data; boundary=" + Boundary;
-                byte[] dataBytes = Encoding.UTF8.GetBytes(isWebkit ? DictionaryToWebkitString(data) : DictionaryToUrlString(data));
-                request.ContentLength = dataBytes.Length;
+            if (data == null || isGetMethod) return new SteamResponse(request.GetResponse() as HttpWebResponse);
 
-                using (var reqStream = request.GetRequestStream())
-                {
-                    reqStream.Write(dataBytes, 0, dataBytes.Length);
-                }
+            if (isWebkit) request.ContentType = "multipart/form-data; boundary=" + Boundary;
+            byte[] dataBytes = Encoding.UTF8.GetBytes(isWebkit ? DictionaryToWebkitString(data) : DictionaryToUrlString(data));
+            request.ContentLength = dataBytes.Length;
+
+            using (var reqStream = request.GetRequestStream())
+            {
+                reqStream.Write(dataBytes, 0, dataBytes.Length);
             }
 
             return new SteamResponse(request.GetResponse() as HttpWebResponse);
