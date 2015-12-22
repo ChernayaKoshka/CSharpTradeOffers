@@ -4,15 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SteamWebChat"
-             mc:Ignorable="d" Height="53" MinWidth="250" MinHeight="50" Margin="2">
+             mc:Ignorable="d" Height="50" MinWidth="250" MinHeight="50" Margin="2">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="53"/>
+            <ColumnDefinition Width="52"/>
             <ColumnDefinition Width="195*"/>
         </Grid.ColumnDefinitions>
-        <Border x:Name="avatarBorder" BorderThickness="1" BorderBrush="#FF7DBA35" Margin="0">
-            <Image x:Name="avatarImage" OpacityMask="#FF1C1C1D" Width="52" Height="52" Margin="0,0,0,0"/>
+        <Border x:Name="avatarBorder" BorderThickness="1" BorderBrush="#FF7DBA35" Margin="0,0,0,0">
+            <Image x:Name="avatarImage" OpacityMask="#FF1C1C1D" Margin="0"/>
         </Border>
         <Grid Background="#FF1C1C1D" Grid.Column="1" Margin="0,0,0,0">
             <Grid.RowDefinitions>

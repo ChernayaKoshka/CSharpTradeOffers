@@ -13,6 +13,7 @@ namespace SteamWebChat
     {
         public readonly TabItem ContainingTab;
         public readonly ulong ChatterId;
+
         public ChatUser Friend;
 
         private readonly ChatWindow _window;
@@ -20,10 +21,11 @@ namespace SteamWebChat
 
         public ChatControl(ChatWindow window, TabItem containingTab, SteamChatHandler chatHandler, ChatUser friend)
         {
+            ContainingTab = containingTab;
             Friend = friend;
             ChatterId = friend.Summary.SteamId;
+
             _window = window;
-            ContainingTab = containingTab;
             _chatHandler = chatHandler;
 
             Loaded += ChatControl_Loaded;
@@ -56,8 +58,7 @@ namespace SteamWebChat
         {
             if (!chatBox.Dispatcher.CheckAccess())
             {
-                chatBox.Dispatcher.Invoke(() => chatBox.Text += ("\n" + username + ": " + message),
-                    DispatcherPriority.Normal);
+                chatBox.Dispatcher.Invoke(() => chatBox.Text += ("\n" + username + ": " + message));
             }
             else
             {
@@ -72,7 +73,7 @@ namespace SteamWebChat
             messageBox.Text = string.Empty;
         }
 
-        void closeTab_Click(object sender, RoutedEventArgs e)
+        void CustomCloseButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             _window.InvokeRemoveTab(ContainingTab);
         }
