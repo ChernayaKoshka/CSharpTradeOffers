@@ -105,6 +105,7 @@ namespace SteamWebChat
         {
             ChatWindow?.Close();
             ChatEventsManager.EndMessageLoop();
+            ChatHandler.Logoff();
         }
 
         static void ChatWindow_Closed(object sender, EventArgs e)

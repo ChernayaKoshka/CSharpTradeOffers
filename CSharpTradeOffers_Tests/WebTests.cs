@@ -35,7 +35,7 @@ namespace CSharpTradeOffers_Tests
             // This mock request handler is only set up to return pre-determined values (set up above).
             // For example, when given a request of 'HandleWebRequest(Url, Method, null, null, true, "")', it will always return a mock response (defined above)
             _mockRequestHandler = new Mock<IWebRequestHandler<IResponse>>();
-            _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "")).Returns(_mockResponse.Object);
+            _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "", false)).Returns(_mockResponse.Object);
 
             // So, follow this mock structure from bottom to top...
             // 1) Mock Web Request Contains a mock response
@@ -59,7 +59,7 @@ namespace CSharpTradeOffers_Tests
         [Test]
         public void RetryFetch_ReturnsNull_WhenExceedingRetryCount()
         {
-            _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "")).Throws<WebException>();
+            _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "", false)).Throws<WebException>();
 
             IResponse response = _web.RetryFetch(new TimeSpan(1), 2, Url, Method);
 

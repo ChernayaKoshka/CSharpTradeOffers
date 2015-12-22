@@ -14,6 +14,6 @@ namespace CSharpTradeOffers.Web
         /// </summary>
         /// <returns>Return's a generic <see cref="IResponse" /> from the request.</returns>
         TResponse HandleWebRequest(string url, string method, Dictionary<string, string> data,
-            CookieContainer cookies, bool xHeaders, string referer);
+            CookieContainer cookies, bool xHeaders, string referer, bool isWebkit);
     }
 }

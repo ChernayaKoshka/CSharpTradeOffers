@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
 
@@ -31,11 +32,6 @@ namespace CSharpTradeOffers.Web
         }
 
         /// <summary>
-        /// SteamMachineAuth cookie value
-        /// </summary>
-        //public string SteamMachineAuth { get; set; }
-
-        /// <summary>
         /// A web method to return the response string from the URL.
         /// </summary>
         /// <param name="url">The URL to request.</param>
@@ -49,9 +45,9 @@ namespace CSharpTradeOffers.Web
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>A string from the response stream.</returns>
         public IResponse Fetch(string url, string method, Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false)
         {
-            IResponse response = _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer);
+            IResponse response = _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer, isWebkit);
 
             return response;
         }
@@ -73,10 +69,10 @@ namespace CSharpTradeOffers.Web
         /// <returns>IResponse interace.</returns>
         public IResponse RetryFetch(TimeSpan retryWait, int retryLimit, string url, string method,
             Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false)
         {
             IResponse response = RetryRequestProcessor(retryWait, retryLimit, url, method, data, cookies, xHeaders,
-                referer);
+                referer, isWebkit);
             return response;
         }
 
@@ -86,14 +82,14 @@ namespace CSharpTradeOffers.Web
         /// <returns>IResponse interace.</returns>
         private IResponse RetryRequestProcessor(TimeSpan retryWait, int retryLimit, string url, string method,
             Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false)
         {
             int attempts = 0;
             while (true)
             {
                 try
                 {
-                    return Fetch(url, method, data, cookies, xHeaders, referer);
+                    return Fetch(url, method, data, cookies, xHeaders, referer, isWebkit);
                 }
                 catch (WebException)
                 {
@@ -120,7 +116,7 @@ namespace CSharpTradeOffers.Web
         /// <returns>An Account object to that contains the SteamId and AuthContainer.</returns>
         public Account DoLogin(string username, string password, string machineAuth = "", IUserInputOutputHandler userInputOutput = null)
         {
-            if(userInputOutput == null) userInputOutput = new ConsoleInputOutput();
+            if (userInputOutput == null) userInputOutput = new ConsoleInputOutput();
 
             Thread.Sleep(2000);
             var rsaHelper = new RsaHelper(password);
@@ -275,7 +271,7 @@ namespace CSharpTradeOffers.Web
         public Account RetryDoLogin(TimeSpan retryWait, int retryLimit, string username, string password,
             string machineAuth = "", IUserInputOutputHandler userInputOutput = null)
         {
-            if(userInputOutput == null) userInputOutput = new ConsoleInputOutput();
+            if (userInputOutput == null) userInputOutput = new ConsoleInputOutput();
 
             int retries = 0;
             Account account = null;

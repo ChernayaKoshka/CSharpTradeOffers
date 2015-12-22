@@ -657,7 +657,7 @@
             </summary>
             <typeparam name="TResponse">The response type to get</typeparam>
         </member>
-        <member name="M:CSharpTradeOffers.Web.IWebRequestHandler`1.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+        <member name="M:CSharpTradeOffers.Web.IWebRequestHandler`1.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String,System.Boolean)">
             <summary>
             Send a request to a URL and receives a response of type <see cref="T:CSharpTradeOffers.Web.IResponse" />.
             </summary>
@@ -704,7 +704,7 @@
             Handles requests to the "www.SteamCommunity.com" page.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.HandleWebRequest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String,System.Boolean)">
             <summary>
             Sends a request to a url, refered from the steam community. Returns a steam response.
             </summary>
@@ -714,8 +714,15 @@
             <summary>
             Converts a dictionary to URL parameters. Ex: ?param=arg
             </summary>
-            <param name="dict">The Dictionary to be converted.</param>
+            <param name="dict">The dictionary to be converted.</param>
             <returns>A concatenated string of URL arguments.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamWebRequestHandler.DictionaryToWebkitString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Converts a dictionary to WebKit params
+            </summary>
+            <param name="data">The dictionary to be converted.</param>
+            <returns>A string in the form of webkit fields</returns>
         </member>
         <member name="T:CSharpTradeOffers.Web.SteamResponse">
             <summary>
@@ -794,7 +801,7 @@
             </summary>
             <param name="webRequestHandler"></param>
         </member>
-        <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+        <member name="M:CSharpTradeOffers.Web.Web.Fetch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String,System.Boolean)">
             <summary>
             A web method to return the response string from the URL.
             </summary>
@@ -809,7 +816,7 @@
             <param name="referer">Sets the referrer for the request.</param>
             <returns>A string from the response stream.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+        <member name="M:CSharpTradeOffers.Web.Web.RetryFetch(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String,System.Boolean)">
             <summary>
             Retries a Fetch until success or fail conditions have been met.
             </summary>
@@ -826,7 +833,7 @@
             <param name="referer">Sets the referrer for the request.</param>
             <returns>IResponse interace.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.Web.RetryRequestProcessor(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String)">
+        <member name="M:CSharpTradeOffers.Web.Web.RetryRequestProcessor(System.TimeSpan,System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Net.CookieContainer,System.Boolean,System.String,System.Boolean)">
             <summary>
             Processes retry attempts
             </summary>

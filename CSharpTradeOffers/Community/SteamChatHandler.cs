@@ -46,9 +46,9 @@ namespace CSharpTradeOffers.Community
                 throw new ChatException(
                     "Error fetching access token, the account specified is not authorized to use this feature.");
             }
-            //111103002823330461979_1450758795784
-            var rand = new Random();                                                //6228287338999220263
-            var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 9999999999999999999); //might be able to be larger, haven't checked
+
+            var rand = new Random();
+            var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 9999999999999999999);
             jQueryId = Math.Abs(jQueryId);
             _basejQuery = "jQuery" + jQueryId + "_{0}";
 
@@ -78,6 +78,19 @@ namespace CSharpTradeOffers.Community
             WebPresenceOAuthLogonResponse webPresenceOAuthLogonResponse = JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
             _message = webPresenceOAuthLogonResponse.Message;
             return webPresenceOAuthLogonResponse;
+        }
+
+        public ChatLogoffResponse Logoff()
+        {
+            const string url = BaseAuthUrl + "Logoff/v0001/";
+            var data = new Dictionary<string, string>
+            {
+                {"umqid", _auth.UmqId},
+                {"access_token", _accessToken}
+            };
+            return
+                JsonConvert.DeserializeObject<ChatLogoffResponse>(
+                    _web.Fetch(url, "POST", data, _account.AuthContainer, false, BaseChatUrl, true).ReadStream());
         }
 
         //icky

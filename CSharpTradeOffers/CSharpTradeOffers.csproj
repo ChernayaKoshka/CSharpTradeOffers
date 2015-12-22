@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Community\ChatEventsManager.cs" />
     <Compile Include="Community\Data Classes\AddFriendResponse.cs" />
+    <Compile Include="Community\Data Classes\ChatLogoffResponse.cs" />
     <Compile Include="Community\Data Classes\ChatLogResponse.cs" />
     <Compile Include="Community\Data Classes\ClanCommentResponse.cs" />
     <Compile Include="Community\Data Classes\CommentResponse.cs" />

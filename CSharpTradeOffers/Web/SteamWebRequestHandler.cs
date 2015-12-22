@@ -10,12 +10,15 @@ namespace CSharpTradeOffers.Web
     /// </summary>
     public class SteamWebRequestHandler : IWebRequestHandler<SteamResponse>
     {
+
+        const string Boundary = "----WebKitFormBoundary";
+
         /// <summary>
         /// Sends a request to a url, refered from the steam community. Returns a steam response.
         /// </summary>
         /// <returns>A stream response</returns>
         public SteamResponse HandleWebRequest(string url, string method, Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "")
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false)
         {
             bool isGetMethod = (method.ToLower() == "get");
             string dataString = null;
@@ -50,7 +53,8 @@ namespace CSharpTradeOffers.Web
 
             if (data != null && !isGetMethod)
             {
-                byte[] dataBytes = Encoding.UTF8.GetBytes(DictionaryToUrlString(data));
+                if (isWebkit) request.ContentType = "multipart/form-data; boundary=" + Boundary;
+                byte[] dataBytes = Encoding.UTF8.GetBytes(isWebkit ? DictionaryToWebkitString(data) : DictionaryToUrlString(data));
                 request.ContentLength = dataBytes.Length;
 
                 using (var reqStream = request.GetRequestStream())
@@ -65,7 +69,7 @@ namespace CSharpTradeOffers.Web
         /// <summary>
         /// Converts a dictionary to URL parameters. Ex: ?param=arg
         /// </summary>
-        /// <param name="dict">The Dictionary to be converted.</param>
+        /// <param name="dict">The dictionary to be converted.</param>
         /// <returns>A concatenated string of URL arguments.</returns>
         private static string DictionaryToUrlString(Dictionary<string, string> dict)
         {
@@ -78,6 +82,27 @@ namespace CSharpTradeOffers.Web
                 joined += $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}";
             }
             return joined;
+        }
+
+        /// <summary>
+        /// Converts a dictionary to WebKit params
+        /// </summary>
+        /// <param name="data">The dictionary to be converted.</param>
+        /// <returns>A string in the form of webkit fields</returns>
+        private static string DictionaryToWebkitString(Dictionary<string, string> data)
+        {
+            var sb = new StringBuilder();
+
+            foreach (KeyValuePair<string, string> field in data)
+            {
+                sb.AppendLine("--" + Boundary);
+                sb.AppendLine("Content-Disposition: form-data; name=\"" + field.Key + "\"");
+                sb.AppendLine();
+                sb.AppendLine(field.Value);
+            }
+            sb.AppendLine("--" + Boundary + "--");
+
+            return sb.ToString();
         }
     }
 }
