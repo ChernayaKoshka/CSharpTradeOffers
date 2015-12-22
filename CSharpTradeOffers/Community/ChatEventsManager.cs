@@ -23,20 +23,20 @@ namespace CSharpTradeOffers.Community
             BeginMessageLoop(TimeSpan.FromSeconds(1));
         }
 
-        public ChatEventsManager(SteamChatHandler chatHandler, TimeSpan waitAfterPoll)
+        public ChatEventsManager(SteamChatHandler chatHandler, TimeSpan waitAfterPoll, int secTimeOut = 0)
         {
             _chatHandler = chatHandler;
-            BeginMessageLoop(waitAfterPoll);
+            BeginMessageLoop(waitAfterPoll, secTimeOut);
         }
 
         /// <summary>
         /// Automatically polls, required to subscribe to chat-related events
         /// </summary>
         /// <param name="waitAfterPoll">Time to wait wait before each poll</param>
-        private void BeginMessageLoop(TimeSpan waitAfterPoll)
+        private void BeginMessageLoop(TimeSpan waitAfterPoll, int secTimeOut = 0)
         {
             if (_searching) return;
-            var messageThread = new Thread(() => MessageLoop(waitAfterPoll));
+            var messageThread = new Thread(() => MessageLoop(waitAfterPoll,secTimeOut));
             messageThread.Start();
         }
 
@@ -44,13 +44,13 @@ namespace CSharpTradeOffers.Community
         /// Starts a message loop that allows events to be subsribed to.
         /// </summary>
         /// <param name="waitAfterPoll">Wait before each poll.</param>
-        private void MessageLoop(TimeSpan waitAfterPoll)
+        private void MessageLoop(TimeSpan waitAfterPoll, int secTimeOut = 0)
         {
             _searching = true;
             while (_searching)
             {
                 Thread.Sleep(waitAfterPoll);
-                PollResponse response = _chatHandler.Poll();
+                PollResponse response = _chatHandler.Poll(secTimeOut);
                 PollReceived?.Invoke(this, new PollArgs(response));
 
                 if (response.Messages == null) continue;
