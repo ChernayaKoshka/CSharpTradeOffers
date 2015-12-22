@@ -46,11 +46,11 @@ namespace CSharpTradeOffers.Community
                 throw new ChatException(
                     "Error fetching access token, the account specified is not authorized to use this feature.");
             }
-
+            //111103002823330461979_1450758795784
             var rand = new Random();                                                //6228287338999220263
             var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 9999999999999999999); //might be able to be larger, haven't checked
             jQueryId = Math.Abs(jQueryId);
-            _basejQuery = "jQuery" + jQueryId + _account.SteamId + "_{0}";
+            _basejQuery = "jQuery" + jQueryId + "_{0}";
 
             _auth = Logon();
 
@@ -68,7 +68,8 @@ namespace CSharpTradeOffers.Community
             {
                 {"jsonp", jQuery},
                 {"ui_mode", "web"},
-                {"access_token", _accessToken} //special id, like SteamId but not for some reason
+                {"access_token", _accessToken}, //special id, like SteamId but not for some reason
+                {"_", UnixTimeNow().ToString()}
             };
 
             string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false).ReadStream(); //returns an annoying JSON string that can't quite be deserialized yet
