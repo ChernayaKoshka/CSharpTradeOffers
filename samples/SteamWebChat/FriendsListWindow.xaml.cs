@@ -20,15 +20,15 @@ namespace SteamWebChat
         private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
         private static readonly Web Web = new Web(new SteamWebRequestHandler());
 
-        public static List<Friend> Friends = new List<Friend>();
-        public static List<PlayerSummary> FriendSummaries = new List<PlayerSummary>();
-        public static PlayerSummary MySummary;
+        public static List<Friend> Friends { get; private set; }
+        public static List<PlayerSummary> FriendSummaries { get; private set; }
+        public static PlayerSummary MySummary { get; private set; }
 
-        public static SteamChatHandler ChatHandler;
-        public static SteamUserHandler SteamUserHandler;
-        public static ChatEventsManager ChatEventsManager;
+        public static SteamChatHandler ChatHandler { get; private set; }
+        public static SteamUserHandler SteamUserHandler { get; private set; }
+        public static ChatEventsManager ChatEventsManager { get; private set; }
 
-        public static ChatWindow ChatWindow;
+        public static ChatWindow ChatWindow { get; private set; }
 
         public FriendsListWindow()
         {
@@ -56,7 +56,6 @@ namespace SteamWebChat
             #region activate apis
             ChatHandler = new SteamChatHandler(_account);
             SteamUserHandler = new SteamUserHandler(config.ApiKey);
-            ChatEventsManager = new ChatEventsManager(ChatHandler, TimeSpan.FromSeconds(2));
             #endregion
             #region populate lists
             MySummary = SteamUserHandler.GetPlayerSummariesV2(new List<ulong> { _account.SteamId }).FirstOrDefault();
@@ -69,7 +68,7 @@ namespace SteamWebChat
             Message responseMessage = null;
             do
             {
-                response = ChatHandler.Poll();
+                response = ChatHandler.Poll(10);
                 if (response.Messages == null) continue;
                 responseMessage = response.Messages.FirstOrDefault(x => x.AccountIdFrom == IdConversions.UlongToAccountId(_account.SteamId));
                 Thread.Sleep(TimeSpan.FromSeconds(2));
@@ -78,6 +77,7 @@ namespace SteamWebChat
 
             loadingScreen.Close();
 
+            ChatEventsManager = new ChatEventsManager(ChatHandler, TimeSpan.FromSeconds(2), 10);
             ChatEventsManager.ChatMessageReceived += OnMessage;
 
             InitializeComponent();
@@ -87,13 +87,18 @@ namespace SteamWebChat
 
         void FriendsListWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var friend in FriendSummaries.OrderBy(x => x.PersonaName))
+            var loadingScreen = new LoadingScreen("Populating friends...");
+            loadingScreen.Show();
+            foreach (var control
+                     in from friend
+                     in FriendSummaries.OrderBy(x => x.PersonaName)
+                        let state = ChatHandler.FriendState(IdConversions.UlongToAccountId(friend.SteamId))
+                        select new FriendControl(new ChatUser { State = state, Summary = friend }))
             {
-                FriendStateResponse state = ChatHandler.FriendState(IdConversions.UlongToAccountId(friend.SteamId));
-                var control = new FriendControl(new ChatUser{State = state, Summary = friend});
                 control.MouseDoubleClick += FriendItem_Clicked;
                 friendsStackPanel.Children.Add(control);
             }
+            loadingScreen.Close();
         }
 
         static void FriendsListWindow_Closed(object sender, EventArgs e)
@@ -154,7 +159,7 @@ namespace SteamWebChat
                 ulong steamId = 0;
                 control.Dispatcher.Invoke(() => { steamId = control.Friend.Summary.SteamId; });
                 if (steamId != summary.SteamId) continue;
-                control.Dispatcher.Invoke(()=> { friend = control.Friend; });
+                control.Dispatcher.Invoke(() => { friend = control.Friend; });
                 break;
             }
 
