@@ -40,6 +40,16 @@ namespace SteamWebChat
 
         void ChatControl_Loaded(object sender, RoutedEventArgs e)
         {
+            var button = new AnimatedCloseButton(EButtonStyle.Close)
+                {
+                    Height = 15,
+                    Width = 15
+                };
+            button.MouseLeftButtonUp += AnimatedCloseButton_MouseLeftButtonUp;
+
+            Grid.SetColumn(button, 1);
+            controlGrid.Children.Add(button);
+
             chatterFriendControl.SetFromFriendObject(Friend);
             messageBox.PreviewKeyUp += MessageBox_KeyPress;
         }

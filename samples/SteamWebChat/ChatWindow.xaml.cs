@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using CSharpTradeOffers;
@@ -25,7 +26,26 @@ namespace SteamWebChat
             ChatHandler = chatHandler;
 
             loadingScreen.Close();
+            Loaded += ChatWindow_Loaded;
             InitializeComponent();
+        }
+
+        void ChatWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var closeButton = new AnimatedCloseButton(EButtonStyle.Close);
+            closeButton.MouseLeftButtonUp += AnimatedCloseButton_MouseLeftButtonUp;
+            Grid.SetColumn(closeButton, 3);
+            controlGrid.Children.Add(closeButton);
+
+            var maximizeButton = new AnimatedCloseButton(EButtonStyle.Maximize);
+            maximizeButton.MouseLeftButtonUp += AnimatedMaximizeButton_MouseLeftButtonUp;
+            Grid.SetColumn(maximizeButton, 2);
+            controlGrid.Children.Add(maximizeButton);
+
+            var minimizeButton = new AnimatedCloseButton(EButtonStyle.Minimize);
+            minimizeButton.MouseLeftButtonUp += AnimatedMinimizeButton_MouseLeftButtonUp;
+            Grid.SetColumn(minimizeButton, 1);
+            controlGrid.Children.Add(minimizeButton);
         }
 
         public void AddChatWindow(ChatUser friend, string message)
@@ -104,7 +124,7 @@ namespace SteamWebChat
                 Close();
         }
 
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
@@ -113,6 +133,16 @@ namespace SteamWebChat
         void AnimatedCloseButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Close();
+        }
+
+        void AnimatedMaximizeButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        void AnimatedMinimizeButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

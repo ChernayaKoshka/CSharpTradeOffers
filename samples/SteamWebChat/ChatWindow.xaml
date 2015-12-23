@@ -9,15 +9,16 @@
     <Grid Background="#FF1C1C1D">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="380"/>
+            <RowDefinition Height="380*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid x:Name="controlGrid" Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="505"/>
+                <ColumnDefinition Width="505*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" MouseDown="Label_MouseDown"/>
-            <local:AnimatedCloseButton Grid.Column="1" Width ="20" Margin="0,0,0,0" MouseLeftButtonUp="AnimatedCloseButton_MouseLeftButtonUp"/>
         </Grid>
         <TabControl Grid.Row="1" x:Name="chatTabs" Background="#FF1C1C1D" BorderBrush="#FF323233"/>
     </Grid>

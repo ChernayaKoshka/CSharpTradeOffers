@@ -6,22 +6,20 @@
              xmlns:local="clr-namespace:SteamWebChat"
              mc:Ignorable="d" 
              d:DesignHeight="318.54" d:DesignWidth="386.798">
+    
     <Grid Margin="0" Background="#FF1C1C1D">
         <Grid Margin="10,0,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="15"/>
                 <RowDefinition Height="54"/>
                 <RowDefinition Height="189*"/>
-                <RowDefinition Height="55*"/>
+                <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,0,-10,0">
+            <Grid x:Name="controlGrid" Grid.Row="0" Margin="0,0,-10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="312*"/>
                     <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
-
-                <local:AnimatedCloseButton Grid.Column="1" Width ="15" Margin="0,0,0,0" MouseLeftButtonUp="AnimatedCloseButton_MouseLeftButtonUp"/>
-
             </Grid>
             
             <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1">
@@ -33,7 +31,7 @@
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="305*"/>
-                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="62"/>
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="messageBox" Margin="0,5,0,5" TextWrapping="Wrap"/>
                 <Button x:Name="sendMessage" Margin="5,5,0,5" Content="Send" Grid.Column="1" Click="sendMessage_Click"/>
