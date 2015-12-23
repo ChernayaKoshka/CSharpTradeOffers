@@ -1,28 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SteamWebChat
 {
     /// <summary>
     /// Interaction logic for AnimatedCloseButton.xaml
     /// </summary>
-    public partial class AnimatedCloseButton : UserControl
+    public partial class AnimatedCloseButton
     {
+        private readonly EButtonStyle _style;
         public AnimatedCloseButton()
         {
             InitializeComponent();
         }
+
+        public AnimatedCloseButton(EButtonStyle style)
+        {
+            _style = style;
+            Loaded += CloseButton_Load;
+            InitializeComponent();
+        }
+
+        void CloseButton_Load(object sender, RoutedEventArgs e)
+        {
+            switch (_style)
+            {
+                case EButtonStyle.Close:
+                    closeLines.Visibility = Visibility.Visible;
+                    break;
+                case EButtonStyle.Maximize:
+                    maximizeLines.Visibility = Visibility.Visible;
+                    break;
+                case EButtonStyle.Minimize:
+                    minimizeLines.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(_style), _style, null);
+            }
+        }
+    }
+
+    public enum EButtonStyle
+    {
+        Close = 0,
+        Maximize = 1,
+        Minimize = 2
     }
 }

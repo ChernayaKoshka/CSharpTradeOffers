@@ -40,8 +40,27 @@
                     <GradientStop Color="#00000000" Offset="0.0" />
                 </LinearGradientBrush >
             </Grid.Background>
-            <Line X1="1" Y1="1" Stroke="#FF929B96" StrokeThickness="1.5" Stretch="UniformToFill" Margin="1"/>
-            <Line X2="1" Y1="1" Stroke="#FF929B96" StrokeThickness="1.5" Stretch="UniformToFill" Margin="1"/>
+
+            <Grid x:Name="contentGrid">
+                <Grid x:Name="closeLines" Visibility="Collapsed">
+                    <Line X1="1" Y1="1" Stroke="#FF929B96" StrokeThickness="1.5" Stretch="UniformToFill" Margin="1"/>
+                    <Line X2="1" Y1="1" Stroke="#FF929B96" StrokeThickness="1.5" Stretch="UniformToFill" Margin="1"/>
+                </Grid>
+                <Grid x:Name="maximizeLines" Visibility="Collapsed">
+                    <Viewbox Stretch="UniformToFill">
+                        <Rectangle Stroke="#FF929B96" Stretch="UniformToFill" Margin="8" Width="50" Height="50" StrokeThickness="3"/>
+                    </Viewbox>
+                </Grid>
+                <Grid x:Name="minimizeLines" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"/>
+                        <RowDefinition Height="20*"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="1">
+                        <Line X1="50" Y1="0" Stroke="#FF929B96" StrokeThickness="6" Stretch="UniformToFill"/>
+                    </Viewbox>
+                </Grid>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
