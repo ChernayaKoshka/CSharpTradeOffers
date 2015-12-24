@@ -30,12 +30,17 @@ namespace SteamWebChat
 
         public static ChatWindow ChatWindow { get; private set; }
 
+        public event LoadingFinished OnLoadingFinished;
+
+        public delegate void LoadingFinished(object sender, EventArgs e);
+
         public FriendsListWindow()
         {
+            InitializeComponent();
+        }
 
-            var loadingScreen = new LoadingScreen();
-            loadingScreen.Show();
-
+        public void LoginAndGoOnline()
+        {
             #region config
             var config = ConfigHandler.Reload();
             if (string.IsNullOrEmpty(config.ApiKey))
@@ -75,20 +80,16 @@ namespace SteamWebChat
             } while ((response.Error != "OK" || responseMessage?.PersonaState == 0));
             #endregion
 
-            loadingScreen.Close();
-
             ChatEventsManager = new ChatEventsManager(ChatHandler, TimeSpan.FromSeconds(2), 10);
             ChatEventsManager.ChatMessageReceived += OnMessage;
-
-            InitializeComponent();
+            
             Loaded += FriendsListWindow_Loaded;
             Closed += FriendsListWindow_Closed;
+            OnLoadingFinished?.Invoke(this, new EventArgs());
         }
 
         void FriendsListWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var loadingScreen = new LoadingScreen("Populating friends...");
-            loadingScreen.Show();
             foreach (var control
                      in from friend
                      in FriendSummaries.OrderBy(x => x.PersonaName)
@@ -98,7 +99,6 @@ namespace SteamWebChat
                 control.MouseDoubleClick += FriendItem_Clicked;
                 friendsStackPanel.Children.Add(control);
             }
-            loadingScreen.Close();
         }
 
         static void FriendsListWindow_Closed(object sender, EventArgs e)

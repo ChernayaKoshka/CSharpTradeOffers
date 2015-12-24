@@ -5,9 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamWebChat"
         mc:Ignorable="d"
-        Title="LoadingScreen" Height="44.663" Width="203.933" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
-    <Grid Height="45" VerticalAlignment="Top">
-        <Label x:Name="statusLabel" Content="Talking to Steam..." HorizontalContentAlignment="Center" Height="45" VerticalContentAlignment="Center"/>
+        Title="LoadingScreen" Height="50" Width="200" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True">
 
-    </Grid>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                    <ColorAnimation Storyboard.TargetName="loadingGrid"
+                                        Storyboard.TargetProperty = "(Grid.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                        From="#00000000" To="#DFF38000" Duration="0:0:1.5"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Border BorderBrush="Black" BorderThickness="1" >
+        <Grid Height="50" Width="200" VerticalAlignment="Top" Background="#FF1C1C1D">
+            <Label x:Name="statusLabel" Content="Talking to Steam..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF929B96" Margin="0,0,0,2" Background="Transparent" Width="200" Height="50"/>
+            <Border BorderBrush="Black" BorderThickness="1" Width="25" Height="25" Margin="0,0,150,0">
+                <Grid x:Name="loadingGrid" Height="23" Width="23">
+                    <Grid.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#00000000" Offset="0.0" />
+                        </LinearGradientBrush >
+                    </Grid.Background>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

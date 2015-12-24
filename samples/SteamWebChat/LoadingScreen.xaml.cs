@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading;
+using System.Windows;
 
 namespace SteamWebChat
 {
@@ -7,23 +9,35 @@ namespace SteamWebChat
     /// </summary>
     public partial class LoadingScreen
     {
-        private readonly string _text;
+        private FriendsListWindow _mainWindow;
 
         public LoadingScreen()
         {
             InitializeComponent();
+            Loaded += LoadingScreen_Loaded;
         }
 
-        public LoadingScreen(string text)
+        private void LoadingScreen_Loaded(object sender, RoutedEventArgs e)
         {
-            _text = text;
-            InitializeComponent();
-            Loaded += Form_Loaded;
+            _mainWindow = new FriendsListWindow();
+            _mainWindow.OnLoadingFinished += MainWindow_LoadingFinished;
+            _mainWindow.Closed += MainWindow_Closed;
+            var loginThread = new Thread(() =>
+            {
+                _mainWindow.LoginAndGoOnline();
+            });
+            loginThread.Start();
         }
 
-        void Form_Loaded(object sender, RoutedEventArgs e)
+        void MainWindow_LoadingFinished(object sender, EventArgs e)
         {
-            statusLabel.Content = _text;
+            Dispatcher.Invoke(Hide);
+            Dispatcher.Invoke(() => { _mainWindow.Visibility = Visibility.Visible; });
+        }
+
+        void MainWindow_Closed(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamWebChat"
         mc:Ignorable="d"
-        Title="Friends" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" SizeToContent="WidthAndHeight" MinWidth="250" Topmost="True">
+        Title="Friends" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" SizeToContent="WidthAndHeight" MinWidth="250">
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
         <StackPanel x:Name="friendsStackPanel" CanVerticallyScroll="True" MinWidth="250" MinHeight = "50" Background="#FF1C1C1D"/>
     </ScrollViewer>

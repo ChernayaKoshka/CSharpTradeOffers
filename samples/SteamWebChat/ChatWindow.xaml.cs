@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using CSharpTradeOffers;
 using CSharpTradeOffers.Community;
 
@@ -18,14 +17,10 @@ namespace SteamWebChat
 
         public ChatWindow(ChatEventsManager chatEventsManager, SteamChatHandler chatHandler, SteamUserHandler steamUserHandler)
         {
-            var loadingScreen = new LoadingScreen();
-            loadingScreen.Show();
-
             chatEventsManager.ChatMessageReceived += OnChatMessage;
             SteamUserHandler = steamUserHandler;
             ChatHandler = chatHandler;
-
-            loadingScreen.Close();
+            
             Loaded += ChatWindow_Loaded;
             InitializeComponent();
         }
@@ -46,11 +41,6 @@ namespace SteamWebChat
             minimizeButton.MouseLeftButtonUp += AnimatedMinimizeButton_MouseLeftButtonUp;
             Grid.SetColumn(minimizeButton, 1);
             controlGrid.Children.Add(minimizeButton);
-        }
-
-        public void AddChatWindow(ChatUser friend, string message)
-        {
-            InvokeAddTab(friend, message);
         }
 
         void OnChatMessage(object sender, ChatMessageArgs e)
@@ -109,21 +99,6 @@ namespace SteamWebChat
                 control.HandleMessage(message);
         }
 
-        public void InvokeRemoveTab(TabItem item)
-        {
-            if (!Dispatcher.CheckAccess())
-            {
-                Dispatcher.Invoke(() => { chatTabs.Items.Remove(item); });
-            }
-            else
-            {
-                chatTabs.Items.Remove(item);
-            }
-
-            if (chatTabs.Items.Count == 0)
-                Close();
-        }
-
         void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -143,6 +118,26 @@ namespace SteamWebChat
         void AnimatedMinimizeButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        public void AddChatWindow(ChatUser friend, string message)
+        {
+            InvokeAddTab(friend, message);
+        }
+
+        public void InvokeRemoveTab(TabItem item)
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => { chatTabs.Items.Remove(item); });
+            }
+            else
+            {
+                chatTabs.Items.Remove(item);
+            }
+
+            if (chatTabs.Items.Count == 0)
+                Close();
         }
     }
 }
