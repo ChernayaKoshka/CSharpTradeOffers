@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using CSharpTradeOffers;
@@ -17,10 +18,7 @@ namespace SteamWebChat
     public partial class FriendsListWindow
     {
         private static Account _account;
-        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
-        private static readonly Web Web = new Web(new SteamWebRequestHandler());
 
-        public static List<Friend> Friends { get; private set; }
         public static List<PlayerSummary> FriendSummaries { get; private set; }
         public static PlayerSummary MySummary { get; private set; }
 
@@ -34,41 +32,41 @@ namespace SteamWebChat
 
         public delegate void LoadingFinished(object sender, EventArgs e);
 
-        public FriendsListWindow()
+        public FriendsListWindow(Account account, string apiKey)
         {
+            _account = account;
+
+            #region activate apis
+            ChatHandler = new SteamChatHandler(_account);
+            SteamUserHandler = new SteamUserHandler(apiKey);
+            #endregion
+
             InitializeComponent();
         }
 
         public void LoginAndGoOnline()
         {
-            #region config
-            var config = ConfigHandler.Reload();
-            if (string.IsNullOrEmpty(config.ApiKey))
-                ComplainQuit("API key is missing. Please fill in the API key field in \"configuration.xml\"");
-            if (string.IsNullOrEmpty(config.Username) || string.IsNullOrEmpty(config.Password))
-                ComplainQuit(
-                    "Username or Password missing. Please fill in their respective fields in \"configuration.xml\"");
-            #endregion
-            #region login
-            _account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, config.Username, config.Password, config.SteamMachineAuth);
+            PopulateLists();
 
-            if (!string.IsNullOrEmpty(_account.SteamMachineAuth))
-            {
-                config.SteamMachineAuth = _account.SteamMachineAuth;
-                ConfigHandler.WriteChanges(config);
-            }
-            #endregion
-            #region activate apis
-            ChatHandler = new SteamChatHandler(_account);
-            SteamUserHandler = new SteamUserHandler(config.ApiKey);
-            #endregion
-            #region populate lists
+            GoOnline();
+
+            ChatEventsManager = new ChatEventsManager(ChatHandler, TimeSpan.FromSeconds(2), 10);
+            ChatEventsManager.ChatMessageReceived += OnMessage;
+
+            Loaded += FriendsListWindow_Loaded;
+            Closed += FriendsListWindow_Closed;
+            OnLoadingFinished?.Invoke(this, new EventArgs());
+        }
+
+
+        void PopulateLists()
+        {
             MySummary = SteamUserHandler.GetPlayerSummariesV2(new List<ulong> { _account.SteamId }).FirstOrDefault();
             if (MySummary == null) throw new Exception("Unable to get my own player summary, please try again.");
-            Friends = SteamUserHandler.GetFriendList(_account.SteamId, "friend");
-            FriendSummaries = SteamUserHandler.GetPlayerSummariesV2(Friends.Select(x => x.SteamId).ToList());
-            #endregion
-            #region go online
+        }
+
+        void GoOnline()
+        {
             PollResponse response;
             Message responseMessage = null;
             do
@@ -78,27 +76,43 @@ namespace SteamWebChat
                 responseMessage = response.Messages.FirstOrDefault(x => x.AccountIdFrom == IdConversions.UlongToAccountId(_account.SteamId));
                 Thread.Sleep(TimeSpan.FromSeconds(2));
             } while ((response.Error != "OK" || responseMessage?.PersonaState == 0));
-            #endregion
-
-            ChatEventsManager = new ChatEventsManager(ChatHandler, TimeSpan.FromSeconds(2), 10);
-            ChatEventsManager.ChatMessageReceived += OnMessage;
-            
-            Loaded += FriendsListWindow_Loaded;
-            Closed += FriendsListWindow_Closed;
-            OnLoadingFinished?.Invoke(this, new EventArgs());
         }
 
-        void FriendsListWindow_Loaded(object sender, RoutedEventArgs e)
+        private void FriendsListWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var control
-                     in from friend
-                     in FriendSummaries.OrderBy(x => x.PersonaName)
-                        let state = ChatHandler.FriendState(IdConversions.UlongToAccountId(friend.SteamId))
-                        select new FriendControl(new ChatUser { State = state, Summary = friend }))
+            Task.Run(()=> { PopulateFriendList(); });
+        }
+
+        void PopulateFriendList()
+        {
+            List<Friend> friends = SteamUserHandler.GetFriendList(_account.SteamId, "friend");
+
+            foreach (var friend in friends)
             {
-                control.MouseDoubleClick += FriendItem_Clicked;
-                friendsStackPanel.Children.Add(control);
+                var friendSummary = SteamUserHandler.GetPlayerSummariesV2(new List<ulong> { friend.SteamId }).FirstOrDefault();
+                if (friendSummary == null) continue;
+                FriendStateResponse state = ChatHandler.FriendState(IdConversions.UlongToAccountId(friendSummary.SteamId));
+                friendsStackPanel.Dispatcher.Invoke(() =>
+                {
+                    var control = new FriendControl(new ChatUser { State = state, Summary = friendSummary });
+                    control.MouseDoubleClick += FriendItem_Clicked;
+                    friendsStackPanel.Children.Add(control);
+                });
             }
+
+            friendsStackPanel.Dispatcher.Invoke(() =>
+            {
+                //sort
+                List<FriendControl> controls =
+                    friendsStackPanel.Children.Cast<FriendControl>().OrderBy(x => x.Friend.Summary.PersonaName).ToList();
+
+                friendsStackPanel.Children.Clear();
+
+                foreach (FriendControl friendControl in controls)
+                {
+                    friendsStackPanel.Children.Add(friendControl);
+                }
+            });
         }
 
         static void FriendsListWindow_Closed(object sender, EventArgs e)
@@ -125,12 +139,6 @@ namespace SteamWebChat
             PlayerSummary summary = FriendSummaries.FirstOrDefault(x => x.PersonaName == control.personaName.Text);
             if (summary != null)
                 ChatWindow.AddChatWindow(control.Friend, string.Empty);
-        }
-
-        void ComplainQuit(string message, string title = "Error")
-        {
-            MessageBox.Show(message, title);
-            Close();
         }
 
         void OnMessage(object sender, ChatMessageArgs e)

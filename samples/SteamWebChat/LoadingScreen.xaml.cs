@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Windows;
+using CSharpTradeOffers.Configuration;
+using CSharpTradeOffers.Web;
 
 namespace SteamWebChat
 {
@@ -11,6 +13,9 @@ namespace SteamWebChat
     {
         private FriendsListWindow _mainWindow;
 
+        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
+        private static readonly Web Web = new Web(new SteamWebRequestHandler());
+
         public LoadingScreen()
         {
             InitializeComponent();
@@ -19,7 +24,25 @@ namespace SteamWebChat
 
         private void LoadingScreen_Loaded(object sender, RoutedEventArgs e)
         {
-            _mainWindow = new FriendsListWindow();
+            #region config
+            var config = ConfigHandler.Reload();
+            if (string.IsNullOrEmpty(config.ApiKey))
+                ComplainQuit("API key is missing. Please fill in the API key field in \"configuration.xml\"");
+            if (string.IsNullOrEmpty(config.Username) || string.IsNullOrEmpty(config.Password))
+                ComplainQuit(
+                    "Username or Password missing. Please fill in their respective fields in \"configuration.xml\"");
+            #endregion
+            #region login
+            Account account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, config.Username, config.Password, config.SteamMachineAuth);
+
+            if (!string.IsNullOrEmpty(account.SteamMachineAuth))
+            {
+                config.SteamMachineAuth = account.SteamMachineAuth;
+                ConfigHandler.WriteChanges(config);
+            }
+            #endregion
+
+            _mainWindow = new FriendsListWindow(account, config.ApiKey);
             _mainWindow.OnLoadingFinished += MainWindow_LoadingFinished;
             _mainWindow.Closed += MainWindow_Closed;
             var loginThread = new Thread(() =>
@@ -37,6 +60,12 @@ namespace SteamWebChat
 
         void MainWindow_Closed(object sender, EventArgs e)
         {
+            Close();
+        }
+
+        void ComplainQuit(string message, string title = "Error")
+        {
+            MessageBox.Show(message, title);
             Close();
         }
     }
