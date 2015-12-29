@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 
 namespace CSharpTradeOffers.Web
@@ -25,6 +26,14 @@ namespace CSharpTradeOffers.Web
         /// The Auth Cookies for the bot.
         /// </summary>
         public readonly CookieContainer AuthContainer = new CookieContainer();
+
+        public Cookie FindCookieByName(string name)
+        {
+            return (
+                from Cookie cookie in AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                where string.Equals(cookie.Name, name, StringComparison.CurrentCultureIgnoreCase)
+                select cookie).FirstOrDefault();
+        }
 
         private string _steamMachineAuth;
 
