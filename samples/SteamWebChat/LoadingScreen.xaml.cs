@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using CSharpTradeOffers.Configuration;
 using CSharpTradeOffers.Web;
@@ -24,6 +25,7 @@ namespace SteamWebChat
 
         private void LoadingScreen_Loaded(object sender, RoutedEventArgs e)
         {
+
             #region config
             var config = ConfigHandler.Reload();
             if (string.IsNullOrEmpty(config.ApiKey))
@@ -32,24 +34,31 @@ namespace SteamWebChat
                 ComplainQuit(
                     "Username or Password missing. Please fill in their respective fields in \"configuration.xml\"");
             #endregion
+
             #region login
-            Account account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, config.Username, config.Password, config.SteamMachineAuth);
-
-            if (!string.IsNullOrEmpty(account.SteamMachineAuth))
+            Task.Run(() =>
             {
-                config.SteamMachineAuth = account.SteamMachineAuth;
-                ConfigHandler.WriteChanges(config);
-            }
-            #endregion
+                Account account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, config.Username, config.Password, config.SteamMachineAuth);
 
-            _mainWindow = new FriendsListWindow(account, config.ApiKey);
-            _mainWindow.OnLoadingFinished += MainWindow_LoadingFinished;
-            _mainWindow.Closed += MainWindow_Closed;
-            var loginThread = new Thread(() =>
-            {
-                _mainWindow.LoginAndGoOnline();
+                if (!string.IsNullOrEmpty(account.SteamMachineAuth))
+                {
+                    config.SteamMachineAuth = account.SteamMachineAuth;
+                    ConfigHandler.WriteChanges(config);
+                }
+
+                Dispatcher.Invoke(() =>
+                {
+                    _mainWindow = new FriendsListWindow(account, config.ApiKey);
+                    _mainWindow.OnLoadingFinished += MainWindow_LoadingFinished;
+                    _mainWindow.Closed += MainWindow_Closed;
+                    var loginThread = new Thread(() =>
+                    {
+                        _mainWindow.LoginAndGoOnline();
+                    });
+                    loginThread.Start();
+                });
             });
-            loginThread.Start();
+            #endregion
         }
 
         void MainWindow_LoadingFinished(object sender, EventArgs e)

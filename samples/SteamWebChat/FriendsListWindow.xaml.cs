@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Input;
 using CSharpTradeOffers;
 using CSharpTradeOffers.Community;
-using CSharpTradeOffers.Configuration;
 using CSharpTradeOffers.Web;
 
 namespace SteamWebChat
@@ -19,7 +18,7 @@ namespace SteamWebChat
     {
         private static Account _account;
 
-        public static List<PlayerSummary> FriendSummaries { get; private set; }
+        public static List<PlayerSummary> FriendSummaries = new List<PlayerSummary>();
         public static PlayerSummary MySummary { get; private set; }
 
         public static SteamChatHandler ChatHandler { get; private set; }
@@ -59,13 +58,13 @@ namespace SteamWebChat
         }
 
 
-        void PopulateLists()
+        static void PopulateLists()
         {
             MySummary = SteamUserHandler.GetPlayerSummariesV2(new List<ulong> { _account.SteamId }).FirstOrDefault();
             if (MySummary == null) throw new Exception("Unable to get my own player summary, please try again.");
         }
 
-        void GoOnline()
+        static void GoOnline()
         {
             PollResponse response;
             Message responseMessage = null;
@@ -80,18 +79,24 @@ namespace SteamWebChat
 
         private void FriendsListWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Task.Run(()=> { PopulateFriendList(); });
+            Task.Run(() => { PopulateFriendList(); });
         }
 
-        void PopulateFriendList()
+        private void PopulateFriendList()
         {
             List<Friend> friends = SteamUserHandler.GetFriendList(_account.SteamId, "friend");
 
-            foreach (var friend in friends)
+            foreach (
+                PlayerSummary friendSummary in
+                    friends.Select(
+                        friend =>
+                            SteamUserHandler.GetPlayerSummariesV2(new List<ulong> { friend.SteamId }).FirstOrDefault())
+                        .Where(friendSummary => friendSummary != null))
             {
-                var friendSummary = SteamUserHandler.GetPlayerSummariesV2(new List<ulong> { friend.SteamId }).FirstOrDefault();
-                if (friendSummary == null) continue;
-                FriendStateResponse state = ChatHandler.FriendState(IdConversions.UlongToAccountId(friendSummary.SteamId));
+                FriendSummaries.Add(friendSummary);
+
+                FriendStateResponse state =
+                    ChatHandler.FriendState(IdConversions.UlongToAccountId(friendSummary.SteamId));
                 friendsStackPanel.Dispatcher.Invoke(() =>
                 {
                     var control = new FriendControl(new ChatUser { State = state, Summary = friendSummary });
