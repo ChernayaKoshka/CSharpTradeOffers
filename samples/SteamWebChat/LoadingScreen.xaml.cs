@@ -38,7 +38,7 @@ namespace SteamWebChat
             #region login
             Task.Run(() =>
             {
-                Account account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, config.Username, config.Password, config.SteamMachineAuth);
+                Account account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, config.Username, config.Password, config.SteamMachineAuth, new UserInputOutputHandler());
 
                 if (!string.IsNullOrEmpty(account.SteamMachineAuth))
                 {

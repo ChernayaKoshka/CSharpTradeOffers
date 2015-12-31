@@ -1,26 +1,29 @@
-﻿namespace SteamWebChat
+﻿using System.Threading;
+using System.Windows;
+
+namespace SteamWebChat
 {
     /// <summary>
     /// Interaction logic for InputDialogBox.xaml
     /// </summary>
     public partial class InputDialogBox
     {
-        public InputDialogBox()
+        public InputDialogBox(string content, string title)
         {
             InitializeComponent();
+            textBlock.Text = content;
+            Title = title;
         }
 
-        public static string Show(string content, string title)
+        public string Result()
         {
-            var inputDialogBox = new InputDialogBox
-            {
-                textBlock = {Text = content},
-                Title = title
-            };
+            ShowDialog();
+            return input.Text;
+        }
 
-            inputDialogBox.ShowDialog();
-
-            return inputDialogBox.input.Text;
+        private void submit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

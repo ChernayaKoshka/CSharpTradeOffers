@@ -4,8 +4,9 @@ namespace CSharpTradeOffers
 {
     public class ConsoleInputOutput : IUserInputOutputHandler
     {
-        public string GetInput()
+        public string GetInput(string question, string title)
         {
+            Console.Write(question);
             return Console.ReadLine();
         }
 

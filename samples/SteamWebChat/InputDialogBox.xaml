@@ -5,11 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamWebChat"
         mc:Ignorable="d"
-        Title="InputDialogBox" Height="152.528" Width="300">
+        Title="InputDialogBox" Height="155.956" Width="300">
     <Grid>
-        <Button x:Name="submit" Content="Submit" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="272"/>
-        <TextBox x:Name="input" HorizontalAlignment="Left" Height="23" Margin="10,71,0,28" TextWrapping="Wrap" VerticalAlignment="Center" Width="272"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="No text set!" VerticalAlignment="Top" RenderTransformOrigin="0.254,1.464" Width="272" Height="61"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="23*"/>
+                <RowDefinition Height="23*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"  x:Name="textBlock" Margin="0" TextWrapping="Wrap" Text="No text set!" RenderTransformOrigin="0.254,1.464" Width="284" Height="49"/>
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+                <TextBox x:Name="input" Margin="0" TextWrapping="Wrap"/>
+            </Border>
+            <Button Grid.Row="2" x:Name="submit" Content="Submit" Margin="0" Click="submit_Click"/>
 
+        </Grid>
     </Grid>
 </Window>

@@ -157,10 +157,10 @@ namespace CSharpTradeOffers.Web
                 if (captcha)
                 {
                     Process.Start("https://steamcommunity.com/public/captcha.php?gid=" + loginJson.CaptchaGid);
-                    userInputOutput.OutputMessage(
-                        "Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.");
-                    userInputOutput.OutputMessage("Please enter the numbers/letters from the picture that opened up: ");
-                    capText = userInputOutput.GetInput();
+                    capText =
+                        userInputOutput.GetInput(
+                            "Please note, if you enter in your captcha correctly and it still opens up new captchas, double check your username and password.\n Please enter the numbers/letters from the picture that opened up: ",
+                            "Captcha");
                 }
 
                 data.Add("captchagid", captcha ? capGid : string.Empty);
@@ -170,8 +170,7 @@ namespace CSharpTradeOffers.Web
                 // SteamGuard
                 if (steamGuard)
                 {
-                    userInputOutput.OutputMessage("SteamGuard code required: ");
-                    steamGuardText = userInputOutput.GetInput();
+                    steamGuardText = userInputOutput.GetInput("SteamGuard code required: ", "SteamGuard");
                     steamGuardId = loginJson.EmailSteamId;
                 }
 
@@ -182,8 +181,7 @@ namespace CSharpTradeOffers.Web
                 //TwoFactor
                 if (twoFactor && !loginJson.Success)
                 {
-                    userInputOutput.OutputMessage("TwoFactor code required: ");
-                    twoFactorText = userInputOutput.GetInput();
+                    twoFactorText = userInputOutput.GetInput("TwoFactor code required: ", "Two Factor Authentication");
                 }
 
                 data.Add("twofactorcode", twoFactor ? twoFactorText : string.Empty);
@@ -279,7 +277,7 @@ namespace CSharpTradeOffers.Web
             {
                 try
                 {
-                    account = DoLogin(username, password, machineAuth);
+                    account = DoLogin(username, password, machineAuth, userInputOutput);
                 }
                 catch (WebException)
                 {
