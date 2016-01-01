@@ -8,5 +8,8 @@ namespace CSharpTradeOffers.Trading
     {
         [JsonProperty("trade_offers_received")]
         public List<CEconTradeOffer> TradeOffersReceived { get; set; }
+        
+        [JsonProperty("trade_offers_sent")]
+        public List<CEconTradeOffer> TradeOffersSent { get; set; }
     }
 }
