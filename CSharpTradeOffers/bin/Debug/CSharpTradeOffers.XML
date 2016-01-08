@@ -295,7 +295,25 @@
             </param>
             <returns>A ResolveVanityUrlResult object.</returns>
         </member>
-        <member name="T:CSharpTradeOffers.Configuration.IConfig">
+        <member name="M:CSharpTradeOffers.Configuration.GenericConfigHandler.#ctor(System.String)">
+            <summary>
+            Initializes the Config and the path to use
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.GenericConfigHandler.Reload``1(``0)">
+            <summary>
+            Reloads the configuration file (path). If file is not present, it will generate a new one.
+            </summary>
+            <returns>A generic object where TConfig:IConfig.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.GenericConfigHandler.WriteChanges``1(``0)">
+            <summary>
+            Writes the changes made to the config.
+            </summary>
+            <param name="towrite"></param>
+        </member>
+        <member name="T:CSharpTradeOffers.Configuration.IConfigHandler">
             <summary>
             IConfig interface so the default ConfigHandler that
             uses JSON does not have to be used.
@@ -322,68 +340,73 @@
             </summary>
             <returns>KeyValuePair of steamid,permissionlevel</returns>
         </member>
-        <member name="T:CSharpTradeOffers.Configuration.Config">
+        <member name="T:CSharpTradeOffers.Configuration.ConfigFrame">
             <summary>
             A generic RootConfig object containing configuration information.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.Config.Username">
+        <member name="P:CSharpTradeOffers.Configuration.ConfigFrame.Username">
             <summary>
             Username to automatically log in to.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.Config.Password">
+        <member name="P:CSharpTradeOffers.Configuration.ConfigFrame.Password">
             <summary>
             Password to use to automatically log in.
             </summary>
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.Config.SteamMachineAuth">
+        <member name="P:CSharpTradeOffers.Configuration.ConfigFrame.SteamMachineAuth">
             <summary>
             Special bytes sent to Steam to prove the user is the account holder.
             </summary>"
         </member>
-        <member name="P:CSharpTradeOffers.Configuration.Config.ApiKey">
+        <member name="P:CSharpTradeOffers.Configuration.ConfigFrame.ApiKey">
             <summary>
             A special key retrieved from https://steamcommunity.com/dev/apikey
             The key MUST be from the bot's account.
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.#ctor(System.String)">
+        <member name="M:CSharpTradeOffers.Configuration.ConfigFrame.InitializeAll">
+            <summary>
+            Initialize all types, allows GenericConfigHandler to properly serialize all fields
+            </summary>
+        </member>
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandlerHandler.#ctor(System.String)">
             <summary>
             Initializes the Config and the path to use
             </summary>
             <param name="path"></param>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.Reload">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandlerHandler.Reload">
             <summary>
             Reloads the configuration file (path). If file is not present, it will generate a new one.
             </summary>
             <returns>A RootConfig object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandlerHandler.WriteChanges(CSharpTradeOffers.Configuration.DefaultConfig)">
             <summary>
             Writes the changes made to the config.
             </summary>
             <param name="towrite"></param>
         </member>
-        <member name="T:CSharpTradeOffers.Configuration.JsonConfigHandler">
+        <member name="T:CSharpTradeOffers.Configuration.JsonConfigHandlerHandler">
             <summary>
             Generic config file handler
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.#ctor(System.String)">
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandlerHandler.#ctor(System.String)">
             <summary>
             Initializes the Config and the path to use
             </summary>
             <param name="path">Path of the config file, will be created if it does not exist.</param>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.Reload">
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandlerHandler.Reload">
             <summary>
             Reloads the configuration file (path). If file is not present, it will generate a new one.
             </summary>
             <returns>A RootConfig object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.Config)">
+        <member name="M:CSharpTradeOffers.Configuration.JsonConfigHandlerHandler.WriteChanges(CSharpTradeOffers.Configuration.DefaultConfig)">
             <summary>
             Writes the changes made to the config.
             </summary>
