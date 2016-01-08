@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -28,7 +30,16 @@ namespace CSharpTradeOffers
             {
                 var xmlserializer = new XmlSerializer(typeof (T));
                 var stringWriter = new StringWriter();
-                using (var writer = XmlWriter.Create(stringWriter))
+
+                var settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    IndentChars = "  ",
+                    NewLineChars = "\r\n",
+                    NewLineHandling = NewLineHandling.Replace
+                };
+
+                using (var writer = XmlWriter.Create(stringWriter,settings))
                 {
                     xmlserializer.Serialize(writer, value);
                     return stringWriter.ToString();
