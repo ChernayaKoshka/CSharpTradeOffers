@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
@@ -33,6 +34,11 @@ namespace CSharpTradeOffers.Web
                 from Cookie cookie in AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
                 where string.Equals(cookie.Name, name, StringComparison.CurrentCultureIgnoreCase)
                 select cookie).FirstOrDefault();
+        }
+
+        public Cookie[] FindCookiesByPartialName(string name)
+        {
+            return AuthContainer.GetCookies(new Uri("https://steamcommunity.com")).Cast<Cookie>().Where(cookie => cookie.Name.ToUpper().Contains(name.ToUpper())).ToArray();
         }
 
         private string _steamMachineAuth;
