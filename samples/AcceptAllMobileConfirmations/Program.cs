@@ -13,7 +13,7 @@ namespace AcceptAllMobileConfirmations
     internal class Program
     {
         private static Account _account;
-        private static Config _config = new Config();
+        private static DefaultConfig _config = new DefaultConfig();
         private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
         private static readonly Web Web = new Web(new SteamWebRequestHandler());
 
