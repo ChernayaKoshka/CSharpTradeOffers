@@ -15,11 +15,18 @@ namespace CSharpTradeOffers.Web
         string ReadStream();
 
         /// <summary>
-        /// Deserializes the stream to a serializable type.
+        /// Deserializes the stream to an XML serializable type.
         /// </summary>
         /// <typeparam name="TSerializable">A serializable type.</typeparam>
         /// <returns>The deserialized type.</returns>
-        TSerializable Deserialize<TSerializable>();
+        TSerializable DeserializeXml<TSerializable>();
+
+        /// <summary>
+        /// Deserializes the stream to a JSON serializable type
+        /// </summary>
+        /// <typeparam name="TSerializable">A serializable type.</typeparam>
+        /// <returns>The deserialized type.</returns>
+        TSerializable DeserializeJson<TSerializable>();
 
         /// <summary>
         /// Any cookies created from the response.
