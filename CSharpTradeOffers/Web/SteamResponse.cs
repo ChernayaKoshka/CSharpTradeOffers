@@ -1,6 +1,7 @@
 using System.IO;
 using System.Net;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Web
 {
@@ -39,12 +40,17 @@ namespace CSharpTradeOffers.Web
             }
         }
 
+        public TSerializable DeserializeJson<TSerializable>()
+        {
+            return JsonConvert.DeserializeObject<TSerializable>(ReadStream());
+        }
+
         /// <summary>
         /// Deserializes the stream to a serializable type with Xml.
         /// </summary>
         /// <typeparam name="TSerializable">An XML serializable type.</typeparam>
         /// <returns>The deserialized type.</returns>
-        public TSerializable Deserialize<TSerializable>()
+        public TSerializable DeserializeXml<TSerializable>()
         {
             return (TSerializable)(new XmlSerializer(typeof(TSerializable)).Deserialize(SteamStream));
         }
