@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace CSharpTradeOffers.Configuration
 {
-    public class XmlConfigHandler : IConfig
+    public class XmlConfigHandlerHandler : IConfigHandler
     {
 
         private readonly string _path;
@@ -13,7 +13,7 @@ namespace CSharpTradeOffers.Configuration
         /// Initializes the Config and the path to use
         /// </summary>
         /// <param name="path"></param>
-        public XmlConfigHandler(string path)
+        public XmlConfigHandlerHandler(string path)
         {
             _path = path;
         }
@@ -22,9 +22,9 @@ namespace CSharpTradeOffers.Configuration
         /// Reloads the configuration file (path). If file is not present, it will generate a new one.
         /// </summary>
         /// <returns>A RootConfig object.</returns>
-        public Config Reload()
+        public DefaultConfig Reload()
         {
-            Config config;
+            DefaultConfig defaultConfig;
 
             if (!File.Exists(_path))
             {
@@ -57,19 +57,19 @@ namespace CSharpTradeOffers.Configuration
 
             using (var sr = new StreamReader(_path))
             {
-                config =
-                    (Config)
-                        new XmlSerializer(typeof (Config)).Deserialize(sr);
+                defaultConfig =
+                    (DefaultConfig)
+                        new XmlSerializer(typeof (DefaultConfig)).Deserialize(sr);
             }
 
-            return config;
+            return defaultConfig;
         }
 
         /// <summary>
         /// Writes the changes made to the config.
         /// </summary>
         /// <param name="towrite"></param>
-        public void WriteChanges(Config towrite)
+        public void WriteChanges(DefaultConfig towrite)
         {
             File.WriteAllText(_path, towrite.SerializeToXml());
         }

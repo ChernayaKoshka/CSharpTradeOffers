@@ -7,7 +7,7 @@ namespace CSharpTradeOffers.Configuration
     /// <summary>
     /// Generic config file handler
     /// </summary>
-    public class JsonConfigHandler : IConfig
+    public class JsonConfigHandlerHandler : IConfigHandler
     {
         private readonly string _path;
 
@@ -15,7 +15,7 @@ namespace CSharpTradeOffers.Configuration
         /// Initializes the Config and the path to use
         /// </summary>
         /// <param name="path">Path of the config file, will be created if it does not exist.</param>
-        public JsonConfigHandler(string path)
+        public JsonConfigHandlerHandler(string path)
         {
             _path = path;
         }
@@ -24,7 +24,7 @@ namespace CSharpTradeOffers.Configuration
         /// Reloads the configuration file (path). If file is not present, it will generate a new one.
         /// </summary>
         /// <returns>A RootConfig object.</returns>
-        public Config Reload()
+        public DefaultConfig Reload()
         {
             if (!File.Exists(_path))
             {
@@ -49,7 +49,7 @@ namespace CSharpTradeOffers.Configuration
                 File.WriteAllText(_path, sb.ToString());
             }
 
-            var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(_path));
+            var config = JsonConvert.DeserializeObject<DefaultConfig>(File.ReadAllText(_path));
 
             return config;
         }
@@ -58,7 +58,7 @@ namespace CSharpTradeOffers.Configuration
         /// Writes the changes made to the config.
         /// </summary>
         /// <param name="towrite"></param>
-        public void WriteChanges(Config towrite)
+        public void WriteChanges(DefaultConfig towrite)
         {
             File.WriteAllText(_path, JsonConvert.SerializeObject(towrite));
         }
