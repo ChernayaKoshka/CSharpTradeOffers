@@ -4,9 +4,9 @@
     /// IConfig interface so the default ConfigHandler that
     /// uses JSON does not have to be used.
     /// </summary>
-    public interface IConfig
+    public interface IConfigHandler
     {
-        Config Reload();
-        void WriteChanges(Config toWrite);
+        DefaultConfig Reload();
+        void WriteChanges(DefaultConfig toWrite);
     }
 }

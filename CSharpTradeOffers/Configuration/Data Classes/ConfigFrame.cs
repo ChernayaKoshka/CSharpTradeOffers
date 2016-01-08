@@ -14,7 +14,7 @@ namespace CSharpTradeOffers.Configuration
     [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "", IsNullable = false, ElementName = "Config")]
-    public class Config
+    public abstract class ConfigFrame
     {
         /// <summary>
         /// Username to automatically log in to.
@@ -39,5 +39,10 @@ namespace CSharpTradeOffers.Configuration
 
         [XmlArrayItem("element", IsNullable = false)]
         public List<uint> Inventories { get; set; }
+
+        /// <summary>
+        /// Initialize all types, allows GenericConfigHandler to properly serialize all fields
+        /// </summary>
+        public abstract void InitializeAll();
     }
 }
