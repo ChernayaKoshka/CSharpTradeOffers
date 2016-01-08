@@ -27,8 +27,8 @@ namespace CSharpTradeOffers.Community
             string url = "https://steamcommunity.com/comment/Profile/post/" + steamId + "/-1/";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -56,8 +56,8 @@ namespace CSharpTradeOffers.Community
             string url = "http://steamcommunity.com/comment/Clan/post/" + clanId + "/-1/";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -66,7 +66,9 @@ namespace CSharpTradeOffers.Community
                 {"sessionid", sessionid}
             };
 
-            return JsonConvert.DeserializeObject<ClanCommentResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
+            return
+                JsonConvert.DeserializeObject<ClanCommentResponse>(
+                    _web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -80,8 +82,8 @@ namespace CSharpTradeOffers.Community
             const string url = "https://steamcommunity.com/actions/AddFriendAjax";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -90,7 +92,9 @@ namespace CSharpTradeOffers.Community
                 {"accept_invite", "0"}
             };
 
-            return JsonConvert.DeserializeObject<AddFriendResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
+            return
+                JsonConvert.DeserializeObject<AddFriendResponse>(
+                    _web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -104,14 +108,14 @@ namespace CSharpTradeOffers.Community
             const string url = "https://steamcommunity.com/actions/AddFriendAjax";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
                 {"sessionID", sessionid},
                 {"steamid", steamId.ToString()},
-                {"accept_invite","1" }
+                {"accept_invite", "1"}
             };
 
             return Convert.ToBoolean(_web.Fetch(url, "POST", data, authContainer));
@@ -128,8 +132,8 @@ namespace CSharpTradeOffers.Community
             const string url = "https://steamcommunity.com/actions/RemoveFriendAjax";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -154,8 +158,8 @@ namespace CSharpTradeOffers.Community
             const string url = "https://steamcommunity.com/actions/GroupInvite/";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -165,7 +169,8 @@ namespace CSharpTradeOffers.Community
                 {"sessionID", sessionid},
                 {"invitee", steamId.ToString()}
             };
-            return JsonConvert.DeserializeObject<InviteResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
+            return
+                JsonConvert.DeserializeObject<InviteResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -182,8 +187,8 @@ namespace CSharpTradeOffers.Community
             const string url = "https://steamcommunity.com/actions/GroupInvite/";
 
             string sessionid = (from Cookie cookie in authContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
+                where cookie.Name == "sessionid"
+                select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -193,7 +198,9 @@ namespace CSharpTradeOffers.Community
                 {"sessionID", sessionid},
                 {"invitee_list", ToJArray(steamIds)}
             };
-            return JsonConvert.DeserializeObject<MultiInviteResponse>(_web.Fetch(url, "POST", data, authContainer).ReadStream());
+            return
+                JsonConvert.DeserializeObject<MultiInviteResponse>(
+                    _web.Fetch(url, "POST", data, authContainer).ReadStream());
         }
 
         /// <summary>
@@ -348,8 +355,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                 where cookie.Name == "sessionid"
-                 select cookie.Value).FirstOrDefault();
+                    where cookie.Name == "sessionid"
+                    select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -383,14 +390,14 @@ namespace CSharpTradeOffers.Community
         /// <param name="settings">Settings to set.</param>
         /// <param name="account">Account of settings to change.</param>
         public void SetPrivacySettings(PrivacySettings settings, Account account)
-        //implement settings as an interface later!
+            //implement settings as an interface later!
         {
             string url = "https://steamcommunity.com/profiles/" + account.SteamId + "/edit/settings";
 
             string sessionid =
                 (from Cookie cookie in account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                 where cookie.Name == "sessionid"
-                 select cookie.Value).FirstOrDefault();
+                    where cookie.Name == "sessionid"
+                    select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -405,5 +412,25 @@ namespace CSharpTradeOffers.Community
             };
             _web.Fetch(url, "POST", data, account.AuthContainer);
         }
+
+        /*public void DeleteForumComment()
+        {
+            return;
+        }
+
+        public void DeleteForumTopic(ulong topicId, ulong  Account account)
+        {
+            int forumId = account.FindCookieByName()
+            return;
+        }
+
+        string parseTopicView
+    }
+
+    class ForumViewInfo
+    {
+        public string MajorTopicId { get; set; }
+        public ulong ForumId { get; set; }
+    }*/
     }
 }

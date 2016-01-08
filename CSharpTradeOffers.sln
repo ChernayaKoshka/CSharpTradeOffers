@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamWebChat", "samples\Ste
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DonationBot", "samples\DonationBot\DonationBot.csproj", "{44880A54-4ACE-45EB-9EEA-34C9A6C5E073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptAllMobileConfirmations", "AcceptAllMobileConfirmations\AcceptAllMobileConfirmations.csproj", "{F11C1193-D13B-4DF6-9C31-694A1FD5B8A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptAllMobileConfirmations", "samples\AcceptAllMobileConfirmations\AcceptAllMobileConfirmations.csproj", "{F11C1193-D13B-4DF6-9C31-694A1FD5B8A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

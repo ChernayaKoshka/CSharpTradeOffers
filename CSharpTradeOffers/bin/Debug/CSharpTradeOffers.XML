@@ -371,19 +371,19 @@
             Initialize all types, allows GenericConfigHandler to properly serialize all fields
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandlerHandler.#ctor(System.String)">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.#ctor(System.String)">
             <summary>
             Initializes the Config and the path to use
             </summary>
             <param name="path"></param>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandlerHandler.Reload">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.Reload">
             <summary>
             Reloads the configuration file (path). If file is not present, it will generate a new one.
             </summary>
             <returns>A RootConfig object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandlerHandler.WriteChanges(CSharpTradeOffers.Configuration.DefaultConfig)">
+        <member name="M:CSharpTradeOffers.Configuration.XmlConfigHandler.WriteChanges(CSharpTradeOffers.Configuration.DefaultConfig)">
             <summary>
             Writes the changes made to the config.
             </summary>
