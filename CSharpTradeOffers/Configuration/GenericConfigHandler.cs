@@ -20,7 +20,7 @@ namespace CSharpTradeOffers.Configuration
         /// Reloads the configuration file (path). If file is not present, it will generate a new one.
         /// </summary>
         /// <returns>A generic object where TConfig:IConfig.</returns>
-        public TConfig Reload<TConfig>(TConfig config) where TConfig: ConfigFrame
+        public TConfig Reload<TConfig>(TConfig config) where TConfig : ConfigFrame
         {
             if (!File.Exists(_path))
             {
