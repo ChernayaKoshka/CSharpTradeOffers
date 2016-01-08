@@ -122,68 +122,68 @@
             Handles commmunity related tasks
             </summary>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostComment(System.UInt64,System.String,System.Net.CookieContainer)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostComment(System.UInt64,System.String)">
             <summary>
             Posts a comment to the specified profile.
             </summary>
             <param name="steamId">The SteamId64 of the profile to post to.</param>
             <param name="comment">The comment text.</param>
-            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="Account.Account.AuthContainer.Account.AuthContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A CommentResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostClanComment(System.UInt64,System.String,System.Net.CookieContainer,System.Int32)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostClanComment(System.UInt64,System.String,System.Int32)">
             <summary>
             Posts a comment to the specified clan.
             </summary>
             <param name="clanId">SteamID64 of the clan to post the comment to.</param>
             <param name="comment">The comment to post.</param>
-            <param name="authContainer">Authcontainer of the user to post from.</param>
+            <param name="Account.AuthContainer.AuthContainer">Account.AuthContainer of the user to post from.</param>
             <param name="count">Almost certainly useless and never needs to be touched.
             I assume that it is the member count but it can be null, non-existant, or any number under the sun.</param>
             <returns>A ClanCommentResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AddFriend(System.UInt64,System.Net.CookieContainer)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AddFriend(System.UInt64)">
             <summary>
             Sends a friend request to the specified user.
             </summary>
             <param name="steamId">SteamId64 of the user to add.</param>
-            <param name="authContainer">Auth container of the user.</param>
+            <param name="Account.AuthContainer.AuthContainer">Auth container of the user.</param>
             <returns>An AddFriendResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AcceptFriendRequest(System.UInt64,System.Net.CookieContainer)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.AcceptFriendRequest(System.UInt64)">
             <summary>
             Accepts a friend request.
             </summary>
             <param name="steamId">SteamId64 of the person who sent the request.</param>
-            <param name="authContainer">Auth container of the user.</param>
+            <param name="Account.AuthContainer.AuthContainer">Auth container of the user.</param>
             <returns>Boolean representing the success of the function.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RemoveFriend(System.UInt64,System.Net.CookieContainer)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.RemoveFriend(System.UInt64)">
             <summary>
             Removes a friend.
             </summary>
             <param name="steamId">SteamId64 of the friend to remove.</param>
-            <param name="authContainer">Auth container of the user.</param>
+            <param name="Account.AuthContainer.AuthContainer">Auth container of the user.</param>
             <returns>Bollean representing the successs of the function.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.UInt64,System.Net.CookieContainer)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUserToGroup(System.UInt64,System.Boolean,System.UInt64)">
             <summary>
             Invites the specified user to a group.
             </summary>
             <param name="steamId">The SteamId64 of the person to invite.</param>
             <param name="json">I forgot... oops.</param>
             <param name="group">The SteamId64 of the group to invite to.</param>
-            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="Account.AuthContainer.AuthContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>An InviteResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUsersToGroup(System.UInt64[],System.Boolean,System.UInt64,System.Net.CookieContainer)">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.InviteUsersToGroup(System.UInt64[],System.Boolean,System.UInt64)">
             <summary>
             Invites the specified users to a group.
             </summary>
             <param name="steamIds">The SteamId64s of the users to invite.</param>
             <param name="json">I forgot... oops.</param>
             <param name="group">The SteamId64 of the group to invite the users to.</param>
-            <param name="authContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
+            <param name="Account.AuthContainer.AuthContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A MultiInviteResponse object.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.ToJArray(System.UInt64[])">
@@ -697,9 +697,16 @@
             </summary>
             <returns>The stream as a string</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.IResponse.Deserialize``1">
+        <member name="M:CSharpTradeOffers.Web.IResponse.DeserializeXml``1">
             <summary>
-            Deserializes the stream to a serializable type.
+            Deserializes the stream to an XML serializable type.
+            </summary>
+            <typeparam name="TSerializable">A serializable type.</typeparam>
+            <returns>The deserialized type.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.IResponse.DeserializeJson``1">
+            <summary>
+            Deserializes the stream to a JSON serializable type
             </summary>
             <typeparam name="TSerializable">A serializable type.</typeparam>
             <returns>The deserialized type.</returns>
@@ -769,7 +776,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CSharpTradeOffers.Web.SteamResponse.Deserialize``1">
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.DeserializeXml``1">
             <summary>
             Deserializes the stream to a serializable type with Xml.
             </summary>
