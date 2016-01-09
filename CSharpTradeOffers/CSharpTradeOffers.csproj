@@ -52,6 +52,7 @@
     <Compile Include="Community\Data Classes\ChatLogResponse.cs" />
     <Compile Include="Community\Data Classes\ClanCommentResponse.cs" />
     <Compile Include="Community\Data Classes\CommentResponse.cs" />
+    <Compile Include="Community\Data Classes\DefaultResult.cs" />
     <Compile Include="Community\Data Classes\EPersonaState.cs" />
     <Compile Include="Community\Data Classes\Friend.cs" />
     <Compile Include="Community\Data Classes\Friendslist.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Community\Data Classes\InviteResponse.cs" />
     <Compile Include="Community\Data Classes\MemberList.cs" />
     <Compile Include="Community\Data Classes\MemberListGroupDetails.cs" />
+    <Compile Include="Community\Data Classes\ModerateTopicResult.cs" />
     <Compile Include="Community\Data Classes\PollResponse.cs" />
     <Compile Include="Community\Data Classes\MultiInviteResponse.cs" />
     <Compile Include="Community\Data Classes\PlayerBans.cs" />
