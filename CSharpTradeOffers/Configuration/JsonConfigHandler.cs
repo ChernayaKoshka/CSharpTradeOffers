@@ -26,30 +26,13 @@ namespace CSharpTradeOffers.Configuration
         /// <returns>A RootConfig object.</returns>
         public DefaultConfig Reload()
         {
+            var config = new DefaultConfig();
             if (!File.Exists(_path))
             {
-                File.Create(_path).Close();
-
-                #region append
-
-                // BuildMyString.com generated code. Please enjoy your string responsibly.
-
-                var sb = new StringBuilder();
-
-                sb.Append("{\r\n");
-                sb.Append("    \"Username\": \"\",\r\n");
-                sb.Append("    \"Password\": \"\",\r\n");
-                sb.Append("    \"ApiKey\": \"\",\r\n");
-                sb.Append("    \"SteamMachineAuth\": \"\",\r\n");
-                sb.Append("    \"Inventories\":[440,730]\r\n");
-                sb.Append("}\r\n");
-
-                #endregion
-
-                File.WriteAllText(_path, sb.ToString());
+                File.WriteAllText(_path, config.SerializeToJson());
             }
 
-            var config = JsonConvert.DeserializeObject<DefaultConfig>(File.ReadAllText(_path));
+            config = JsonConvert.DeserializeObject<DefaultConfig>(File.ReadAllText(_path));
 
             return config;
         }
