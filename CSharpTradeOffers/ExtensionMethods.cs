@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace CSharpTradeOffers
 {
@@ -44,6 +45,18 @@ namespace CSharpTradeOffers
                     xmlserializer.Serialize(writer, value);
                     return stringWriter.ToString();
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred", ex);
+            }
+        }
+
+        public static string SerializeToJson<TSerializable>(this TSerializable serializable)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(serializable);
             }
             catch (Exception ex)
             {
