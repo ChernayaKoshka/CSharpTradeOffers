@@ -24,35 +24,11 @@ namespace CSharpTradeOffers.Configuration
         /// <returns>A RootConfig object.</returns>
         public DefaultConfig Reload()
         {
-            DefaultConfig defaultConfig;
+            var defaultConfig = new DefaultConfig();
 
             if (!File.Exists(_path))
             {
-                File.Create(_path).Close();
-
-                #region append
-
-                // BuildMyString.com generated code. Please enjoy your string responsibly.
-
-                var sb = new StringBuilder();
-
-                sb.Append("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n");
-                sb.Append("<Config\r\n");
-                sb.Append("    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n");
-                sb.Append("    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n");
-                sb.Append("    <Username></Username>\r\n");
-                sb.Append("    <Password></Password>\r\n");
-                sb.Append("    <ApiKey></ApiKey>\r\n");
-                sb.Append("    <SteamMachineAuth></SteamMachineAuth>\r\n");
-                sb.Append("    <Inventories>\r\n");
-                sb.Append("        <element>440</element>\r\n");
-                sb.Append("        <element>730</element>\r\n");
-                sb.Append("    </Inventories>\r\n");
-                sb.Append("</Config>\r\n");
-
-                #endregion
-
-                File.WriteAllText(_path, sb.ToString());
+                File.WriteAllText(_path, defaultConfig.SerializeToXml());
             }
 
             using (var sr = new StreamReader(_path))

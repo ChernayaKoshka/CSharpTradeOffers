@@ -2,7 +2,12 @@
 {
     public class DefaultConfig : ConfigFrame
     {
-        public override void InitializeAll()
+        public DefaultConfig()
+        {
+            InitializeAll();
+        }
+
+        public override sealed void InitializeAll()
         {
             Username = " ";
             Password = " ";

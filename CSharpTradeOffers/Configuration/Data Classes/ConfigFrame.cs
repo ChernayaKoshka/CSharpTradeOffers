@@ -37,9 +37,6 @@ namespace CSharpTradeOffers.Configuration
         /// </summary>
         public string ApiKey { get; set; }
 
-        [XmlArrayItem("element", IsNullable = false)]
-        public List<uint> Inventories { get; set; }
-
         /// <summary>
         /// Initialize all types, allows GenericConfigHandler to properly serialize all fields
         /// </summary>
