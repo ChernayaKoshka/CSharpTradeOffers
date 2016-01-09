@@ -151,12 +151,10 @@ namespace CSharpTradeOffers.Trading
                 {"captcha", string.Empty},
                 {"trade_offer_create_params", "{}"}
             };
-            return
-                JsonConvert.DeserializeObject<SendOfferResponse>(
-                    _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
-                        "https://steamcommunity.com/tradeoffer/new/?partner=" +
-                        IdConversions.UlongToAccountId(partnerSid))
-                        .ReadStream());
+            return _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
+                "https://steamcommunity.com/tradeoffer/new/?partner=" +
+                IdConversions.UlongToAccountId(partnerSid))
+                .DeserializeJson<SendOfferResponse>();
         }
 
         /// <summary>
@@ -191,9 +189,9 @@ namespace CSharpTradeOffers.Trading
                 {"trade_offer_create_params", JsonConvert.SerializeObject(offerToken)}
             };
             return
-                JsonConvert.DeserializeObject<SendOfferResponse>(
-                    _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
-                        $"https://steamcommunity.com/tradeoffer/new/?partner={IdConversions.UlongToAccountId(partnerSid)}&token={token}").ReadStream());
+                _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
+                    $"https://steamcommunity.com/tradeoffer/new/?partner={IdConversions.UlongToAccountId(partnerSid)}&token={token}")
+                    .DeserializeJson<SendOfferResponse>();
         }
 
         /// <summary>
@@ -226,8 +224,9 @@ namespace CSharpTradeOffers.Trading
                 {"trade_offer_create_params", "{}"},
                 {"tradeofferid_countered", tradeofferidCountered.ToString()}
             };
-            return JsonConvert.DeserializeObject<SendOfferResponse>(_web.Fetch(url, "POST", data, container, false,
-                "https://steamcommunity.com/tradeoffer/" + tradeofferidCountered + "/").ReadStream());
+            return _web.Fetch(url, "POST", data, container, false,
+                "https://steamcommunity.com/tradeoffer/" + tradeofferidCountered + "/")
+                .DeserializeJson<SendOfferResponse>();
         }
 
         /// <summary>
@@ -243,8 +242,7 @@ namespace CSharpTradeOffers.Trading
                 {"key", _apiKey},
                 {"time_last_visit", timeLastVisit.ToString()}
             };
-            return
-                JsonConvert.DeserializeObject<GetTradeOffersSummaryBaseResponse>(_web.Fetch(url, "GET", data).ReadStream()).Response;
+            return _web.Fetch(url, "GET", data).DeserializeJson<GetTradeOffersSummaryBaseResponse>().Response;
         }
     }
 }

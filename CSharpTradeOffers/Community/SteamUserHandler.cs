@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CSharpTradeOffers.Web;
-using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Community
 {
@@ -32,7 +31,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="steamId">SteamId64 to retrieve the friends list from.</param>
         /// <param name="relationship">All/Friend, there are others but I do not know what.</param>
         /// <returns>Null upon failure, otherwise a list of Friend objects.</returns>
-        public List<Friend> GetFriendList(ulong steamId, string relationship = "" )
+        public List<Friend> GetFriendList(ulong steamId, string relationship = "")
         {
             const string url = BaseUrl + "GetFriendList/v1/";
             var data = new Dictionary<string, string>
@@ -41,9 +40,7 @@ namespace CSharpTradeOffers.Community
                 {"steamid", steamId.ToString()},
                 {"relationship", relationship}
             };
-            return
-                JsonConvert.DeserializeObject<GetFriendListResult>(_web.Fetch(url, "GET", data, null, false).ReadStream())
-                    .Friendslist.Friends;
+            return _web.Fetch(url, "GET", data, null, false).DeserializeJson<GetFriendListResult>().Friendslist.Friends;
         }
 
         /// <summary>
@@ -59,8 +56,7 @@ namespace CSharpTradeOffers.Community
                 {"key", _apiKey},
                 {"steamids", CommaDelimit(playersBansToRequest)}
             };
-            return
-                JsonConvert.DeserializeObject<GetPlayerBansResult>(_web.Fetch(url, "GET", data, null, false).ReadStream()).PlayerBans;
+            return _web.Fetch(url, "GET", data, null, false).DeserializeJson<GetPlayerBansResult>().PlayerBans;
         }
 
         /// <summary>
@@ -76,10 +72,7 @@ namespace CSharpTradeOffers.Community
                 {"key", _apiKey},
                 {"steamids", CommaDelimit(playerSummariesToRequest)}
             };
-            return
-                JsonConvert.DeserializeObject<GetPlayerSummariesV2BaseResult>(
-                    _web.Fetch(url, "GET", data, null, false).ReadStream())
-                    .Response.PlayerSummaries;
+            return _web.Fetch(url, "GET", data, null, false).DeserializeJson<GetPlayerSummariesV2BaseResult>().Response.PlayerSummaries;
         }
 
         /// <summary>
@@ -95,9 +88,7 @@ namespace CSharpTradeOffers.Community
                 {"key", _apiKey},
                 {"steamid", steamId.ToString()}
             };
-            return
-                JsonConvert.DeserializeObject<GetUserGroupListBaseResult>(_web.Fetch(url, "GET", data, null, false).ReadStream())
-                    .Result;
+            return _web.Fetch(url, "GET", data, null, false).DeserializeJson<GetUserGroupListBaseResult>().Result;
         }
 
         /// <summary>
@@ -119,9 +110,7 @@ namespace CSharpTradeOffers.Community
                 {"vanityurl", vanityUrl},
                 {"url_type", urlType.ToString()}
             };
-            return
-                JsonConvert.DeserializeObject<ResolveVanityUrlBaseResult>(_web.Fetch(url, "GET", data, null, false).ReadStream())
-                    .Response;
+            return _web.Fetch(url, "GET", data, null, false).DeserializeJson<ResolveVanityUrlBaseResult>().Response;
         }
 
         static string CommaDelimit(List<ulong> toDelimit)

@@ -9,11 +9,17 @@ namespace CSharpTradeOffers.Community
 {
     public class ChatException : Exception
     {
-        public ChatException() { }
+        public ChatException()
+        {
+        }
 
-        public ChatException(string message) : base(message) { }
+        public ChatException(string message) : base(message)
+        {
+        }
 
-        public ChatException(string message, Exception inner) : base(message, inner) { }
+        public ChatException(string message, Exception inner) : base(message, inner)
+        {
+        }
     }
 
     public class SteamChatHandler
@@ -48,7 +54,7 @@ namespace CSharpTradeOffers.Community
             }
 
             var rand = new Random();
-            var jQueryId = (long)(((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue) % 9999999999999999999);
+            var jQueryId = (long) (((rand.NextDouble()*2.0 - 1.0)*long.MaxValue)%9999999999999999999);
             jQueryId = Math.Abs(jQueryId);
             _basejQuery = "jQuery" + jQueryId + "_{0}";
 
@@ -72,10 +78,13 @@ namespace CSharpTradeOffers.Community
                 {"_", UnixTimeNow().ToString()}
             };
 
-            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false).ReadStream(); //returns an annoying JSON string that can't quite be deserialized yet
-            response = StripjQueryArtifacts(response); //remove /**/jQuery11110010656769154593349_1442204142816( and remove )
+            string response = _web.Fetch(url, "GET", data, _account.AuthContainer, false).ReadStream();
+                //returns an annoying JSON string that can't quite be deserialized yet
+            response = StripjQueryArtifacts(response);
+                //remove /**/jQuery11110010656769154593349_1442204142816( and remove )
 
-            WebPresenceOAuthLogonResponse webPresenceOAuthLogonResponse = JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
+            WebPresenceOAuthLogonResponse webPresenceOAuthLogonResponse =
+                JsonConvert.DeserializeObject<WebPresenceOAuthLogonResponse>(response);
             _message = webPresenceOAuthLogonResponse.Message;
             return webPresenceOAuthLogonResponse;
         }
@@ -89,8 +98,8 @@ namespace CSharpTradeOffers.Community
                 {"access_token", _accessToken}
             };
             return
-                JsonConvert.DeserializeObject<ChatLogoffResponse>(
-                    _web.Fetch(url, "POST", data, _account.AuthContainer, false, BaseChatUrl, true).ReadStream());
+                _web.Fetch(url, "POST", data, _account.AuthContainer, false, BaseChatUrl, true)
+                    .DeserializeJson<ChatLogoffResponse>();
         }
 
         //icky
@@ -98,7 +107,8 @@ namespace CSharpTradeOffers.Community
         {
             string response = _web.Fetch(BaseChatUrl, "GET", null, _account.AuthContainer).ReadStream();
             if (response.Contains("not authorized")) return null; //hideous and sloppy. :(
-            string removed = response.Remove(0, response.IndexOf("\'https://api.steampowered.com/\', \"", StringComparison.Ordinal) + 34);
+            string removed = response.Remove(0,
+                response.IndexOf("\'https://api.steampowered.com/\', \"", StringComparison.Ordinal) + 34);
             return removed.Substring(0, 32);
         }
 
@@ -134,7 +144,7 @@ namespace CSharpTradeOffers.Community
             return pollResponse;
         }
 
-        static string StripjQueryArtifacts(string toStrip)
+        private static string StripjQueryArtifacts(string toStrip)
         {
             toStrip = toStrip.Remove(0, toStrip.IndexOf("(", StringComparison.Ordinal) + 1);
             return toStrip.Substring(0, toStrip.Length - 1);
@@ -144,10 +154,10 @@ namespace CSharpTradeOffers.Community
         /// Gets the Unix time. Also known as Epoch.
         /// </summary>
         /// <returns>A long integer of the number of seconds since 1,1,1970</returns>
-        static long UnixTimeNow()
+        private static long UnixTimeNow()
         {
             var timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
-            return (long)timeSpan.TotalSeconds;
+            return (long) timeSpan.TotalSeconds;
         }
 
         /// <summary>
@@ -158,8 +168,7 @@ namespace CSharpTradeOffers.Community
         public FriendStateResponse FriendState(uint accountId)
         {
             string url = BaseChatUrl + "friendstate/" + accountId;
-            return
-                JsonConvert.DeserializeObject<FriendStateResponse>(_web.Fetch(url, "GET", null, _account.AuthContainer).ReadStream());
+            return _web.Fetch(url, "GET", null, _account.AuthContainer).DeserializeJson<FriendStateResponse>();
         }
 
         /// <summary>
@@ -170,13 +179,13 @@ namespace CSharpTradeOffers.Community
         public List<ChatLogMessage> ChatLog(uint accountId)
         {
             string url = BaseChatUrl + "chatlog/" + accountId;
-            string sessionid = (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                                where cookie.Name == "sessionid"
-                                select cookie.Value).FirstOrDefault();
-            var data = new Dictionary<string, string> { { "sessionid", sessionid } };
+            string sessionid =
+                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                    where cookie.Name == "sessionid"
+                    select cookie.Value).FirstOrDefault();
+            var data = new Dictionary<string, string> {{"sessionid", sessionid}};
 
-            return
-                JsonConvert.DeserializeObject<List<ChatLogMessage>>(_web.Fetch(url, "GET", data, _account.AuthContainer).ReadStream());
+            return _web.Fetch(url, "GET", data, _account.AuthContainer).DeserializeJson<List<ChatLogMessage>>();
         }
 
         //saytext = send chat message
