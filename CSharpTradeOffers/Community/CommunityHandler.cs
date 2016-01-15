@@ -16,6 +16,8 @@ namespace CSharpTradeOffers.Community
 
         private const string BaseCommunityUrl = "https://steamcommunity.com/";
         private const string TopicUrl = BaseCommunityUrl + "forum/{0}/General/";
+        private const string CommentUrl = BaseCommunityUrl + "comment/ForumTopic/delete/{0}/{1}/";
+
         private readonly Account _account;
 
         public CommunityHandler(Account account)
@@ -23,6 +25,19 @@ namespace CSharpTradeOffers.Community
             _account = account;
         }
 
+
+        public GetTopicsHtmlResult GetTopicsHtml(ulong forumId, ulong start, ulong count)
+        {
+            string url = string.Format(TopicUrl, forumId) + "render/0/";
+
+            var data = new Dictionary<string, string>
+            {
+                {"start", start.ToString()},
+                {"count", count.ToString()}
+            };
+
+            return _web.Fetch(url, "POST", data, _account.AuthContainer).DeserializeJson<GetTopicsHtmlResult>();
+        }
 
         /// <summary>
         /// Posts a comment to the specified profile.
@@ -215,7 +230,7 @@ namespace CSharpTradeOffers.Community
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public string ToJArray(ulong[] items)
+        private static string ToJArray(IEnumerable<ulong> items)
         {
             const string formatter = "\"{0}\",";
             string jArray = items.Aggregate("[", (current, item) => current + string.Format(formatter, item.ToString()));
@@ -444,7 +459,7 @@ namespace CSharpTradeOffers.Community
 
         public DefaultResult EditTopic(string title, string text, ulong forumId, ulong topicId)
         {
-            string url = TopicUrl + "moderatetopic/0/";
+            string url = TopicUrl + "edittopic/0/";
             url = string.Format(url, forumId);
 
             string sessionid =
@@ -480,6 +495,39 @@ namespace CSharpTradeOffers.Community
             };
 
             return _web.Fetch(url, "POST", data, _account.AuthContainer).DeserializeJson<DefaultResult>();
+        }
+
+        /// <summary>
+        /// Used to delete a comment
+        /// </summary>
+        /// <param name="commentId">The id of the comment</param>
+        /// <param name="topicId">The id of the topic</param>
+        /// <param name="forumId">The id of the forum</param>
+        /// <param name="permissions">A permissions object</param>
+        /// <param name="start">Use if includeRawComments is set. This will specify the comment # to start at.</param>
+        /// <param name="count">The number of comments to grab if includeRawComments is set.</param>
+        /// <param name="oldestFirst">Order of the comments</param>
+        /// <param name="includeRawComments">Include the comments or not</param>
+        /// <returns></returns>
+        public DeleteTopicCommentResult DeleteTopicComment(ulong commentId, ulong topicId, ulong forumId, ulong groupId,
+            ForumInfo forumInfo, ulong start = 0, ulong count = 15, bool oldestFirst = false,
+            bool includeRawComments = false)
+        {
+            string url = TopicUrl + "deletetopic/0/";
+            url = string.Format(url, forumId);
+
+            string sessionid =
+                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"gidforumtopic", topicId.ToString()},
+                {"sessionid", sessionid}
+            };
+
+            return _web.Fetch(url, "POST", data, _account.AuthContainer).DeserializeJson<DeleteTopicCommentResult>();
         }
     }
 }
