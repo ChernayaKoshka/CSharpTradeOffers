@@ -51,7 +51,7 @@ namespace AcceptAllMobileConfirmations
             AcceptConfirmationsLoop(sgAccount);
         }
 
-        private static bool SteamAuthLogin()
+        private static void SteamAuthLogin()
         {
             var authLogin = new UserLogin(_config.Username, _config.Password);
             LoginResult result;
@@ -80,7 +80,7 @@ namespace AcceptAllMobileConfirmations
 
             AuthenticatorLinker linker = new AuthenticatorLinker(authLogin.Session);
             Console.Write("Please enter the number you wish to associate this account in the format +1XXXXXXXXXX where +1 is your country code, leave blank if no new number is desired: ");
-
+             
             string phoneNumber = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(phoneNumber)) phoneNumber = null;
             linker.PhoneNumber = phoneNumber;
@@ -91,13 +91,13 @@ namespace AcceptAllMobileConfirmations
                 Console.WriteLine("Could not add authenticator: " + linkResult);
                 Console.WriteLine(
                     "If you attempted to link an already linked account, please tell FatherFoxxy to get off his ass and implement the new stuff.");
-                return false;
+                return;
             }
 
             if (!SaveMobileAuth(linker))
             {
                 Console.WriteLine("Issue saving auth file, link operation abandoned.");
-                return false;
+                return;
             }
 
             Console.WriteLine(
@@ -107,12 +107,10 @@ namespace AcceptAllMobileConfirmations
             {
                 Console.Write("SMS Code: ");
                 string smsCode = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(smsCode)) return false;
+                if (string.IsNullOrWhiteSpace(smsCode)) return;
                 finalizeResult = linker.FinalizeAddAuthenticator(smsCode);
 
             } while (finalizeResult != AuthenticatorLinker.FinalizeResult.BadSMSCode);
-
-            return finalizeResult == AuthenticatorLinker.FinalizeResult.Success;
         }
 
         private static bool SaveMobileAuth(AuthenticatorLinker linker)
@@ -137,6 +135,9 @@ namespace AcceptAllMobileConfirmations
             while (true) //permanent loop, can be changed 
             {
                 Thread.Sleep(10000);
+
+                Console.WriteLine(sgAccount.GenerateSteamGuardCode());
+
                 foreach (Confirmation confirmation in sgAccount.FetchConfirmations())
                 {
                     sgAccount.AcceptConfirmation(confirmation);
