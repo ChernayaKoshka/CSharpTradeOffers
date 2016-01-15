@@ -53,6 +53,7 @@
     <Compile Include="Community\Data Classes\ClanCommentResponse.cs" />
     <Compile Include="Community\Data Classes\CommentResponse.cs" />
     <Compile Include="Community\Data Classes\DefaultResult.cs" />
+    <Compile Include="Community\Data Classes\DeleteTopicCommentResult.cs" />
     <Compile Include="Community\Data Classes\EPersonaState.cs" />
     <Compile Include="Community\Data Classes\Friend.cs" />
     <Compile Include="Community\Data Classes\Friendslist.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Community\Data Classes\GetFriendListResult.cs" />
     <Compile Include="Community\Data Classes\GetPlayerBansResult.cs" />
     <Compile Include="Community\Data Classes\GetPlayerSummariesV2Result.cs" />
+    <Compile Include="Community\Data Classes\GetTopicsHtmlResult.cs" />
     <Compile Include="Community\Data Classes\GetUserGroupListBaseResult.cs" />
     <Compile Include="Community\Data Classes\GetUserGroupListResult.cs" />
     <Compile Include="Community\Data Classes\Group.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Community\Data Classes\ResolveVanityUrlBaseResult.cs" />
     <Compile Include="Community\Data Classes\ResolveVanityUrlResult.cs" />
     <Compile Include="Community\Data Classes\SendChatMessageResponse.cs" />
+    <Compile Include="Community\Data Classes\TopicPermissions.cs" />
     <Compile Include="Community\SteamChatHandler.cs" />
     <Compile Include="Community\Data Classes\WebPresenceOAuthLogonResponse.cs" />
     <Compile Include="Configuration\Data Classes\DefaultConfig.cs" />

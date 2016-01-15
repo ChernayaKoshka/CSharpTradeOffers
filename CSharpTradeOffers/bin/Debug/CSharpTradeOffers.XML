@@ -186,7 +186,7 @@
             <param name="Account.AuthContainer.AuthContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A MultiInviteResponse object.</returns>
         </member>
-        <member name="M:CSharpTradeOffers.Community.CommunityHandler.ToJArray(System.UInt64[])">
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.ToJArray(System.Collections.Generic.IEnumerable{System.UInt64})">
             <summary>
             Converts an array of SteamId64s to an array of the format ["0","1"]
             </summary>
@@ -240,6 +240,20 @@
             </summary>
             <param name="settings">Settings to set.</param>
             <param name="account">Account of settings to change.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.DeleteTopicComment(System.UInt64,System.UInt64,System.UInt64,System.UInt64,CSharpTradeOffers.Community.ForumInfo,System.UInt64,System.UInt64,System.Boolean,System.Boolean)">
+            <summary>
+            Used to delete a comment
+            </summary>
+            <param name="commentId">The id of the comment</param>
+            <param name="topicId">The id of the topic</param>
+            <param name="forumId">The id of the forum</param>
+            <param name="permissions">A permissions object</param>
+            <param name="start">Use if includeRawComments is set. This will specify the comment # to start at.</param>
+            <param name="count">The number of comments to grab if includeRawComments is set.</param>
+            <param name="oldestFirst">Order of the comments</param>
+            <param name="includeRawComments">Include the comments or not</param>
+            <returns></returns>
         </member>
         <member name="T:CSharpTradeOffers.Community.SteamUserHandler">
             <summary>
