@@ -26,13 +26,6 @@ namespace AcceptAllMobileConfirmations
 
             _config = ConfigHandler.Reload();
 
-            if (string.IsNullOrEmpty(_config.ApiKey))
-            {
-                Console.WriteLine("Fatal error: API key is missing. Please fill in the API key field in \"configuration.xml\"");
-                Console.ReadLine();
-                Environment.Exit(-1);
-            }
-
             Console.WriteLine("Attempting web login...");
 
             _account = Web.RetryDoLogin(TimeSpan.FromSeconds(5), 10, _config.Username, _config.Password, _config.SteamMachineAuth);

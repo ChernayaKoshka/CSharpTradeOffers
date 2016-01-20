@@ -80,6 +80,7 @@
     <Compile Include="Community\Data Classes\TopicPermissions.cs" />
     <Compile Include="Community\SteamChatHandler.cs" />
     <Compile Include="Community\Data Classes\WebPresenceOAuthLogonResponse.cs" />
+    <Compile Include="Configuration\Data Classes\ConfigErrorResult.cs" />
     <Compile Include="Configuration\Data Classes\DefaultConfig.cs" />
     <Compile Include="Configuration\GenericConfigHandler.cs" />
     <Compile Include="Configuration\IConfig.cs" />
