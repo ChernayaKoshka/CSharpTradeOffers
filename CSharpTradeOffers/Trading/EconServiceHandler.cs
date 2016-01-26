@@ -190,7 +190,8 @@ namespace CSharpTradeOffers.Trading
             };
             return
                 _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
-                    $"https://steamcommunity.com/tradeoffer/new/?partner={IdConversions.UlongToAccountId(partnerSid)}&token={token}")
+                    string.Format("https://steamcommunity.com/tradeoffer/new/?partner={0}&token={1}",
+                        IdConversions.UlongToAccountId(partnerSid), token))
                     .DeserializeJson<SendOfferResponse>();
         }
 

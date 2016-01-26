@@ -77,8 +77,7 @@ namespace CSharpTradeOffers.Web
             {
                 if (joined != string.Empty)
                     joined += "&";
-
-                joined += $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}";
+                joined += string.Format("{0}={1}", WebUtility.UrlEncode(kvp.Key), WebUtility.UrlEncode(kvp.Value));
             }
             return joined;
         }
