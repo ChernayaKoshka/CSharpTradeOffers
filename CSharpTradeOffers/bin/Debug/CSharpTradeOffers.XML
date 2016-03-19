@@ -131,6 +131,32 @@
             <param name="Account.Account.AuthContainer.Account.AuthContainer">Auth Cookies MUST be passed here, the function will fail if not.</param>
             <returns>A CommentResponse object.</returns>
         </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.GroupAnnounce(System.String,System.String,System.String)">
+            <summary>
+            Posts an announcement to the specified group.
+            </summary>
+            <param name="groupName">Groupname of the steam group.</param>
+            <param name="headLine">The headline of the announcement.</param>
+            <param name="body">The body of the announcement.</param>
+            <returns>no return</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.GroupEvent(System.String,System.String,System.String,System.String,System.DateTime,System.String,System.String,System.Net.IPAddress,System.Int32,System.Int32)">
+            <summary>
+            Posts an event to the specified group.
+            </summary>
+            <param name="groupName">Groupname of the steam group.</param>
+            <param name="eventName">The name of the event.</param>
+            <param name="eventNotes">The notes of the event.</param>
+            <param name="timeChoice">"quick" which means now, or "specific" which means will start at the given date/time.</param>
+            <param name="startMinute">The minute of the event date. EX: 30</param>
+            <param name="startHour">The hour of the event date. EX: 10</param>
+            <param name="startDate">The date of the event. MM/DD/YY EX: 12/20/18</param>
+            <param name="startAMPM">AM or PM of the event date.</param>
+            <param name="serverPassword">Password to the server.</param>
+            <param name="serverIP">Ip of the server.</param>
+            <param name="appID">The game associated with the event.</param>
+            <returns>no return</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostClanComment(System.UInt64,System.String,System.Int32)">
             <summary>
             Posts a comment to the specified clan.
