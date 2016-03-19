@@ -65,6 +65,88 @@ namespace CSharpTradeOffers.Community
                 _web.Fetch(url, "POST", data, _account.AuthContainer, true, url.Substring(0, url.Length - 3))
                     .DeserializeJson<CommentResponse>();
         }
+        
+        /// <summary>
+        /// Posts an announcement to the specified group.
+        /// </summary>
+        /// <param name="groupName">Groupname of the steam group.</param>
+        /// <param name="headLine">The headline of the announcement.</param>
+        /// <param name="body">The body of the announcement.</param>
+        /// <returns>no return</returns>
+        public void GroupAnnounce(string groupName, string headLine, string body)
+        {
+            string url = "http://steamcommunity.com/groups/" + groupName + "/announcements";
+
+            string sessionid =
+                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"action", "post"},
+                {"headline", headLine},
+                {"body", body},
+                {"languages[0][headline]", headLine},
+                {"languages[0][body]", body}
+            };
+
+            for (int i = 1; i <= 26; i++)
+            {
+                data.Add("languages[" + i + "][headline]", "");
+                data.Add("languages[" + i + "][body]", "");
+                data.Add("languages[" + i + "][updated]", "0");
+            }
+
+            _web.Fetch(url, "POST", data, _account.AuthContainer, true, url + "/create");
+        }
+
+        /// <summary>
+        /// Posts an event to the specified group.
+        /// </summary>
+        /// <param name="groupName">Groupname of the steam group.</param>
+        /// <param name="eventName">The name of the event.</param>
+        /// <param name="eventNotes">The notes of the event.</param>
+        /// <param name="timeChoice">"quick" which means now, or "specific" which means will start at the given date/time.</param>
+        /// <param name="startMinute">The minute of the event date. EX: 30</param>
+        /// <param name="startHour">The hour of the event date. EX: 10</param>
+        /// <param name="startDate">The date of the event. MM/DD/YY EX: 12/20/18</param>
+        /// <param name="startAMPM">AM or PM of the event date.</param>
+        /// <param name="serverPassword">Password to the server.</param>
+        /// <param name="serverIP">Ip of the server.</param>
+        /// <param name="appID">The game associated with the event.</param>
+        /// <returns>no return</returns>
+        public void GroupEvent(string groupName, string eventName, string eventNotes, string eventType, string timeChoice = "quick", string startMinute = "00", string startHour = "12", string startDate = "MM/DD/YY", string startAMPM = "PM", string serverPassword = "", string serverIP = "", string appID = "")
+        {
+            string url = "http://steamcommunity.com/groups/" + groupName + "/eventEdit";
+
+            string sessionid =
+                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionid", sessionid},
+                {"tzOffset", "-18000"},
+                {"type", eventType}, // What type of event? BroadcastEvent, Chat, etc
+                {"timeChoice", timeChoice}, // "quick" which means now, or "specific" which means will start at the given date/time
+                {"startMinute", startMinute},
+                {"startHour", startHour},
+                {"startDate", startDate},
+                {"startAMPM", startAMPM},
+                {"serverPassword", serverPassword},
+                {"serverIP", serverIP},
+                {"name", eventName}, // Title of the event
+                {"notes", eventNotes}, // Notes of the event
+                {"eventQuickTime", "now"},
+                {"appID", appID}, // The game you want the event associated with
+                {"action", "newEvent"}
+            };
+
+            _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
+        }
 
         /// <summary>
         /// Posts a comment to the specified clan.
