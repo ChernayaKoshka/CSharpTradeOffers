@@ -20,7 +20,7 @@ namespace GetAssetClassInfo
 
         private void itemLB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            assetClassInfoTB.Text = items[itemLB.Text].SerializeToXml();
+            try { assetClassInfoTB.Text = items[itemLB.Text].SerializeToXml(); } catch (Exception) { return; }
         }
 
         private void goButton_Click(object sender, EventArgs e)
@@ -35,6 +35,7 @@ namespace GetAssetClassInfo
                     items.Add(i.Description.MarketHashName, i);
             }
             itemLB.DataSource = items.Keys.ToList();
+            itemLB.Refresh();
         }
     }
 }
