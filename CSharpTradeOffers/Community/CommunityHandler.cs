@@ -117,7 +117,8 @@ namespace CSharpTradeOffers.Community
         /// <param name="serverIP">Ip of the server.</param>
         /// <param name="appID">The game associated with the event.</param>
         /// <returns>no return</returns>
-        public void GroupEvent(string groupName, string eventName, string eventNotes, string eventType, string timeChoice = "quick", string startMinute = "00", string startHour = "12", string startDate = "MM/DD/YY", string startAMPM = "PM", string serverPassword = "", string serverIP = "", string appID = "")
+        public void GroupEvent(string groupName, string eventName, string eventNotes, string eventType, DateTime startDateAndTime,
+                               string timeChoice = "quick", string serverPassword = "", IPAddress serverAddress = null, int appId = -1, int timezoneOffset = -18000)
         {
             string url = "http://steamcommunity.com/groups/" + groupName + "/eventEdit";
 
@@ -129,19 +130,19 @@ namespace CSharpTradeOffers.Community
             var data = new Dictionary<string, string>
             {
                 {"sessionid", sessionid},
-                {"tzOffset", "-18000"},
+                {"tzOffset", timezoneOffset.ToString()},
                 {"type", eventType}, // What type of event? BroadcastEvent, Chat, etc
                 {"timeChoice", timeChoice}, // "quick" which means now, or "specific" which means will start at the given date/time
-                {"startMinute", startMinute},
-                {"startHour", startHour},
-                {"startDate", startDate},
-                {"startAMPM", startAMPM},
+                {"startMinute", startDateAndTime.TimeOfDay.Minutes.ToString()},
+                {"startHour", startDateAndTime.TimeOfDay.Hours.ToString()},
+                {"startDate", startDateAndTime.ToString("MM/DD/YY")},
+                {"startAMPM", startDateAndTime.TimeOfDay.Hours >= 12 ? "PM" : "AM" },
                 {"serverPassword", serverPassword},
-                {"serverIP", serverIP},
+                {"serverIP", serverAddress == null ? "" : serverAddress.ToString()},
                 {"name", eventName}, // Title of the event
                 {"notes", eventNotes}, // Notes of the event
                 {"eventQuickTime", "now"},
-                {"appID", appID}, // The game you want the event associated with
+                {"appID", appId == -1 ? "" : appId.ToString()}, // The game you want the event associated with
                 {"action", "newEvent"}
             };
 
