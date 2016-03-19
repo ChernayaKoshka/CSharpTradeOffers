@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleChatBot", "samples\Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeBot", "samples\ExchangeBot\ExchangeBot.csproj", "{F55987A4-1E50-4761-BDE3-AF735211E642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryInfo", "GetAssetClassInfo\InventoryInfo.csproj", "{54F9B95B-9BF4-47DE-95CC-A1161577067D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryInfo", "samples\GetAssetClassInfo\InventoryInfo.csproj", "{54F9B95B-9BF4-47DE-95CC-A1161577067D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
