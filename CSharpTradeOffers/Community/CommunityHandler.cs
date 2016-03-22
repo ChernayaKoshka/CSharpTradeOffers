@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -52,8 +52,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -65,7 +65,7 @@ namespace CSharpTradeOffers.Community
                 _web.Fetch(url, "POST", data, _account.AuthContainer, true, url.Substring(0, url.Length - 3))
                     .DeserializeJson<CommentResponse>();
         }
-        
+
         /// <summary>
         /// Posts an announcement to the specified group.
         /// </summary>
@@ -149,6 +149,52 @@ namespace CSharpTradeOffers.Community
             _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
         }
 
+
+        /// <summary>
+        /// Join a public group.
+        /// </summary>
+        /// <param name="groupName">The name of the group found in the group url.</param>
+        public void JoinGroup(string groupName)
+        {
+            string url = "https://steamcommunity.com/groups/" + groupName;
+
+            string sessionid =
+                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"action", "join"}
+            };
+
+            _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
+        }
+
+        /// <summary>
+        /// Leave a group.
+        /// </summary>
+        /// <param name="groupID">The GroupID of the steam group.</param>
+        public void LeaveGroup(ulong groupID)
+        {
+            string url = "https://steamcommunity.com/profiles/" + _account.SteamId + "/home_process";
+
+            string sessionid =
+                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"action", "leaveGroup"},
+                {"groupId", groupID.ToString()}
+            };
+
+            _web.Fetch(url, "POST", data, _account.AuthContainer, true, "https://steamcommunity.com/profiles/" + _account.SteamId + "/groups");
+        }
+
         /// <summary>
         /// Posts a comment to the specified clan.
         /// </summary>
@@ -165,8 +211,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -190,8 +236,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -215,8 +261,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -240,8 +286,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -266,8 +312,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -294,8 +340,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -460,8 +506,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -495,14 +541,14 @@ namespace CSharpTradeOffers.Community
         /// <param name="settings">Settings to set.</param>
         /// <param name="account">Account of settings to change.</param>
         public void SetPrivacySettings(PrivacySettings settings, Account account)
-            //implement settings as an interface later!
+        //implement settings as an interface later!
         {
             string url = "https://steamcommunity.com/profiles/" + account.SteamId + "/edit/settings";
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -525,8 +571,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -547,8 +593,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
@@ -568,8 +614,8 @@ namespace CSharpTradeOffers.Community
 
             string sessionid =
                 (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                    where cookie.Name == "sessionid"
-                    select cookie.Value).FirstOrDefault();
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
 
             var data = new Dictionary<string, string>
             {
