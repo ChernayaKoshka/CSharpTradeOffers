@@ -157,6 +157,18 @@
             <param name="appID">The game associated with the event.</param>
             <returns>no return</returns>
         </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.JoinGroup(System.String)">
+            <summary>
+            Join a public group.
+            </summary>
+            <param name="groupName">The name of the group found in the group url.</param>
+        </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.LeaveGroup(System.UInt64)">
+            <summary>
+            Leave a group.
+            </summary>
+            <param name="groupID">The GroupID of the steam group.</param>
+        </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostClanComment(System.UInt64,System.String,System.Int32)">
             <summary>
             Posts a comment to the specified clan.
