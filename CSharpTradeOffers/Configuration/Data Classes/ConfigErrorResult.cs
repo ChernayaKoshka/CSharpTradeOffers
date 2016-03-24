@@ -18,9 +18,10 @@
             ErrorMessage = errorMessage;
         }
 
-        public void AddError(string error)
+        public void AddError(string error, bool invalidate = true)
         {
-            Valid = false;
+            if(invalidate)
+                Valid = false;
             ErrorMessage += error + "\r\n";
         }
 
