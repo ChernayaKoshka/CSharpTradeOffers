@@ -1,7 +1,7 @@
+using Newtonsoft.Json;
+
 namespace CSharpTradeOffers.Community
 {
-    using Newtonsoft.Json;
-
     public class Group
     {
         [JsonProperty("gid")]

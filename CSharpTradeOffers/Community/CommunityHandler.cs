@@ -292,7 +292,7 @@ namespace CSharpTradeOffers.Community
             var data = new Dictionary<string, string>
             {
                 {"sessionID", sessionid},
-                {"steamid", steamId.ToString()},
+                {"steamid", steamId.ToString()}
             };
 
             return Convert.ToBoolean(_web.Fetch(url, "POST", data, _account.AuthContainer));

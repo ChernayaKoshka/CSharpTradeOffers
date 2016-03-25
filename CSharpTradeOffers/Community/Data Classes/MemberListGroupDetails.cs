@@ -1,10 +1,12 @@
+using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace CSharpTradeOffers.Community
 {
     /// <remarks/>
-    [System.Serializable]
-    [System.ComponentModel.DesignerCategory("code")]
+    [Serializable]
+    [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     public class MemberListGroupDetails
     {

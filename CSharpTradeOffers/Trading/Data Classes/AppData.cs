@@ -1,7 +1,7 @@
+using Newtonsoft.Json;
+
 namespace CSharpTradeOffers.Trading
 {
-    using Newtonsoft.Json;
-
     public class AppData
     {
 

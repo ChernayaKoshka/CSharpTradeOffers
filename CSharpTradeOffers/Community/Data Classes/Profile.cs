@@ -1,7 +1,7 @@
-﻿namespace CSharpTradeOffers.Community
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace CSharpTradeOffers.Community
+{
     public class Profile
     {
         public const string Type = "profileSave";

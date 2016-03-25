@@ -1,9 +1,8 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Community
 {
-    using Newtonsoft.Json;
-
     public class Friendslist
     {
         [JsonProperty("friends")]

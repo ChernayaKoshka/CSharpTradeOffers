@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 using CSharpTradeOffers.Web;
 using Newtonsoft.Json;
-using System.Data;
-using System.Globalization;
 
 namespace CSharpTradeOffers.Trading
 {

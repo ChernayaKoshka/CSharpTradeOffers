@@ -1,9 +1,8 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CSharpTradeOffers.Trading
 {
-    using Newtonsoft.Json;
-
     public class Offer //ToDo: NEEDS a better name
     {
         [JsonProperty("assets")]
