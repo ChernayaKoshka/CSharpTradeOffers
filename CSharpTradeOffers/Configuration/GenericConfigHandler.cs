@@ -20,7 +20,7 @@ namespace CSharpTradeOffers.Configuration
         /// Reloads the configuration file (path). If file is not present, it will generate a new one.
         /// </summary>
         /// <returns>A generic object where TConfig:IConfig.</returns>
-        public TConfig Reload<TConfig>(TConfig config) where TConfig : ConfigFrame
+        public TConfig Reload<TConfig>(TConfig config)
         {
             if (!File.Exists(_path))
             {
@@ -42,7 +42,7 @@ namespace CSharpTradeOffers.Configuration
         /// Writes the changes made to the config.
         /// </summary>
         /// <param name="towrite"></param>
-        public void WriteChanges<TConfig>(TConfig towrite) where TConfig : ConfigFrame
+        public void WriteChanges<TConfig>(TConfig towrite)
         {
             File.WriteAllText(_path, towrite.SerializeToXml());
         }
