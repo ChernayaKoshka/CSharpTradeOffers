@@ -14,7 +14,7 @@ namespace SteamWebChat
     {
         private FriendsListWindow _mainWindow;
 
-        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
+        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler();
         private static readonly Web Web = new Web(new SteamWebRequestHandler());
 
         public LoadingScreen()
@@ -27,7 +27,7 @@ namespace SteamWebChat
         {
 
             #region config
-            var config = ConfigHandler.Reload();
+            DefaultConfig config = ConfigHandler.Reload(new DefaultConfig("configuration.xml"));
             if (string.IsNullOrEmpty(config.ApiKey))
                 ComplainQuit("API key is missing. Please fill in the API key field in \"configuration.xml\"");
             if (string.IsNullOrEmpty(config.Username) || string.IsNullOrEmpty(config.Password))

@@ -5,30 +5,19 @@ namespace CSharpTradeOffers.Configuration
 {
     public class GenericConfigHandler
     {
-        private readonly string _path;
-
-        /// <summary>
-        /// Initializes the Config and the path to use
-        /// </summary>
-        /// <param name="path"></param>
-        public GenericConfigHandler(string path)
-        {
-            _path = path;
-        }
-
         /// <summary>
         /// Reloads the configuration file (path). If file is not present, it will generate a new one.
         /// </summary>
         /// <returns>A generic object where TConfig:IConfig.</returns>
-        public TConfig Reload<TConfig>(TConfig config)
+        public TConfig Reload<TConfig>(TConfig config) where TConfig : IConfig
         {
-            if (!File.Exists(_path))
+            if (!File.Exists(config.Path))
             {
-                File.Create(_path).Close();
-                File.WriteAllText(_path, config.SerializeToXml());
+                File.Create(config.Path).Close();
+                File.WriteAllText(config.Path, config.SerializeToXml());
             }
 
-            using (var sr = new StreamReader(_path))
+            using (var sr = new StreamReader(config.Path))
             {
                 config =
                     (TConfig)
@@ -42,9 +31,9 @@ namespace CSharpTradeOffers.Configuration
         /// Writes the changes made to the config.
         /// </summary>
         /// <param name="towrite"></param>
-        public void WriteChanges<TConfig>(TConfig towrite)
+        public void WriteChanges<TConfig>(TConfig towrite) where TConfig : IConfig
         {
-            File.WriteAllText(_path, towrite.SerializeToXml());
+            File.WriteAllText(towrite.Path, towrite.SerializeToXml());
         }
     }
 }

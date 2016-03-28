@@ -13,8 +13,8 @@ namespace SimpleChatBot
     class Program
     {
         private static Account _account;
-        private static DefaultConfig _config = new DefaultConfig();
-        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
+        private static DefaultConfig _config = new DefaultConfig("configuration.xml");
+        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler();
         private static readonly Web Web = new Web(new SteamWebRequestHandler());
 
         public static SteamChatHandler ChatHandler { get; set; }
@@ -45,7 +45,7 @@ namespace SimpleChatBot
         //load config
         static void LoadConfig()
         {
-            _config = ConfigHandler.Reload();
+            _config = ConfigHandler.Reload(_config);
 
             if (!string.IsNullOrEmpty(_config.ApiKey)) return;
             Console.WriteLine("Fatal error: API key is missing. Please fill in the API key field in \"configuration.xml\"");

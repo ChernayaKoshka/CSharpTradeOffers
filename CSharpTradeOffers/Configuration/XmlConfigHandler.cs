@@ -3,34 +3,22 @@ using System.Xml.Serialization;
 
 namespace CSharpTradeOffers.Configuration
 {
-    public class XmlConfigHandler : IConfigHandler
+    public class XmlConfigHandler
     {
-
-        private readonly string _path;
-
-        /// <summary>
-        /// Initializes the Config and the path to use
-        /// </summary>
-        /// <param name="path"></param>
-        public XmlConfigHandler(string path)
-        {
-            _path = path;
-        }
-
         /// <summary>
         /// Reloads the configuration file (path). If file is not present, it will generate a new one.
         /// </summary>
         /// <returns>A RootConfig object.</returns>
-        public DefaultConfig Reload()
+        public DefaultConfig Reload(DefaultConfig config)
         {
-            var defaultConfig = new DefaultConfig();
+            DefaultConfig defaultConfig = new DefaultConfig(config.Path);
 
-            if (!File.Exists(_path))
+            if (!File.Exists(config.Path))
             {
-                File.WriteAllText(_path, defaultConfig.SerializeToXml());
+                File.WriteAllText(config.Path, defaultConfig.SerializeToXml());
             }
 
-            using (var sr = new StreamReader(_path))
+            using (var sr = new StreamReader(config.Path))
             {
                 defaultConfig =
                     (DefaultConfig)
@@ -46,7 +34,7 @@ namespace CSharpTradeOffers.Configuration
         /// <param name="towrite"></param>
         public void WriteChanges(DefaultConfig towrite)
         {
-            File.WriteAllText(_path, towrite.SerializeToXml());
+            File.WriteAllText(towrite.Path, towrite.SerializeToXml());
         }
     }
 }

@@ -13,8 +13,15 @@ namespace CSharpTradeOffers.Configuration
     [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "", IsNullable = false, ElementName = "Config")]
-    public abstract class ConfigFrame
+    public abstract class ConfigFrame : IConfig
     {
+        public string Path { get; set; }
+
+        protected ConfigFrame(string path)
+        {
+            Path = path;
+        }
+
         /// <summary>
         /// Username to automatically log in to.
         /// </summary>

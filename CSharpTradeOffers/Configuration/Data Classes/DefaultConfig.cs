@@ -2,7 +2,7 @@
 {
     public class DefaultConfig : ConfigFrame
     {
-        public DefaultConfig()
+        public DefaultConfig(string path) : base(path)
         {
             InitializeAll();
         }
@@ -23,8 +23,7 @@
             return result;
         }
 
-
-        public override sealed void InitializeAll()
+        public sealed override void InitializeAll()
         {
             Username = " ";
             Password = " ";

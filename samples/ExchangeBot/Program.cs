@@ -12,8 +12,8 @@ namespace ExchangeBot
     internal class Program
     {
         private static Account _account;
-        private static DefaultConfig _config = new DefaultConfig();
-        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler("configuration.xml");
+        private static DefaultConfig _config = new DefaultConfig("configuration.xml");
+        private static readonly XmlConfigHandler ConfigHandler = new XmlConfigHandler();
         private static readonly Web Web = new Web(new SteamWebRequestHandler());
 
         private static void Main()
@@ -23,7 +23,7 @@ namespace ExchangeBot
             Console.WriteLine(
                 "By using this software you agree to the terms in \"license.txt\".");
 
-            _config = ConfigHandler.Reload();
+            _config = ConfigHandler.Reload(_config);
 
             ConfigErrorResult errors = _config.CheckForErrors();
             if (!errors.Valid)

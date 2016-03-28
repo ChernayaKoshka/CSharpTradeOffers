@@ -82,8 +82,8 @@
     <Compile Include="Community\Data Classes\WebPresenceOAuthLogonResponse.cs" />
     <Compile Include="Configuration\Data Classes\ConfigErrorResult.cs" />
     <Compile Include="Configuration\Data Classes\DefaultConfig.cs" />
+    <Compile Include="Configuration\Data Classes\IConfig.cs" />
     <Compile Include="Configuration\GenericConfigHandler.cs" />
-    <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Configuration\Data Classes\Officer.cs" />
     <Compile Include="Configuration\Data Classes\ConfigFrame.cs" />
     <Compile Include="Configuration\XmlConfigHandler.cs" />

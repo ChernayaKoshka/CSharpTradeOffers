@@ -6,32 +6,20 @@ namespace CSharpTradeOffers.Configuration
     /// <summary>
     /// Generic config file handler
     /// </summary>
-    public class JsonConfigHandlerHandler : IConfigHandler
+    public class JsonConfigHandler
     {
-        private readonly string _path;
-
-        /// <summary>
-        /// Initializes the Config and the path to use
-        /// </summary>
-        /// <param name="path">Path of the config file, will be created if it does not exist.</param>
-        public JsonConfigHandlerHandler(string path)
-        {
-            _path = path;
-        }
-
         /// <summary>
         /// Reloads the configuration file (path). If file is not present, it will generate a new one.
         /// </summary>
         /// <returns>A RootConfig object.</returns>
-        public DefaultConfig Reload()
+        public DefaultConfig Reload(DefaultConfig config)
         {
-            var config = new DefaultConfig();
-            if (!File.Exists(_path))
+            if (!File.Exists(config.Path))
             {
-                File.WriteAllText(_path, config.SerializeToJson());
+                File.WriteAllText(config.Path, config.SerializeToJson());
             }
 
-            config = JsonConvert.DeserializeObject<DefaultConfig>(File.ReadAllText(_path));
+            config = JsonConvert.DeserializeObject<DefaultConfig>(File.ReadAllText(config.Path));
 
             return config;
         }
@@ -42,7 +30,7 @@ namespace CSharpTradeOffers.Configuration
         /// <param name="towrite"></param>
         public void WriteChanges(DefaultConfig towrite)
         {
-            File.WriteAllText(_path, JsonConvert.SerializeObject(towrite));
+            File.WriteAllText(towrite.Path, JsonConvert.SerializeObject(towrite));
         }
     }
 }
