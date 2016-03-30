@@ -16,7 +16,6 @@ namespace CSharpTradeOffers.Community
 
         private const string BaseCommunityUrl = "https://steamcommunity.com/";
         private const string TopicUrl = BaseCommunityUrl + "forum/{0}/General/";
-        private const string CommentUrl = BaseCommunityUrl + "comment/ForumTopic/delete/{0}/{1}/";
 
         private readonly Account _account;
 
@@ -138,7 +137,7 @@ namespace CSharpTradeOffers.Community
                 {"startDate", startDateAndTime.ToString("MM/DD/YY")},
                 {"startAMPM", startDateAndTime.TimeOfDay.Hours >= 12 ? "PM" : "AM" },
                 {"serverPassword", serverPassword},
-                {"serverIP", serverAddress == null ? "" : serverAddress.ToString()},
+                {"serverIP", serverAddress?.ToString() ?? ""},
                 {"name", eventName}, // Title of the event
                 {"notes", eventNotes}, // Notes of the event
                 {"eventQuickTime", "now"},
@@ -195,8 +194,8 @@ namespace CSharpTradeOffers.Community
         /// <summary>
         /// Leave a group.
         /// </summary>
-        /// <param name="groupID">The GroupID of the steam group.</param>
-        public void LeaveGroup(ulong groupID)
+        /// <param name="groupId">The GroupID of the steam group.</param>
+        public void LeaveGroup(ulong groupId)
         {
             string url = "https://steamcommunity.com/profiles/" + _account.SteamId + "/home_process";
 
@@ -209,7 +208,7 @@ namespace CSharpTradeOffers.Community
             {
                 {"sessionID", sessionid},
                 {"action", "leaveGroup"},
-                {"groupId", groupID.ToString()}
+                {"groupId", groupId.ToString()}
             };
 
             _web.Fetch(url, "POST", data, _account.AuthContainer, true, "https://steamcommunity.com/profiles/" + _account.SteamId + "/groups");
