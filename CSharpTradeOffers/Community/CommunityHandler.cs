@@ -172,6 +172,26 @@ namespace CSharpTradeOffers.Community
             _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
         }
 
+
+        public void RetryJoinGroup(string groupName, int retryWait, int retryLimit)
+        {
+            string url = "https://steamcommunity.com/groups/" + groupName;
+
+            string sessionid =
+                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
+                 where cookie.Name == "sessionid"
+                 select cookie.Value).FirstOrDefault();
+
+            var data = new Dictionary<string, string>
+            {
+                {"sessionID", sessionid},
+                {"action", "join"}
+            };
+
+            _web.RetryFetch(TimeSpan.FromSeconds(retryWait), retryLimit, url, "POST", data, _account.AuthContainer, true,
+                url);
+        }
+
         /// <summary>
         /// Leave a group.
         /// </summary>
