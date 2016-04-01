@@ -15,6 +15,7 @@ namespace CSharpTradeOffers.Configuration
     [XmlRoot(Namespace = "", IsNullable = false, ElementName = "Config")]
     public abstract class ConfigFrame : IConfig
     {
+        [XmlIgnore]
         public string Path { get; set; }
 
         protected ConfigFrame(string path)
