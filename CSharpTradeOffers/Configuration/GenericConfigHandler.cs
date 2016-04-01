@@ -11,6 +11,7 @@ namespace CSharpTradeOffers.Configuration
         /// <returns>A generic object where TConfig:IConfig.</returns>
         public TConfig Reload<TConfig>(TConfig config) where TConfig : IConfig
         {
+            string path = config.Path;
             if (!File.Exists(config.Path))
             {
                 File.Create(config.Path).Close();
@@ -23,6 +24,8 @@ namespace CSharpTradeOffers.Configuration
                     (TConfig)
                         new XmlSerializer(typeof(TConfig)).Deserialize(sr);
             }
+
+            config.Path = path;
 
             return config;
         }
