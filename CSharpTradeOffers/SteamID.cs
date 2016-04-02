@@ -21,15 +21,15 @@ namespace CSharpTradeOffers
         {
             AccountId = accountId;
             SteamIdUlong = IdConversions.AccountIdToUlong(accountId);
-            if (SteamIdUlong > 76561197960265728)
-                throw new ArgumentException("SteamIdUlong cannot be greater than '76561197960265728'");
+            if (SteamIdUlong < 76561197960265728)
+                throw new ArgumentException("SteamIdUlong cannot be less than '76561197960265728'");
             SteamIdText = IdConversions.AccountIdToSteamIdText(accountId);
         }
 
         public SteamId(ulong steamIdUlong)
         {
-            if (steamIdUlong > 76561197960265728)
-                throw new ArgumentException("SteamIdUlong cannot be greater than '76561197960265728'");
+            if (steamIdUlong < 76561197960265728)
+                throw new ArgumentException("SteamIdUlong cannot be less than '76561197960265728'");
             AccountId = IdConversions.UlongToAccountId(steamIdUlong);
             SteamIdUlong = steamIdUlong;
             SteamIdText = IdConversions.UlongToSteamIdText(steamIdUlong);
@@ -39,8 +39,8 @@ namespace CSharpTradeOffers
         {
             AccountId = IdConversions.SteamIdTextToAccountId(steamIdText);
             SteamIdUlong = IdConversions.SteamIdTextToUlong(steamIdText);
-            if (SteamIdUlong > 76561197960265728)
-                throw new ArgumentException("SteamIdUlong cannot be greater than '76561197960265728'");
+            if (SteamIdUlong < 76561197960265728)
+                throw new ArgumentException("SteamIdUlong cannot be less than '76561197960265728'");
             SteamIdText = steamIdText;
         }
     }
