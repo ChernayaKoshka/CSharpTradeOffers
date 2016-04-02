@@ -139,7 +139,7 @@ namespace CSharpTradeOffers.Web
                 bool twoFactor = loginJson != null && loginJson.RequiresTwofactor;
 
                 var time = Uri.EscapeDataString(rsaHelper.RsaJson.TimeStamp);
-                var capGid = "-1";
+                string capGid = "-1";
 
                 if (loginJson != null && loginJson.CaptchaNeeded)
                     capGid = Uri.EscapeDataString(loginJson.CaptchaGid);
@@ -149,7 +149,7 @@ namespace CSharpTradeOffers.Web
                     {"password", encryptedBase64Password},
                     {"username", username},
                     {"loginfriendlyname", string.Empty},
-                    {"rememberlogin", "false"}
+                    {"remember_login", "false"}
                 };
                 // Captcha
                 string capText = string.Empty;
@@ -162,7 +162,7 @@ namespace CSharpTradeOffers.Web
                             "Captcha");
                 }
 
-                data.Add("captchagid", captcha ? capGid : string.Empty);
+                data.Add("captchagid", capGid);
                 data.Add("captcha_text", captcha ? capText : string.Empty);
                 // Captcha end
 
