@@ -282,8 +282,6 @@ namespace CSharpTradeOffers.Web
                 {
                     retries++;
                     if (retries == retryLimit) throw;
-                    userInputOutput.OutputMessage("Connection failed... retrying in: " + retryWait.Milliseconds + "ms. Retries: " +
-                                      retries);
                     Thread.Sleep(retryWait);
                 }
             } while (account == null);
