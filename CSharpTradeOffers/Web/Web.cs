@@ -118,28 +118,32 @@ namespace CSharpTradeOffers.Web
             if (userInputOutput == null) userInputOutput = new ConsoleInputOutput();
 
             Thread.Sleep(2000);
-            var rsaHelper = new RsaHelper(password);
 
-            var loginDetails = new Dictionary<string, string> { { "username", username } };
-            IResponse response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
-
-            string encryptedBase64Password = rsaHelper.EncryptPassword(response);
-            if (encryptedBase64Password == null) return null;
 
             LoginResult loginJson = null;
             CookieCollection cookieCollection;
+            CookieContainer cc = new CookieContainer();
+
             string steamGuardText = string.Empty;
             string steamGuardId = string.Empty;
             string twoFactorText = string.Empty;
 
             do
             {
+                var rsaHelper = new RsaHelper(password);
+
+                var loginDetails = new Dictionary<string, string> { { "username", username } };
+                IResponse response = Fetch("https://steamcommunity.com/login/getrsakey", "POST", loginDetails);
+
+                string encryptedBase64Password = rsaHelper.EncryptPassword(response);
+                if (encryptedBase64Password == null) return null;
+
                 bool captcha = loginJson != null && loginJson.CaptchaNeeded;
                 bool steamGuard = loginJson != null && loginJson.EmailAuthNeeded;
                 bool twoFactor = loginJson != null && loginJson.RequiresTwofactor;
 
                 var time = Uri.EscapeDataString(rsaHelper.RsaJson.TimeStamp);
-                var capGid = "-1";
+                string capGid = "-1";
 
                 if (loginJson != null && loginJson.CaptchaNeeded)
                     capGid = Uri.EscapeDataString(loginJson.CaptchaGid);
@@ -149,7 +153,7 @@ namespace CSharpTradeOffers.Web
                     {"password", encryptedBase64Password},
                     {"username", username},
                     {"loginfriendlyname", string.Empty},
-                    {"rememberlogin", "false"}
+                    {"remember_login", "false"}
                 };
                 // Captcha
                 string capText = string.Empty;
@@ -162,7 +166,7 @@ namespace CSharpTradeOffers.Web
                             "Captcha");
                 }
 
-                data.Add("captchagid", captcha ? capGid : string.Empty);
+                data.Add("captchagid", capGid);
                 data.Add("captcha_text", captcha ? capText : string.Empty);
                 // Captcha end
 
@@ -187,10 +191,9 @@ namespace CSharpTradeOffers.Web
 
                 data.Add("rsatimestamp", time);
 
-                CookieContainer cc = null;
                 if (!string.IsNullOrEmpty(machineAuth))
                 {
-                    cc = new CookieContainer();
+                    //cc = new CookieContainer();
                     var split = machineAuth.Split('=');
                     var machineCookie = new Cookie(split[0], split[1]);
                     cc.Add(new Uri("https://steamcommunity.com/login/dologin/"), machineCookie);
@@ -201,6 +204,10 @@ namespace CSharpTradeOffers.Web
                     string json = webResponse.ReadStream();
                     loginJson = JsonConvert.DeserializeObject<LoginResult>(json);
                     cookieCollection = webResponse.Cookies;
+                    foreach (Cookie cookie in cookieCollection)
+                    {
+                        cc.Add(cookie);
+                    }
                 }
             } while (loginJson.CaptchaNeeded || loginJson.EmailAuthNeeded || (loginJson.RequiresTwofactor && !loginJson.Success));
 
