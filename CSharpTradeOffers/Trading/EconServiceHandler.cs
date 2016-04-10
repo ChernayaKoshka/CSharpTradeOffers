@@ -151,9 +151,9 @@ namespace CSharpTradeOffers.Trading
                 {"captcha", string.Empty},
                 {"trade_offer_create_params", "{}"}
             };
-            return _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
+            return _web.Fetch(url, "POST", data, container, false,
                 "https://steamcommunity.com/tradeoffer/new/?partner=" +
-                IdConversions.UlongToAccountId(partnerSid))
+                IdConversions.UlongToAccountId(partnerSid),false, 10000, 20)
                 .DeserializeJson<SendOfferResponse>();
         }
 
@@ -189,9 +189,9 @@ namespace CSharpTradeOffers.Trading
                 {"trade_offer_create_params", JsonConvert.SerializeObject(offerToken)}
             };
             return
-                _web.RetryFetch(TimeSpan.FromSeconds(10), 20, url, "POST", data, container, false,
+                _web.Fetch(url, "POST", data, container, false,
                     string.Format("https://steamcommunity.com/tradeoffer/new/?partner={0}&token={1}",
-                        IdConversions.UlongToAccountId(partnerSid), token))
+                        IdConversions.UlongToAccountId(partnerSid), token), false, 10000, 20)
                     .DeserializeJson<SendOfferResponse>();
         }
 

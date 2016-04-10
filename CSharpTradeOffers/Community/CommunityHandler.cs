@@ -171,26 +171,6 @@ namespace CSharpTradeOffers.Community
             _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
         }
 
-
-        public void RetryJoinGroup(string groupName, int retryWait, int retryLimit)
-        {
-            string url = "https://steamcommunity.com/groups/" + groupName;
-
-            string sessionid =
-                (from Cookie cookie in _account.AuthContainer.GetCookies(new Uri("https://steamcommunity.com"))
-                 where cookie.Name == "sessionid"
-                 select cookie.Value).FirstOrDefault();
-
-            var data = new Dictionary<string, string>
-            {
-                {"sessionID", sessionid},
-                {"action", "join"}
-            };
-
-            _web.RetryFetch(TimeSpan.FromSeconds(retryWait), retryLimit, url, "POST", data, _account.AuthContainer, true,
-                url);
-        }
-
         /// <summary>
         /// Leave a group.
         /// </summary>
@@ -420,7 +400,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="retryWait">The number of miliseconds to wait between each retry.</param>
         /// <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
         /// <returns>A List of the MemberList object.</returns>
-        public List<MemberList> RequestAllMemberLists(ulong groupId, TimeSpan retryWait, int retryCount = 10)
+        public List<MemberList> RequestAllMemberLists(ulong groupId, int retryWait, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
             const string url = "http://steamcommunity.com/gid/{0}/memberslistxml/?xml=1&p={1}";
@@ -435,8 +415,8 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    IResponse fetched = _web.RetryFetch(retryWait, retryCount,
-                        requestUrl, "GET");
+                    IResponse fetched = _web.Fetch(
+                        requestUrl, "GET", null, null, true, "", false, retryWait, retryCount);
 
                     var populatedList = fetched.DeserializeXml<MemberList>();
 
@@ -471,7 +451,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="retryWait">The number of miliseconds to wait between each retry.</param>
         /// <param name="retryCount">The number of times to retry before inserting a null MemberList object.</param>
         /// <returns>A List of the MemberList object.</returns>
-        public List<MemberList> RequestAllMemberLists(string groupName, TimeSpan retryWait, int retryCount = 10)
+        public List<MemberList> RequestAllMemberLists(string groupName, int retryWait, int retryCount = 10)
         {
             var membersList = new List<MemberList>();
             groupName = groupName.Replace(" ", string.Empty);
@@ -486,7 +466,7 @@ namespace CSharpTradeOffers.Community
 
                 try
                 {
-                    IResponse fetched = _web.RetryFetch(retryWait, retryCount, temp, "GET");
+                    IResponse fetched = _web.Fetch(temp, "GET", null, null, true, "", false, retryWait, retryCount);
                     var populatedList = fetched.DeserializeXml<MemberList>();
                     membersList.Add(populatedList);
 

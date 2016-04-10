@@ -31,27 +31,6 @@ namespace CSharpTradeOffers.Web
         }
 
         /// <summary>
-        /// A web method to return the response string from the URL.
-        /// </summary>
-        /// <param name="url">The URL to request.</param>
-        /// <param name="method">The method to be used. Ex: POST</param>
-        /// <param name="data">Dictionary containing the paramters to be sent in the URL or in the Stream, depending on the method.</param>
-        /// <param name="cookies">A cookiecontainer with cookies to send.</param>
-        /// <param name="xHeaders">
-        /// Special parameter, should only be used with requests that need "X-Requested-With:
-        /// XMLHttpRequest" and "X-Prototype-Version: 1.7"
-        /// </param>
-        /// <param name="referer">Sets the referrer for the request.</param>
-        /// <returns>A string from the response stream.</returns>
-        public IResponse Fetch(string url, string method, Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false)
-        {
-            IResponse response = _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer, isWebkit);
-
-            return response;
-        }
-
-        /// <summary>
         /// Retries a Fetch until success or fail conditions have been met.
         /// </summary>
         /// <param name="retryWait">The TimeSpan in which to wait between requests.</param>
@@ -66,9 +45,9 @@ namespace CSharpTradeOffers.Web
         /// </param>
         /// <param name="referer">Sets the referrer for the request.</param>
         /// <returns>IResponse interace.</returns>
-        public IResponse RetryFetch(TimeSpan retryWait, int retryLimit, string url, string method,
+        public IResponse Fetch(string url, string method,
             Dictionary<string, string> data = null,
-            CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false)
+            CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false, int retryWait = 5000, int retryLimit = 5)
         {
             IResponse response = RetryRequestProcessor(retryWait, retryLimit, url, method, data, cookies, xHeaders,
                 referer, isWebkit);
@@ -79,7 +58,7 @@ namespace CSharpTradeOffers.Web
         /// Processes retry attempts
         /// </summary>
         /// <returns>IResponse interace.</returns>
-        private IResponse RetryRequestProcessor(TimeSpan retryWait, int retryLimit, string url, string method,
+        private IResponse RetryRequestProcessor(int retryWait, int retryLimit, string url, string method,
             Dictionary<string, string> data = null,
             CookieContainer cookies = null, bool xHeaders = true, string referer = "", bool isWebkit = false)
         {
@@ -88,7 +67,7 @@ namespace CSharpTradeOffers.Web
             {
                 try
                 {
-                    return Fetch(url, method, data, cookies, xHeaders, referer, isWebkit);
+                    return _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer, isWebkit);
                 }
                 catch (WebException)
                 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using CSharpTradeOffers.Web;
 using Moq;
 using NUnit.Framework;
@@ -61,7 +60,7 @@ namespace CSharpTradeOffers_Tests
         {
             _mockRequestHandler.Setup(x => x.HandleWebRequest(Url, Method, null, null, true, "", false)).Throws<WebException>();
 
-            IResponse response = _web.RetryFetch(new TimeSpan(1), 2, Url, Method);
+            IResponse response = _web.Fetch(Url, Method, null, null, true, "", false, 1000, 2);
 
             Assert.IsNull(response);
         }
@@ -69,7 +68,7 @@ namespace CSharpTradeOffers_Tests
         [Test]
         public void RetryFetch_ReturnsSteamStreamResponse_WhenNotExceedingRetryCount()
         {
-            IResponse response = _web.RetryFetch(new TimeSpan(1), 2, Url, Method);
+            IResponse response = _web.Fetch(Url, Method, null, null, true, "", false, 1000, 2);
 
             Assert.AreEqual(response.ReadStream(), SteamStreamResponse);
         }
