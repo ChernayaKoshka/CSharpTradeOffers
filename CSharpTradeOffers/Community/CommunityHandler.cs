@@ -174,7 +174,7 @@ namespace CSharpTradeOffers.Community
             {
                 _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
             }
-            catch (WebException we)
+            catch (WebException)
             {
                 return false;
             }
