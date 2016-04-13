@@ -69,8 +69,26 @@ namespace CSharpTradeOffers.Web
                 {
                     return _webRequestHandler.HandleWebRequest(url, method, data, cookies, xHeaders, referer, isWebkit);
                 }
-                catch (WebException)
+                catch (WebException we)
                 {
+                    HttpWebResponse response = we.Response as HttpWebResponse;;
+                    switch (we.Status)
+                    {
+                        case WebExceptionStatus.SendFailure:
+                            break;
+                        case WebExceptionStatus.ConnectFailure:
+                            break;
+                        case WebExceptionStatus.ConnectionClosed:
+                            break;
+                        case WebExceptionStatus.ReceiveFailure:
+                            break;
+                        case WebExceptionStatus.Timeout:
+                            break;
+                        default:
+                            if (response?.StatusCode == HttpStatusCode.NotFound)
+                                return null;
+                            throw;
+                    }
                     if (attempts >= retryLimit)
                         return null;
                     attempts++;
