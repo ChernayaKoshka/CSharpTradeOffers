@@ -84,6 +84,8 @@ namespace CSharpTradeOffers.Web
                             break;
                         case WebExceptionStatus.Timeout:
                             break;
+                        case WebExceptionStatus.ProtocolError:
+                            break;
                         default:
                             if (response?.StatusCode == HttpStatusCode.NotFound)
                                 return null;
