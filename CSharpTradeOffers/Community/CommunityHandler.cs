@@ -153,8 +153,10 @@ namespace CSharpTradeOffers.Community
         /// Join a public group.
         /// </summary>
         /// <param name="groupName">The name of the group found in the group url.</param>
-        public void JoinGroup(string groupName)
+        public bool JoinGroup(string groupName)
         {
+            if (!groupName.All(char.IsLetterOrDigit)) return false;
+
             string url = "https://steamcommunity.com/groups/" + groupName;
 
             string sessionid =
@@ -168,7 +170,15 @@ namespace CSharpTradeOffers.Community
                 {"action", "join"}
             };
 
-            _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
+            try
+            {
+                _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
+            }
+            catch (WebException we)
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
