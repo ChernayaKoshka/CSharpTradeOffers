@@ -72,7 +72,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="headLine">The headline of the announcement.</param>
         /// <param name="body">The body of the announcement.</param>
         /// <returns>no return</returns>
-        public void GroupAnnounce(string groupName, string headLine, string body)
+        public IResponse GroupAnnounce(string groupName, string headLine, string body)
         {
             string url = "http://steamcommunity.com/groups/" + groupName + "/announcements";
 
@@ -98,7 +98,7 @@ namespace CSharpTradeOffers.Community
                 data.Add("languages[" + i + "][updated]", "0");
             }
 
-            _web.Fetch(url, "POST", data, _account.AuthContainer, true, url + "/create");
+            return _web.Fetch(url, "POST", data, _account.AuthContainer, true, url + "/create");
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace CSharpTradeOffers.Community
         /// <param name="serverIP">Ip of the server.</param>
         /// <param name="appID">The game associated with the event.</param>
         /// <returns>no return</returns>
-        public void GroupEvent(string groupName, string eventName, string eventNotes, string eventType, DateTime startDateAndTime,
+        public IResponse GroupEvent(string groupName, string eventName, string eventNotes, string eventType, DateTime startDateAndTime,
                                string timeChoice = "quick", string serverPassword = "", IPAddress serverAddress = null, int appId = -1, int timezoneOffset = -18000)
         {
             string url = "http://steamcommunity.com/groups/" + groupName + "/eventEdit";
@@ -145,7 +145,7 @@ namespace CSharpTradeOffers.Community
                 {"action", "newEvent"}
             };
 
-            _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
+            return _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
         }
 
 
@@ -153,9 +153,9 @@ namespace CSharpTradeOffers.Community
         /// Join a public group.
         /// </summary>
         /// <param name="groupName">The name of the group found in the group url.</param>
-        public bool JoinGroup(string groupName)
+        public IResponse JoinGroup(string groupName)
         {
-            if (!groupName.All(char.IsLetterOrDigit)) return false;
+            if (!groupName.All(char.IsLetterOrDigit)) return null;
 
             string url = "https://steamcommunity.com/groups/" + groupName;
 
@@ -172,20 +172,19 @@ namespace CSharpTradeOffers.Community
 
             try
             {
-                _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
+                return _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
             }
             catch (WebException)
             {
-                return false;
+                return null;
             }
-            return true;
         }
 
         /// <summary>
         /// Leave a group.
         /// </summary>
         /// <param name="groupId">The GroupID of the steam group.</param>
-        public void LeaveGroup(ulong groupId)
+        public IResponse LeaveGroup(ulong groupId)
         {
             string url = "https://steamcommunity.com/profiles/" + _account.SteamId + "/home_process";
 
@@ -201,7 +200,7 @@ namespace CSharpTradeOffers.Community
                 {"groupId", groupId.ToString()}
             };
 
-            _web.Fetch(url, "POST", data, _account.AuthContainer, true, "https://steamcommunity.com/profiles/" + _account.SteamId + "/groups");
+            return _web.Fetch(url, "POST", data, _account.AuthContainer, true, "https://steamcommunity.com/profiles/" + _account.SteamId + "/groups");
         }
 
         /// <summary>
