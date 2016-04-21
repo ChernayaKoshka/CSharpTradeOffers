@@ -18,6 +18,11 @@ namespace CSharpTradeOffers.Configuration
         [XmlIgnore]
         public string Path { get; set; }
 
+        protected ConfigFrame()
+        {
+            Path = "default_configname.cfg";
+        }
+
         protected ConfigFrame(string path)
         {
             Path = path;

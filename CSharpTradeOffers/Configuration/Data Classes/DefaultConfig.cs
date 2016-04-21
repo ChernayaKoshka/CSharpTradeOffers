@@ -2,6 +2,11 @@
 {
     public class DefaultConfig : ConfigFrame
     {
+        public DefaultConfig()
+        {
+            base.Path = "default_configname.cfg";
+        }
+
         public DefaultConfig(string path) : base(path)
         {
             InitializeAll();
