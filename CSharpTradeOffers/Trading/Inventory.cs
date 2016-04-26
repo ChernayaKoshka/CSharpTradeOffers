@@ -71,10 +71,18 @@ namespace CSharpTradeOffers.Trading
                 throw new InventoryException(
                     "Inventory request was not successsful. 'success' field was false. Likely cause: No items in inventory.");
 
-            dynamic rgInventory = inventoryJson.rgInventory;
-            dynamic rgDescriptions = inventoryJson.rgDescriptions;
-            Dictionary<string, RgDescription> deserializedDescriptions =
-                JsonConvert.DeserializeObject<Dictionary<string, RgDescription>>(rgDescriptions.ToString());
+            dynamic rgInventory = null;
+            if (inventoryJson.rgInventory.Count != 0)
+                rgInventory = inventoryJson.rgInventory;
+
+            Dictionary<string, RgDescription> deserializedDescriptions = new Dictionary<string, RgDescription>();
+
+            if (inventoryJson.rgDescriptions.Count != 0)
+            {
+                dynamic rgDescriptions = inventoryJson.rgDescriptions;
+                deserializedDescriptions =
+                    JsonConvert.DeserializeObject<Dictionary<string, RgDescription>>(rgDescriptions.ToString());
+            }
 
             foreach (RgDescription rgDescription in deserializedDescriptions.Values)
             {
@@ -92,6 +100,7 @@ namespace CSharpTradeOffers.Trading
             }
 
             //later implement RgInventory like I did with RgDescription
+            if (rgInventory == null) return;
             foreach (dynamic obj in rgInventory)
             {
                 dynamic item = JsonConvert.DeserializeObject<dynamic>(obj.Value.ToString());
