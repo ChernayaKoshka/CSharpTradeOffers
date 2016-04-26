@@ -20,17 +20,14 @@ namespace CSharpTradeOffers.Trading
         public string AssetIdDontSet { get; set; }
 
         //end fuuuuuuuuuuck thiiiiiiis
-
-        private long _contextId;
-
+        
         [JsonIgnore]
         [JsonProperty("contextid")]
         public long ContextId
         {
-            get { return _contextId; }
+            get { return Convert.ToInt32(AssetIdDontSet); }
             set
             {
-                _contextId = value;
                 ContextIdDontSet = value.ToString();
 
             }
@@ -39,32 +36,25 @@ namespace CSharpTradeOffers.Trading
         [JsonProperty("amount")]
         public int Amount { get; set; }
 
-        private long _assetId;
-
         [JsonIgnore]
         [JsonProperty("assetid")]
         public long AssetId
         {
-            get { return _assetId; }
+            get { return Convert.ToInt32(AssetIdDontSet); }
             set
             {
-                _assetId = value;
                 AssetIdDontSet = value.ToString();
-
             }
         }
 
 
         [JsonProperty("classid")]
-        [JsonIgnore]
         public long ClassId { get; set; }
 
         [JsonProperty("instanceid")]
-        [JsonIgnore]
         public long InstanceId { get; set; }
 
         [JsonProperty("missing")]
-        [JsonIgnore]
         public bool Missing { get; set; }
 
         /// <param name="apiKey"></param>
