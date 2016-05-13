@@ -153,7 +153,7 @@ namespace CSharpTradeOffers.Trading
             };
             return _web.Fetch(url, "POST", data, container, false,
                 "https://steamcommunity.com/tradeoffer/new/?partner=" +
-                IdConversions.UlongToAccountId(partnerSid),false, 10000, 20)
+                IdConversions.UlongToAccountId(partnerSid), false, 10000, 20)
                 .DeserializeJson<SendOfferResponse>();
         }
 
@@ -244,6 +244,26 @@ namespace CSharpTradeOffers.Trading
                 {"time_last_visit", timeLastVisit.ToString()}
             };
             return _web.Fetch(url, "GET", data).DeserializeJson<GetTradeOffersSummaryBaseResponse>().Response;
+        }
+
+        /// <summary>
+        /// Accepts an email-confirmation
+        /// </summary>
+        /// <param name="accountId">Your accountId</param>
+        /// <param name="tradeOfferId">Trade offer id of the offer to confirm</param>
+        /// <param name="confirmationCode">Confirmation code</param>
+        /// <param name="mId">No idea, but it looks something like: wiGVgcpbphpfTU5vDzD9uIwqtGlG8_QaWJqNmq5dOW3P3</param>
+        public void EmailConfirmSendOffer(uint accountId, uint tradeOfferId, ulong confirmationCode, string mId)
+        {
+            string url = "https://steamcommunity.com/tradeoffer/" + tradeOfferId + "/confirm";
+            var data = new Dictionary<string, string>
+            {
+                {"accountid", accountId.ToString()},
+                {"tradeofferid", tradeOfferId.ToString()},
+                {"confirmation_code", confirmationCode.ToString()},
+                {"mid", mId}
+            };
+            _web.Fetch(url, "GET", data);
         }
     }
 }
