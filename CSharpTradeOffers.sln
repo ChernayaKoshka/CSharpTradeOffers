@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpTradeOffers", "CSharpTradeOffers\CSharpTradeOffers.csproj", "{11CE73A4-5123-46F1-B668-892D6BAFCC40}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeBot", "samples\ExchangeBot\ExchangeBot.csproj", "{F55987A4-1E50-4761-BDE3-AF735211E642}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryInfo", "samples\GetAssetClassInfo\InventoryInfo.csproj", "{54F9B95B-9BF4-47DE-95CC-A1161577067D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProfileDownloader", "MiniProfileDownloader\MiniProfileDownloader.csproj", "{E3F572E3-1660-4B80-A840-60161868EB61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{54F9B95B-9BF4-47DE-95CC-A1161577067D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54F9B95B-9BF4-47DE-95CC-A1161577067D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54F9B95B-9BF4-47DE-95CC-A1161577067D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3F572E3-1660-4B80-A840-60161868EB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3F572E3-1660-4B80-A840-60161868EB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3F572E3-1660-4B80-A840-60161868EB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3F572E3-1660-4B80-A840-60161868EB61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,6 @@ Global
 		{1A98C145-1B1F-4EAE-A9EE-395072322B79} = {3E561EFB-A30E-4888-834B-EA775AC23985}
 		{F55987A4-1E50-4761-BDE3-AF735211E642} = {3E561EFB-A30E-4888-834B-EA775AC23985}
 		{54F9B95B-9BF4-47DE-95CC-A1161577067D} = {3E561EFB-A30E-4888-834B-EA775AC23985}
+		{E3F572E3-1660-4B80-A840-60161868EB61} = {3E561EFB-A30E-4888-834B-EA775AC23985}
 	EndGlobalSection
 EndGlobal

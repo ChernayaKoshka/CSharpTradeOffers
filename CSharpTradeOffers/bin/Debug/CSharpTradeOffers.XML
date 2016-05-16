@@ -531,6 +531,15 @@
             <param name="timeLastVisit">Unix time for historical cutoff.</param>
             <returns></returns>
         </member>
+        <member name="M:CSharpTradeOffers.Trading.EconServiceHandler.EmailConfirmSendOffer(System.UInt32,System.UInt32,System.UInt64,System.String)">
+            <summary>
+            Accepts an email-confirmation
+            </summary>
+            <param name="accountId">Your accountId</param>
+            <param name="tradeOfferId">Trade offer id of the offer to confirm</param>
+            <param name="confirmationCode">Confirmation code</param>
+            <param name="mId">No idea, but it looks something like: wiGVgcpbphpfTU5vDzD9uIwqtGlG8_QaWJqNmq5dOW3P3</param>
+        </member>
         <member name="M:CSharpTradeOffers.Trading.Inventory.#ctor(System.UInt64,System.UInt32)">
             <summary>
             Class constructor, automatically initializes inventory.

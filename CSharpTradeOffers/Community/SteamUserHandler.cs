@@ -72,7 +72,10 @@ namespace CSharpTradeOffers.Community
                 {"key", _apiKey},
                 {"steamids", CommaDelimit(playerSummariesToRequest)}
             };
-            return _web.Fetch(url, "GET", data, null, false).DeserializeJson<GetPlayerSummariesV2BaseResult>().Response.PlayerSummaries;
+            return
+                _web.Fetch(url, "GET", data, null, false)
+                    .DeserializeJson<GetPlayerSummariesV2BaseResult>()
+                    .Response.PlayerSummaries;
         }
 
         /// <summary>
@@ -111,6 +114,17 @@ namespace CSharpTradeOffers.Community
                 {"url_type", urlType.ToString()}
             };
             return _web.Fetch(url, "GET", data, null, false).DeserializeJson<ResolveVanityUrlBaseResult>().Response;
+        }
+
+        public string FetchMiniProfile(SteamId id, bool client = true, int status = 1)
+        {
+            string url = "http://steamcommunity.com/miniprofile/" + id.AccountId;
+            var data = new Dictionary<string, string>
+            {
+                {"client", client.IntValue().ToString()},
+                {"status", status.ToString()}
+            };
+            return _web.Fetch(url, "GET", data, null, false).ReadStream();
         }
 
         static string CommaDelimit(List<ulong> toDelimit)
