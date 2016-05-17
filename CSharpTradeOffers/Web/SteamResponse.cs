@@ -34,6 +34,9 @@ namespace CSharpTradeOffers.Web
 
         public string ReadStream()
         {
+            if (!SteamStream.CanRead)
+                return null;
+
             using (var streamReader = new StreamReader(SteamStream))
             {
                 return streamReader.ReadToEnd();
