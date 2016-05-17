@@ -58,6 +58,7 @@
     <Compile Include="Community\Data Classes\Friend.cs" />
     <Compile Include="Community\Data Classes\Friendslist.cs" />
     <Compile Include="Community\Data Classes\FriendStateResponse.cs" />
+    <Compile Include="Community\Data Classes\GetCommentsResponse.cs" />
     <Compile Include="Community\Data Classes\GetFriendListResult.cs" />
     <Compile Include="Community\Data Classes\GetPlayerBansResult.cs" />
     <Compile Include="Community\Data Classes\GetPlayerSummariesV2Result.cs" />

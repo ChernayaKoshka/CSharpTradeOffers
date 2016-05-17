@@ -122,6 +122,16 @@
             Handles commmunity related tasks
             </summary>
         </member>
+        <member name="M:CSharpTradeOffers.Community.CommunityHandler.GetProfileComments(System.UInt64,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the profile comments of the specified SteamId64
+            </summary>
+            <param name="steamId">SteamId of the profile to get comments from</param>
+            <param name="start">Starting index</param>
+            <param name="totalCount">Number of comments to retrieve</param>
+            <param name="count">The number of comments previously retrieved</param>
+            <returns>A GetCommentsResponse object</returns>
+        </member>
         <member name="M:CSharpTradeOffers.Community.CommunityHandler.PostComment(System.UInt64,System.String)">
             <summary>
             Posts a comment to the specified profile.
@@ -812,6 +822,19 @@
             The response stream.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.ReadStream">
+            <summary>
+            Reads the response Stream
+            </summary>
+            <returns>The read Stream, however, if an exception occurs, null will be returned instead.</returns>
+        </member>
+        <member name="M:CSharpTradeOffers.Web.SteamResponse.DeserializeJson``1">
+            <summary>
+            Deserializes the stream to a serializable type with Json.
+            </summary>
+            <typeparam name="TSerializable">A JSON serializable type</typeparam>
+            <returns>The deserialized type.</returns>
         </member>
         <member name="M:CSharpTradeOffers.Web.SteamResponse.DeserializeXml``1">
             <summary>

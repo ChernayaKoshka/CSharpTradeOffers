@@ -15,6 +15,7 @@ namespace CSharpTradeOffers.Community
         private readonly Web.Web _web = new Web.Web(new SteamWebRequestHandler());
 
         private const string BaseCommunityUrl = "https://steamcommunity.com/";
+
         private const string TopicUrl = BaseCommunityUrl + "forum/{0}/General/";
 
         private readonly Account _account;
@@ -23,7 +24,6 @@ namespace CSharpTradeOffers.Community
         {
             _account = account;
         }
-
 
         public GetTopicsHtmlResult GetTopicsHtml(ulong forumId, ulong start, ulong count)
         {
@@ -36,6 +36,29 @@ namespace CSharpTradeOffers.Community
             };
 
             return _web.Fetch(url, "POST", data, _account.AuthContainer).DeserializeJson<GetTopicsHtmlResult>();
+        }
+
+        /// <summary>
+        /// Gets the profile comments of the specified SteamId64
+        /// </summary>
+        /// <param name="steamId">SteamId of the profile to get comments from</param>
+        /// <param name="start">Starting index</param>
+        /// <param name="totalCount">Number of comments to retrieve</param>
+        /// <param name="count">The number of comments previously retrieved</param>
+        /// <returns>A GetCommentsResponse object</returns>
+        public GetCommentsResponse GetProfileComments(ulong steamId, int totalCount, int count, int start = 0)
+        {
+            string url = BaseCommunityUrl + string.Format("comment/Profile/render/{0}/-1/", steamId);
+
+            var data = new Dictionary<string, string>
+            {
+                {"start", start.ToString()},
+                {"totalcount",totalCount.ToString() },
+                {"count", count.ToString()},
+                {"sessionid",_account.FindCookieByName("sessionid").Value }
+            };
+
+            return _web.Fetch(url, "GET", data, _account.AuthContainer).DeserializeJson<GetCommentsResponse>();
         }
 
         /// <summary>
@@ -147,7 +170,6 @@ namespace CSharpTradeOffers.Community
 
             return _web.Fetch(url, "POST", data, _account.AuthContainer, true, url);
         }
-
 
         /// <summary>
         /// Join a public group.
