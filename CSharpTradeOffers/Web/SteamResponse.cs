@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net;
 using System.Xml.Serialization;
@@ -32,17 +33,30 @@ namespace CSharpTradeOffers.Web
         /// <returns></returns>
         private Stream SteamStream => _httpWebResponse.GetResponseStream();
 
+        /// <summary>
+        /// Reads the response Stream
+        /// </summary>
+        /// <returns>The read Stream, however, if an exception occurs, null will be returned instead.</returns>
         public string ReadStream()
         {
-            if (!SteamStream.CanRead)
-                return null;
-
-            using (var streamReader = new StreamReader(SteamStream))
+            try
             {
-                return streamReader.ReadToEnd();
+                using (var streamReader = new StreamReader(SteamStream))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 
+        /// <summary>
+        /// Deserializes the stream to a serializable type with Json.
+        /// </summary>
+        /// <typeparam name="TSerializable">A JSON serializable type</typeparam>
+        /// <returns>The deserialized type.</returns>
         public TSerializable DeserializeJson<TSerializable>()
         {
             return JsonConvert.DeserializeObject<TSerializable>(ReadStream());
