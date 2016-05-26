@@ -56,10 +56,11 @@ namespace CSharpTradeOffers.Web
         /// Deserializes the stream to a serializable type with Json.
         /// </summary>
         /// <typeparam name="TSerializable">A JSON serializable type</typeparam>
-        /// <returns>The deserialized type.</returns>
+        /// <returns>The deserialized type unless stream is null, in which case it returns the default of the generic.</returns>
         public TSerializable DeserializeJson<TSerializable>()
         {
-            return JsonConvert.DeserializeObject<TSerializable>(ReadStream());
+            string streamData = ReadStream();
+            return streamData == null ? default(TSerializable) : JsonConvert.DeserializeObject<TSerializable>(ReadStream());
         }
 
         /// <summary>
