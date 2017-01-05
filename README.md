@@ -1,4 +1,7 @@
 # NOTICE #
+This library is deprecated. Please see https://github.com/FatherFoxxy/SteamToolkit/
+
+# NOTICE #
 FatherFoxxy will no longer be working on this library. Commits and forks are always welcome, however. FatherFoxxy will continue to deny/accept commits but will not be personally working on the library itself.
 
 # README #
